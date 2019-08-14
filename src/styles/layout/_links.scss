@@ -1,0 +1,10 @@
+a {
+    @include transition(color .75s, 0s);
+    color: $color-anchor;
+    text-decoration: none;
+}
+
+.button {
+    @include reset-button();
+    @include display-flex-center();
+}

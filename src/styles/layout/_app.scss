@@ -1,0 +1,12 @@
+.app {
+    @include transition($change-page-duration, 0s);
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+
+    &.hide {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+}

@@ -1,0 +1,9 @@
+.afterload {
+    @include transition(opacity $afterload-transition, $afterload-delay);
+    opacity: 0;
+
+    &_show {
+        opacity: 1;
+    }
+    
+}

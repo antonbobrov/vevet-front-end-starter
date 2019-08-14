@@ -1,0 +1,35 @@
+@import '~normalize-scss';
+@include normalize();
+
+@import 'settings';
+@import 'mixins/mixins';
+
+//@import '~vevet/dist/scss/index';
+//@import '~vevet/dist/scss/modules/preloader';
+
+@import '../../../vevet/src/scss/index';
+@import '../../../vevet/src/scss/modules/preloader';
+@import '../../../vevet/src/scss/modules/scroll';
+
+
+
+@import '../fonts/Font/font';
+
+@import 'layout/document';
+@import 'layout/links';
+@import 'layout/text';
+@import 'layout/scroll';
+@import 'layout/content';
+@import 'layout/wrap';
+@import 'layout/page';
+@import 'layout/app';
+
+@import 'layout/modules/preloader';
+
+@import 'layout/header';
+@import 'layout/menu';
+
+@import 'helpers/afterload';
+@import 'helpers/view';
+
+@import 'pages/home';

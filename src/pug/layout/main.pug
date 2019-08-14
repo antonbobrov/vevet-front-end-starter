@@ -1,0 +1,55 @@
+block variables
+
+doctype html
+html(lang=lang, class="v-reset v-no-transition")
+
+    head
+        meta(content="text/html; charset=UTF-8", http-equiv="Content-Type")
+        meta(http-equiv="X-UA-Compatible", content="IE=Edge")
+
+        title #{title}
+
+        meta(name="viewport", content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no")
+        
+        meta(name="description", content="")
+        meta(name="keywords", content="")
+        
+        meta(name="apple-mobile-web-app-capable", content="yes")
+        meta(name="format-detection", content="telephone=no")
+
+        // base(href="", target="")
+        // link(rel="canonical", href="url")
+        
+        // meta(name="robots", content="noyaca")
+        // meta(name="og:site_name", content="#{title}")
+        // meta(name="og:type", content="website")
+        // meta(name="og:title", content="#{title}")
+        // meta(name="og:url", content="")
+        // meta(name="og:description", content="")
+        // meta(name="og:image", content="")
+        // meta(name="og:image", content="")
+        // meta(name="og:image", content="")
+
+        // meta(name="twitter:card", content="summary_large_image")
+        // meta(name="twitter:site", content="@twitter_name")
+        // meta(name="twitter:image:src", content="twitter image url")
+
+        // meta(http-equiv="content-language", content="en")
+        // meta(rel="alternate", hreflang="en", href="url")
+        // meta(rel="alternate", hreflang="ru", href="url")
+        // meta(rel="alternate", hreflang="x-default", href="url")
+
+    body(class="v-loading")
+
+        include ./modules/preloader
+
+        .page.height-full.hidden
+
+            include ./blocks/header
+            
+            .app(data-v-page=page, data-v-pageAjax-name=page, class="height-full")
+
+                div(class="scroll " + page)
+                    .scroll__outer
+
+                        block content

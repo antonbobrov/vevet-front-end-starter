@@ -1,0 +1,60 @@
+@mixin layout-text() {
+    font-size: .6875rem;
+    line-height: 160%;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: $color-layout-text;
+}
+
+@mixin list-menu() {
+    @include display-flex-center();
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    .blot {
+        &__outer {
+            width: 4rem;
+            height: 4rem;
+        }
+    }
+
+    a {
+        @include transition(opacity .75s, 0s);
+        display: inline-block;
+        padding: .5625rem;
+        color: $color-anchor;
+        opacity: .4;
+
+        @include adaptive(desktop) {
+            &:hover {
+                color: $color-anchor;
+                opacity: 1;
+            }
+        }
+
+    }
+
+    li {
+
+        &.active {
+
+            a {
+                opacity: 1;
+                color: $color-anchor;
+            }
+
+        }
+
+    }
+
+}
+
+@mixin hover() {
+    @include adaptive(desktop) {
+        &:hover {
+            @content;
+        }
+    }
+}
+
