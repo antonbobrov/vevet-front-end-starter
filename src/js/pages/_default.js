@@ -1,5 +1,6 @@
 import { Page, Scroll, View } from '../modules/vevet';
 import app from '../modules/app';
+import settings from '../settings';
 import height from '../helpers/height';
 import elements from '../helpers/elements';
 
@@ -33,11 +34,12 @@ class Default extends Page {
 
         super.show();
 
+        // update view
+        this.view.updateEl();
+        this.view.seek();
+
         // enable scroll
         this.scrollPlay();
-
-        // update view
-        this.view._changeProp();
 
         // show app
         elements.get().app.classList.remove("hide");
@@ -70,6 +72,9 @@ class Default extends Page {
         // scroll
         this.scroll.destroy();
 
+        // destroy view
+        this.view.destroy();
+
     }
 
 
@@ -84,15 +89,17 @@ class Default extends Page {
         }
 
         // get selector
+        this._scrollEl = '.scroll .scroll__outer';
 
-        let selector = '.scroll .scroll__outer';
+        // get outer
+        this._scrollOuter = document.querySelector('.scroll');
 
         // initialize scroll
         
         this.scroll = new Scroll({
             selectors: {
                 outer: '.scroll',
-                elements: selector
+                elements: this._scrollEl
             },
             k: {
                 value: k,
@@ -101,18 +108,35 @@ class Default extends Page {
                 on: true,
                 k: 2,
                 reset: false,
-                disableListeners: false,
+                disableListeners: true,
                 timeoutListeners: 10,
                 min: 1
             },
-            resizeTimeout: 500,
+            resizeTimeout: settings.resizeTimeout,
             run: false,
-            resizeOnUpdate: false
+            resizeOnUpdate: false,
+            roundPixel: app.browser == 'firefox',
+            responsive: [
+                {
+                    breakpoint: 1199,
+                    settings: {
+                        run: false
+                    }
+                }
+            ]
+        });
+
+        // resize run
+        this._addEvent('viewport', {
+            target: 'w_',
+            do: () => {
+                this.scrollPlay();
+            }
         });
 
     }
 
-    _scrollPause() {
+    scrollPause() {
 
         this.scroll.changeProp({
             run: false
@@ -122,9 +146,33 @@ class Default extends Page {
 
     scrollPlay() {
 
-        this.scroll.changeProp({
-            run: true
-        });
+        // bool
+        let play = true;
+        if (app.viewport.mobiledevice || !app.viewport.desktop) {
+            play = false
+        }
+
+        if (play) {
+            // play
+            this.scroll.changeProp({
+                run: true
+            });
+            // class
+            this._scrollOuter.classList.remove("unactive");
+        }
+        else {
+            // stop
+            this.scroll.changeProp({
+                run: false
+            });
+            // class
+            this._scrollOuter.classList.add("unactive");
+            // transforms
+            let el = document.querySelectorAll(this._scrollEl);
+            for (let i = 0; i < el.length; i++) {
+                el[i].style.transform = '';
+            }
+        }
 
     }
 
@@ -146,13 +194,20 @@ class Default extends Page {
             stackDelay: 75,
             event: false,
             resizeTimeout: 1000,
-        });
-
-        this.add({
-            target: 'show',
-            do: () => {
-                this.view.seek();
-            }
+            responsive: [
+                {
+                    breakpoint: 1199,
+                    settings: {
+                        event: true
+                    }
+                },
+                {
+                    breakpoint: 'md',
+                    settings: {
+                        event: true
+                    }
+                }
+            ]
         });
 
         this.scroll.add({

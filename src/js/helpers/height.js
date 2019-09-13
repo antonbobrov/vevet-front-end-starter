@@ -11,6 +11,11 @@ let height = (function() {
             el[i].style.height = `${app.viewport.size[1]}px`;
         }
 
+        let elMin = document.querySelectorAll(".height-full-min");
+        for (let i = 0; i < elMin.length; i++) {
+            elMin[i].style.minHeight = `${app.viewport.size[1]}px`;
+        }
+
     };
     set();
 

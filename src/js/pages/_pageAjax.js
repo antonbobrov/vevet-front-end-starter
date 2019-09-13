@@ -9,7 +9,7 @@ let pageAjax = new PageAjax({
         links: '.v-al'
     },
     ajax: {
-        method: 'get'
+        method: process.env.NODE_ENV == 'development' ? 'get' : 'post'
     },
     timeouts: {
         load: settings.page.load,

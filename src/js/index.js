@@ -10,24 +10,22 @@ window[rand] = {};
 
 
 // site
-
 import app from './modules/app';
 window[rand].app = app;
 window.app = app;
 
+// modules
 import preloader from './modules/preloader';
 window[rand].preloader = preloader;
 
-
-
+// helpers
 import fontSize from './helpers/fontSize';
 window[rand].fontSize = fontSize;
 
 import height from './helpers/height';
 window[rand].height = height;
 
-
-
+// pages
 import home from './pages/home';
 window[rand].home = home;
 
