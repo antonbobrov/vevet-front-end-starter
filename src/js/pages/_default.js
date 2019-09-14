@@ -56,7 +56,7 @@ class Default extends Page {
         super.hide();
 
         // stop scroll
-        this._scrollPause();
+        this.scrollPause();
 
         // hide app
         elements.get().app.classList.add("hide");
