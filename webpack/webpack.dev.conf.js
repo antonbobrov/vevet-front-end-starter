@@ -15,10 +15,16 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 
     devServer: {
         contentBase: baseWebpackConfig.externals.paths.public,
+        open: false,
+        compress: true,
+        disableHostCheck: true,
         port: 8083,
         overlay: {
             warnings: true,
             errors: true
+        },
+        headers: {
+            'Access-Control-Allow-Origin': '*'
         }
     },
 

@@ -1,6 +1,6 @@
 {
-  "name": "vevet-tmplate",
-  "version": "0.1.5",
+  "name": "vevet-template",
+  "version": "0.2.0",
   "description": "Vevet Template",
   "main": "./src/js/index.js",
   "sideEffects": [
@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "NODE_ENV=development webpack --config ./webpack/webpack.dev.conf.js",
     "build": "NODE_ENV=production webpack --config ./webpack/webpack.build.conf.js",
-    "start": "webpack-dev-server --open --config ./webpack/webpack.dev.conf.js"
+    "start": "webpack-dev-server --config ./webpack/webpack.dev.conf.js"
   },
   "author": "Anton Bobrov <anton.bobrov@hotmail.com>",
   "license": "ISC",
