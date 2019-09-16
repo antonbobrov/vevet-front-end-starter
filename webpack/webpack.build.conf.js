@@ -20,8 +20,8 @@ const buildWebpackConfig = merge(baseWebpackConfig, {
                     ecma: 5,
                     mangle: true,
                     output: {
-                        beautify: true,
-                        comments: true
+                        beautify: false,
+                        comments: false
                     }
                 }
             })
