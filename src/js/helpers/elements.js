@@ -1,5 +1,3 @@
-import app from '../modules/app';
-
 let elements = (function() {
 
     let el = {
