@@ -212,12 +212,12 @@ class Default extends Page {
         let el = elements.get();
 
         // make logo non-active on home page
-        // if (this.name == 'home') {
-        //     el.logo.style.pointerEvents = 'none';
-        // }
-        // else {
-        //     el.logo.style.pointerEvents = '';
-        // }
+        if (this.prop.name == 'home') {
+            el.logo.style.pointerEvents = 'none';
+        }
+        else {
+            el.logo.style.pointerEvents = '';
+        }
 
     }
 
