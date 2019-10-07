@@ -21,9 +21,10 @@ window[rand].preloader = preloader;
 // helpers
 import fontSize from './helpers/fontSize';
 window[rand].fontSize = fontSize;
-
 import height from './helpers/height';
 window[rand].height = height;
+import cssVars from './helpers/cssVars';
+cssVars();
 
 // pages
 import home from './pages/home';

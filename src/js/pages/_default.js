@@ -63,20 +63,6 @@ class Default extends Page {
 
     }
 
-    // Destroy the page
-
-    destroy() {
-
-        super.destroy();
-
-        // scroll
-        this.scroll.destroy();
-
-        // destroy view
-        this.view.destroy();
-
-    }
-
 
 
     /*** Custom Scroll ***/
@@ -97,6 +83,7 @@ class Default extends Page {
         // initialize scroll
         
         this.scroll = new Scroll({
+            parent: this,
             selectors: {
                 outer: '.scroll',
                 elements: this._scrollEl
@@ -183,8 +170,9 @@ class Default extends Page {
     _view() {
 
         this.view = new View({
+            parent: this,
             selectors: {
-                outer: '.scroll',
+                outer: this.scroll,
                 elements: '.v-view',
                 inside: false
             },
@@ -192,29 +180,25 @@ class Default extends Page {
             seekInit: false,
             classToAdd: 'v-viewed',
             stackDelay: 75,
-            event: false,
             resizeTimeout: 1000,
             responsive: [
                 {
                     breakpoint: 1199,
                     settings: {
-                        event: true
+                        selectors: {
+                            outer: '.scroll'
+                        }
                     }
                 },
                 {
                     breakpoint: 'md',
                     settings: {
-                        event: true
+                        selectors: {
+                            outer: '.scroll'
+                        }
                     }
                 }
             ]
-        });
-
-        this.scroll.add({
-            target: 'update',
-            do: () => {
-                this.view.seek();
-            }
         });
 
     }

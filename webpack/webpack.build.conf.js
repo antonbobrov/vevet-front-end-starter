@@ -16,7 +16,11 @@ const buildWebpackConfig = merge(baseWebpackConfig, {
                 cache: true,
                 parallel: true,
                 uglifyOptions: {
-                    compress: false,
+                    compress: {
+                        drop_console: false,
+                        keep_fargs: false,
+                        passes: 2
+                    },
                     ecma: 5,
                     mangle: true,
                     output: {

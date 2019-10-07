@@ -67,6 +67,7 @@
     "@babel/preset-typescript": "^7.3.3",
     "bootstrap": "^4.3.1",
     "circletype": "^2.3.0",
+    "eslint-plugin-jsdoc": "^15.9.2",
     "three": "^0.92.0",
     "vevet": "^0.1.4"
   }

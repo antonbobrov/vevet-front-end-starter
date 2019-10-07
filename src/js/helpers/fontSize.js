@@ -13,6 +13,9 @@ let fontSize = (function() {
 
         if (v.desktop) {
             k = width / 1440;
+            if (k > 1.25) {
+                k = 1.25;
+            }
         }
         else {
 
@@ -31,6 +34,9 @@ let fontSize = (function() {
                 else {
                     if (window.innerHeight > window.innerWidth) {
                         k = width / 375;
+                        if (width < 420) {
+                            k = 1;
+                        }
                     }
                     else {
                         k = 1;
@@ -49,8 +55,8 @@ let fontSize = (function() {
         if (font <= 13) {
             font = 14;
         }
-        if (font > 24) {
-            font = 24;
+        if (font > 22) {
+            font = 22;
         }
 
         if (!settings.font.adaptive) {

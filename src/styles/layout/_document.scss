@@ -3,6 +3,18 @@ html {
     font-family: 'Arial';
     user-select: none;
     overflow: hidden;
+
+    --wrap: 4vw;
+    --wrap-1: 16vw;
+    @include tablet {
+        --wrap: 2.5rem;
+        --wrap-1: 2.5rem;
+    }
+    @include mobile {
+        --wrap: 1.25rem;
+        --wrap-1: 1.25rem;
+    }
+    
 }
 
 body {
@@ -20,5 +32,10 @@ div {
     &::-webkit-scrollbar {
         display: none;
     }
+}
+
+input,
+textarea {
+    font-family: 'Arial';
 }
     
