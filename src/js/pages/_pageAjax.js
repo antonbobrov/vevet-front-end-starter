@@ -16,6 +16,7 @@ let pageAjax = new PageAjax({
         update: settings.page.update,
         done: settings.page.done
     },
+    changeSame: false,
     cache: true
 });
 

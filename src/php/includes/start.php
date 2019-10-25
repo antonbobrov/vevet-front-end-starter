@@ -13,6 +13,9 @@
 		
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="format-detection" content="telephone=no">
+		
+		<meta name="theme-color" content="#000000">
+		<link rel="manifest" href="/manifest.webmanifest">
 
 		<link rel="stylesheet" href="/assets/css/app.css"> 
 
