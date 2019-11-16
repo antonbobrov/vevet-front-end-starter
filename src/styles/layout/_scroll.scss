@@ -1,9 +1,4 @@
 .scroll {
-    @include transition($show-content-duration, 0s);
-
-    &.hide {
-        opacity: 0;
-    }
 
     &__outer {
         position: relative;

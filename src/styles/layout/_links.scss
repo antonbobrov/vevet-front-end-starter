@@ -1,10 +1,10 @@
 a {
     @include transition(color .75s, 0s);
-    color: $color-anchor;
+    color: var(--anchor-color);
     text-decoration: none;
-}
 
-.button {
-    @include reset-button();
-    @include display-flex-center();
+    @include hover {
+        color: var(--anchor-hover-color);
+    }
+
 }

@@ -4,8 +4,7 @@
 @import 'settings';
 @import 'mixins/mixins';
 
-//@import '~vevet/dist/scss/index';
-//@import '~vevet/dist/scss/modules/preloader';
+
 
 @import '../../../vevet/src/scss/index';
 @import '../../../vevet/src/scss/modules/preloader';
@@ -20,17 +19,17 @@
 @import 'layout/text';
 @import 'layout/scroll';
 @import 'layout/content';
-@import 'layout/wrap';
 @import 'layout/page';
 @import 'layout/app';
-
-@import 'layout/modules/preloader';
-@import 'layout/modules/scroll';
-
 @import 'layout/header';
 @import 'layout/menu';
 
+@import 'modules/preloader';
+@import 'modules/scroll';
+
 @import 'helpers/afterload';
 @import 'helpers/view';
+
+@import 'blocks/button';
 
 @import 'pages/home';

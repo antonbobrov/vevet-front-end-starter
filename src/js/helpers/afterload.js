@@ -1,4 +1,3 @@
-import app from '../modules/app';
 import settings from '../settings';
 
 let afterload = function() {

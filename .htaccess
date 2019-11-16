@@ -2,8 +2,9 @@ Options +FollowSymLinks
 RewriteEngine On
 
 # redirect resources to webpack's dev server
-Redirect 301 /assets http://localhost:8083/assets
-Redirect 301 /image http://localhost:8083/image
+Redirect 301 /assets http://192.168.0.102:8083/assets
+Redirect 301 /image http://192.168.0.102:8083/image
+Redirect 301 /css http://192.168.0.102:8083/css
 
 # access php files from /src/php as if they were in the root folder
 RewriteCond %{REQUEST_URI} !src/php/

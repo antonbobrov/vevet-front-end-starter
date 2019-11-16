@@ -1,26 +1,34 @@
-import { Preloader } from './vevet';
+import { Preloader, utils } from './vevet';
 
 import settings from '../settings';
 import app from './app';
 import afterload from '../helpers/afterload';
 
+let ps = settings.preloader;
+
 let preloader = (function() {
 
 
 
-    // settings
-
+    // vars
     let preloader = false;
 
 
 
     // initialize preloader
-
     function init() {
 
         // create preloader
-    
-        preloader = new Preloader();
+        preloader = new Preloader({
+            hide: true,
+            animation: ps.animation,
+            progress: {
+                on: false,
+                forceEnd: true,
+                k: ps.k,
+                forceEndDuration: ps.duration
+            }
+        });
 
         // set events
         _setEvents();
@@ -33,11 +41,9 @@ let preloader = (function() {
 
 
     // events
-
     function _setEvents() {
 
         // on hide
-
         preloader.add({
             target: 'hide',
             do: hide.bind(this)
@@ -48,15 +54,14 @@ let preloader = (function() {
 
 
     // hide preloader
-
     function hide() {
 
         afterload();
 
-        setTimeout(() => {
+        utils.timeoutCallback(() => {
             app.vevetPage.show();
-        }, settings.preloader.showPage);
-
+        }, ps.showPageTimeout);
+        
     }
 
 

@@ -16,11 +16,14 @@ let settings = {
     },
 
     preloader: {
-        showPage: 25
+        k: !test ? .035 : 1,
+        duration: !test ? 1500 : 10,
+        animation: !test ? 0 : 0,
+        showPageTimeout: 25
     },
 
     font: {
-        adaptive: false
+        adaptive: true
     },
 
 };

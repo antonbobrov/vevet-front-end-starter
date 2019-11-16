@@ -1,8 +1,9 @@
-import { Page, Scroll, View } from '../modules/vevet';
+import { Page, Scroll, utils } from '../modules/vevet';
 import app from '../modules/app';
 import settings from '../settings';
 import height from '../helpers/height';
-import elements from '../helpers/elements';
+import { elementsUpdate, elements } from '../helpers/elements';
+import view from '../modules/view';
 
 
 
@@ -10,11 +11,11 @@ class Default extends Page {
 
 
 
-    // Create the page
-
     create(ajax) {
 
-        super.create(ajax);
+        if (!super.create(ajax)) {
+            return false;
+        }
 
         // set full height
         height.set();
@@ -26,13 +27,15 @@ class Default extends Page {
         this._scroll();
         this._view();
 
-    }
+        return true;
 
-    // Show the page
+    }
 
     show() {
 
-        super.show();
+        if (!super.show()) {
+            return false;
+        }
 
         // update view
         this.view.updateEl();
@@ -42,43 +45,47 @@ class Default extends Page {
         this.scrollPlay();
 
         // show app
-        elements.get().app.classList.remove("hide");
+        elements.app.classList.remove("hide");
 
-        // show contents
-        elements.get().scroll.classList.remove("hide");
+        return true;
 
     }
 
-    // Hide the page
-
     hide() {
 
-        super.hide();
+        if (!super.hide()) {
+            return false;
+        }
 
         // stop scroll
         this.scrollPause();
 
         // hide app
-        elements.get().app.classList.add("hide");
+        elements.app.classList.add("hide");
+
+        return true;
 
     }
 
 
 
     /*** Custom Scroll ***/
-
+    
     _scroll() {
 
-        let k = .1;
+        // get easing
+        let ease = .1;
         if (app.os == 'macos') {
-            k = .2;
+            if (!app.viewport.mobiledevice) {
+                ease = .2;
+            }
+        }
+        if (app.browser == 'edge') {
+            ease = .2;
         }
 
         // get selector
-        this._scrollEl = '.scroll .scroll__outer';
-
-        // get outer
-        this._scrollOuter = document.querySelector('.scroll');
+        this._scrollEl = this._scrollSelector();
 
         // initialize scroll
         
@@ -88,21 +95,10 @@ class Default extends Page {
                 outer: '.scroll',
                 elements: this._scrollEl
             },
-            k: {
-                value: k,
-            },
-            drag: {
-                on: true,
-                k: 2,
-                reset: false,
-                disableListeners: true,
-                timeoutListeners: 10,
-                min: 1
-            },
+            ease: ease,
             resizeTimeout: settings.resizeTimeout,
             run: false,
             resizeOnUpdate: false,
-            roundPixel: app.browser == 'firefox',
             responsive: [
                 {
                     breakpoint: 1199,
@@ -123,6 +119,12 @@ class Default extends Page {
 
     }
 
+    _scrollSelector() {
+
+        return '.scroll .scroll__outer';
+
+    }
+
     scrollPause() {
 
         this.scroll.changeProp({
@@ -136,7 +138,7 @@ class Default extends Page {
         // bool
         let play = true;
         if (app.viewport.mobiledevice || !app.viewport.desktop) {
-            play = false
+            // play = false
         }
 
         if (play) {
@@ -145,7 +147,7 @@ class Default extends Page {
                 run: true
             });
             // class
-            this._scrollOuter.classList.remove("unactive");
+            this.scroll.outer.classList.remove("unactive");
         }
         else {
             // stop
@@ -153,9 +155,9 @@ class Default extends Page {
                 run: false
             });
             // class
-            this._scrollOuter.classList.add("unactive");
+            this.scroll.outer.classList.add("unactive");
             // transforms
-            let el = document.querySelectorAll(this._scrollEl);
+            let el = utils.elements(this._scrollEl);
             for (let i = 0; i < el.length; i++) {
                 el[i].style.transform = '';
             }
@@ -169,37 +171,7 @@ class Default extends Page {
 
     _view() {
 
-        this.view = new View({
-            parent: this,
-            selectors: {
-                outer: this.scroll,
-                elements: '.v-view',
-                inside: false
-            },
-            seekLoad: false,
-            seekInit: false,
-            classToAdd: 'v-viewed',
-            stackDelay: 75,
-            resizeTimeout: 1000,
-            responsive: [
-                {
-                    breakpoint: 1199,
-                    settings: {
-                        selectors: {
-                            outer: '.scroll'
-                        }
-                    }
-                },
-                {
-                    breakpoint: 'md',
-                    settings: {
-                        selectors: {
-                            outer: '.scroll'
-                        }
-                    }
-                }
-            ]
-        });
+        this.view = view();
 
     }
 
@@ -209,14 +181,16 @@ class Default extends Page {
 
     _elements() {
 
-        let el = elements.get();
+        elementsUpdate();
 
-        // make logo non-active on home page
-        if (this.prop.name == 'home') {
-            el.logo.style.pointerEvents = 'none';
-        }
-        else {
-            el.logo.style.pointerEvents = '';
+        // make the logo inactive on the main page
+        if (elements.logo) {
+            if (this.prop.name == 'home') {
+                elements.logo.style.pointerEvents = 'none';
+            }
+            else {
+                elements.logo.style.pointerEvents = '';
+            }
         }
 
     }

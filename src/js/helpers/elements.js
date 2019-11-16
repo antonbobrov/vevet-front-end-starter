@@ -1,33 +1,15 @@
-let elements = (function() {
+import {utils} from '../modules/vevet';
 
-    let el = {
-        logo: null,
-        app: null,
-        scroll: null,
-    };
+let elements = {
+    logo: null,
+    app: null,
+    scroll: null,
+};
 
-    let update = function() {
+let elementsUpdate = function() {
+    elements.logo = utils.element(".header-logo");
+    elements.app = utils.element(".app");
+    elements.scroll = utils.element(".scroll");
+};
 
-        el.logo = document.querySelector(".header-logo");
-        el.app = document.querySelector(".app");
-        el.scroll = document.querySelector(".scroll");
-
-    };
-    update();
-
-    let get = function() {
-        return el;
-    };
-
-
-
-    return {
-        get: get.bind(this),
-        update: update.bind(this)
-    };
-
-
-
-}());
-
-export default elements;
+export { elements, elementsUpdate };

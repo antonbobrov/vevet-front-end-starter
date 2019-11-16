@@ -1,25 +1,58 @@
+// CSS3 Variables / This mixin is used in /layout/_document.scss
+@mixin css-vars() {
+
+    // wrappers
+    --wrap: 4vw;
+    --wrap-1: 16vw;
+    @include tablet {
+        --wrap: 2.5rem;
+        --wrap-1: 2.5rem;
+    }
+    @include mobile {
+        --wrap: 1.25rem;
+        --wrap-1: 1.25rem;
+    }
+
+    // colors
+    --black: #000;
+    --white: #fff;
+
+    // layout colors
+    --bg-color: var(--white);
+    --text-color: var(--black);
+    --anchor-color: var(--black);
+    --anchor-hover-color: var(--black);
+
+    // layout vars
+    --content-padding: 0 0;
+
+    // preloader
+    --preloader-bg: var(--white);
+
+}
+
+
+
+// Vevet Variables
 $prefix: 'v-';
 
-$bg: #fff;
-$color: #000;
+$bg: var(--bg-color);
+$color: var(--text-color);
 
 $wrap-padding: 0 var(--wrap);
 $wrap-1-padding: 0 var(--wrap-1);
 
-$preloader-bg: #000;
+$preloader-bg: var(--preloader-bg);
 
 
 
 // Custom
 
-$color-anchor: #000;
-
 $font-size: 16px;
+
 $afterload-transition: 1s;
 $afterload-delay: 0s;
-$show-content-duration: .5s;
+
+$change-page-duration: .5s;
 
 $view-duration: 1.75s;
-
-$change-page-elements-duration: .75s;
-$change-page-duration: .5s;
