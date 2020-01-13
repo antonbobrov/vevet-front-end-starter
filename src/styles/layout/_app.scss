@@ -1,8 +1,9 @@
 .app {
-    @include transition($change-page-duration, 0s);
     position: relative;
     z-index: 1;
     overflow: hidden;
+    
+    @include transition(opacity $change-page-duration, 0s);
 
     &.hide {
         opacity: 0;

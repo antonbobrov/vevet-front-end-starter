@@ -25,7 +25,7 @@
 
         <?php require_once "blocks/preloader.php"; ?>
 
-        <div class="page height-full hidden">
+        <div class="page height-full">
 
             <?php require_once "blocks/header.php"; ?>
 
