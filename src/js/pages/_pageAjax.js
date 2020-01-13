@@ -1,4 +1,4 @@
-import { PageAjax } from '../vevet/vevet';
+import { PageAjax } from '../v/v';
 import settings from '../settings';
 
 const pageAjax = new PageAjax({

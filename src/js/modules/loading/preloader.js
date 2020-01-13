@@ -1,7 +1,7 @@
-import { Preloader, utils } from '../../vevet/vevet';
+import { Preloader, utils } from '../../v/v';
 
 import settings from '../../settings';
-import app from '../../vevet/app';
+import app from '../../v/app';
 import afterload from '../../helpers/afterload';
 
 let ps = settings.preloader;

@@ -9,8 +9,7 @@ window[rand] = {};
 
 
 // site
-import app from './vevet/app';
-window[rand].app = app;
+import app from './v/app';
 window.app = app;
 
 // modules

@@ -1,4 +1,4 @@
-import app from '../vevet/app';
+import app from '../v/app';
 
 let height = (function() {
 

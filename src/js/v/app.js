@@ -1,4 +1,4 @@
-import { Application } from './vevet'
+import { Application } from './v';
 
 // create veevet application
 let app = new Application({

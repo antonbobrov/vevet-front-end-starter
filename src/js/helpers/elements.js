@@ -1,4 +1,4 @@
-import {utils} from '../vevet/vevet';
+import {utils} from '../v/v';
 
 let elements = {
     app: null,

@@ -1,4 +1,4 @@
-import app from '../vevet/app';
+import app from '../v/app';
 import settings from '../settings';
 
 let fontSize = (function() {

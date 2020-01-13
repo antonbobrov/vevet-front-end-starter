@@ -1,4 +1,4 @@
-import {ResponsiveProp} from './vevet/vevet';
+import {ResponsiveProp} from './v/v';
 
 let test = false;
 
