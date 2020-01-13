@@ -1,6 +1,8 @@
+import {ResponsiveProp} from './vevet/vevet';
+
 let test = false;
 
-let settings = {
+let rp = new ResponsiveProp({
 
     test: test,
 
@@ -26,6 +28,8 @@ let settings = {
         adaptive: true
     },
 
-};
+});
+
+let settings = rp._prop;
 
 export default settings;
