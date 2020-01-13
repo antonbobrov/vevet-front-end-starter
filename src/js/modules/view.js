@@ -1,7 +1,7 @@
-import { View } from './vevet';
+import { View } from '../vevet/vevet';
 import scrollSelector from '../helpers/scrollSelector';
 import settings from '../settings';
-import app from './app';
+import app from '../vevet/app';
 
 let view = function(selector = scrollSelector()) {
 

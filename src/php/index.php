@@ -3,6 +3,6 @@ define("PAGE", "home");
 require_once './includes/start.php';
 ?>
 
-<!-- Code -->
+<!-- Code -->Hello
 
 <? require_once './includes/end.php'; ?>

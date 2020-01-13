@@ -1,5 +1,5 @@
-import { Page, Scroll, utils } from '../modules/vevet';
-import app from '../modules/app';
+import { Page, Scroll, utils } from '../vevet/vevet';
+import app from '../vevet/app';
 import settings from '../settings';
 import height from '../helpers/height';
 import { elementsUpdate, elements } from '../helpers/elements';

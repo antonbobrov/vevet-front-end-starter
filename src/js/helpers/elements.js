@@ -1,4 +1,4 @@
-import {utils} from '../modules/vevet';
+import {utils} from '../vevet/vevet';
 
 let elements = {
     logo: null,
