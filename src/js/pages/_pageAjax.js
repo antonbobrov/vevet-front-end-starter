@@ -1,7 +1,7 @@
 import { PageAjax } from '../vevet/vevet';
 import settings from '../settings';
 
-let pageAjax = new PageAjax({
+const pageAjax = new PageAjax({
     selectors: {
         outer: '.app',
         links: '.v-al'
@@ -15,6 +15,10 @@ let pageAjax = new PageAjax({
         done: settings.page.done
     },
     changeSame: false,
+    menuLinks: {
+        selectorNew: '.menu a',
+        selectorOld: '.menu a'
+    },
     cache: true
 });
 

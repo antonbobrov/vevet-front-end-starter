@@ -2,8 +2,8 @@ import { Page, Scroll, utils } from '../vevet/vevet';
 import app from '../vevet/app';
 import settings from '../settings';
 import height from '../helpers/height';
-import { elementsUpdate, elements } from '../helpers/elements';
-import view from '../modules/view';
+import { elements, elementsUpdate } from '../helpers/elements';
+import view from '../modules/scroll/view';
 
 
 
@@ -20,12 +20,12 @@ class Default extends Page {
         // set full height
         height.set();
 
-        // show/hide elements
-        this._elements();
-
         // scrolling
         this._scroll();
         this._view();
+
+        // update page elements
+        elementsUpdate();
 
         return true;
 
@@ -98,7 +98,6 @@ class Default extends Page {
             ease: ease,
             resizeTimeout: settings.resizeTimeout,
             run: false,
-            resizeOnUpdate: false,
             responsive: [
                 {
                     breakpoint: 1199,
@@ -151,9 +150,7 @@ class Default extends Page {
         }
         else {
             // stop
-            this.scroll.changeProp({
-                run: false
-            });
+            this.scrollPause();
             // class
             this.scroll.outer.classList.add("unactive");
             // transforms
@@ -172,26 +169,6 @@ class Default extends Page {
     _view() {
 
         this.view = view();
-
-    }
-
-
-
-    /*** Show/Hide Elements ***/
-
-    _elements() {
-
-        elementsUpdate();
-
-        // make the logo inactive on the main page
-        if (elements.logo) {
-            if (this.prop.name == 'home') {
-                elements.logo.style.pointerEvents = 'none';
-            }
-            else {
-                elements.logo.style.pointerEvents = '';
-            }
-        }
 
     }
 

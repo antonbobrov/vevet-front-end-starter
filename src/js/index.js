@@ -14,7 +14,7 @@ window[rand].app = app;
 window.app = app;
 
 // modules
-import preloader from './modules/preloader';
+import preloader from './modules/loading/preloader';
 window[rand].preloader = preloader;
 
 // helpers

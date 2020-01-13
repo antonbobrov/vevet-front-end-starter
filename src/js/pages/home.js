@@ -16,7 +16,7 @@ class Home extends Default {
 
 }
 
-var home = new Home({
+const home = new Home({
     name: 'home'
 });
 

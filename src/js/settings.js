@@ -28,6 +28,17 @@ let rp = new ResponsiveProp({
         adaptive: true
     },
 
+    
+    
+    responsive: [{
+        breakpoint: 'md',
+        settings: {
+            font: {
+                // adaptive: false
+            }
+        }
+    }],
+
 });
 
 let settings = rp._prop;
