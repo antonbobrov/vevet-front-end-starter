@@ -1,17 +1,22 @@
-import app from '../v/app';
 import settings from '../settings';
+import app from '../v/app';
 
-let fontSize = (function() {
+// adaptive font size
+
+const fontSize = (function() {
 
 
 
-    let condition = function(width, v) {
+    // get font size
+    function value() {
 
-        let k = 1;
+        let k = 1,
+            viewport = app.viewport,
+            width = viewport.size[0];
 
         // dekstop
 
-        if (v.desktop) {
+        if (viewport.desktop) {
             k = width / 1440;
             if (k > 1.25) {
                 k = 1.25;
@@ -21,13 +26,13 @@ let fontSize = (function() {
 
             // tablet
 
-            if (v.tablet) {
+            if (viewport.tablet) {
                 k = width / 1024;
             }
 
             // mobile
 
-            if (v.mobile) {
+            if (viewport.mobile) {
                 if (width > 750) {
                     k = width / 500;
                 }
@@ -65,27 +70,28 @@ let fontSize = (function() {
 
         return font;
 
-    };
+    }
 
 
 
+    // set font size
     let set = function() {
-
-        let width = app.viewport.size[0],
-            font = condition(width, app.viewport);
-
+        let font = value();
         app.html.style.fontSize = `${font}px`;
-
     };
     set();
 
+
+    
+    // add viewport callbacks
     app.viewport.add({
         target: '',
         do: set.bind(this)
     });
 
     app.load.add({
-        do: set.bind(this)
+        do: set.bind(this),
+        value: value.bind(this)
     });
 
 

@@ -1,4 +1,4 @@
-import Default from './_default';
+import Default from './default';
 
 class Home extends Default {
 

@@ -1,4 +1,7 @@
 .scroll {
+    height: calc(100 * var(--vh));
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
 
     &__outer {
         position: relative;

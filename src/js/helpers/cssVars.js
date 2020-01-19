@@ -1,5 +1,7 @@
 import app from "../v/app";
 
+// calculate viewport values for css
+
 function cssVars() {
 
     let viewport = app.viewport;

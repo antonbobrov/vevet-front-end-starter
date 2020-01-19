@@ -1,10 +1,22 @@
-import { View } from '../../v/v';
 import scrollSelector from '../../helpers/scrollSelector';
 import settings from '../../settings';
 import app from '../../v/app';
+import { View } from 'vevet';
+import viewChildren from './viewChildren';
 
-let view = function() {
 
+// settings for the view
+const vs = settings.view;
+
+
+// the module lets elements animate when they appear into the viewport
+function view() {
+
+
+    // view children
+    viewChildren();
+
+    // initialize view
     let v = new View({
         parent: app.vevetPage,
         selectors: {
@@ -18,12 +30,12 @@ let view = function() {
         stackDelay: 75,
         resizeTimeout: settings.resizeTimeout,
         edge: 1,
-        autostack: {
-            on: true,
-            delay: 1500
-        }
+        autostack: vs.autostack
     });
 
+
+
+    // add event on resize
     app.viewport.on("", () => {
         v.changeProp({
             selectors: {
@@ -32,8 +44,12 @@ let view = function() {
         });
     });
 
+
+
     return v;
 
-};
+
+    
+}
 
 export default view;
