@@ -3,7 +3,7 @@ import settings from '../../settings';
 
 // create page according to the defined type
 
-let createPage = (function() {
+let createPage = function() {
 
     let page = app.page[0];
 
@@ -41,6 +41,6 @@ let createPage = (function() {
 
     
 
-}());
+};
 
 export default createPage;

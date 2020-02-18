@@ -6,12 +6,14 @@ import pageAjax from "./pageAjax";
 
 function pagesRegistry() {
 
-    let storage = {};
+    let storage = {
+        pages: []
+    };
 
 
 
     // add pages
-    storage.home = home;
+    storage.pages.push(home);
 
 
 
@@ -19,7 +21,7 @@ function pagesRegistry() {
     storage.pageAjax = pageAjax;
 
     // and create current page
-    storage.createPage = createPage;
+    createPage();
 
 
 
