@@ -2,7 +2,8 @@ const merge = require('webpack-merge');
 const baseWebpackConfig = require('./webpack.base.conf');
 
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const ImageminPlugin = require('imagemin-webpack-plugin').default
+const ImageminPlugin = require('imagemin-webpack-plugin').default;
+const CompressionPlugin = require('compression-webpack-plugin');
 
 const buildWebpackConfig = merge(baseWebpackConfig, {
 
@@ -41,6 +42,7 @@ const buildWebpackConfig = merge(baseWebpackConfig, {
                 quality: '95-100'
             }
         }),
+        new CompressionPlugin()
     ]   
 
 });
