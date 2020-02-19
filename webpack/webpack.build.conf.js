@@ -4,6 +4,7 @@ const baseWebpackConfig = require('./webpack.base.conf');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const ImageminPlugin = require('imagemin-webpack-plugin').default;
 const CompressionPlugin = require('compression-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const buildWebpackConfig = merge(baseWebpackConfig, {
 
@@ -42,7 +43,12 @@ const buildWebpackConfig = merge(baseWebpackConfig, {
                 quality: '95-100'
             }
         }),
-        new CompressionPlugin()
+        new CompressionPlugin(),
+        new BundleAnalyzerPlugin({
+            analyzerMode: 'static',
+            reportFilename: 'BundleAnalyzer.html',
+            openAnalyzer: false
+        })
     ]   
 
 });

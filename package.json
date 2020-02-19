@@ -66,6 +66,7 @@
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
-    "vevet": "^0.4.6"
+    "vevet": "^0.4.6",
+    "webpack-bundle-analyzer": "^3.6.0"
   }
 }
