@@ -1,6 +1,8 @@
 import settings from '../../settings';
 import app from '../../v/app';
-import { utils, Scroll } from 'vevet';
+import { ScrollModule } from 'vevet';
+import { all } from 'select-el';
+
 
 
 // the module lets elements animate when they appear into the viewport
@@ -20,11 +22,11 @@ function scroll() {
     }
 
     // get scrolling elements
-    const scrollEl = utils.elements('.scroll .scroll__outer');
+    const scrollEl = all('.scroll .scroll__outer');
 
     // initialize scroll
     
-    const scroll = new Scroll({
+    const scroll = new ScrollModule({
         parent: page,
         selectors: {
             outer: '.scroll',

@@ -1,0 +1,10 @@
+{
+    "plugins": [
+        ["transform-imports", {
+            "vevet": {
+                "transform": "vevet/dist/js/${member}",
+                "preventFullImport": false
+            }
+        }]
+    ]
+  }

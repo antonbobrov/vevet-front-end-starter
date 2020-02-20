@@ -1,7 +1,7 @@
 import scrollSelector from '../../helpers/scrollSelector';
 import settings from '../../settings';
 import app from '../../v/app';
-import { View } from 'vevet';
+import { ScrollViewModule } from 'vevet';
 import viewChildren from './viewChildren';
 
 
@@ -17,7 +17,7 @@ function view() {
     viewChildren();
 
     // initialize view
-    let v = new View({
+    let v = new ScrollViewModule({
         parent: app.vevetPage,
         selectors: {
             outer: scrollSelector(),

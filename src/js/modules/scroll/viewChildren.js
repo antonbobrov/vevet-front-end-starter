@@ -1,8 +1,8 @@
-import {utils} from 'vevet';
+import { all } from "select-el";
 
 const viewChildren = function() {
 
-    let outers = utils.elements(".view-children");
+    let outers = all(".view-children");
     outers.forEach(outer => {
         let children = outer.children;
         for (let i = 0; i < children.length; i++) {

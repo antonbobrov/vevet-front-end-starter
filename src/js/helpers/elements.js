@@ -1,4 +1,4 @@
-import {utils} from 'vevet';
+import { one, all } from "select-el";
 
 // layout elements
 
@@ -11,8 +11,8 @@ let elements = {
 
 // update elements in the storage
 function updateElements() {
-    elements.app = utils.element(".app");
-    elements.scroll = utils.element(".scroll");
+    elements.app = one(".app");
+    elements.scroll = all(".scroll");
 }
 
 export { elements, updateElements };

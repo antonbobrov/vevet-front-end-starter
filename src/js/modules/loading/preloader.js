@@ -1,7 +1,7 @@
 import settings from '../../settings';
 import app from '../../v/app';
 import afterload from '../../helpers/afterload';
-import { Preloader } from 'vevet';
+import { PreloaderModule } from 'vevet';
 
 // settings for the preloader
 let ps = settings.preloader;
@@ -22,7 +22,7 @@ const preloader = (function() {
     function init() {
 
         // create preloader
-        preloader = new Preloader({
+        preloader = new PreloaderModule({
             hide: true,
             animation: ps.animation,
             progress: ps.progress

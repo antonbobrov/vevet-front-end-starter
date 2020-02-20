@@ -25,6 +25,7 @@
     "babel-cli": "^6.26.0",
     "babel-eslint": "^10.0.2",
     "babel-loader": "^8.0.6",
+    "babel-plugin-transform-imports": "^2.0.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-es2015-ie": "^6.7.0",
     "circletype": "^2.3.0",
@@ -66,7 +67,8 @@
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
-    "vevet": "^0.4.6",
+    "select-el": "^1.0.3",
+    "vevet": "^1.0.3",
     "webpack-bundle-analyzer": "^3.6.0"
   }
 }

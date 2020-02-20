@@ -1,6 +1,6 @@
 import { elements, updateElements } from '../helpers/elements';
 import view from '../modules/scroll/view';
-import { Page } from 'vevet';
+import { PageModule } from 'vevet';
 import scroll from '../modules/scroll/scroll';
 import settings from '../settings';
 import fullHeight from '../helpers/fullHeight';
@@ -11,7 +11,7 @@ let ss = settings.scroll;
 
 
 // Default Page Class
-class Default extends Page {
+class Default extends PageModule {
 
 
 

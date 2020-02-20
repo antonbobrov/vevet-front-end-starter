@@ -1,5 +1,5 @@
 import settings from '../../settings';
-import { PageAjax } from 'vevet';
+import { PageAjaxModule } from 'vevet';
 
 // settings for pages
 const ps = settings.page;
@@ -8,7 +8,7 @@ const ps = settings.page;
 const menuSelector = '.menu a';
 
 // create ajax transition between pages
-const pageAjax = new PageAjax({
+const pageAjax = new PageAjaxModule({
     selectors: {
         outer: '.app',
         links: '.v-al'
