@@ -2,11 +2,6 @@
   "name": "vevet-template",
   "version": "0.3.0",
   "description": "Vevet Template",
-  "main": "./src/js/index.js",
-  "sideEffects": [
-    "*.css",
-    "*.scss"
-  ],
   "scripts": {
     "dev": "NODE_ENV=development webpack --config ./webpack/webpack.dev.conf.js",
     "build": "NODE_ENV=production webpack --config ./webpack/webpack.build.conf.js",
@@ -64,11 +59,11 @@
     "webpack-cli": "^3.3.5",
     "webpack-common-shake": "^2.1.0",
     "webpack-dev-server": "^3.7.2",
-    "webpack-merge": "^4.2.1"
+    "webpack-merge": "^4.2.1",
+    "webpack-bundle-analyzer": "^3.6.0"
   },
   "dependencies": {
     "select-el": "^1.0.3",
-    "vevet": "^1.0.3",
-    "webpack-bundle-analyzer": "^3.6.0"
+    "vevet": "^1.0.3"
   }
 }
