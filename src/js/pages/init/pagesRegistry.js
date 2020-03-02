@@ -2,8 +2,6 @@ import home from "../home";
 import createPage from "./createPage";
 import pageAjax from "./pageAjax";
 
-// the order of imports is important
-
 function pagesRegistry() {
 
     let storage = {

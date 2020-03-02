@@ -1,16 +1,14 @@
 @import '~normalize-scss';
 @include normalize();
 
-@import 'settings';
+@import './settings/index';
 @import 'mixins/mixins';
 
 
 
-// @import '../../../vevet/src/scss/index';
 @import '~vevet/dist/scss/index';
-@import '~vevet/dist/scss/modules/preloader';
-@import '~vevet/dist/scss/modules/scroll';
-
+@import '~vevet/dist/scss/modules/preloader/index';
+@import '~vevet/dist/scss/modules/scroll/index';
 
 
 @import '../fonts/Font/font';

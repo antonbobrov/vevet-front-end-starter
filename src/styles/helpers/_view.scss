@@ -1,25 +1,26 @@
+$view-duration: 1.25s;
+
 .v-view {
-    animation-timing-function: $transition-timing-function;
 
     &_b {
         opacity: 0;
 
         &.v-viewed {
+            @include transition-animation($view-duration);
             animation-name: viewBottom;
-            animation-duration: $view-duration;
-            animation-delay: 0s;
             animation-fill-mode: both;
-        }
 
-        @keyframes viewBottom {
-            from {
-                transform: translate3d(0, 2rem, 0);
-                opacity: 0;
+            @keyframes viewBottom {
+                from {
+                    transform: translate3d(0, 2rem, 0);
+                    opacity: 0;
+                }
+                to {
+                    transform: none;
+                    opacity: 1;
+                }
             }
-            to {
-                transform: none;
-                opacity: 1;
-            }
+            
         }
 
     }

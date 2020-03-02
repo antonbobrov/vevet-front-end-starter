@@ -1,3 +1,6 @@
+$afterload-transition: 1s;
+$afterload-delay: 0s;
+
 .afterload {
     @include transition(opacity $afterload-transition, $afterload-delay);
     opacity: 0;

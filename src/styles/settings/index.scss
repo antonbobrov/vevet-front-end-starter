@@ -1,0 +1,17 @@
+@import './color';
+@import './wrap';
+@import './layout';
+@import './modules';
+
+// Vevet Variables
+$prefix: 'v-';
+
+// CSS3 Variables / This mixin is used in /layout/_document.scss
+@mixin css-vars() {
+
+    @include settings-wrap;
+    @include settings-color;
+    @include settings-layout;
+    @include settings-modules;
+
+}

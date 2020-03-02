@@ -1,0 +1,5 @@
+$preloader-bg: var(--preloader-bg);
+
+@mixin settings-modules {
+    --preloader-bg: var(--white);
+}

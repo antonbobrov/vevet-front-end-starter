@@ -26,7 +26,7 @@ let rp = new ResponsiveProp({
 
 
     preloader: {
-        animation: !test ? 0 : 0,
+        animation: !test ? 500 : 0,
         progress: {
             on: false,
             forceEnd: true,

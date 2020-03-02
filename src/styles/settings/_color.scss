@@ -1,0 +1,17 @@
+$bg: var(--bg-color);
+$color: var(--text-color);
+
+@mixin settings-color {
+    
+    // colors
+    --black: #000;
+    --white: #fff;
+
+    // layout colors
+    --bg-color: #5F2580;
+    --text-color: #fff;
+
+    --link-color: var(--white);
+    --link-color-hover: var(--white);
+
+}

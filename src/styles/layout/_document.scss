@@ -1,6 +1,9 @@
+$font-size: 16px;
+$font-family: 'Oswald';
+
 html {
     font-size: $font-size;
-    font-family: 'Oswald';
+    font-family: $font-family;
     user-select: none;
     overflow: hidden;
 
@@ -27,6 +30,6 @@ div {
 
 input,
 textarea {
-    font-family: 'Oswald';
+    font-family: $font-family;
 }
     
