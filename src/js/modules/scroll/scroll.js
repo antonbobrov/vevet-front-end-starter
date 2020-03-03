@@ -2,6 +2,7 @@ import settings from '../../settings';
 import app from '../../v/app';
 import { ScrollModule } from 'vevet';
 import { all } from 'select-el';
+import scrollCanBeCustom from './scrollCanBeCustom';
 
 
 
@@ -68,14 +69,10 @@ function scroll() {
     // play scroll
     function play() {
 
-        let viewport = app.viewport,
-            scrollOuter = scroll.outer;
+        let scrollOuter = scroll.outer;
 
         // bool
-        let play = true;
-        if (viewport.mobiledevice || !viewport.desktop) {
-            // play = false;
-        }
+        let play = scrollCanBeCustom();
 
         // either play or stop
         if (play) {

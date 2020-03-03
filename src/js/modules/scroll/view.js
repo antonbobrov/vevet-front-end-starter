@@ -1,4 +1,4 @@
-import scrollSelector from '../../helpers/scrollSelector';
+import scrollSelector from './scrollSelector';
 import settings from '../../settings';
 import app from '../../v/app';
 import { ScrollViewModule } from 'vevet';

@@ -38,6 +38,7 @@ let rp = new ResponsiveProp({
 
 
     scroll: {
+        // not responsive
         custom: true
     },
 
