@@ -36,12 +36,16 @@ function view() {
 
 
     // add event on resize
-    app.viewport.on("", () => {
+    const viewportID = app.viewport.on("", () => {
         v.changeProp({
             selectors: {
                 outer: scrollSelector()
             }
         });
+    });
+
+    app.vevetPage.on("hide", () => {
+        app.viewport.remove(viewportID);
     });
 
 
