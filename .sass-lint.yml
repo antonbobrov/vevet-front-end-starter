@@ -38,8 +38,8 @@ rules:
   empty-line-between-blocks:
     - 0
     - ignore-single-line-rulesets: true
-  extends-before-declarations: 1
-  extends-before-mixins: 1
+  extends-before-declarations: 0
+  extends-before-mixins: 0
   final-newline:
     - 1
     - include: true
@@ -78,7 +78,7 @@ rules:
   no-css-comments: 1
   no-debug: 1
   no-duplicate-properties: 1
-  no-empty-rulesets: 1
+  no-empty-rulesets: 0
   no-extends: 0
   no-ids: 1
   no-important: 0
