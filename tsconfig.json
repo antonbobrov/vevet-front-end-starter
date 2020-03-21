@@ -7,6 +7,7 @@
         "jsx": "react",
         "allowJs": true,
         "noEmitOnError": false,
-        "declaration": true
+        "declaration": false,
+        "esModuleInterop": true
     }
 }
