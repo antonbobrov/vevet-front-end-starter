@@ -1,0 +1,19 @@
+.vevet {
+    position: relative;
+    width: 100%;
+    height: calc(100 * var(--vh));
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &__desc {
+        margin-top: 1.5rem;
+    }
+
+    &__link {
+        margin-top: 1.5rem;
+    }
+
+}

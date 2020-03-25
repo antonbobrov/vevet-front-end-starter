@@ -1,0 +1,21 @@
+.v-scroll {
+
+    &.unactive {
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+
+        .v-scroll {
+            
+            &__container {
+                position: static;
+            }
+
+            &__scrollbar {
+                display: none;
+            }
+
+        }
+
+    }
+
+}
