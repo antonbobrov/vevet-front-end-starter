@@ -46,15 +46,7 @@ module.exports = {
                 use: 'ts-loader',
             },
             {
-                test: /\.(png|jpg|gif|svg)?$/,
-                exclude: /node_modules/,
-                loader: 'file-loader',
-                options: {
-                    name: '[name].[ext]'
-                }
-            },
-            {
-                test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+                test: /\.(woff(2)?|ttf|eot|svg|png|jpg|gif|svg)(\?v=\d+\.\d+\.\d+)?$/,
                 loader: 'file-loader',
                 options: {
                     name: '[name].[ext]'
