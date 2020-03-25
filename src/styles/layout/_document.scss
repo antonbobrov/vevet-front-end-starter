@@ -8,6 +8,15 @@ html {
     overflow: hidden;
 
     @include css-vars;
+
+    &.loading {
+        cursor: progress !important;
+    
+        * {
+            cursor: progress !important;
+        }
+    
+    }
     
 }
 
