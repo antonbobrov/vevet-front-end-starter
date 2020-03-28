@@ -1,4 +1,4 @@
-# Alcomag Front-end
+# Шаблон Front-end для OpenServer и Vevet
 
 Работает на OpenServer + Webpack
 
