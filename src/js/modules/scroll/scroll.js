@@ -1,6 +1,6 @@
 import settings from '../../settings';
 import app from '../../v/app';
-import { ScrollModule } from 'vevet';
+import { ScrollModule, ScrollBarPlugin } from 'vevet';
 import { all } from 'select-el';
 import scrollCanBeCustom from './scrollCanBeCustom';
 
@@ -26,7 +26,6 @@ function scroll() {
     const scrollEl = all('.scroll .scroll__outer');
 
     // initialize scroll
-    
     const scroll = new ScrollModule({
         parent: page,
         selectors: {
@@ -46,6 +45,9 @@ function scroll() {
         ]
     });
 
+    // add scrollbars
+    scroll.addPlugin(new ScrollBarPlugin());
+
     // resize run
     page._addEvent('viewport', {
         target: 'w_',
@@ -64,6 +66,10 @@ function scroll() {
     // pause scroll
     function pause() {
         run(false);
+        // remove a special class
+        scrollEl.forEach(el => {
+            el.classList.remove("custom");
+        });
     }
 
     // play scroll
@@ -90,6 +96,18 @@ function scroll() {
             for (let i = 0; i < scrollEl.length; i++) {
                 scrollEl[i].style.transform = '';
             }
+        }
+
+        // add a special class
+        if (play) {
+            scrollEl.forEach(el => {
+                el.classList.add("custom");
+            });
+        }
+        else {
+            scrollEl.forEach(el => {
+                el.classList.remove("custom");
+            });
         }
 
     }

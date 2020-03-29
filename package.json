@@ -63,6 +63,6 @@
   },
   "dependencies": {
     "select-el": "^1.0.3",
-    "vevet": "^1.0.22"
+    "vevet": "^1.0.23"
   }
 }

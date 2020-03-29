@@ -6,6 +6,11 @@
     &__outer {
         position: relative;
         height: auto;
+
+        &.custom {
+            will-change: transform;
+        }
+        
     }
 
 }
