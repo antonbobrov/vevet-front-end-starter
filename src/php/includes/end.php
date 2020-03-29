@@ -6,7 +6,7 @@
 
         </div>
 
-        <script src="/assets/js/app.js" defer></script>
+        <? include('js.php'); ?>
 
     </body>
 

@@ -18,7 +18,7 @@
 		<link rel="manifest" href="/manifest.webmanifest">
 
         <link href="https://fonts.googleapis.com/css?family=Oswald:400,600&display=swap" rel="stylesheet">
-		<link rel="stylesheet" href="/assets/css/app.css"> 
+		<? include('css.php'); ?>
 
     </head>
 

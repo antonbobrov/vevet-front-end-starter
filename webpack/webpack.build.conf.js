@@ -1,10 +1,13 @@
 const merge = require('webpack-merge');
 const baseWebpackConfig = require('./webpack.base.conf');
+const PATHS = require('./paths').PATHS;
 const preamble = require('./preamble');
 
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const ImageminPlugin = require('imagemin-webpack-plugin').default;
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const AssetsManifest = require('webpack-assets-manifest');
 
 const buildWebpackConfig = merge(baseWebpackConfig, {
 
@@ -21,7 +24,7 @@ const buildWebpackConfig = merge(baseWebpackConfig, {
                     compress: {
                         drop_console: false,
                         keep_fargs: false,
-                        passes: 2
+                        passes: 1
                     },
                     ecma: 5,
                     mangle: true,
@@ -38,6 +41,11 @@ const buildWebpackConfig = merge(baseWebpackConfig, {
     },
 
     plugins: [
+        new CleanWebpackPlugin({
+            verbose: false,
+            cleanStaleWebpackAssets: true,
+            dry: false,
+        }),
         new ImageminPlugin({
             disable: false,
             pngquant: {
@@ -48,7 +56,11 @@ const buildWebpackConfig = merge(baseWebpackConfig, {
             analyzerMode: 'static',
             reportFilename: 'BundleAnalyzer.html',
             openAnalyzer: false
-        })
+        }),
+        new AssetsManifest({
+            output: PATHS.public + '/assets-manifest.json',
+            publicPath: true,
+        }),
     ]   
 
 });

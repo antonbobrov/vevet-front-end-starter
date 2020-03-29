@@ -1,16 +1,11 @@
 'use strict';
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
-const path = require('path');
+const PATHS = require('./paths').PATHS;
+
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
-
-const PATHS = {
-    src: path.join(__dirname, '../src'),
-    public: path.join(__dirname, '../public'),
-    assets: 'assets/'
-};
 
 module.exports = {
 
@@ -22,7 +17,7 @@ module.exports = {
         app: PATHS.src + '/js/index.js'
     }, 
     output: {
-        filename: `${PATHS.assets}js/[name].js`,
+        filename: NODE_ENV == 'development' ? `${PATHS.assets}js/[name].js` : `${PATHS.assets}js/[name].[contenthash].js`,
         path: PATHS.public,
         publicPath: '/'
     },
@@ -122,7 +117,7 @@ module.exports = {
             NODE_ENV: JSON.stringify(NODE_ENV)
         }),
         new MiniCssExtractPlugin({
-            filename: `${PATHS.assets}css/[name].css`
+            filename: NODE_ENV == 'development' ? `${PATHS.assets}css/[name].css` : `${PATHS.assets}css/[name].[hash].css`
         }),
         new CopyWebpackPlugin([
             { from: `${PATHS.src}/img`, to: `${PATHS.assets}img` },
