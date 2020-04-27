@@ -3,7 +3,7 @@ import preloader from "./modules/loading/preloader";
 import fullHeight from "./helpers/fullHeight";
 import fontSize from "./helpers/fontSize";
 import cssVars from "./helpers/cssVars";
-import pagesRegistry from "./pages/init/pagesRegistry";
+import pagesRegistry from "./modules/page/pagesRegistry";
 
 // init site
 
@@ -24,7 +24,8 @@ function init() {
     storage.cssVars = cssVars();
 
 
-    // show preloader
+
+    // page preloader
     storage.preloader = preloader;
 
 

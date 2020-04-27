@@ -1,4 +1,4 @@
-import settings from '../settings';
+import { afterloadDuration } from '../settings';
 
 // show elements when the page is loaded
 // see also /src/styles/helpers/_afterload.scss
@@ -15,7 +15,7 @@ function afterload() {
             el[i].classList.remove("afterload");
             el[i].classList.remove("afterload_show");
         }
-    }, (settings.afterload + 50));
+    }, (afterloadDuration + 50));
 
 }
 

@@ -1,5 +1,5 @@
-import settings from '../settings';
 import app from '../v/app';
+import { adaptiveFont } from '../settings';
 
 // adaptive font size
 
@@ -64,7 +64,7 @@ const fontSize = (function() {
             font = 22;
         }
 
-        if (!settings.font.adaptive) {
+        if (!adaptiveFont) {
             font = 16;
         }
 

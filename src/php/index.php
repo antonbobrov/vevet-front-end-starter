@@ -1,5 +1,5 @@
 <?
-define("PAGE", "home");
+define("PAGE", "home-page");
 require_once './includes/start.php';
 ?>
 

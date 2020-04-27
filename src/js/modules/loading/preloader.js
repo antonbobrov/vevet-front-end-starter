@@ -1,10 +1,20 @@
-import settings from '../../settings';
 import app from '../../v/app';
 import afterload from '../../helpers/afterload';
 import { PreloaderModule } from 'vevet';
+import { isTesting } from '../../settings';
+
+
 
 // settings for the preloader
-let ps = settings.preloader;
+let settings = {
+    animation: !isTesting ? 500 : 0,
+    progress: {
+        on: false,
+        forceEnd: true,
+        k: !isTesting ? .035 : 1,
+        forceEndDuration: !isTesting ? 1500 : 10
+    }
+};
 
 
 
@@ -24,8 +34,8 @@ const preloader = (function() {
         // create preloader
         preloader = new PreloaderModule({
             hide: true,
-            animation: ps.animation,
-            progress: ps.progress
+            animation: settings.animation,
+            progress: settings.progress
         });
 
         // set events

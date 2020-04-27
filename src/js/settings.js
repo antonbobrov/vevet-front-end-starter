@@ -1,67 +1,16 @@
-import { ResponsiveProp } from "vevet";
+export const isTesting = false;
 
-let test = false;
+export const resizeTimeout = 100;
 
-let rp = new ResponsiveProp({
+export const afterloadDuration = 1000;
 
-    test: test,
+export const adaptiveFont = true;
 
-    resizeTimeout: 100,
+export const pageSettings = {
+    default: 'default-page',
+    load: 250,
+    update: 0,
+    done: 0
+};
 
-    afterload: 1000,
-
-    font: {
-        adaptive: true
-    },
-
-
-
-    page: {
-        default: 'default',
-        load: 250,
-        update: 0,
-        done: 0
-    },
-
-
-
-    preloader: {
-        animation: !test ? 500 : 0,
-        progress: {
-            on: false,
-            forceEnd: true,
-            k: !test ? .035 : 1,
-            forceEndDuration: !test ? 1500 : 10
-        }
-    },
-
-
-
-    scroll: {
-        // not responsive
-        custom: true
-    },
-
-    view: {
-        autostack: {
-            on: true,
-            delay: 1500
-        }
-    },
-
-    
-    
-    responsive: [{
-        breakpoint: 'md',
-        settings: {
-            font: {
-                // adaptive: false
-            }
-        }
-    }],
-
-});
-
-let settings = rp._prop;
-
-export default settings;
+export const useCustomScroll = true;

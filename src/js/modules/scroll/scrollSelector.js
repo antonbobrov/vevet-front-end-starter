@@ -1,15 +1,16 @@
-import app from "../../v/app";
 import scrollCanBeCustom from "./scrollCanBeCustom";
+import customScroll from "./customScroll";
 
 // get scroll selector
 // it can be used in many modules, f.e., Vevet.View
 function scrollSelector() {
+    const selector = '.scroll';
     if (scrollCanBeCustom()) {
-        return app.vevetPage.scroll.scroll;
+        if (customScroll.get()) {
+            return customScroll.get();
+        }
     }
-    else {
-        return '.scroll';
-    }
+    return selector;
 }
 
 export default scrollSelector;

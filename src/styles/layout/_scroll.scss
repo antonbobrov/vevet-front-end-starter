@@ -1,5 +1,4 @@
 .scroll {
-    height: calc(100 * var(--vh));
     overflow: auto;
     -webkit-overflow-scrolling: touch;
 
@@ -7,10 +6,6 @@
         position: relative;
         height: auto;
 
-        &.custom {
-            will-change: transform;
-        }
-        
     }
 
 }

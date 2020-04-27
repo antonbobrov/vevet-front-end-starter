@@ -1,5 +1,9 @@
 .v-scroll {
 
+    &:not(.unactive) {
+        overflow: hidden;
+    }
+
     &.unactive {
         overflow: auto;
         -webkit-overflow-scrolling: touch;

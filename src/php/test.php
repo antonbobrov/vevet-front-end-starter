@@ -1,12 +1,12 @@
 <?
-define("PAGE", "test");
+define("PAGE", "test-page");
 require_once './includes/start.php';
 ?>
 
 
 
 <div class="wrap">
-    <div class="text view-children">
+    <div class="text" data-view-parent="v-view_b">
         <p>&nbsp;</p>
         <p>&nbsp;</p>
         <p>

@@ -36,5 +36,5 @@
                 data-v-pageAjax-name="<? echo PAGE; ?>" 
             >
 
-                <div class="scroll <? echo PAGE; ?>">
+                <div class="scroll full-height <? echo PAGE; ?>">
                     <div class="scroll__outer">

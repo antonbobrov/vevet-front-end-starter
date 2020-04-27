@@ -22,12 +22,12 @@
 @import './layout/page';
 @import './layout/app';
 
-@import './includes/loading/preloader';
-@import './includes/scroll/scroll';
+@import './includes/loading/v-preloader';
+@import './includes/scroll/v-scroll';
 
 @import './helpers/afterload';
 @import './helpers/view';
 
 @import './includes/el/button';
 
-@import './pages/home';
+@import './pages/home-page';
