@@ -26,7 +26,7 @@ self.addEventListener("fetch", function(event) {
     if (event.request.method !== "GET") return;
 
     event.respondWith(
-        fetch(event.request).catch(function(error) {
+        fetch(event.request).catch(function() {
             // The following validates that the request was for a navigation to a new document
             if (
                 event.request.destination !== "document" ||

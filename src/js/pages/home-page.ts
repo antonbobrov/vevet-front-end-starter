@@ -2,13 +2,17 @@ import DefaultPage from './default-page';
 
 class HomePage extends DefaultPage {
 
+    protected _canBeShown = false;
 
 
-    create(ajax) {
+
+    create(ajax = false) {
 
         if (!super.create(ajax)) {
             return false;
         }
+
+        return this;
 
     }
 

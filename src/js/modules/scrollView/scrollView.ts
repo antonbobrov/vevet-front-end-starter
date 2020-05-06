@@ -1,38 +1,37 @@
 import { ScrollViewModule } from "vevet";
 import scrollViewParents from "./scrollViewParents";
-import app from "../../v/app";
 import scrollSelector from "../scroll/scrollSelector";
 import { resizeTimeout } from "../../settings";
+import app from "../../v/app";
 
 
 
-let currentViewModule = false;
+let currentViewModule: (ScrollViewModule | false) = false;
+
+
 
 // view module
-const scrollView = (function() {
-
+interface ScrollView {
+    get: () => false | ScrollViewModule;
+    create: () => ScrollViewModule;
+    enable: Function;
+}
+const scrollView: ScrollView = (function() {
     return {
         get: getView.bind(this),
         create: createView.bind(this),
         enable: enableView.bind(this)
     }
-
 })();
 
 export default scrollView;
 
 
 
-/**
- * @returns { ScrollViewModule | false } Returns the initialized module or false.
- */
 function getView() {
     return currentViewModule;
 }
 
-/**
- * @returns { ScrollViewModule | false } Returns the initialized module or false.
- */
 function createView() {
 
     // set view parents
@@ -40,7 +39,6 @@ function createView() {
 
     // initialize scroll view
     const view = new ScrollViewModule({
-        parent: app.vevetPage,
         selectors: {
             outer: scrollSelector(),
             elements: `*[class*="v-view"]`,
@@ -58,18 +56,27 @@ function createView() {
         }
     });
 
+    // destroy the class on page destroy
+    if (app.vevetPage) {
+        app.vevetPage.on("destroy", () => {
+            view.destroy();
+        })
+    }
+
     // add event on resize
     // change scroll selector
-    app.vevetPage._addEvent('viewport', {
-        target: 'w_',
-        do: () => {
-            view.changeProp({
-                selectors: {
-                    outer: scrollSelector()
-                }
-            });
-        }
-    });
+    if (app.vevetPage) {
+        app.vevetPage.addEvent('viewport', {
+            target: 'w_',
+            do: () => {
+                view.changeProp({
+                    selectors: {
+                        outer: scrollSelector()
+                    }
+                });
+            }
+        });
+    }
 
     // change var
     currentViewModule = view;

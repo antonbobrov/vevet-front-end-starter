@@ -1,10 +1,12 @@
 {
+    "presets": ["@babel/preset-env"],
     "plugins": [
         ["transform-imports", {
             "vevet": {
                 "transform": "vevet/dist/js/${member}",
                 "preventFullImport": false
             }
-        }]
+        }],
+        ["@babel/plugin-syntax-dynamic-import"]
     ]
 }

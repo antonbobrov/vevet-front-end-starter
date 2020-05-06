@@ -1,18 +1,25 @@
-import { resizeTimeout, useCustomScroll } from '../../settings';
-import app from '../../v/app';
-import { ScrollModule, ScrollBarPlugin } from 'vevet';
-import scrollCanBeCustom from './scrollCanBeCustom';
-import getCustomScrollElements from './getCustomScrollElements';
-import getCustomScrollEase from './getCustomScrollEase';
+import { ScrollModule, ScrollBarPlugin } from "vevet";
+import { useCustomScroll, resizeTimeout } from "../../settings";
+import app from "../../v/app";
+import getCustomScrollElementsSelector from "./getCustomScrollElementsSelector";
+import getCustomScrollEase from "./getCustomScrollEase";
+import scrollCanBeCustom from "./scrollCanBeCustom";
+import { all } from "select-el";
 
 
 
-let currentScrollModule = false;
+let currentScrollModule: false | ScrollModule = false;
 
 
-
-const customScroll = (function() {
-
+interface CustomScroll {
+    get: () => false | ScrollModule;
+    create: () => false | ScrollModule;
+    pause: () => boolean;
+    play: () => boolean;
+    toggle: () => Function;
+    playAndSetClasses: () => boolean;
+}
+const customScroll: CustomScroll = (function() {
     return {
         get: getScroll.bind(this),
         create: createScroll.bind(this),
@@ -21,25 +28,17 @@ const customScroll = (function() {
         toggle: toggleScroll.bind(this),
         playAndSetClasses: playAndSetClasses.bind(this)
     }
-
 })();
-window.customScroll = customScroll;
 
 export default customScroll;
 
 
 
 
-/**
- * @returns { ScrollModule | false } Returns the initialized module or false.
- */
 function getScroll() {
     return currentScrollModule;
 }
 
-/**
- * @returns { ScrollModule | false } Returns the initialized module or false.
- */
 function createScroll() {
 
     if (!useCustomScroll) {
@@ -49,10 +48,9 @@ function createScroll() {
 
     // initialize scroll
     const scroll = new ScrollModule({
-        parent: app.vevetPage,
         selectors: {
             outer: '.scroll',
-            elements: getCustomScrollElements()
+            elements: getCustomScrollElementsSelector()
         },
         ease: getCustomScrollEase(),
         willChange: true,
@@ -68,6 +66,13 @@ function createScroll() {
         ]
     });
 
+    // destroy the scroll on page destroy
+    if (app.vevetPage) {
+        app.vevetPage.on("destroy", () => {
+            scroll.destroy();
+        })
+    }
+
     // set scroll classes
     setScrollClasses(scroll, false);
 
@@ -75,10 +80,12 @@ function createScroll() {
     scroll.addPlugin(new ScrollBarPlugin());
 
     // enable or disable scroll on resize
-    app.vevetPage._addEvent('viewport', {
-        target: 'w_',
-        do: toggleScroll.bind(this, true)
-    });
+    if (app.vevetPage) {
+        app.vevetPage.addEvent('viewport', {
+            target: 'w_',
+            do: toggleScroll.bind(this, true)
+        });
+    }
 
     // change var
     currentScrollModule = scroll;
@@ -89,9 +96,6 @@ function createScroll() {
 
 
 
-/**
- * @param { boolean } onResize 
- */
 function toggleScroll(onResize = false) {
 
     // get scroll
@@ -99,11 +103,9 @@ function toggleScroll(onResize = false) {
     if (scroll) {
 
         // bool
-        let playBool = scrollCanBeCustom();
+        const playBool = scrollCanBeCustom();
         // either play or pause
         if (playBool) {
-            scroll.outer.scrollTop = 0;
-            scroll.outer.scrollLeft = 0;
             playPause(scroll, true);
         }
         else {
@@ -119,11 +121,12 @@ function toggleScroll(onResize = false) {
 
 }
 
-/**
- * @param { ScrollModule } scroll 
- * @param { boolean } [bool] 
- */
-function playPause(scroll, bool = true) {
+function playPause(scroll: ScrollModule, bool = true) {
+
+    if (bool) {
+        scroll.outer.scrollTop = 0;
+        scroll.outer.scrollLeft = 0;
+    }
 
     // change scroll properties
     scroll.changeProp({
@@ -171,16 +174,12 @@ function playAndSetClasses() {
 
 
 
-/**
- * @param { ScrollModule } scroll 
- * @param { boolean } bool 
- */
-function setScrollClasses(scroll, bool) {
+function setScrollClasses(scroll: ScrollModule, bool: boolean) {
 
     // get scroll outer
     const scrollOuter = scroll.outer;
     // and scroll elements
-    const elements = getCustomScrollElements();
+    const elements = all(getCustomScrollElementsSelector());
 
     if (bool) {
         // classes
@@ -191,7 +190,10 @@ function setScrollClasses(scroll, bool) {
         scrollOuter.classList.add("unactive");
         // transform
         for (let i = 0; i < elements.length; i++) {
-            elements[i].style.transform = '';
+            const el = elements[i];
+            if (el instanceof HTMLElement) {
+                el.style.transform = '';
+            }
         }
     }
 

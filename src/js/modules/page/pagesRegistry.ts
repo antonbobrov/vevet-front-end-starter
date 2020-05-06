@@ -1,17 +1,17 @@
-import createPage from "./createPage";
+import { PageModule } from "vevet";
 import pageAjax from "./pageAjax";
+import createPage from "./createPage";
 import homePage from "../../pages/home-page";
 
 function pagesRegistry() {
 
-    let storage = {
-        pages: []
-    };
+    const pages: PageModule[] = [];
+    const storage: any = {};
 
 
 
     // add pages
-    storage.pages.push(homePage);
+    pages.push(homePage);
 
 
 

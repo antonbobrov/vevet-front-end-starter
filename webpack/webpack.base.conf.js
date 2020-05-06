@@ -14,12 +14,16 @@ module.exports = {
     },
     
     entry: {
-        app: PATHS.src + '/js/index.js'
+        app: PATHS.src + '/js/index.ts'
     }, 
     output: {
         filename: NODE_ENV == 'development' ? `${PATHS.assets}js/[name].js` : `${PATHS.assets}js/[name].[contenthash].js`,
         path: PATHS.public,
         publicPath: '/'
+    },
+
+    resolve: {
+        extensions: ['.ts', '.js', '.json']
     },
 
     module: {
@@ -28,17 +32,12 @@ module.exports = {
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loader: 'babel-loader',
-                options: {
-                    presets: [
-                        ['@babel/preset-env', { modules: false }]
-                    ]
-                }
+                loader: 'babel-loader'
             },
             {
                 test: /\.ts?$/,
                 exclude: /node_modules/,
-                use: 'ts-loader',
+                loaders: ['babel-loader', 'ts-loader'],
             },
             {
                 test: /\.(woff(2)?|ttf|eot|svg|png|jpg|gif|svg)(\?v=\d+\.\d+\.\d+)?$/,
@@ -93,9 +92,11 @@ module.exports = {
                         loader: "sass-loader",
                         options: {
                             sourceMap: NODE_ENV == 'development',
-                            "includePaths": [
-                                require('path').resolve(__dirname, 'node_modules')
-                            ]
+                            sassOptions: {
+                                includePaths: [
+                                    require('path').resolve(__dirname, 'node_modules')
+                                ]
+                            }
                         }
                     }
                 ]

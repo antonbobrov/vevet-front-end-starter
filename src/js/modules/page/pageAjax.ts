@@ -1,8 +1,10 @@
-import { PageAjaxModule } from 'vevet';
-import { pageSettings } from '../../settings';
+import { MENU_LINKS_SELECTOR } from "../menu/vars";
+import { PageAjaxModule } from "vevet";
+import { pageSettings } from "../../settings";
+import setLoadingIndicator from "../../helpers/setLoadingIndicator";
 
 // menu selectors
-const menuSelector = '.menu a';
+const menuSelector = MENU_LINKS_SELECTOR;
 
 // create ajax transition between pages
 const pageAjax = new PageAjaxModule({
@@ -21,12 +23,26 @@ const pageAjax = new PageAjaxModule({
     pageChange: {
         default: pageSettings.default
     },
-    changeSame: false,
+    changeSame: true,
     menuLinks: {
         selectorNew: menuSelector,
         selectorOld: menuSelector
     },
     cache: true
 });
+
+
+
+// show loading
+pageAjax.on("prepare", () => {
+    setLoadingIndicator(true);
+});
+
+// hide loading
+pageAjax.on("done", () => {
+    setLoadingIndicator(false);
+});
+
+
 
 export default pageAjax;

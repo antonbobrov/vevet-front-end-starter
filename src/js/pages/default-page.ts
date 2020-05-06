@@ -1,16 +1,16 @@
-import { elements, updateElements } from '../helpers/elements';
-import { PageModule } from 'vevet';
-import fullHeight from '../helpers/fullHeight';
-import customScroll from '../modules/scroll/customScroll';
-import scrollView from '../modules/scrollView/scrollView';
-
+import { PageModule } from "vevet";
+import fullHeight from "../helpers/fullHeight";
+import customScroll from "../modules/scroll/customScroll";
+import scrollView from "../modules/scrollView/scrollView";
+import { updateElements, elements } from "../helpers/elements";
+import initLazyImages from "../modules/image/initLazyImages";
 
 // Default Page Class
 class DefaultPage extends PageModule {
 
 
 
-    create(ajax) {
+    create(ajax = false) {
 
         if (!super.create(ajax)) {
             return false;
@@ -27,7 +27,7 @@ class DefaultPage extends PageModule {
         // update page elements
         updateElements();
 
-        return true;
+        return this;
 
     }
 
@@ -41,6 +41,9 @@ class DefaultPage extends PageModule {
         customScroll.playAndSetClasses();
         // enable & update view
         scrollView.enable();
+
+        // init lazy images
+        initLazyImages();
 
         // show app
         elements.app.classList.remove("hide");

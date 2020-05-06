@@ -1,24 +1,33 @@
 {
+
   "env": {
     "browser": true,
     "es6": true,
+    "es2017": true,
+    "es2020": true,
     "node": true
   },
-  "extends": "eslint:recommended",
+  
+  "parser": "babel-eslint",
+  
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "allowImportExportEverywhere": true
+  },
+
+  "extends": [
+    "eslint:recommended"
+  ],
+
   "plugins": [
     "filenames",
     "jsdoc"
   ],
+
   "globals": {
-    "Atomics": "readonly",
-    "SharedArrayBuffer": "readonly"
   },
-  "parser": "babel-eslint",
-  "parserOptions": {
-    "ecmaVersion": 2018,
-    "sourceType": "module",
-    "allowImportExportEverywhere": true
-  },
+
   "rules": {
 
     "jsdoc/check-alignment": 1,
@@ -34,7 +43,7 @@
     "jsdoc/no-types": 0,
     "jsdoc/no-undefined-types": 0,
     "jsdoc/require-description": 0,
-    "jsdoc/require-description-complete-sentence": 1,
+    "jsdoc/require-description-complete-sentence": 0,
     "jsdoc/require-example": 0,
     "jsdoc/require-hyphen-before-param-description": 1,
     "jsdoc/require-jsdoc": 0,
@@ -44,9 +53,53 @@
     "jsdoc/require-param-type": 1,
     "jsdoc/require-returns": 0,
     "jsdoc/require-returns-check": 1,
-    "jsdoc/require-returns-description": 1,
+    "jsdoc/require-returns-description": 0,
     "jsdoc/require-returns-type": 1,
     "jsdoc/valid-types": 1
 
-  }
+  },
+
+
+
+  "overrides": [
+
+    {
+    
+      "files": ["*.ts", "*.tsx"],
+
+      "parser": "@typescript-eslint/parser",
+
+      "extends": [
+        // Базовый набор правил eslint
+        "eslint:recommended",
+        // Отключаем правила из базового набора
+        "plugin:@typescript-eslint/eslint-recommended",
+        // Базовые правила для TypeScript
+        "plugin:@typescript-eslint/recommended",
+        // Правила TS, требующие инфо о типах
+        "plugin:@typescript-eslint/recommended-requiring-type-checking"
+      ],
+
+      "parserOptions": {
+        // Движку нужен проект TS для правил с типами
+        "project": "tsconfig.json",
+        "tsconfigRootDir": "."
+      },
+
+      "plugins": ["@typescript-eslint"],
+      
+      "rules": {
+        "@typescript-eslint/no-use-before-define": 0,
+        "@typescript-eslint/prefer-regexp-exec": 0,
+        "@typescript-eslint/explicit-function-return-type": 0,
+        "@typescript-eslint/no-namespace": 0,
+        "@typescript-eslint/no-explicit-any": 0,
+        "@typescript-eslint/ban-ts-ignore": 0,
+        "@typescript-eslint/no-var-requires": 0
+      }
+
+    }
+    
+  ]
+
 }

@@ -1,21 +1,22 @@
-import app from '../../v/app';
-import { pageSettings } from '../../settings';
+import { PageModule } from "vevet";
+import app from "../../v/app";
+import { pageSettings } from "../../settings";
 
 // create page according to the defined type
 
-let createPage = function() {
+export default function createPage() {
 
-    let page = app.page[0];
+    const page = app.page[0];
 
 
 
     // check existing pages
 
-    let existingPage = false,
-        defaultPage = false;
+    let existingPage: false | PageModule = false,
+        defaultPage: false | PageModule = false;
 
     for (let i = 0; i < app.vevetPages.length; i++) {
-        let p = app.vevetPages[i];
+        const p = app.vevetPages[i];
         if (p.name == page) {
             existingPage = p;
         }
@@ -41,6 +42,4 @@ let createPage = function() {
 
     
 
-};
-
-export default createPage;
+}

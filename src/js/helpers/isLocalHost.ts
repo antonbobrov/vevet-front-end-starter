@@ -1,8 +1,8 @@
 import osDomain from "../os-domain";
 
-const isLocalhost = function() {
+const isLocalHost = function(): boolean {
     
-    var isLocalhost = Boolean(
+    const isLocalHost = Boolean(
         location.hostname === osDomain ||
         location.hostname === 'localhost' ||
         // location.hostname === '192.168.0.102' || 
@@ -14,8 +14,8 @@ const isLocalhost = function() {
         )
     );
 
-    return isLocalhost;
+    return isLocalHost;
 
 };
 
-export default isLocalhost;
+export default isLocalHost;
