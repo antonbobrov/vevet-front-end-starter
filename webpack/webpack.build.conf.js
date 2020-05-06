@@ -3,7 +3,7 @@ const baseWebpackConfig = require('./webpack.base.conf');
 const PATHS = require('./paths').PATHS;
 const preamble = require('./preamble');
 
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const ImageminPlugin = require('imagemin-webpack-plugin').default;
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -17,10 +17,10 @@ const buildWebpackConfig = merge(baseWebpackConfig, {
         minimize: true,
         concatenateModules: true,
         minimizer: [
-            new UglifyJsPlugin({
+            new TerserPlugin({
                 cache: true,
                 parallel: true,
-                uglifyOptions: {
+                terserOptions: {
                     compress: {
                         drop_console: false,
                         keep_fargs: false,
