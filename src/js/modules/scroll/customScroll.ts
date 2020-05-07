@@ -83,7 +83,8 @@ function createScroll() {
     if (app.vevetPage) {
         app.vevetPage.addEvent('viewport', {
             target: 'w_',
-            do: toggleScroll.bind(this, true)
+            do: toggleScroll.bind(this, true),
+            name: 'Custom Scroll'
         });
     }
 

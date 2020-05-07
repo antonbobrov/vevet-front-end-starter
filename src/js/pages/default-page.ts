@@ -43,7 +43,12 @@ class DefaultPage extends PageModule {
         scrollView.enable();
 
         // init lazy images
-        initLazyImages();
+        const lazyImages = initLazyImages();
+        this.on("destroy", () => {
+            if (lazyImages) {
+                lazyImages.destroy();
+            }
+        });
 
         // show app
         elements.app.classList.remove("hide");

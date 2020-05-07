@@ -58,7 +58,6 @@ export default function initLazyImages(
     function set() {
 
         // update viewport
-        removeViewportEvent();
         addViewportEvent();
 
         // get intersection outer
@@ -133,7 +132,7 @@ export default function initLazyImages(
         
         viewportEvent = viewport.add({
             target: '',
-            do: reset.bind(this),
+            do: reset.bind(this, true),
             timeout: resizeTimeout,
             name: 'LAZY IMAGE'
         });
@@ -152,7 +151,7 @@ export default function initLazyImages(
 
 
     // Reset events
-    function reset() {
+    function reset(initAgain = true) {
     
         if (eventNative) {
             if (page) {
@@ -178,7 +177,11 @@ export default function initLazyImages(
             image.removeAttribute(attr);
         });
 
-        set();
+        removeViewportEvent();
+
+        if (initAgain) {
+            set();
+        }
     
     }
 
@@ -186,7 +189,7 @@ export default function initLazyImages(
     function destroy() {
 
         removeViewportEvent();
-        reset();
+        reset(false);
     
     }
 

@@ -39,7 +39,8 @@ const fullHeight = (function(): {
     // add viewport events
     app.viewport.add({
         target: '',
-        do: set.bind(this)
+        do: set.bind(this),
+        name: 'Full Height'
     });
 
     app.load.add({

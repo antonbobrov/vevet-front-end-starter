@@ -13,7 +13,8 @@ function cssVars() {
     });
     viewport.add({
         target: '',
-        do: set.bind(this)
+        do: set.bind(this),
+        name: 'CSS Vars'
     });
 
     // set vars

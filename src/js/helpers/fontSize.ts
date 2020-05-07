@@ -86,7 +86,8 @@ const fontSize = (function(): {
     // add viewport callbacks
     app.viewport.add({
         target: '',
-        do: set.bind(this)
+        do: set.bind(this),
+        name: 'Font Size'
     });
 
     app.load.add({

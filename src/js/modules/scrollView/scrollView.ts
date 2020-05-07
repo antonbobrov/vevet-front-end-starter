@@ -74,7 +74,8 @@ function createView() {
                         outer: scrollSelector()
                     }
                 });
-            }
+            },
+            name: 'Scroll View'
         });
     }
 
