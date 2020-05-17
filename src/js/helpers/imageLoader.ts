@@ -10,14 +10,15 @@ interface Image {
 
 function load(
     src: string, 
-    callback: (img: HTMLImageElement) => void
+    success: (img: HTMLImageElement) => void, 
+    error?: () => void
 ) {
 
     // if the image was loaded before
     for (let i = 0; i < images.length; i++) {
         const img = images[i];
         if (img.src === src) {
-            callback(img.img);
+            success(img.img);
             return;
         }
     }
@@ -30,7 +31,12 @@ function load(
             src: src,
             img: img
         });
-        callback(img);
+        success(img);
+    }
+    img.onerror = () => {
+        if (error) {
+            error();
+        }
     }
     img.src = src;
 

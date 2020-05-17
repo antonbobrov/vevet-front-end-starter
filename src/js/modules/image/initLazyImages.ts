@@ -5,6 +5,7 @@ import { all } from "select-el";
 import observerSupported from "../../helpers/observerSupported";
 import scrollSelector from "../scroll/scrollSelector";
 import { resizeTimeout } from "../../settings";
+import { load } from "../../helpers/imageLoader";
 
 const viewport = app.viewport;
 
@@ -88,7 +89,7 @@ export default function initLazyImages(
         }
     
         // if observer supported
-        if (observerSupported() && !(outer instanceof ScrollModule)) {
+        if (observerSupported()) {
             const options = {
                 root: outerForIntersection,
                 rootMargin: '0px',
@@ -251,6 +252,7 @@ export default function initLazyImages(
                 if (el instanceof HTMLElement) {
                     if (!el.classList.contains(classNameLoad)) {
                         el.classList.add(classNameLoad);
+                        el.style.willChange = 'opacity';
                         lazyImageLoad(el);
                     }
                 }
@@ -274,6 +276,7 @@ export default function initLazyImages(
             ) {
                 if (!image.classList.contains(classNameLoad)) {
                     image.classList.add(classNameLoad);
+                    image.style.willChange = 'opacity';
                     lazyImageLoad(image);
                 }
             }
@@ -291,8 +294,7 @@ export default function initLazyImages(
         const src = img.getAttribute("data-src");
     
         // load image
-        const image = new Image();
-        image.onload = function() {
+        load(src, () => {
             if (img instanceof HTMLImageElement) {
                 img.src = src;
             }
@@ -300,8 +302,10 @@ export default function initLazyImages(
                 img.style.backgroundImage = `url('${src}')`;
             }
             img.classList.add(classNameLoaded);
-        };
-        image.src = src;
+            setTimeout(() => {
+                img.style.willChange = '';
+            }, 250);
+        });
     
     }
 
