@@ -46,6 +46,18 @@ function createScroll() {
         return false;
     }
 
+    // scroll settings
+    let round = false;
+    let willChange = true;
+    if (app.browser == 'firefox') {
+        round = true;
+        willChange = false;
+    }
+    if (app.browser == 'edge') {
+        round = true;
+        willChange = true;
+    }
+
     // initialize scroll
     const scroll = new ScrollModule({
         selectors: {
@@ -53,7 +65,8 @@ function createScroll() {
             elements: getCustomScrollElementsSelector()
         },
         ease: getCustomScrollEase(),
-        willChange: true,
+		round: round,
+        willChange: willChange,
         resizeTimeout: resizeTimeout,
         run: false,
         responsive: [
