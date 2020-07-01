@@ -51,7 +51,7 @@
   "dependencies": {
     "normalize-scss": "^7.0.1",
     "select-el": "^1.0.3",
-    "vevet": "^1.4.9"
+    "vevet": "^1.4.18"
   },
   "browserslist": "cover 99.5%"
 }
