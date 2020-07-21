@@ -6,3 +6,34 @@
     }
 }
 
+@mixin focus() {
+    @include desktop {
+        &:focus {
+            @content;
+        }
+    }
+}
+
+@mixin hover-focus() {
+    @include hover {
+        @content;
+    }
+    @include focus {
+        @content;
+    }
+}
+
+@mixin highlight() {
+    &.highlight {
+        @content;
+    }
+}
+
+@mixin hover-highlight() {
+    @include hover {
+        @content;
+    }
+    @include highlight() {
+        @content;
+    }
+}
