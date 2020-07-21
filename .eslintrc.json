@@ -38,7 +38,7 @@
         "max-len": [
             "error",
             {
-                "code": 80,
+                "code": 120,
                 "comments": 100
             }
         ],
@@ -65,6 +65,9 @@
             "error",
             "never"
         ],
+        "import/no-mutable-exports": "off",
+        "import/no-duplicates": "off",
+        "global-require": "off",
         "no-underscore-dangle": "off",
         "no-unused-vars": "off",
         "no-plusplus": "off",
