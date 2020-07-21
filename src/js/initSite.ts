@@ -2,6 +2,7 @@ import app from "./v/app";
 import fontSize from "./helpers/fontSize";
 import fullHeight from "./helpers/fullHeight";
 import cssVars from "./helpers/cssVars";
+import setKeyboardTabHightlight from "./helpers/setKeyboardTabHightlight";
 import pagesRegistry from "./modules/page/pagesRegistry";
 import preloader from "./modules/loading/preloader";
 
@@ -21,6 +22,7 @@ export default function initSite () {
     storage.fontSize = fontSize;
     storage.fullHeight = fullHeight;
     storage.cssVars = cssVars();
+    setKeyboardTabHightlight();
 
 
 
