@@ -16,23 +16,23 @@ interface ScrollView {
     create: () => ScrollViewModule;
     enable: Function;
 }
-const scrollView: ScrollView = (function() {
+const scrollView: ScrollView = (function () {
     return {
         get: getView.bind(this),
         create: createView.bind(this),
-        enable: enableView.bind(this)
-    }
-})();
+        enable: enableView.bind(this),
+    };
+}());
 
 export default scrollView;
 
 
 
-function getView() {
+function getView () {
     return currentViewModule;
 }
 
-function createView() {
+function createView () {
 
     // set view parents
     scrollViewParents();
@@ -41,41 +41,41 @@ function createView() {
     const view = new ScrollViewModule({
         selectors: {
             outer: scrollSelector(),
-            elements: `*[class*="v-view"]`,
-            inside: false
+            elements: "*[class*=\"v-view\"]",
+            inside: false,
         },
         on: false,
         seekInit: false,
-        classToAdd: 'v-viewed',
+        classToAdd: "v-viewed",
         stackDelay: 75,
-        resizeTimeout: resizeTimeout,
+        resizeTimeout,
         edge: 1,
         autostack: {
             on: true,
-            delay: 1000
-        }
+            delay: 1000,
+        },
     });
 
     // destroy the class on page destroy
     if (app.vevetPage) {
         app.vevetPage.on("destroy", () => {
             view.destroy();
-        })
+        });
     }
 
     // add event on resize
     // change scroll selector
     if (app.vevetPage) {
-        app.vevetPage.addEvent('viewport', {
-            target: 'w_',
+        app.vevetPage.addEvent("viewport", {
+            target: "w_",
             do: () => {
                 view.changeProp({
                     selectors: {
-                        outer: scrollSelector()
-                    }
+                        outer: scrollSelector(),
+                    },
                 });
             },
-            name: 'Scroll View'
+            name: "Scroll View",
         });
     }
 
@@ -88,12 +88,12 @@ function createView() {
 
 
 
-function enableView() {
+function enableView () {
 
     const view = getView();
     if (view) {
         view.changeProp({
-            on: true
+            on: true,
         });
         view.seek();
     }

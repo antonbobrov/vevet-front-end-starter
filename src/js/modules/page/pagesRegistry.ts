@@ -1,9 +1,9 @@
 import { PageModule } from "vevet";
 import pageAjax from "./pageAjax";
 import createPage from "./createPage";
-import homePage from "../../pages/home-page";
+import { homePage } from "../../pages/home-page";
 
-function pagesRegistry() {
+function pagesRegistry () {
 
     const pages: PageModule[] = [];
     const storage: any = {};

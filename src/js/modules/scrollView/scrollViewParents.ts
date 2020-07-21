@@ -1,8 +1,8 @@
 import { all } from "select-el";
 
-const viewAttr = 'data-view-parent';
+const viewAttr = "data-view-parent";
 
-const scrollViewParents = function() {
+const scrollViewParents = function () {
 
     const outers = all(`*[${viewAttr}]`);
     for (let i = 0; i < outers.length; i++) {
@@ -11,11 +11,11 @@ const scrollViewParents = function() {
             const attr = outer.getAttribute(viewAttr);
             if (attr) {
 
-                const children = outer.children;
-                for (let i = 0; i < children.length; i++) {
-                    children[i].classList.add(attr);
+                const { children } = outer;
+                for (let a = 0; a < children.length; a++) {
+                    children[a].classList.add(attr);
                 }
-    
+
             }
         }
     }

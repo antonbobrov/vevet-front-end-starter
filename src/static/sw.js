@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 // This is the "Offline page" service worker
 var CACHE = "pwabuilder-page";
 

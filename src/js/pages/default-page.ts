@@ -10,7 +10,7 @@ class DefaultPage extends PageModule {
 
 
 
-    create(ajax = false) {
+    create (ajax = false) {
 
         if (!super.create(ajax)) {
             return false;
@@ -31,7 +31,7 @@ class DefaultPage extends PageModule {
 
     }
 
-    show() {
+    show () {
 
         if (!super.show()) {
             return false;
@@ -57,7 +57,7 @@ class DefaultPage extends PageModule {
 
     }
 
-    hide() {
+    hide () {
 
         if (!super.hide()) {
             return false;
@@ -77,8 +77,11 @@ class DefaultPage extends PageModule {
 
 }
 
-new DefaultPage({
-    name: 'default-page'
+const defaultPage = new DefaultPage({
+    name: "default-page",
 });
 
-export default DefaultPage;
+export {
+    DefaultPage,
+    defaultPage,
+};

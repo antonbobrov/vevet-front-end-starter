@@ -1,4 +1,4 @@
-import DefaultPage from './default-page';
+import { DefaultPage } from "./default-page";
 
 class HomePage extends DefaultPage {
 
@@ -6,7 +6,7 @@ class HomePage extends DefaultPage {
 
 
 
-    create(ajax = false) {
+    create (ajax = false) {
 
         if (!super.create(ajax)) {
             return false;
@@ -17,11 +17,14 @@ class HomePage extends DefaultPage {
     }
 
 
-    
+
 }
 
 const homePage = new HomePage({
-    name: 'home-page'
+    name: "home-page",
 });
 
-export default homePage;
+export {
+    HomePage,
+    homePage,
+};

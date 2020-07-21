@@ -4,7 +4,7 @@ import { afterloadDuration } from "../settings";
 // see also /src/styles/helpers/_afterload.scss
 
 
-function afterload() {
+function afterload () {
 
     const el = document.querySelectorAll(".afterload");
     for (let i = 0; i < el.length; i++) {

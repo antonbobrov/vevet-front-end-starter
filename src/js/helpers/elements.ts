@@ -12,7 +12,7 @@ const elements: Elements = {
 
 
 // update elements in the storage
-function updateElements() {
+function updateElements () {
     elements.app = one(".app");
     elements.scroll = one(".scroll");
 }

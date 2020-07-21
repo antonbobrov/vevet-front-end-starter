@@ -4,7 +4,7 @@ import { pageSettings } from "../../settings";
 
 // create page according to the defined type
 
-export default function createPage() {
+export default function createPage () {
 
     const page = app.page[0];
 
@@ -12,15 +12,15 @@ export default function createPage() {
 
     // check existing pages
 
-    let existingPage: false | PageModule = false,
-        defaultPage: false | PageModule = false;
+    let existingPage: false | PageModule = false;
+    let defaultPage: false | PageModule = false;
 
     for (let i = 0; i < app.vevetPages.length; i++) {
         const p = app.vevetPages[i];
-        if (p.name == page) {
+        if (p.name === page) {
             existingPage = p;
         }
-        if (p.name == pageSettings.default) {
+        if (p.name === pageSettings.default) {
             defaultPage = p;
         }
     }
@@ -40,6 +40,6 @@ export default function createPage() {
         existingPage.create();
     }
 
-    
+
 
 }

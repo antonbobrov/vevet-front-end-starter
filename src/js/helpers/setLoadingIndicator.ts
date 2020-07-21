@@ -1,6 +1,6 @@
 import app from "../v/app";
 
-export default function setLoadingIndicator(bool = true) {
+export default function setLoadingIndicator (bool = true) {
 
     if (bool) {
         app.html.classList.add("loading");

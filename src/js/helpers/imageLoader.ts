@@ -5,13 +5,13 @@ interface Image {
     src: string;
     img: HTMLImageElement;
 }
-    
 
 
-function load(
-    src: string, 
-    success: (img: HTMLImageElement) => void, 
-    error?: () => void
+
+function load (
+    src: string,
+    success: (img: HTMLImageElement) => void,
+    error?: () => void,
 ) {
 
     // if the image was loaded before
@@ -22,22 +22,22 @@ function load(
             return;
         }
     }
-    
+
     // if the image was never loaded before
     const img = new Image();
     img.crossOrigin = "Anonymous";
     img.onload = () => {
         images.push({
-            src: src,
-            img: img
+            src,
+            img,
         });
         success(img);
-    }
+    };
     img.onerror = () => {
         if (error) {
             error();
         }
-    }
+    };
     img.src = src;
 
 }
@@ -46,5 +46,5 @@ function load(
 
 export {
     images,
-    load
+    load,
 };

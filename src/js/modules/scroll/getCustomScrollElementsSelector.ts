@@ -1,3 +1,3 @@
-export default function getCustomScrollElementsSelector() {
-    return '.scroll .scroll__outer';
+export default function getCustomScrollElementsSelector () {
+    return ".scroll .scroll__outer";
 }

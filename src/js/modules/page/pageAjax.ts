@@ -1,5 +1,5 @@
-import { MENU_LINKS_SELECTOR } from "../menu/vars";
 import { PageAjaxModule } from "vevet";
+import { MENU_LINKS_SELECTOR } from "../menu/vars";
 import { pageSettings } from "../../settings";
 import setLoadingIndicator from "../../helpers/setLoadingIndicator";
 
@@ -9,26 +9,26 @@ const menuSelector = MENU_LINKS_SELECTOR;
 // create ajax transition between pages
 const pageAjax = new PageAjaxModule({
     selectors: {
-        outer: '.app',
-        links: '.v-al'
+        outer: ".app",
+        links: ".v-al",
     },
     ajax: {
-        method: 'post'
+        method: "post",
     },
     timeouts: {
         load: pageSettings.load,
         update: pageSettings.update,
-        done: pageSettings.done
+        done: pageSettings.done,
     },
     pageChange: {
-        default: pageSettings.default
+        default: pageSettings.default,
     },
     changeSame: true,
     menuLinks: {
         selectorNew: menuSelector,
-        selectorOld: menuSelector
+        selectorOld: menuSelector,
     },
-    cache: true
+    cache: true,
 });
 
 

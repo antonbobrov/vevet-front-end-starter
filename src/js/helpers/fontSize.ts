@@ -3,17 +3,17 @@ import { adaptiveFont } from "../settings";
 
 // adaptive font size
 
-const fontSize = (function(): {
+const fontSize = (function fontSize (): {
     set: Function;
     value: Function;
-} {
+    } {
 
 
 
     // get font size
-    function value(): number {
+    function value (): number {
 
-        const viewport = app.viewport;
+        const { viewport } = app;
         const width = viewport.size[0];
         let k = 1;
 
@@ -36,25 +36,23 @@ const fontSize = (function(): {
                 if (width > 750) {
                     k = width / 500;
                 }
-                else {
-                    if (window.innerHeight > window.innerWidth) {
-                        k = width / 375;
-                        if (width < 420) {
-                            k = 1;
-                        }
-                    }
-                    else {
+                else if (window.innerHeight > window.innerWidth) {
+                    k = width / 375;
+                    if (width < 420) {
                         k = 1;
                     }
+                }
+                else {
+                    k = 1;
                 }
             }
 
         }
 
         // calculate
-        
+
         let font = Math.floor(k * 16);
-        if (app.browser == 'ie') {
+        if (app.browser === "ie") {
             font = 16;
         }
         if (font <= 13) {
@@ -75,31 +73,31 @@ const fontSize = (function(): {
 
 
     // set font size
-    const set = function() {
+    function set () {
         const font = value();
         app.html.style.fontSize = `${font}px`;
-    };
+    }
     set();
 
 
-    
+
     // add viewport callbacks
     app.viewport.add({
-        target: '',
+        target: "",
         do: set.bind(this),
-        name: 'Font Size'
+        name: "Font Size",
     });
 
     app.load.add({
-        do: set.bind(this)
+        do: set.bind(this),
     });
 
 
 
     return {
         set: set.bind(this),
-        value: value.bind(this)
-    }
+        value: value.bind(this),
+    };
 
 
 

@@ -1,10 +1,10 @@
 import { ScrollModule, ScrollBarPlugin } from "vevet";
+import { all } from "select-el";
 import { useCustomScroll, resizeTimeout } from "../../settings";
 import app from "../../v/app";
 import getCustomScrollElementsSelector from "./getCustomScrollElementsSelector";
 import getCustomScrollEase from "./getCustomScrollEase";
 import scrollCanBeCustom from "./scrollCanBeCustom";
-import { all } from "select-el";
 
 
 
@@ -19,27 +19,26 @@ interface CustomScroll {
     toggle: () => Function;
     playAndSetClasses: () => boolean;
 }
-const customScroll: CustomScroll = (function() {
+const customScroll: CustomScroll = (function () {
     return {
         get: getScroll.bind(this),
         create: createScroll.bind(this),
         pause: pause.bind(this),
         play: play.bind(this),
         toggle: toggleScroll.bind(this),
-        playAndSetClasses: playAndSetClasses.bind(this)
-    }
-})();
+        playAndSetClasses: playAndSetClasses.bind(this),
+    };
+}());
 
 export default customScroll;
 
 
 
-
-function getScroll() {
+function getScroll () {
     return currentScrollModule;
 }
 
-function createScroll() {
+function createScroll () {
 
     if (!useCustomScroll) {
         currentScrollModule = false;
@@ -49,11 +48,11 @@ function createScroll() {
     // scroll settings
     let round = false;
     let willChange = true;
-    if (app.browser == 'firefox') {
+    if (app.browser === "firefox") {
         round = true;
         willChange = false;
     }
-    if (app.browser == 'edge') {
+    if (app.browser === "edge") {
         round = true;
         willChange = true;
     }
@@ -61,29 +60,29 @@ function createScroll() {
     // initialize scroll
     const scroll = new ScrollModule({
         selectors: {
-            outer: '.scroll',
-            elements: getCustomScrollElementsSelector()
+            outer: ".scroll",
+            elements: getCustomScrollElementsSelector(),
         },
         ease: getCustomScrollEase(),
-		round: round,
-        willChange: willChange,
-        resizeTimeout: resizeTimeout,
+        round,
+        willChange,
+        resizeTimeout,
         run: false,
         responsive: [
             {
-                breakpoint: 't',
+                breakpoint: "t",
                 settings: {
-                    run: false
-                }
-            }
-        ]
+                    run: false,
+                },
+            },
+        ],
     });
 
     // destroy the scroll on page destroy
     if (app.vevetPage) {
         app.vevetPage.on("destroy", () => {
             scroll.destroy();
-        })
+        });
     }
 
     // set scroll classes
@@ -94,23 +93,23 @@ function createScroll() {
 
     // enable or disable scroll on resize
     if (app.vevetPage) {
-        app.vevetPage.addEvent('viewport', {
-            target: 'w_',
+        app.vevetPage.addEvent("viewport", {
+            target: "w_",
             do: toggleScroll.bind(this, true),
-            name: 'Custom Scroll'
+            name: "Custom Scroll",
         });
     }
 
     // change var
     currentScrollModule = scroll;
-    
+
     return scroll;
 
 }
 
 
 
-function toggleScroll(onResize = false) {
+function toggleScroll (onResize = false) {
 
     // get scroll
     const scroll = getScroll();
@@ -135,7 +134,7 @@ function toggleScroll(onResize = false) {
 
 }
 
-function playPause(scroll: ScrollModule, bool = true) {
+function playPause (scroll: ScrollModule, bool = true) {
 
     if (bool) {
         scroll.outer.scrollTop = 0;
@@ -144,12 +143,12 @@ function playPause(scroll: ScrollModule, bool = true) {
 
     // change scroll properties
     scroll.changeProp({
-        run: bool
+        run: bool,
     });
 
 }
 
-function pause() {
+function pause () {
     if (!useCustomScroll || !scrollCanBeCustom()) {
         return false;
     }
@@ -161,7 +160,7 @@ function pause() {
     return false;
 }
 
-function play() {
+function play () {
     if (!useCustomScroll || !scrollCanBeCustom()) {
         return false;
     }
@@ -173,7 +172,7 @@ function play() {
     return false;
 }
 
-function playAndSetClasses() {
+function playAndSetClasses () {
     if (!useCustomScroll || !scrollCanBeCustom()) {
         return false;
     }
@@ -188,7 +187,7 @@ function playAndSetClasses() {
 
 
 
-function setScrollClasses(scroll: ScrollModule, bool: boolean) {
+function setScrollClasses (scroll: ScrollModule, bool: boolean) {
 
     // get scroll outer
     const scrollOuter = scroll.outer;
@@ -206,7 +205,7 @@ function setScrollClasses(scroll: ScrollModule, bool: boolean) {
         for (let i = 0; i < elements.length; i++) {
             const el = elements[i];
             if (el instanceof HTMLElement) {
-                el.style.transform = '';
+                el.style.transform = "";
             }
         }
     }

@@ -1,8 +1,8 @@
 import { one, exists } from "select-el";
-import customScroll from "./customScroll";
 import { ScrollModule } from "vevet";
+import customScroll from "./customScroll";
 
-export default function onScroll(callback: (scrollTop: number) => void) {
+export default function onScroll (callback: (scrollTop: number) => void) {
 
     // set event on default scroll outer
     const scrollOuter = one(".scroll");

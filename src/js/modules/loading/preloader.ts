@@ -1,7 +1,7 @@
-import app from '../../v/app';
-import afterload from '../../helpers/afterload';
-import { PreloaderModule } from 'vevet';
-import { isTesting } from '../../settings';
+import { PreloaderModule } from "vevet";
+import app from "../../v/app";
+import afterload from "../../helpers/afterload";
+import { isTesting } from "../../settings";
 
 
 
@@ -11,50 +11,50 @@ const settings = {
     progress: {
         on: false,
         forceEnd: true,
-        k: !isTesting ? .035 : 1,
-        forceEndDuration: !isTesting ? 1500 : 10
-    }
+        k: !isTesting ? 0.035 : 1,
+        forceEndDuration: !isTesting ? 1500 : 10,
+    },
 };
 
 
 
 // init preloader
-const preloader = (function() {
+const preloader = (function () {
 
 
 
     // vars
-    let preloader: PreloaderModule;
+    let mod: PreloaderModule;
 
 
 
     // initialize preloader
-    function init() {
+    function init () {
 
         // create preloader
-        preloader = new PreloaderModule({
+        mod = new PreloaderModule({
             hide: true,
             animation: settings.animation,
-            progress: settings.progress
+            progress: settings.progress,
         });
 
         // set events
         setEvents();
 
         // return preloader
-        return preloader;
+        return mod;
 
     }
 
 
 
     // events
-    function setEvents() {
+    function setEvents () {
 
         // add event on hide
-        preloader.add({
-            target: 'hide',
-            do: hide.bind(this)
+        mod.add({
+            target: "hide",
+            do: hide.bind(this),
         });
 
     }
@@ -62,21 +62,21 @@ const preloader = (function() {
 
 
     // hide preloader
-    function hide() {
-        
+    function hide () {
+
         afterload();
 
         if (app.vevetPage) {
             app.vevetPage.show();
         }
-        
+
     }
 
 
 
     return init();
 
-    
+
 
 }());
 

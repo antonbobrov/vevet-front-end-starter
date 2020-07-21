@@ -1,9 +1,9 @@
-import app from "../../v/app"
+import app from "../../v/app";
 import { useCustomScroll } from "../../settings";
 
-const viewport = app.viewport;
+const { viewport } = app;
 
-export default function scrollCanBeCustom() {
+export default function scrollCanBeCustom () {
     if (viewport.desktop && !viewport.mobiledevice && useCustomScroll) {
         return true;
     }

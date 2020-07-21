@@ -7,7 +7,7 @@ import preloader from "./modules/loading/preloader";
 
 // init site
 
-export default function initSite() {
+export default function initSite () {
 
     const storage: any = {};
 

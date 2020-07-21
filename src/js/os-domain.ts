@@ -1,3 +1,3 @@
-const osDomain = 'template';
+const osDomain = "template";
 
 export default osDomain;
