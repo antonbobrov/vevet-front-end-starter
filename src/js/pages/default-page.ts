@@ -3,10 +3,16 @@ import fullHeight from "../helpers/fullHeight";
 import customScroll from "../modules/scroll/customScroll";
 import scrollView from "../modules/scrollView/scrollView";
 import { updateElements, elements } from "../helpers/elements";
-import initLazyImages from "../modules/image/initLazyImages";
+import { initLazyImages, LazyImages } from "../modules/image/initLazyImages";
 
 // Default Page Class
 class DefaultPage extends PageModule {
+
+    protected _lazyImages: false | LazyImages;
+
+    get lazyImages () {
+        return this._lazyImages;
+    }
 
 
 
@@ -44,6 +50,7 @@ class DefaultPage extends PageModule {
 
         // init lazy images
         const lazyImages = initLazyImages();
+        this._lazyImages = lazyImages;
         this.on("destroy", () => {
             if (lazyImages) {
                 lazyImages.destroy();

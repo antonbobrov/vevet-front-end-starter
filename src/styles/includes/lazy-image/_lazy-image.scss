@@ -1,0 +1,12 @@
+@import './lazy-image-transition';
+
+.lazy-bg,
+.lazy-image {
+    @include lazy-image-transition();
+    opacity: 0;
+
+    &.loaded {
+        opacity: 1;
+    }
+
+}

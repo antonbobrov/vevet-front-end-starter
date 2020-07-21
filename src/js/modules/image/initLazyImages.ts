@@ -9,13 +9,13 @@ import { load } from "../../helpers/imageLoader";
 
 const { viewport } = app;
 
-interface LazyImages {
+export interface LazyImages {
     set: Function;
     reset: Function;
     destroy: Function;
 }
 
-export default function initLazyImages (
+export function initLazyImages (
     outerSelector: false | HTMLElement = false,
     insersectionOuter: false | HTMLElement = false,
 ): LazyImages | false {
@@ -110,7 +110,8 @@ export default function initLazyImages (
             }
             else if (page) {
                 eventNative = page.listener(
-                    outer, "scroll",
+                    outer,
+                    "scroll",
                     lazyImageBounding.bind(this),
                     {},
                 );
@@ -236,8 +237,10 @@ export default function initLazyImages (
     // when the page is shown, show the images that must be loaded at once
     function showInstantImages () {
 
-        // eslint-disable-next-line max-len
-        const items = all(".lazy-image-instant, .lazy-bg-instant", parentElement);
+        const items = all(
+            ".lazy-image-instant, .lazy-bg-instant",
+            parentElement,
+        );
         for (let i = 0; i < items.length; i++) {
             const item = items[i];
             if (item instanceof HTMLElement) {
@@ -304,16 +307,21 @@ export default function initLazyImages (
 
         // load image
         load(src, () => {
+
             if (img instanceof HTMLImageElement) {
                 img.src = src;
             }
             else {
                 img.style.backgroundImage = `url('${src}')`;
             }
-            img.classList.add(classNameLoaded);
+
             setTimeout(() => {
-                img.style.willChange = "";
-            }, 250);
+                img.classList.add(classNameLoaded);
+                setTimeout(() => {
+                    img.style.willChange = "";
+                }, 250);
+            }, 50);
+
         });
 
     }
