@@ -1,17 +1,19 @@
-const merge = require('webpack-merge');
-const baseWebpackConfig = require('./webpack.base.conf');
-const PATHS = require('./paths').PATHS;
-const preamble = require('./preamble');
+/* eslint-disable import/no-extraneous-dependencies */
+const merge = require("webpack-merge");
 
-const TerserPlugin = require('terser-webpack-plugin');
-const ImageminPlugin = require('imagemin-webpack-plugin').default;
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const AssetsManifest = require('webpack-assets-manifest');
+const TerserPlugin = require("terser-webpack-plugin");
+const ImageminPlugin = require("imagemin-webpack-plugin").default;
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const AssetsManifest = require("webpack-assets-manifest");
+
+const { PATHS } = require("./paths");
+const preamble = require("./preamble");
+const baseWebpackConfig = require("./webpack.base.conf");
 
 const buildWebpackConfig = merge(baseWebpackConfig, {
 
-    mode: 'production',
+    mode: "production",
 
     optimization: {
         minimize: true,
@@ -24,20 +26,20 @@ const buildWebpackConfig = merge(baseWebpackConfig, {
                     compress: {
                         drop_console: false,
                         keep_fargs: false,
-                        passes: 1
+                        passes: 1,
                     },
                     ecma: 5,
                     mangle: true,
                     output: {
                         beautify: false,
                         comments: false,
-                        preamble: preamble
-                    }
-                }
-            })
+                        preamble,
+                    },
+                },
+            }),
         ],
         usedExports: true,
-        sideEffects: true
+        sideEffects: true,
     },
 
     plugins: [
@@ -49,19 +51,19 @@ const buildWebpackConfig = merge(baseWebpackConfig, {
         new ImageminPlugin({
             disable: false,
             pngquant: {
-                quality: '95-100'
-            }
+                quality: "95-100",
+            },
         }),
         new BundleAnalyzerPlugin({
-            analyzerMode: 'static',
-            reportFilename: 'BundleAnalyzer.html',
-            openAnalyzer: false
+            analyzerMode: "static",
+            reportFilename: "BundleAnalyzer.html",
+            openAnalyzer: false,
         }),
         new AssetsManifest({
-            output: PATHS.public + '/assets-manifest.json',
+            output: `${PATHS.public}/assets-manifest.json`,
             publicPath: true,
         }),
-    ]   
+    ],
 
 });
 

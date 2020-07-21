@@ -1,16 +1,18 @@
-const webpack = require('webpack');
-const merge = require('webpack-merge');
-const baseWebpackConfig = require('./webpack.base.conf');
+/* eslint-disable import/no-extraneous-dependencies */
+
+const webpack = require("webpack");
+const merge = require("webpack-merge");
+const baseWebpackConfig = require("./webpack.base.conf");
 
 const devWebpackConfig = merge(baseWebpackConfig, {
 
-    mode: 'development',
+    mode: "development",
 
-    devtool: 'cheap-module-eval-source-map',
+    devtool: "cheap-module-eval-source-map",
 
     watch: true,
     watchOptions: {
-        aggregateTimeout: 100
+        aggregateTimeout: 100,
     },
 
     devServer: {
@@ -19,21 +21,21 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         compress: true,
         disableHostCheck: true,
         port: 8083,
-        host: '0.0.0.0',
+        host: "0.0.0.0",
         overlay: {
             warnings: true,
-            errors: true
+            errors: true,
         },
         headers: {
-            'Access-Control-Allow-Origin': '*'
-        }
+            "Access-Control-Allow-Origin": "*",
+        },
     },
 
     plugins: [
         new webpack.SourceMapDevToolPlugin({
-            filename: '[file].map'
-        })
-    ]
+            filename: "[file].map",
+        }),
+    ],
 
 });
 
