@@ -55,6 +55,7 @@
     "lerp": "^1.0.3",
     "normalize-scss": "^7.0.1",
     "select-el": "^1.0.3",
-    "vevet": "^1.4.19"
+    "vevet": "^1.4.19",
+    "vevet-dom": "0.0.3"
   }
 }
