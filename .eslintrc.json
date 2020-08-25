@@ -24,10 +24,6 @@
             "error",
             "windows"
         ],
-        "quotes": [
-            "error",
-            "double"
-        ],
         "padded-blocks": "off",
         "no-multiple-empty-lines": [
             "error",
@@ -35,6 +31,7 @@
                 "max": 3
             }
         ],
+        "lines-between-class-members": "off",
         "max-len": [
             "error",
             {
