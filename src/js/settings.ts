@@ -16,5 +16,3 @@ export const pageSettings = {
 };
 
 export const useCustomScroll = true;
-
-export const viewClasses = ['v-view', 'v-view_b'];
