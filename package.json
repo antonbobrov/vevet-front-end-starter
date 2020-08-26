@@ -1,7 +1,7 @@
 {
-  "name": "vevet-template",
+  "name": "vevet-front-end-starter",
   "version": "0.0.1",
-  "description": "Vevet Template",
+  "description": "Vevet Front-end Starter",
   "scripts": {
     "build": "NODE_ENV=production webpack --config ./webpack/webpack.build.conf.js",
     "start": "webpack-dev-server --config ./webpack/webpack.dev.conf.js",
