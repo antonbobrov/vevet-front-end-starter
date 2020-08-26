@@ -6,7 +6,7 @@ const { viewport } = app;
 
 export class Ctx2D {
 
-    protected _parent: HTMLElement | false;
+    protected _parent: Element | false;
 
     protected _canvas: HTMLCanvasElement;
 
@@ -40,7 +40,7 @@ export class Ctx2D {
 
 
 
-    constructor (parent: HTMLElement | false) {
+    constructor (parent: Element | false) {
 
         this._parent = parent;
         this._create();

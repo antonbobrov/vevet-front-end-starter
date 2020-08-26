@@ -7,7 +7,7 @@ export class Ctx2DPrerender extends Ctx2D {
 
     constructor (
         public source: HTMLImageElement,
-        parent: HTMLElement | false,
+        parent: Element | false,
     ) {
 
         super(parent);
