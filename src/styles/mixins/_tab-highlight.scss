@@ -1,12 +1,14 @@
 @mixin tab-highlight() {
     &.tab-highlight {
-        outline: 1px solid var(--color-black);
+        outline: 1px solid currentColor;
         outline-offset: 2px;
     }
 }
 
 @mixin tab-highlight-content() {
-    @content;
+    &.tab-highlight {
+        @content;
+    }
 }
 
 @mixin hover-tab-highlight() {
