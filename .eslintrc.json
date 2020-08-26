@@ -20,10 +20,7 @@
             "error",
             4
         ],
-        "linebreak-style": [
-            "error",
-            "windows"
-        ],
+        "linebreak-style": "off",
         "padded-blocks": "off",
         "no-multiple-empty-lines": [
             "error",
