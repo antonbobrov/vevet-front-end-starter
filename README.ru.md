@@ -11,7 +11,7 @@ npm install
 ```sh
 npm start
 ```
-Соберать production-версию
+Собрать production-версию
 ```sh
 npm build
 ```
