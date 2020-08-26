@@ -1,6 +1,6 @@
-import "../styles/index.scss";
-import registerServiceWorker from "./register-service-worker";
-import initSite from "./initSite";
+import '../styles/index.scss';
+import { initSite } from './initSite';
+import { registerServiceWorker } from './service-worker';
 
 initSite();
 registerServiceWorker();

@@ -8,10 +8,9 @@ $color: var(--color-text);
     --color-white: #fff;
 
     // layout colors
-    --color-bg: #5F2580;
-    --color-text: #fff;
+    --color-bg: var(--color-white);
+    --color-text: var(--color-black);
 
-    --color-link: var(--color-white);
-    --color-link-hover: var(--color-white);
+    --color-link: var(--color-black);
 
 }

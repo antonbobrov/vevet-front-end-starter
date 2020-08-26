@@ -1,10 +1,6 @@
-import { DefaultPage } from "./default-page";
+import { DefaultPage } from './default-page';
 
 class HomePage extends DefaultPage {
-
-    protected _canBeShown = false;
-
-
 
     create (ajax = false) {
 
@@ -16,12 +12,10 @@ class HomePage extends DefaultPage {
 
     }
 
-
-
 }
 
 const homePage = new HomePage({
-    name: "home-page",
+    name: 'home-page',
 });
 
 export {

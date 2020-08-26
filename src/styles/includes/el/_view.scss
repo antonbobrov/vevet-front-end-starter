@@ -1,0 +1,47 @@
+.v-view {
+
+    &_b {
+        opacity: 0;
+
+        &.v-viewed {
+            @include transition-animation($view-duration);
+            animation-name: viewBottom;
+            animation-fill-mode: both;
+
+            @keyframes viewBottom {
+                from {
+                    transform: translate3d(0, 2rem, 0);
+                    opacity: 0;
+                }
+                to {
+                    transform: none;
+                    opacity: 1;
+                }
+            }
+            
+        }
+
+    }
+
+    &_a {
+        opacity: 0;
+
+        &.v-viewed {
+            @include transition-animation($view-duration);
+            animation-name: viewAlpha;
+            animation-fill-mode: both;
+
+            @keyframes viewAlpha {
+                from {
+                    opacity: 0;
+                }
+                to {
+                    opacity: 1;
+                }
+            }
+            
+        }
+
+    }
+
+}

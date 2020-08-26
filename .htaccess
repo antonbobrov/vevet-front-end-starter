@@ -3,7 +3,7 @@ RewriteEngine On
 RewriteBase /
 
 # redirect resources to webpack's dev server
-Redirect 301 /assets http://localhost:8083/assets
+Redirect 301 /assets http://localhost:8081/assets
 
 # redirect to images
 Redirect 301 /image /src/static/image

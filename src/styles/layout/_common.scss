@@ -1,0 +1,43 @@
+html {
+    font-size: $font-size;
+    font-family: $font-family;
+    overflow: hidden;
+
+    @include css-vars;
+
+    &.loading {
+        cursor: progress !important; /* stylelint-disable-line declaration-no-important */
+    
+        * {
+            cursor: progress !important; /* stylelint-disable-line declaration-no-important */
+        }
+    
+    }
+    
+}
+
+body {
+    position: fixed;
+    width: 100%;
+}
+
+* {
+    -ms-scroll-chaining: none;
+    -ms-content-zooming: none;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+div {
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+input,
+textarea,
+button,
+select {
+    font-family: $font-family;
+}
+    

@@ -1,30 +1,48 @@
 <?
-define("PAGE", "test-page");
+define("PAGE", "home-page");
 require_once './includes/start.php';
 ?>
 
+<div class="content">
+    <div class="wrap">
 
+        <h1 class="v-view_b">Test Page</h1>
 
-<div class="wrap">
-    <div class="text" data-view-parent="v-view_b">
-        <p>&nbsp;</p>
-        <p>&nbsp;</p>
-        <p>
-            <a href="/" class="v-al">--- back to home</a>
-        </p>
-        <p>&nbsp;</p>
-        <p>&nbsp;</p>
-        <p>
-            <h1>TEST PAGE</h1>
-        </p>
-        <p>&nbsp;</p>
-        <p>&nbsp;</p>
-        <? for ($i = 0; $i < 50; $i++) { ?>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Non hic corporis, esse dolores ullam aperiam voluptatum quia molestiae corrupti eos magnam quibusdam inventore iste eveniet at suscipit laudantium? Deserunt, eum.</p>
-        <? } ?>
+        <div class="text" data-view-parent="v-view_b">
+
+            <p>
+                <a href="index.php" class="v-al">-- back to home (through AJAX)</a>
+            </p>
+
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti ex ea reiciendis vero sequi blanditiis odit. Maxime fugit enim, architecto illo numquam neque sint ut quos repellendus quis, necessitatibus veniam?</p>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti ex ea reiciendis vero sequi blanditiis odit. Maxime fugit enim, architecto illo numquam neque sint ut quos repellendus quis, necessitatibus veniam?</p>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti ex ea reiciendis vero sequi blanditiis odit. Maxime fugit enim, architecto illo numquam neque sint ut quos repellendus quis, necessitatibus veniam?</p>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti ex ea reiciendis vero sequi blanditiis odit. Maxime fugit enim, architecto illo numquam neque sint ut quos repellendus quis, necessitatibus veniam?</p>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti ex ea reiciendis vero sequi blanditiis odit. Maxime fugit enim, architecto illo numquam neque sint ut quos repellendus quis, necessitatibus veniam?</p>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti ex ea reiciendis vero sequi blanditiis odit. Maxime fugit enim, architecto illo numquam neque sint ut quos repellendus quis, necessitatibus veniam?</p>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti ex ea reiciendis vero sequi blanditiis odit. Maxime fugit enim, architecto illo numquam neque sint ut quos repellendus quis, necessitatibus veniam?</p>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti ex ea reiciendis vero sequi blanditiis odit. Maxime fugit enim, architecto illo numquam neque sint ut quos repellendus quis, necessitatibus veniam?</p>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti ex ea reiciendis vero sequi blanditiis odit. Maxime fugit enim, architecto illo numquam neque sint ut quos repellendus quis, necessitatibus veniam?</p>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti ex ea reiciendis vero sequi blanditiis odit. Maxime fugit enim, architecto illo numquam neque sint ut quos repellendus quis, necessitatibus veniam?</p>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti ex ea reiciendis vero sequi blanditiis odit. Maxime fugit enim, architecto illo numquam neque sint ut quos repellendus quis, necessitatibus veniam?</p>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti ex ea reiciendis vero sequi blanditiis odit. Maxime fugit enim, architecto illo numquam neque sint ut quos repellendus quis, necessitatibus veniam?</p>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti ex ea reiciendis vero sequi blanditiis odit. Maxime fugit enim, architecto illo numquam neque sint ut quos repellendus quis, necessitatibus veniam?</p>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti ex ea reiciendis vero sequi blanditiis odit. Maxime fugit enim, architecto illo numquam neque sint ut quos repellendus quis, necessitatibus veniam?</p>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti ex ea reiciendis vero sequi blanditiis odit. Maxime fugit enim, architecto illo numquam neque sint ut quos repellendus quis, necessitatibus veniam?</p>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti ex ea reiciendis vero sequi blanditiis odit. Maxime fugit enim, architecto illo numquam neque sint ut quos repellendus quis, necessitatibus veniam?</p>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti ex ea reiciendis vero sequi blanditiis odit. Maxime fugit enim, architecto illo numquam neque sint ut quos repellendus quis, necessitatibus veniam?</p>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti ex ea reiciendis vero sequi blanditiis odit. Maxime fugit enim, architecto illo numquam neque sint ut quos repellendus quis, necessitatibus veniam?</p>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti ex ea reiciendis vero sequi blanditiis odit. Maxime fugit enim, architecto illo numquam neque sint ut quos repellendus quis, necessitatibus veniam?</p>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti ex ea reiciendis vero sequi blanditiis odit. Maxime fugit enim, architecto illo numquam neque sint ut quos repellendus quis, necessitatibus veniam?</p>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti ex ea reiciendis vero sequi blanditiis odit. Maxime fugit enim, architecto illo numquam neque sint ut quos repellendus quis, necessitatibus veniam?</p>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti ex ea reiciendis vero sequi blanditiis odit. Maxime fugit enim, architecto illo numquam neque sint ut quos repellendus quis, necessitatibus veniam?</p>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti ex ea reiciendis vero sequi blanditiis odit. Maxime fugit enim, architecto illo numquam neque sint ut quos repellendus quis, necessitatibus veniam?</p>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti ex ea reiciendis vero sequi blanditiis odit. Maxime fugit enim, architecto illo numquam neque sint ut quos repellendus quis, necessitatibus veniam?</p>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti ex ea reiciendis vero sequi blanditiis odit. Maxime fugit enim, architecto illo numquam neque sint ut quos repellendus quis, necessitatibus veniam?</p>
+
+        </div>
+
     </div>
 </div>
-
-
 
 <? require_once './includes/end.php'; ?>

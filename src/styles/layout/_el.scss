@@ -1,0 +1,11 @@
+a {
+    color: var(--color-link);
+    text-decoration: none;
+
+    @include tab-highlight;
+
+}
+
+button {
+    @include tab-highlight;
+}

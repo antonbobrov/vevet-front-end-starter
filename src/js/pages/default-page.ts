@@ -1,9 +1,9 @@
-import { PageModule } from "vevet";
-import fullHeight from "../helpers/fullHeight";
-import customScroll from "../modules/scroll/customScroll";
-import scrollView from "../modules/scrollView/scrollView";
-import { updateElements, elements } from "../helpers/elements";
-import { initLazyImages, LazyImages } from "../modules/image/initLazyImages";
+import { PageModule } from 'vevet';
+import { initLazyImages, LazyImages } from '../modules/image/initLazyImages';
+import { fullHeight } from '../helpers/dom-css/fullHeight';
+import { updateLayoutElements, layoutElements } from '../helpers/dom-css/layoutElements';
+import { customScroll } from '../modules/scroll/customScroll/customScroll';
+import { scrollView } from '../modules/scroll/scrollView/scrollView';
 
 // Default Page Class
 class DefaultPage extends PageModule {
@@ -31,7 +31,7 @@ class DefaultPage extends PageModule {
         scrollView.create();
 
         // update page elements
-        updateElements();
+        updateLayoutElements();
 
         return this;
 
@@ -51,14 +51,14 @@ class DefaultPage extends PageModule {
         // init lazy images
         const lazyImages = initLazyImages();
         this._lazyImages = lazyImages;
-        this.on("destroy", () => {
+        this.on('destroy', () => {
             if (lazyImages) {
                 lazyImages.destroy();
             }
         });
 
         // show app
-        elements.app.classList.remove("hide");
+        layoutElements.app.classList.remove('hide');
 
         return true;
 
@@ -74,7 +74,7 @@ class DefaultPage extends PageModule {
         customScroll.pause();
 
         // hide app
-        elements.app.classList.add("hide");
+        layoutElements.app.classList.add('hide');
 
         return true;
 
@@ -85,7 +85,7 @@ class DefaultPage extends PageModule {
 }
 
 const defaultPage = new DefaultPage({
-    name: "default-page",
+    name: 'default-page',
 });
 
 export {

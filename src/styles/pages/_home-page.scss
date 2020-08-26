@@ -1,1 +1,14 @@
-@import '../includes/el/vevet';
+.home-page {
+
+    h1 {
+        position: relative;
+        @include line-top;
+        @include line-bottom;
+        padding: px-to-rem(20) 0;
+    }
+
+    .text {
+        margin: px-to-rem(60) 0;
+    }
+
+}

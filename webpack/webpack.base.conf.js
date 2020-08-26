@@ -1,12 +1,12 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 
-const NODE_ENV = process.env.NODE_ENV || "development";
+const NODE_ENV = process.env.NODE_ENV || 'development';
 
-const webpack = require("webpack");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
-const { PATHS } = require("./paths");
+const webpack = require('webpack');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const { PATHS } = require('./paths');
 
 module.exports = {
 
@@ -18,15 +18,15 @@ module.exports = {
         app: `${PATHS.src}/js/index.ts`,
     },
     output: {
-        filename: NODE_ENV === "development"
+        filename: NODE_ENV === 'development'
             ? `${PATHS.assets}js/[name].js`
             : `${PATHS.assets}js/[name].[contenthash].js`,
         path: PATHS.public,
-        publicPath: "/",
+        publicPath: '/',
     },
 
     resolve: {
-        extensions: [".ts", ".js", ".json"],
+        extensions: ['.ts', '.js', '.json'],
     },
 
     module: {
@@ -35,35 +35,35 @@ module.exports = {
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loader: "babel-loader",
+                loader: 'babel-loader',
             },
             {
                 test: /\.ts?$/,
                 exclude: /node_modules/,
-                loaders: ["babel-loader", "ts-loader"],
+                loaders: ['babel-loader', 'ts-loader'],
             },
             {
                 test: /\.(woff(2)?|ttf|eot|svg|png|jpg|gif|svg)(\?v=\d+\.\d+\.\d+)?$/,
-                loader: "file-loader",
+                loader: 'file-loader',
                 options: {
-                    name: "[name].[ext]",
+                    name: '[name].[ext]',
                 },
             },
             {
                 test: /\.css$/,
                 use: [
-                    "style-loader",
+                    'style-loader',
                     MiniCssExtractPlugin.loader,
                     {
-                        loader: "css-loader",
+                        loader: 'css-loader',
                         options: {
-                            sourceMap: NODE_ENV === "development",
+                            sourceMap: NODE_ENV === 'development',
                         },
                     },
                     {
-                        loader: "postcss-loader",
+                        loader: 'postcss-loader',
                         options: {
-                            sourceMap: NODE_ENV === "development",
+                            sourceMap: NODE_ENV === 'development',
                             config: {
                                 path: `${PATHS.src}/styles/postcss.config.js`,
                             },
@@ -74,30 +74,30 @@ module.exports = {
             {
                 test: /\.scss$/,
                 use: [
-                    "style-loader",
+                    'style-loader',
                     MiniCssExtractPlugin.loader,
                     {
-                        loader: "css-loader",
+                        loader: 'css-loader',
                         options: {
-                            sourceMap: NODE_ENV === "development",
+                            sourceMap: NODE_ENV === 'development',
                         },
                     },
                     {
-                        loader: "postcss-loader",
+                        loader: 'postcss-loader',
                         options: {
-                            sourceMap: NODE_ENV === "development",
+                            sourceMap: NODE_ENV === 'development',
                             config: {
                                 path: `${PATHS.src}/styles/postcss.config.js`,
                             },
                         },
                     },
                     {
-                        loader: "sass-loader",
+                        loader: 'sass-loader',
                         options: {
-                            sourceMap: NODE_ENV === "development",
+                            sourceMap: NODE_ENV === 'development',
                             sassOptions: {
                                 includePaths: [
-                                    require("path").resolve(__dirname, "node_modules"),
+                                    require('path').resolve(__dirname, 'node_modules'),
                                 ],
                             },
                         },
@@ -108,8 +108,8 @@ module.exports = {
                 test: /\.(glsl|vs|fs|vert|frag)$/,
                 exclude: /node_modules/,
                 use: [
-                    "raw-loader",
-                    "glslify-loader",
+                    'raw-loader',
+                    'glslify-loader',
                 ],
             },
         ],
@@ -121,7 +121,7 @@ module.exports = {
             NODE_ENV: JSON.stringify(NODE_ENV),
         }),
         new MiniCssExtractPlugin({
-            filename: NODE_ENV === "development"
+            filename: NODE_ENV === 'development'
                 ? `${PATHS.assets}css/[name].css`
                 : `${PATHS.assets}css/[name].[hash].css`,
         }),
@@ -132,11 +132,11 @@ module.exports = {
             },
             {
                 from: `${PATHS.src}/static`,
-                to: "",
+                to: '',
             },
             {
                 from: `${PATHS.src}/php`,
-                to: "",
+                to: '',
             },
             {
                 from: `${PATHS.src}/fonts`,

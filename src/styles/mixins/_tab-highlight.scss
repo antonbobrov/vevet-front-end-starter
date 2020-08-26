@@ -1,0 +1,31 @@
+@mixin tab-highlight() {
+    &.tab-highlight {
+        outline: 1px solid var(--color-black);
+        outline-offset: 2px;
+    }
+}
+
+@mixin tab-highlight-content() {
+    @content;
+}
+
+@mixin hover-tab-highlight() {
+    @include hover {
+        @content;
+    }
+    @include tab-highlight {
+        @content;
+    }
+}
+
+@mixin hover-tab-highlight-active() {
+    @include hover {
+        @content;
+    }
+    @include active-class {
+        @content;
+    }
+    @include tab-highlight-content {
+        @content;
+    }
+}

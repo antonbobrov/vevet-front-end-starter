@@ -1,0 +1,40 @@
+@mixin hover() {
+    &:hover {
+        @content;
+    }
+    &.hover {
+        @content;
+    }
+}
+
+@mixin focus() {
+    @include desktop {
+        &:focus {
+            @content;
+        }
+    }
+}
+
+@mixin hover-focus() {
+    @include hover {
+        @content;
+    }
+    @include focus {
+        @content;
+    }
+}
+
+@mixin hover-active-class() {
+    @include hover {
+        @content;
+    }
+    @include active-class {
+        @content;
+    }
+}
+
+@mixin active-class() {
+    &.active {
+        @content;
+    }
+}

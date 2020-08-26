@@ -1,3 +1,18 @@
+$wrap-padding: 0 var(--wrap);
+$wrap-1-padding: 0 var(--wrap-1);
+
 @mixin settings-layout {
-    --content-padding: 0 0;
+    --content-padding-top: #{px-to-rem(60)};
+
+    --wrap: 4vw;
+    --wrap-1: 8vw;
+    @include tablet {
+        --wrap: 2.5rem;
+        --wrap-1: 5rem;
+    }
+    @include mobile {
+        --wrap: 1.25rem;
+        --wrap-1: 1.25rem;
+    }
+
 }

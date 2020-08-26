@@ -1,11 +1,11 @@
-import { ScrollModule } from "vevet";
-import { all } from "select-el";
-import app from "../../v/app";
-import { updateElements, elements } from "../../helpers/elements";
-import observerSupported from "../../helpers/observerSupported";
-import scrollSelector from "../scroll/scrollSelector";
-import { resizeTimeout } from "../../settings";
-import { load } from "../../helpers/imageLoader";
+import { ScrollModule } from 'vevet';
+import { selectAll } from 'vevet-dom';
+import app from '../../v/app';
+import { resizeTimeout } from '../../settings';
+import { updateLayoutElements, layoutElements } from '../../helpers/dom-css/layoutElements';
+import { observerSupported } from '../../helpers/abilities/observerSupported';
+import { loadImage } from './imageLoader';
+import { getScrollSelector } from '../scroll/customScroll/сustomScrollSettings';
 
 const { viewport } = app;
 
@@ -32,7 +32,7 @@ export function initLazyImages (
     let outer: HTMLElement | ScrollModule;
     let parentElement: HTMLElement;
 
-    const attr = "data-lazy-image-proceeded";
+    const proceededAttribute = 'data-lazy-image-proceeded';
 
 
 
@@ -45,8 +45,8 @@ export function initLazyImages (
 
     let images: HTMLElement[] = [];
 
-    const classNameLoad = "load";
-    const classNameLoaded = "loaded";
+    const classNameLoad = 'load';
+    const classNameLoaded = 'loaded';
 
 
 
@@ -62,10 +62,10 @@ export function initLazyImages (
         addViewportEvent();
 
         // get intersection outer
-        let outerForIntersection: HTMLElement;
+        let outerForIntersection: Element;
         if (!insersectionOuter) {
-            updateElements();
-            outerForIntersection = elements.app;
+            updateLayoutElements();
+            outerForIntersection = layoutElements.app;
         }
         else {
             outerForIntersection = insersectionOuter;
@@ -92,7 +92,7 @@ export function initLazyImages (
         if (observerSupported()) {
             const options = {
                 root: outerForIntersection,
-                rootMargin: "0px",
+                rootMargin: '0px',
                 threshold: 0.01,
             };
             observer = new IntersectionObserver(
@@ -106,12 +106,12 @@ export function initLazyImages (
 
             // if custom scroll
             if (outer instanceof ScrollModule) {
-                eventCustom = outer.on("update", lazyImageBounding.bind(this));
+                eventCustom = outer.on('update', lazyImageBounding.bind(this));
             }
             else if (page) {
                 eventNative = page.listener(
                     outer,
-                    "scroll",
+                    'scroll',
                     lazyImageBounding.bind(this),
                     {},
                 );
@@ -126,7 +126,7 @@ export function initLazyImages (
 
     function getOuteSelector () {
         if (!outerSelector) {
-            return scrollSelector();
+            return getScrollSelector();
         }
 
         return outerSelector;
@@ -138,17 +138,17 @@ export function initLazyImages (
     function addViewportEvent () {
 
         viewportEvent = viewport.add({
-            target: "",
+            target: '',
             do: reset.bind(this, true),
             timeout: resizeTimeout,
-            name: "LAZY IMAGE",
+            name: 'LAZY IMAGE',
         });
 
     }
 
     function removeViewportEvent () {
 
-        if (typeof viewportEvent !== "boolean") {
+        if (typeof viewportEvent !== 'boolean') {
             viewport.remove(viewportEvent);
             viewportEvent = false;
         }
@@ -172,7 +172,7 @@ export function initLazyImages (
 
         if (
             (outer instanceof ScrollModule)
-            && typeof eventCustom === "string"
+            && typeof eventCustom === 'string'
         ) {
             outer.remove(eventCustom);
             eventCustom = false;
@@ -184,7 +184,7 @@ export function initLazyImages (
         }
 
         images.forEach((image) => {
-            image.removeAttribute(attr);
+            image.removeAttribute(proceededAttribute);
         });
 
         removeViewportEvent();
@@ -210,13 +210,13 @@ export function initLazyImages (
 
         images = [];
 
-        const items = all(".lazy-image, .lazy-bg", parentElement);
-        for (let i = 0; i < items.length; i++) {
+        const items = selectAll('.lazy-image, .lazy-bg', parentElement);
+        for (let i = 0, l = items.length; i < l; i++) {
             const item = items[i];
             if (item instanceof HTMLElement) {
-                if (item.getAttribute(attr) == null) {
+                if (item.getAttribute(proceededAttribute) == null) {
                     images.push(item);
-                    item.setAttribute(attr, "true");
+                    item.setAttribute(proceededAttribute, 'true');
                 }
             }
         }
@@ -237,11 +237,11 @@ export function initLazyImages (
     // when the page is shown, show the images that must be loaded at once
     function showInstantImages () {
 
-        const items = all(
-            ".lazy-image-instant, .lazy-bg-instant",
+        const items = selectAll(
+            '.lazy-image-instant, .lazy-bg-instant',
             parentElement,
         );
-        for (let i = 0; i < items.length; i++) {
+        for (let i = 0, l = items.length; i < l; i++) {
             const item = items[i];
             if (item instanceof HTMLElement) {
                 if (!item.classList.contains(classNameLoad)) {
@@ -264,7 +264,7 @@ export function initLazyImages (
                 if (el instanceof HTMLElement) {
                     if (!el.classList.contains(classNameLoad)) {
                         el.classList.add(classNameLoad);
-                        el.style.willChange = "opacity";
+                        el.style.willChange = 'opacity';
                         lazyImageLoad(el);
                     }
                 }
@@ -276,7 +276,7 @@ export function initLazyImages (
     // callback on scroll update
     function lazyImageBounding () {
 
-        const outerHeight = elements.app.clientHeight;
+        const outerHeight = layoutElements.app.clientHeight;
 
         for (let i = 0; i < images.length; i++) {
 
@@ -288,7 +288,7 @@ export function initLazyImages (
             ) {
                 if (!image.classList.contains(classNameLoad)) {
                     image.classList.add(classNameLoad);
-                    image.style.willChange = "opacity";
+                    image.style.willChange = 'opacity';
                     lazyImageLoad(image);
                 }
             }
@@ -303,10 +303,10 @@ export function initLazyImages (
     function lazyImageLoad (img: HTMLElement) {
 
         // get attribute
-        const src = img.getAttribute("data-src");
+        const src = img.getAttribute('data-src');
 
         // load image
-        load(src, () => {
+        loadImage(src, () => {
 
             if (img instanceof HTMLImageElement) {
                 img.src = src;
@@ -318,7 +318,7 @@ export function initLazyImages (
             setTimeout(() => {
                 img.classList.add(classNameLoaded);
                 setTimeout(() => {
-                    img.style.willChange = "";
+                    img.style.willChange = '';
                 }, 250);
             }, 50);
 

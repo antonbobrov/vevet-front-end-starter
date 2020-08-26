@@ -1,13 +1,15 @@
-import { one, exists } from "select-el";
-import { ScrollModule } from "vevet";
-import customScroll from "./customScroll";
+import { ScrollModule } from 'vevet';
+import { selectOne, isElement } from 'vevet-dom';
+import { customScroll } from './customScroll/customScroll';
 
-export default function onScroll (callback: (scrollTop: number) => void) {
+export function onScroll (
+    callback: (scrollTop: number) => void,
+) {
 
     // set event on default scroll outer
-    const scrollOuter = one(".scroll");
-    if (exists(scrollOuter)) {
-        scrollOuter.addEventListener("scroll", () => {
+    const scrollOuter = selectOne('.scroll');
+    if (isElement(scrollOuter)) {
+        scrollOuter.addEventListener('scroll', () => {
             callback(scrollOuter.scrollTop);
         });
     }
@@ -15,7 +17,7 @@ export default function onScroll (callback: (scrollTop: number) => void) {
     // set event on custom scroll
     const scrollModule = customScroll.get();
     if (scrollModule instanceof ScrollModule) {
-        scrollModule.on("update", () => {
+        scrollModule.on('update', () => {
             callback(scrollModule.scrollTop);
         });
     }

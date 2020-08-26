@@ -1,0 +1,10 @@
+.scroll {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+
+    &__outer {
+        position: relative;
+        height: auto;
+    }
+
+}

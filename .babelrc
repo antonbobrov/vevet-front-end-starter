@@ -1,14 +1,24 @@
 {
     "presets": [
-        ["@babel/preset-env", {"modules": false} ]
+        [
+            "@babel/preset-env",
+            {
+                "modules": false
+            }
+        ]
     ],
     "plugins": [
-        ["transform-imports", {
-            "vevet": {
-                "transform": "vevet/dist/js/${member}",
-                "preventFullImport": false
+        [
+            "transform-imports",
+            {
+                "vevet": {
+                    "transform": "vevet/dist/js/${member}",
+                    "preventFullImport": false
+                }
             }
-        }],
-        ["@babel/plugin-syntax-dynamic-import"]
+        ],
+        [
+            "@babel/plugin-syntax-dynamic-import"
+        ]
     ]
 }

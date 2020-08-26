@@ -1,19 +1,20 @@
 /* eslint-disable import/no-extraneous-dependencies */
-const merge = require("webpack-merge");
 
-const TerserPlugin = require("terser-webpack-plugin");
-const ImageminPlugin = require("imagemin-webpack-plugin").default;
-const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const AssetsManifest = require("webpack-assets-manifest");
+const merge = require('webpack-merge');
 
-const { PATHS } = require("./paths");
-const preamble = require("./preamble");
-const baseWebpackConfig = require("./webpack.base.conf");
+const TerserPlugin = require('terser-webpack-plugin');
+const ImageminPlugin = require('imagemin-webpack-plugin').default;
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const AssetsManifest = require('webpack-assets-manifest');
+
+const { PATHS } = require('./paths');
+const preamble = require('./preamble');
+const baseWebpackConfig = require('./webpack.base.conf');
 
 const buildWebpackConfig = merge(baseWebpackConfig, {
 
-    mode: "production",
+    mode: 'production',
 
     optimization: {
         minimize: true,
@@ -39,7 +40,7 @@ const buildWebpackConfig = merge(baseWebpackConfig, {
             }),
         ],
         usedExports: true,
-        sideEffects: true,
+        sideEffects: false,
     },
 
     plugins: [
@@ -51,12 +52,12 @@ const buildWebpackConfig = merge(baseWebpackConfig, {
         new ImageminPlugin({
             disable: false,
             pngquant: {
-                quality: "95-100",
+                quality: '95-100',
             },
         }),
         new BundleAnalyzerPlugin({
-            analyzerMode: "static",
-            reportFilename: "BundleAnalyzer.html",
+            analyzerMode: 'static',
+            reportFilename: 'BundleAnalyzer.html',
             openAnalyzer: false,
         }),
         new AssetsManifest({

@@ -1,32 +1,48 @@
-import { TimelineModule, ScrollModule } from "vevet";
-import scrollSelector from "./scrollSelector";
+import { TimelineModule, ScrollModule } from 'vevet';
+import { getScrollSelector } from './customScroll/сustomScrollSettings';
 
-export default function scrollToTop (
+export function scrollToTop (
     duration = 350,
     outer: (false | HTMLElement | ScrollModule) = false,
 ) {
 
-    let scrollOuter: HTMLElement | ScrollModule;
-    if (!outer) {
-        scrollOuter = scrollSelector();
-    }
-    else {
-        scrollOuter = outer;
-    }
+    // return a promise
+    const promise = new Promise((resolve) => {
 
-    // get current value
-    const { scrollTop } = scrollOuter;
-
-    // animate
-    const timeline = new TimelineModule();
-    timeline.on("progress", (p) => {
-        if (outer instanceof ScrollModule) {
-            outer.play();
+        let scrollOuter: HTMLElement | ScrollModule;
+        if (!outer) {
+            scrollOuter = getScrollSelector();
         }
-        scrollOuter.scrollTop = scrollTop * (1 - p.se);
+        else {
+            scrollOuter = outer;
+        }
+
+        // get current value
+        const { scrollTop } = scrollOuter;
+
+        // create a timeline
+        const timeline = new TimelineModule();
+
+        // animate progress
+        timeline.on('progress', (p) => {
+            if (outer instanceof ScrollModule) {
+                outer.play();
+            }
+            scrollOuter.scrollTop = scrollTop * (1 - p.se);
+        });
+
+        // on animation end
+        timeline.on('end', () => {
+            resolve();
+        });
+
+        // launch the timeline
+        timeline.play({
+            duration,
+        });
+
     });
-    timeline.play({
-        duration,
-    });
+
+    return promise;
 
 }

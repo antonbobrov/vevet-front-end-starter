@@ -2,34 +2,29 @@
 @include normalize();
 
 @import './settings/index';
-@import './mixins/mixins';
-
-
+@import './mixins/index';
 
 @import '~vevet/dist/scss/mixins/index';
 @import '~vevet/dist/scss/classes/index';
 @import '~vevet/dist/scss/modules/preloader/index';
 @import '~vevet/dist/scss/modules/scroll/index';
 
-
 @import '../fonts/Font/font';
 
-@import './layout/document';
-@import './layout/links';
-@import './layout/text';
-@import './layout/scroll';
-@import './layout/content';
+@import './layout/common';
 @import './layout/page';
 @import './layout/app';
+@import './layout/el';
+@import './layout/text';
+@import './layout/content';
 
-@import './includes/loading/v-preloader';
+@import './includes/el/afterload';
+@import './includes/el/view';
+
 @import './includes/scroll/v-scroll';
+@import './includes/scroll/scroll';
 
-@import './helpers/afterload';
-@import './helpers/view';
-
-@import './includes/el/button';
-@import './includes/el/bg';
-@import './includes/lazy-image/lazy-image';
+@import './includes/image/lazy-image';
+@import './includes/image/bg';
 
 @import './pages/home-page';

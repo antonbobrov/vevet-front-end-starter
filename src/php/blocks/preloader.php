@@ -1,1 +1,1 @@
-<div class="v-preloader"></div>
+<div class="v-preloader" id="preloader"></div>

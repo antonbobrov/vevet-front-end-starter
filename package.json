@@ -49,13 +49,13 @@
     "webpack-bundle-analyzer": "^3.8.0",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0",
-    "webpack-merge": "^5.1.2"
+    "webpack-merge": "^4.2.2"
   },
   "dependencies": {
     "lerp": "^1.0.3",
+    "node-background-size": "^1.0.4",
     "normalize-scss": "^7.0.1",
-    "select-el": "^1.0.3",
     "vevet": "^1.4.19",
-    "vevet-dom": "0.0.3"
+    "vevet-dom": "0.0.4"
   }
 }

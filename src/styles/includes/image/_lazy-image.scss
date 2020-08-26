@@ -1,0 +1,19 @@
+@mixin lazy-image-transition($str: null) {
+    @if ($str) {
+        @include transition((opacity 0.5s, $str));
+    } @else {
+        @include transition(opacity 0.5s);
+    }
+    transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.lazy-bg,
+.lazy-image {
+    @include lazy-image-transition();
+    opacity: 0;
+
+    &.loaded {
+        opacity: 1;
+    }
+
+}

@@ -1,14 +1,13 @@
-import app from "./v/app";
-import fontSize from "./helpers/fontSize";
-import fullHeight from "./helpers/fullHeight";
-import cssVars from "./helpers/cssVars";
-import setKeyboardTabHightlight from "./helpers/setKeyboardTabHightlight";
-import pagesRegistry from "./modules/page/pagesRegistry";
-import preloader from "./modules/loading/preloader";
+import app from './v/app';
+import { fontSize } from './helpers/dom-css/fontSize';
+import { fullHeight } from './helpers/dom-css/fullHeight';
+import { setCSSVars } from './helpers/dom-css/cssVars';
+import { preloader } from './modules/loading/preloader';
+import { pagesRegistry } from './modules/page/pagesRegistry';
 
 // init site
 
-export default function initSite () {
+export function initSite () {
 
     const storage: any = {};
 
@@ -21,8 +20,7 @@ export default function initSite () {
     // set font size, full-height elements and css vars
     storage.fontSize = fontSize;
     storage.fullHeight = fullHeight;
-    storage.cssVars = cssVars();
-    setKeyboardTabHightlight();
+    storage.cssVars = setCSSVars();
 
 
 

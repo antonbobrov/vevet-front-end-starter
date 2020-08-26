@@ -1,15 +1,23 @@
 @import './color';
-@import './wrap';
 @import './layout';
 @import './modules';
 
 // Vevet Variables
 $prefix: 'v-';
 
+// Site Vars
+$font-family: 'Arial';
+$font-size: 16px;
+$change-page-duration: 0.25s;
+
+$afterload-transition: 1s;
+$afterload-delay: 0s;
+
+$view-duration: 1.25s;
+
 // CSS3 Variables / This mixin is used in /layout/_document.scss
 @mixin css-vars() {
 
-    @include settings-wrap;
     @include settings-color;
     @include settings-layout;
     @include settings-modules;

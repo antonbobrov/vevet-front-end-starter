@@ -17,7 +17,6 @@
 		<meta name="theme-color" content="#000000">
 		<link rel="manifest" href="/manifest.webmanifest">
 
-        <link href="https://fonts.googleapis.com/css?family=Oswald:400,600&display=swap" rel="stylesheet">
 		<? include('css.php'); ?>
 
     </head>
@@ -26,15 +25,19 @@
 
         <?php require_once "blocks/preloader.php"; ?>
 
-        <div class="page full-height">
+        <div class="page full-height" id="page">
 
             <?php require_once "blocks/header.php"; ?>
 
             <div 
                 class="app full-height" 
+                id="app"
                 data-v-page="<? echo PAGE; ?>" 
                 data-v-pageAjax-name="<? echo PAGE; ?>" 
             >
 
-                <div class="scroll full-height <? echo PAGE; ?>">
+                <div 
+                    class="scroll full-height <? echo PAGE; ?>" 
+                    id="scroll"
+                >
                     <div class="scroll__outer">

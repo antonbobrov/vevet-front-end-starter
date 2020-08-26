@@ -3,7 +3,7 @@ define("LANG", "en");
 
 $lang = array();
 
-$lang['site']['title'] = 'Template';
+$lang['site']['title'] = 'Front-end Starter';
 
 
 

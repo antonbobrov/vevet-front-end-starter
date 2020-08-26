@@ -1,7 +1,7 @@
-import { PreloaderModule } from "vevet";
-import app from "../../v/app";
-import afterload from "../../helpers/afterload";
-import { isTesting } from "../../settings";
+import { PreloaderModule } from 'vevet';
+import app from '../../v/app';
+import { isTesting } from '../../settings';
+import { showAfterloadElements } from '../../helpers/dom-css/showAfterloadElements';
 
 
 
@@ -19,7 +19,7 @@ const settings = {
 
 
 // init preloader
-const preloader = (function () {
+export const preloader = (function () {
 
 
 
@@ -33,6 +33,7 @@ const preloader = (function () {
 
         // create preloader
         mod = new PreloaderModule({
+            selector: '#preloader',
             hide: true,
             animation: settings.animation,
             progress: settings.progress,
@@ -53,7 +54,7 @@ const preloader = (function () {
 
         // add event on hide
         mod.add({
-            target: "hide",
+            target: 'hide',
             do: hide.bind(this),
         });
 
@@ -64,7 +65,7 @@ const preloader = (function () {
     // hide preloader
     function hide () {
 
-        afterload();
+        showAfterloadElements();
 
         if (app.vevetPage) {
             app.vevetPage.show();
@@ -79,5 +80,3 @@ const preloader = (function () {
 
 
 }());
-
-export default preloader;

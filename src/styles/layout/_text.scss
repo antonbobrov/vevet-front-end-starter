@@ -1,37 +1,33 @@
 .text {
-    font-size: .9375rem;
-    line-height: 160%;
-
-    p {
-        margin: 0;
-    }
-
-    img {
-        margin: .5rem 0;
-
-        &:not([width]),
-        &[width=''],
-        &:not([height]) {
-            width: 100%;
-        }
-
-    }
-
-    blockquote,
-    q,
-    cite {
-        position: relative;
-        @include reset-button;
-    }
-
+    @include text-styles;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-size: 4rem;
+h1 {
     margin: 0;
+    @include text-header-1;
+}
+
+h2 {
+    margin: 0;
+    @include text-header-2;
+}
+
+h3 {
+    margin: 0;
+    @include text-header-3;
+}
+
+h4 {
+    margin: 0;
+    @include text-header-4;
+}
+
+h5 {
+    margin: 0;
+    @include text-header-5;
+}
+
+h6 {
+    margin: 0;
+    @include text-header-6;
 }

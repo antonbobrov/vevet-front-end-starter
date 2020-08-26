@@ -1,10 +1,10 @@
-import { PageModule } from "vevet";
-import app from "../../v/app";
-import { pageSettings } from "../../settings";
+import { PageModule } from 'vevet';
+import app from '../../v/app';
+import { pageSettings } from '../../settings';
 
 // create page according to the defined type
 
-export default function createPage () {
+export function createPage () {
 
     const page = app.page[0];
 

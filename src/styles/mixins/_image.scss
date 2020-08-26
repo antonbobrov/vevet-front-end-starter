@@ -1,0 +1,10 @@
+@function image-path($path) {
+    @return '/assets/img/#{$path}';
+}
+
+@mixin full-size-bg($path) {
+    background-image: url(#{image-path($path)});
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
