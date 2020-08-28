@@ -9,31 +9,26 @@ export class Ctx2D {
     protected _parent: Element | false;
 
     protected _canvas: HTMLCanvasElement;
-
     get canvas () {
         return this._canvas;
     }
 
     protected _ctx: CanvasRenderingContext2D;
-
     get ctx () {
         return this._ctx;
     }
 
     protected _width = 0;
-
     get width () {
         return this._width;
     }
 
     protected _height = 0;
-
     get height () {
         return this._height;
     }
 
     protected _dpr = 1;
-
     get dpr () {
         return this._dpr;
     }
@@ -65,7 +60,7 @@ export class Ctx2D {
         let newWidth = 0;
         let newHeight = 0;
 
-        if (width & height) {
+        if (!!width && !!height) {
             newWidth = width;
             newHeight = height;
         }
