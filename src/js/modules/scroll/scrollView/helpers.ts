@@ -1,5 +1,6 @@
 export const scrollViewClasses = [
     'v-view',
+    'v-viewed',
     'v-view_b',
     'v-view_a',
 ];
@@ -13,5 +14,20 @@ export function includesScrollViewClass (el: HTMLElement) {
     }
 
     return false;
+
+}
+
+
+
+export function removeViewClasses (
+    outer: HTMLElement,
+) {
+
+    const children = outer.querySelectorAll('*');
+    children.forEach((child) => {
+        scrollViewClasses.forEach((className) => {
+            child.classList.remove(className);
+        });
+    });
 
 }
