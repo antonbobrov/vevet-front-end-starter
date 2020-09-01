@@ -19,7 +19,7 @@ export function includesScrollViewClass (el: HTMLElement) {
 
 
 
-export function removeViewClasses (
+export function removeScrollViewClasses (
     outer: HTMLElement,
 ) {
 
