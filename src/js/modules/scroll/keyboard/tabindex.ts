@@ -1,4 +1,4 @@
-export function disableTabIndex (parent: HTMLElement) {
+export function disableTabIndex (parent: Element) {
 
     const children = parent.querySelectorAll('*');
     for (let i = 0, l = children.length; i < l; i++) {
@@ -9,7 +9,7 @@ export function disableTabIndex (parent: HTMLElement) {
 
 
 
-export function enableTabIndex (el: HTMLElement) {
+export function enableTabIndex (el: Element) {
 
     el.setAttribute('tabindex', '0');
 
@@ -17,7 +17,7 @@ export function enableTabIndex (el: HTMLElement) {
 
 
 
-export function enableChildrenTabIndex (outer: HTMLElement) {
+export function enableChildrenTabIndex (outer: Element) {
 
     const { children } = outer;
     for (let i = 0; i < children.length; i++) {
