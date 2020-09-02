@@ -1,4 +1,4 @@
-import { get as getImageSize } from 'node-background-size';
+import { getPos } from 'get-image-pos';
 import { Ctx2D } from './Ctx2D';
 
 
@@ -22,8 +22,8 @@ export class Ctx2DPrerender extends Ctx2D {
 
         super.updateSize(width, height);
 
-        const size = getImageSize({
-            media: this.source,
+        const size = getPos({
+            source: this.source,
             rule: 'cover',
             scale: 1,
             width: this.width,
@@ -36,7 +36,7 @@ export class Ctx2DPrerender extends Ctx2D {
         this._ctx.drawImage(
             this.source,
             0, 0,
-            size.mediaWidth, size.mediaHeight,
+            size.sourceWidth, size.sourceHeight,
             size.x, size.y, size.width, size.height,
         );
 
