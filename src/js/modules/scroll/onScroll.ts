@@ -7,7 +7,7 @@ export function onScroll (
 ) {
 
     // set event on default scroll outer
-    const scrollOuter = selectOne('.scroll');
+    const scrollOuter = selectOne('#scroll');
     if (isElement(scrollOuter)) {
         scrollOuter.addEventListener('scroll', () => {
             callback(scrollOuter.scrollTop);
