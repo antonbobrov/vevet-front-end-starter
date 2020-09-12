@@ -19,3 +19,5 @@ export function updateLayoutElements () {
     layoutElements.page = selectOne('#page');
     layoutElements.scroll = selectOne('#scroll');
 }
+
+updateLayoutElements();
