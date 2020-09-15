@@ -15,7 +15,7 @@
     @include hover {
         @content;
     }
-    @include tab-highlight {
+    @include tab-highlight-content() {
         @content;
     }
 }
