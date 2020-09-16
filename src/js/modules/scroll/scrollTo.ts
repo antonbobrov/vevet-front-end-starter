@@ -1,7 +1,10 @@
 import { TimelineModule, ScrollModule } from 'vevet';
 import { getScrollSelector } from './customScroll/сustomScrollSettings';
 
-export function scrollToTop (
+
+
+export function scrollTo (
+    targetTop: number,
     duration = 350,
     outer: (false | HTMLElement | ScrollModule) = false,
 ) {
@@ -19,6 +22,8 @@ export function scrollToTop (
 
         // get current value
         const { scrollTop } = scrollOuter;
+        // get difference
+        const diff = targetTop - scrollTop;
 
         // create a timeline
         const timeline = new TimelineModule();
@@ -28,7 +33,7 @@ export function scrollToTop (
             if (outer instanceof ScrollModule) {
                 outer.play();
             }
-            scrollOuter.scrollTop = scrollTop * (1 - p.se);
+            scrollOuter.scrollTop = scrollTop + diff * p.se;
         });
 
         // on animation end
@@ -45,4 +50,13 @@ export function scrollToTop (
 
     return promise;
 
+}
+
+
+
+export function scrollToTop (
+    duration = 350,
+    outer: (false | HTMLElement | ScrollModule) = false,
+) {
+    return scrollTo(0, duration, outer);
 }
