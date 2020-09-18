@@ -1,3 +1,4 @@
+import { createElement } from 'vevet-dom';
 import app from '../../v/app';
 
 const { viewport } = app;
@@ -44,7 +45,7 @@ export class Ctx2D {
 
     protected _create () {
 
-        this._canvas = document.createElement('canvas');
+        this._canvas = createElement('canvas');
         this._ctx = this._canvas.getContext('2d');
 
     }
