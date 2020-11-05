@@ -1,0 +1,7 @@
+@mixin narrow-mobile {
+    @include mobile {
+        @media (max-width: 350px) {
+            @content;
+        }
+    }
+}

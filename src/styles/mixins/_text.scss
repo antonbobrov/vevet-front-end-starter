@@ -194,16 +194,3 @@
     }
 
 }
-
-
-
-@mixin min-font-size ($px) {
-    font-size: px-to-rm($px);
-
-    @include desktop {
-        @media (max-width: 1440px) {
-            font-size: #{$px}px;
-        }
-    }
-
-}
