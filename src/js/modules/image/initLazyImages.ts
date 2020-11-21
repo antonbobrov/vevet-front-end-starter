@@ -3,9 +3,11 @@ import { selectAll } from 'vevet-dom';
 import app from '../../v/app';
 import { resizeTimeout } from '../../settings';
 import { updateLayoutElements, layoutElements } from '../../helpers/dom-css/layoutElements';
-import { observerSupported } from '../../helpers/abilities/observerSupported';
 import { loadImage } from './imageLoader';
 import { getScrollSelector } from '../scroll/customScroll/сustomScrollSettings';
+import {
+    intersectionObserverSupported,
+} from '../../helpers/abilities/intersection-observer/intersectionObserverSupported';
 
 const { viewport } = app;
 
@@ -89,7 +91,7 @@ export function initLazyImages (
         }
 
         // if observer supported
-        if (observerSupported()) {
+        if (intersectionObserverSupported()) {
             const options = {
                 root: outerForIntersection,
                 rootMargin: '0px',

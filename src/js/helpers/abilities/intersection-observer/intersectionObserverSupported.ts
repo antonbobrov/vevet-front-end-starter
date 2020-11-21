@@ -1,4 +1,4 @@
-export function observerSupported (): boolean {
+export function intersectionObserverSupported (): boolean {
 
     if (
         !('IntersectionObserver' in window)
