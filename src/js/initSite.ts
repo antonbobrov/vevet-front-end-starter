@@ -3,7 +3,7 @@ import { fontSize } from './helpers/dom-css/fontSize';
 import { fullHeight } from './helpers/dom-css/fullHeight';
 import { setCSSVars } from './helpers/dom-css/cssVars';
 import { preloader } from './modules/loading/preloader';
-import { pagesRegistry } from './modules/page/pagesRegistry';
+import { pagesRegistry } from './pages/pagesRegistry';
 
 // init site
 

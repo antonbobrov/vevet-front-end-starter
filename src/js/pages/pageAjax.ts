@@ -1,7 +1,7 @@
 import { PageAjaxModule } from 'vevet';
-import { MENU_LINKS_SELECTOR } from '../menu/vars';
-import { pageSettings } from '../../settings';
-import { setLoadingIndicator } from '../loading/indicator';
+import { MENU_LINKS_SELECTOR } from '../modules/menu/vars';
+import { pageSettings } from '../settings';
+import { setLoadingIndicator } from '../modules/loading/indicator';
 
 // menu selectors
 const menuSelector = MENU_LINKS_SELECTOR;

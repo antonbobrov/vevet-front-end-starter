@@ -1,5 +1,5 @@
 import { PageModule } from 'vevet';
-import { homePage } from '../../pages/home-page';
+import { homePage } from './list/home-page';
 import { createPage } from './createPage';
 import { pageAjax } from './pageAjax';
 

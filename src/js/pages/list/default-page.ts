@@ -1,9 +1,9 @@
 import { PageModule } from 'vevet';
-import { initLazyImages, LazyImages } from '../modules/image/initLazyImages';
-import { fullHeight } from '../helpers/dom-css/fullHeight';
-import { updateLayoutElements, layoutElements } from '../helpers/dom-css/layoutElements';
-import { customScroll } from '../modules/scroll/customScroll/customScroll';
-import { scrollView } from '../modules/scroll/scrollView/scrollView';
+import { initLazyImages, LazyImages } from '../../modules/image/initLazyImages';
+import { fullHeight } from '../../helpers/dom-css/fullHeight';
+import { updateLayoutElements, layoutElements } from '../../helpers/dom-css/layoutElements';
+import { customScroll } from '../../modules/scroll/customScroll/customScroll';
+import { scrollView } from '../../modules/scroll/scrollView/scrollView';
 
 // Default Page Class
 class DefaultPage extends PageModule {
