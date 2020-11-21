@@ -1,9 +1,10 @@
 import { PageModule } from 'vevet';
 import { initLazyImages, LazyImages } from '../../modules/image/initLazyImages';
 import { fullHeight } from '../../helpers/dom-css/fullHeight';
-import { updateLayoutElements, layoutElements } from '../../helpers/dom-css/layoutElements';
+import { updateLayoutElements } from '../../helpers/dom-css/layoutElements';
 import { customScroll } from '../../modules/scroll/customScroll/customScroll';
 import { scrollView } from '../../modules/scroll/scrollView/scrollView';
+import { hidePage, showPage } from '../pageStates';
 
 // Default Page Class
 class DefaultPage extends PageModule {
@@ -57,8 +58,8 @@ class DefaultPage extends PageModule {
             }
         });
 
-        // show app
-        layoutElements.app.classList.remove('hide');
+        // show the page
+        showPage();
 
         return true;
 
@@ -73,8 +74,8 @@ class DefaultPage extends PageModule {
         // stop scroll
         customScroll.pause();
 
-        // hide app
-        layoutElements.app.classList.add('hide');
+        // hide page
+        hidePage();
 
         return true;
 
