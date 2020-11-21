@@ -1,0 +1,17 @@
+.custom-scroll {
+
+    @at-root html:not(.use-native-scroll) & {
+        height: calc(100 * var(--vh));
+    }
+
+    @at-root html:not(.use-native-scroll):not(.use-custom-scroll) & {
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    &__outer {
+        position: relative;
+        height: auto;
+    }
+
+}

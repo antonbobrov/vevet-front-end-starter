@@ -1,4 +1,4 @@
 .content {
     transform: translateZ(0);
-    padding-top: var(--content-padding-top);
+    padding-top: px-to-rem(60);
 }

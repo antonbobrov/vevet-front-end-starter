@@ -1,10 +1,10 @@
-import { ScrollModule } from 'vevet';
 import { selectAll } from 'vevet-dom';
 import app from '../../v/app';
 import { resizeTimeout } from '../../settings';
-import { updateLayoutElements, layoutElements } from '../../helpers/dom-css/layoutElements';
+import { layoutElements } from '../../helpers/dom-css/layoutElements';
 import { loadImage } from './imageLoader';
 import { getScrollSelector } from '../scroll/customScroll/сustomScrollSettings';
+import { CustomScrollType, isCustomScroll } from '../scroll/customScroll/isCustomScroll';
 import {
     intersectionObserverSupported,
 } from '../../helpers/abilities/intersection-observer/intersectionObserverSupported';
@@ -19,7 +19,6 @@ export interface LazyImages {
 
 export function initLazyImages (
     outerSelector: false | HTMLElement = false,
-    insersectionOuter: false | HTMLElement = false,
 ): LazyImages | false {
 
 
@@ -31,7 +30,7 @@ export function initLazyImages (
     }
 
     // Get Outer
-    let outer: HTMLElement | ScrollModule;
+    let outer: HTMLElement | CustomScrollType;
     let parentElement: HTMLElement;
 
     const proceededAttribute = 'data-lazy-image-proceeded';
@@ -63,23 +62,14 @@ export function initLazyImages (
         // update viewport
         addViewportEvent();
 
-        // get intersection outer
-        let outerForIntersection: Element;
-        if (!insersectionOuter) {
-            updateLayoutElements();
-            outerForIntersection = layoutElements.app;
-        }
-        else {
-            outerForIntersection = insersectionOuter;
-        }
-
         // get outer
         outer = getOuteSelector();
-        if (!(outer instanceof ScrollModule)) {
-            parentElement = outer;
+        if (!isCustomScroll(outer)) {
+            parentElement = outer as HTMLElement;
         }
         else {
-            parentElement = outer.outer;
+            const mod = outer as CustomScrollType;
+            parentElement = mod.outer as HTMLElement;
         }
 
         // get images
@@ -92,8 +82,8 @@ export function initLazyImages (
 
         // if observer supported
         if (intersectionObserverSupported()) {
-            const options = {
-                root: outerForIntersection,
+            const options: IntersectionObserverInit = {
+                root: null,
                 rootMargin: '0px',
                 threshold: 0.01,
             };
@@ -107,12 +97,13 @@ export function initLazyImages (
         else {
 
             // if custom scroll
-            if (outer instanceof ScrollModule) {
+            if (isCustomScroll(outer)) {
+                // @ts-ignore
                 eventCustom = outer.on('update', lazyImageBounding.bind(this));
             }
             else if (page) {
                 eventNative = page.listener(
-                    outer,
+                    outer as HTMLElement,
                     'scroll',
                     lazyImageBounding.bind(this),
                     {},
@@ -173,7 +164,7 @@ export function initLazyImages (
         }
 
         if (
-            (outer instanceof ScrollModule)
+            (isCustomScroll(outer))
             && typeof eventCustom === 'string'
         ) {
             outer.remove(eventCustom);

@@ -1,4 +1,5 @@
-import { TimelineModule, ScrollModule } from 'vevet';
+import { TimelineModule } from 'vevet';
+import { CustomScrollType, isCustomScroll } from './customScroll/isCustomScroll';
 import { getScrollSelector } from './customScroll/сustomScrollSettings';
 
 
@@ -6,13 +7,13 @@ import { getScrollSelector } from './customScroll/сustomScrollSettings';
 export function scrollTo (
     targetTop: number,
     duration = 350,
-    outer: (false | HTMLElement | ScrollModule) = false,
+    outer: (false | HTMLElement | CustomScrollType) = false,
 ) {
 
     // return a promise
     const promise = new Promise((resolve) => {
 
-        let scrollOuter: HTMLElement | ScrollModule;
+        let scrollOuter: HTMLElement | CustomScrollType;
         if (!outer) {
             scrollOuter = getScrollSelector();
         }
@@ -30,8 +31,9 @@ export function scrollTo (
 
         // animate progress
         timeline.on('progress', (p) => {
-            if (outer instanceof ScrollModule) {
-                outer.play();
+            if (isCustomScroll(outer)) {
+                const mod = outer as CustomScrollType;
+                mod.play();
             }
             scrollOuter.scrollTop = scrollTop + diff * p.se;
         });
@@ -56,7 +58,7 @@ export function scrollTo (
 
 export function scrollToTop (
     duration = 350,
-    outer: (false | HTMLElement | ScrollModule) = false,
+    outer: (false | HTMLElement | CustomScrollType) = false,
 ) {
     return scrollTo(0, duration, outer);
 }

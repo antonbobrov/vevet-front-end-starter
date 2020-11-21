@@ -4,12 +4,12 @@ import { selectOne } from 'vevet-dom';
 interface Elements {
     app: Element;
     page: Element;
-    scroll: Element;
+    customScroll: Element;
 }
 export const layoutElements: Elements = {
     app: null,
     page: null,
-    scroll: null,
+    customScroll: null,
 };
 
 
@@ -17,7 +17,7 @@ export const layoutElements: Elements = {
 export function updateLayoutElements () {
     layoutElements.app = selectOne('#app');
     layoutElements.page = selectOne('#page');
-    layoutElements.scroll = selectOne('#scroll');
+    layoutElements.customScroll = selectOne('#custom-scroll');
 }
 
 updateLayoutElements();

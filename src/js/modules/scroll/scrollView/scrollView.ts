@@ -1,4 +1,4 @@
-import { ScrollViewModule, merge } from 'vevet';
+import { ScrollViewModule, merge, ScrollModule } from 'vevet';
 import { initScrollViewParents } from './scrollViewParents';
 import { getScrollSelector } from '../customScroll/сustomScrollSettings';
 import { resizeTimeout } from '../../../settings';
@@ -35,10 +35,13 @@ export function createView (
     // set view parents
     initScrollViewParents();
 
+    // get scroll outer
+    const scrollOuter = getScrollSelector() as (HTMLElement | ScrollModule);
+
     // get settings
     const pageSettings: ScrollViewModule.Properties = {
         selectors: {
-            outer: getScrollSelector(),
+            outer: (scrollOuter instanceof HTMLHtmlElement) ? window : scrollOuter,
             elements: '*[class*="v-view"]',
             inside: false,
         },
@@ -71,13 +74,15 @@ export function createView (
         app.vevetPage.addEvent('viewport', {
             target: 'w_',
             do: () => {
+                const selector = getScrollSelector() as (HTMLElement | ScrollModule);
                 view.changeProp({
                     selectors: {
-                        outer: getScrollSelector(),
+                        outer: (selector instanceof HTMLHtmlElement) ? window : selector,
                     },
                 });
             },
             name: 'Scroll View',
+            timeout: 50,
         });
     }
 

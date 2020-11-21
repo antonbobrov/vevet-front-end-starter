@@ -1,4 +1,9 @@
 .page {
     position: relative;
     z-index: 1;
+
+    @at-root html:not(.use-native-scroll) & {
+        height: calc(100 * var(--vh));
+    }
+    
 }

@@ -50,7 +50,9 @@ require_once './includes/start.php';
             <img src="https://picsum.photos/seed/picsum/1440/400" alt="">
 
             <h4>Lazy Image</h4>
-            <div class="lazy-bg" data-src="https://picsum.photos/seed/picsum1/1440/500" style="padding-top: 40%;"></div>
+            <div>
+                <div class="lazy-bg" data-src="https://picsum.photos/seed/picsum1/1440/500" style="padding-top: 40%;"></div>
+            </div>
 
         </div>
 

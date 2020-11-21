@@ -1,8 +1,8 @@
-import { ScrollModule } from 'vevet';
 import { selectOne } from 'vevet-dom';
 import app from '../../../v/app';
-import { useCustomScroll } from '../../../settings';
+import { useCustomScroll, useWindowScroll } from '../../../settings';
 import { customScroll } from './customScroll';
+import { CustomScrollType, isCustomScroll } from './isCustomScroll';
 
 const { viewport } = app;
 
@@ -28,21 +28,25 @@ export function getEase () {
 
 
 // it can be used in many modules, f.e., Vevet.View
-export function getScrollSelector (): (HTMLElement | ScrollModule) {
-    const selector = selectOne('#scroll') as HTMLElement;
+export function getScrollSelector (): (HTMLElement | CustomScrollType) {
+    if (useWindowScroll) {
+        return app.html;
+    }
+    const selector = selectOne('#custom-scroll') as HTMLElement;
     if (canBeCustom()) {
         const scroll = customScroll.get();
-        if (scroll instanceof ScrollModule) {
-            return scroll;
+        if (isCustomScroll(scroll)) {
+            return scroll as CustomScrollType;
         }
     }
     return selector;
+
 }
 
 
 
 export function canBeCustom () {
-    if (viewport.desktop && !viewport.mobiledevice && useCustomScroll) {
+    if (!viewport.mobile && !viewport.mobiledevice && useCustomScroll) {
         return true;
     }
     return false;
@@ -51,5 +55,5 @@ export function canBeCustom () {
 
 
 export function getElementsSelector () {
-    return '#scroll .scroll__outer';
+    return '#custom-scroll .custom-scroll__outer';
 }

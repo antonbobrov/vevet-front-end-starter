@@ -1,3 +1,5 @@
+import app from './v/app';
+
 export const OpenServerDomain = 'template';
 
 export const isTesting = process.env.NODE_ENV === 'development';
@@ -16,4 +18,8 @@ export const pageSettings = {
     done: showHidePageDuration,
 };
 
-export const useCustomScroll = true;
+export const useCustomScroll = !app.viewport.mobiledevice;
+export const useWindowScroll = !useCustomScroll;
+if (!useCustomScroll && useWindowScroll) {
+    document.documentElement.classList.add('use-native-scroll');
+}

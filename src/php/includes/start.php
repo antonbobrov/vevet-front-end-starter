@@ -25,19 +25,19 @@
 
         <?php require_once "blocks/preloader.php"; ?>
 
-        <div class="page full-height" id="page">
+        <div class="page" id="page">
 
             <?php require_once "blocks/header.php"; ?>
 
             <div 
-                class="app full-height" 
+                class="app" 
                 id="app"
                 data-v-page="<? echo PAGE; ?>" 
                 data-v-pageAjax-name="<? echo PAGE; ?>" 
             >
 
                 <div 
-                    class="scroll full-height <? echo PAGE; ?>" 
-                    id="scroll"
+                    class="custom-scroll <? echo PAGE; ?>" 
+                    id="custom-scroll"
                 >
-                    <div class="scroll__outer">
+                    <div class="custom-scroll__outer">

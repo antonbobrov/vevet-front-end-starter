@@ -2,12 +2,9 @@
     position: relative;
     z-index: 1;
     overflow: hidden;
-    
-    @include transition(opacity $change-page-duration, 0s);
 
-    &.hide {
-        opacity: 0;
-        pointer-events: none;
+    @at-root html:not(.use-native-scroll) & {
+        height: calc(100 * var(--vh));
     }
-
+    
 }

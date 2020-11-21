@@ -1,7 +1,6 @@
 html {
     font-size: $font-size;
     font-family: $font-family;
-    overflow: hidden;
 
     @include css-vars;
 
@@ -14,11 +13,14 @@ html {
     
     }
     
-}
-
-body {
-    position: fixed;
-    width: 100%;
+    &:not(.use-native-scroll) {
+        overflow: hidden;
+        body {
+            position: fixed;
+            width: 100%;
+        }
+    }
+    
 }
 
 * {
@@ -40,4 +42,3 @@ button,
 select {
     font-family: $font-family;
 }
-    
