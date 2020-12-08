@@ -3,7 +3,7 @@ define("PAGE", "home-page");
 require_once './includes/start.php';
 ?>
 
-<div class="content">
+<div class="page-content">
     <div class="wrap">
 
         <h1 class="v-view_b">Front-end Starter</h1>

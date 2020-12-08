@@ -1,5 +1,5 @@
 import { selectAll } from 'vevet-dom';
-import app from '../../v/app';
+import app from '../../app/app';
 
 // except for css, we may set full-height elements here
 // both for full-height and min-full-height elements

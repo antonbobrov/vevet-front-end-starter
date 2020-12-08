@@ -1,9 +1,9 @@
 import { PageModule } from 'vevet';
-import { initLazyImages, LazyImages } from '../../modules/image/initLazyImages';
+import { initLazyImages, LazyImages } from '../../layout/image/initLazyImages';
 import { fullHeight } from '../../helpers/dom-css/fullHeight';
 import { updateLayoutElements } from '../../helpers/dom-css/layoutElements';
-import { customScroll } from '../../modules/scroll/customScroll/customScroll';
-import { scrollView } from '../../modules/scroll/scrollView/scrollView';
+import { customScroll } from '../../layout/scroll/custom-scroll/customScroll';
+import { scrollView } from '../../layout/scroll/scroll-view/scrollView';
 import { hidePage, showPage } from '../pageStates';
 
 // Default Page Class
@@ -59,7 +59,9 @@ class DefaultPage extends PageModule {
         });
 
         // show the page
-        showPage();
+        if (this._throughAjax) {
+            showPage();
+        }
 
         return true;
 

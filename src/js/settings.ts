@@ -1,14 +1,9 @@
-import app from './v/app';
-
-export const OpenServerDomain = 'template';
+export const OpenServerDomain = 'vevet-front-end-starter';
 
 export const isTesting = process.env.NODE_ENV === 'development';
 
 export const resizeTimeout = 100;
-
-export const afterloadDuration = 1000;
-
-export const adaptiveFont = true;
+export const useAdaptiveFontSize = true;
 
 export const showHidePageDuration = !isTesting ? 250 : 10;
 export const pageSettings = {
@@ -17,9 +12,3 @@ export const pageSettings = {
     update: 10,
     done: showHidePageDuration,
 };
-
-export const useCustomScroll = !app.viewport.mobiledevice;
-export const useWindowScroll = !useCustomScroll;
-if (!useCustomScroll && useWindowScroll) {
-    document.documentElement.classList.add('use-native-scroll');
-}

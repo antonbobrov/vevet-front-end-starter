@@ -1,33 +1,11 @@
-html {
-    font-size: $font-size;
-    font-family: $font-family;
-
-    @include css-vars;
-
-    &.loading {
-        cursor: progress !important; /* stylelint-disable-line declaration-no-important */
-    
-        * {
-            cursor: progress !important; /* stylelint-disable-line declaration-no-important */
-        }
-    
-    }
-    
-    &:not(.use-native-scroll) {
-        overflow: hidden;
-        body {
-            position: fixed;
-            width: 100%;
-        }
-    }
-    
-}
-
 * {
     -ms-scroll-chaining: none;
     -ms-content-zooming: none;
     -ms-overflow-style: none;
     scrollbar-width: none;
+    
+    @include tab-highlight;
+
 }
 
 div {
@@ -35,6 +13,8 @@ div {
         display: none;
     }
 }
+
+
 
 input,
 textarea,

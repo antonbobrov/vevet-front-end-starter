@@ -1,0 +1,76 @@
+@mixin text-header-font {
+    font-family: 'Verdana';
+}
+
+@mixin text-header-styles {
+    @include text-header-font();
+    font-weight: normal;
+}
+
+@mixin text-header-1 {
+    @include text-header-styles();
+    font-size: px-to-rem(60);
+}
+
+@mixin text-header-2 {
+    @include text-header-styles();
+    font-size: px-to-rem(50);
+}
+
+@mixin text-header-3 {
+    @include text-header-styles();
+    font-size: px-to-rem(44);
+}
+
+@mixin text-header-4 {
+    @include text-header-styles();
+    font-size: px-to-rem(36);
+}
+
+@mixin text-header-5 {
+    @include text-header-styles();
+    font-size: px-to-rem(32);
+}
+
+@mixin text-header-6 {
+    @include text-header-styles();
+    font-size: px-to-rem(21);
+}
+
+
+
+h1,
+.h1 {
+    margin: 0;
+    @include text-header-1;
+}
+
+h2,
+.h2 {
+    margin: 0;
+    @include text-header-2;
+}
+
+h3,
+.h3 {
+    margin: 0;
+    @include text-header-3;
+}
+
+h4,
+.h4 {
+    margin: 0;
+    @include text-header-4;
+}
+
+h5,
+.h5 {
+    margin: 0;
+    @include text-header-5;
+}
+
+h6,
+.h6 {
+    margin: 0;
+    @include text-header-6;
+}

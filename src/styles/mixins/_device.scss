@@ -1,0 +1,11 @@
+@mixin mobile-device {
+    @at-root html.v-mobile-device & {
+        @content;
+    }
+}
+
+@mixin non-mobile-device {
+    @at-root html:not(.v-mobile-device) & {
+        @content;
+    }
+}

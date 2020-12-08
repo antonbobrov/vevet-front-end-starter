@@ -1,5 +1,6 @@
 import { selectAll } from 'vevet-dom';
-import { afterloadDuration } from '../../settings';
+
+const afterloadDuration = 1000;
 
 // show elements when the page is loaded
 // see also /src/styles/helpers/_afterload.scss

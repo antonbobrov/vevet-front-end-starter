@@ -1,5 +1,5 @@
 import { PageModule } from 'vevet';
-import app from '../v/app';
+import app from '../app/app';
 import { pageSettings } from '../settings';
 
 // create page according to the defined type

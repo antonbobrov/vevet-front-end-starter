@@ -1,18 +1,6 @@
 import '../styles/index.scss';
-import { initSite } from './initSite';
+import { initSite } from './init';
 import { registerServiceWorker } from './service-worker';
-import { useWindowScroll } from './settings';
-import app from './v/app';
 
 initSite();
 registerServiceWorker();
-
-// scroll to top on resize (mobile bug)
-app.viewport.on('', () => {
-    if (!useWindowScroll) {
-        document.documentElement.scrollTop = 0;
-        document.body.scrollTop = 0;
-    }
-}, {
-    timeout: 650,
-});

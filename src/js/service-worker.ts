@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-/* eslint-disable max-len */
 
 import { isLocalHost } from './helpers/site/isLocalHost';
 
@@ -26,9 +25,6 @@ export const registerServiceWorker = function () {
                     console.log(`[PWA Builder] Service worker has been registered for scope: ${reg.scope}`);
                 });
         }
-    }
-    else {
-        // alert("nooo")
     }
 
 

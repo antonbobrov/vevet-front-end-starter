@@ -4,27 +4,48 @@
 @import './settings/index';
 @import './mixins/index';
 
+
+// Vevet Modules
 @import '~vevet/dist/scss/mixins/index';
 @import '~vevet/dist/scss/classes/index';
 @import '~vevet/dist/scss/modules/preloader/index';
 @import '~vevet/dist/scss/modules/scroll/index';
 
+
+
+// Fonts
 @import '../fonts/Font/font';
 
+
+
+// Layout
 @import './layout/common';
+@import './layout/doc';
 @import './layout/page';
 @import './layout/app';
-@import './layout/el';
-@import './layout/text';
-@import './layout/content';
+@import './layout/page-content';
+@import './layout/wrap';
+@import './layout/afterload';
+@import './layout/view';
 
-@import './includes/el/afterload';
-@import './includes/el/view';
+// Layout Elements
 
-@import './includes/scroll/v-scroll';
-@import './includes/scroll/custom-scroll';
+@import './layout/scroll/v-scroll';
+@import './layout/scroll/custom-scroll';
 
-@import './includes/image/lazy-image';
-@import './includes/image/bg';
+@import './layout/buttons/button';
 
+@import './layout/text/haders';
+@import './layout/text/text';
+
+@import './layout/image/bg';
+@import './layout/image/lazy-image';
+
+
+
+// Includes
+
+
+
+// Pages
 @import './pages/home-page';
