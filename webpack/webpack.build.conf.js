@@ -31,6 +31,7 @@ const buildWebpackConfig = merge(baseWebpackConfig, {
                     },
                     ecma: 5,
                     mangle: true,
+                    safari10: true,
                     output: {
                         beautify: false,
                         comments: false,
