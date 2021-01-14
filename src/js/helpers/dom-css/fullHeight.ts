@@ -39,7 +39,7 @@ export const fullHeight = (function fullHeight (): {
 
     // add viewport events
     app.viewport.add({
-        target: '',
+        target: 'w_',
         do: set.bind(this),
         name: 'Full Height',
     });
