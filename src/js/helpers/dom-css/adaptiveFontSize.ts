@@ -43,7 +43,10 @@ export const fontSize = (function fontSize (): {
 
             // mobile
             if (viewport.mobile) {
-                if (width > 750) {
+                if (app.viewport.landscape) {
+                    k = 1;
+                }
+                else if (width > 750) {
                     k = width / 500;
                 }
                 else if (window.innerHeight > window.innerWidth) {
@@ -87,7 +90,7 @@ export const fontSize = (function fontSize (): {
 
     // add viewport callbacks
     app.viewport.add({
-        target: '',
+        target: 'w_',
         do: set.bind(this),
         name: 'Font Size',
     });
