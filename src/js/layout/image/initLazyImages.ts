@@ -131,7 +131,7 @@ export function initLazyImages (
     function addViewportEvent () {
 
         viewportEvent = viewport.add({
-            target: '',
+            target: 'w_',
             do: reset.bind(this, true),
             timeout: resizeTimeout,
             name: 'LAZY IMAGE',
