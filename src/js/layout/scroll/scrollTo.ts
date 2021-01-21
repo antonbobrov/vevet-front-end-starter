@@ -11,7 +11,7 @@ export function scrollTo (
 ) {
 
     // return a promise
-    const promise = new Promise((resolve) => {
+    const promise = new Promise((resolve: (arg?: unknown) => void) => {
 
         let scrollOuter: HTMLElement | CustomScrollType;
         if (!outer) {
@@ -46,6 +46,7 @@ export function scrollTo (
         // launch the timeline
         timeline.play({
             duration,
+            easing: [0.25, 0.1, 0.25, 1],
         });
 
     });
