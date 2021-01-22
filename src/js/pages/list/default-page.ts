@@ -5,6 +5,7 @@ import { updateLayoutElements } from '../../helpers/dom-css/layoutElements';
 import { customScroll } from '../../layout/scroll/custom-scroll/customScroll';
 import { scrollView } from '../../layout/scroll/scroll-view/scrollView';
 import { hidePage, showPage } from '../pageStates';
+import { updateMenuLinks } from '../../layout/menu/updateMenuLinks';
 
 // Default Page Class
 class DefaultPage extends PageModule {
@@ -33,6 +34,9 @@ class DefaultPage extends PageModule {
 
         // update page elements
         updateLayoutElements();
+
+        // update menu links
+        updateMenuLinks();
 
         return this;
 
