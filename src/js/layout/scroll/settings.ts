@@ -30,3 +30,8 @@ app.viewport.on('', () => {
 }, {
     timeout: 650,
 });
+
+// disable scroll restoration
+if (useWindowScroll) {
+    window.history.scrollRestoration = 'manual';
+}
