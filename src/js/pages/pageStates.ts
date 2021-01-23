@@ -1,5 +1,6 @@
 import { TimelineModule } from 'vevet';
 import { layoutElements } from '../helpers/dom-css/layoutElements';
+import { scrollToTop } from '../layout/scroll/scrollTo';
 import { showHidePageDuration } from '../settings';
 
 function getElements () {
@@ -12,6 +13,7 @@ function getElements () {
 
 export function hidePage (
     duration = showHidePageDuration,
+    scrollTop = true,
 ) {
 
     const outers = getElements();
@@ -26,6 +28,11 @@ export function hidePage (
     tm.on('progress', (data) => {
         for (let i = 0; i < length; i++) {
             outers[i].style.opacity = (1 - data.se).toString();
+        }
+    });
+    tm.on('end', () => {
+        if (scrollTop) {
+            scrollToTop(0);
         }
     });
     tm.play({
