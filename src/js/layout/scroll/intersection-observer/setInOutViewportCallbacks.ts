@@ -1,14 +1,25 @@
-import { onScroll } from '../onScroll';
+import { IOnScroll, onScroll } from '../onScroll';
 import app from '../../../app/app';
 import { getIntersectionObserverRoot } from './getIntersectionObserverRoot';
 import { intersectionObserverSupported } from './intersectionObserverSupported';
+
+
+
+export interface InOutViewportCallbacks {
+    destroy: () => void;
+}
+
+
 
 export function setInOutViewportCallbacks (
     element: HTMLElement,
     inCallback: () => void,
     outCallback: () => void,
     threshold = 0.001,
-) {
+): InOutViewportCallbacks {
+
+    let onScrollEvents: IOnScroll | false = false;
+    let observer: IntersectionObserver | false = false;
 
     if (intersectionObserverSupported()) {
         const options = {
@@ -16,11 +27,11 @@ export function setInOutViewportCallbacks (
             rootMargin: '0px',
             threshold,
         };
-        const observer = new IntersectionObserver(observerCallback.bind(this), options);
+        observer = new IntersectionObserver(observerCallback.bind(this), options);
         observer.observe(element);
     }
     else {
-        onScroll(seekBounding.bind(this));
+        onScrollEvents = onScroll(seekBounding.bind(this));
     }
 
 
@@ -58,5 +69,26 @@ export function setInOutViewportCallbacks (
         }
 
     }
+
+
+
+    // destroy the listeners
+    function destroy () {
+
+        if (onScrollEvents) {
+            onScrollEvents.destroy();
+        }
+
+        if (observer) {
+            observer.disconnect();
+        }
+
+    }
+
+
+
+    return {
+        destroy: destroy.bind(this),
+    };
 
 }
