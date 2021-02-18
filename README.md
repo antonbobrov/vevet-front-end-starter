@@ -20,6 +20,25 @@ npm build
 
 
 
+<br>
+
+## !!! Checklist
+    * Viewport callbacks on modules destroy
+    * DPR
+    * Update menu on AjaxPage change
+    * Update languages on AjaxPage change
+    * iPhone 5 - 320w
+    * Lazy image - use <img>
+    * Image attributes: alt, title
+    * Horizontal scroll - overflow:hidden for wrappers
+    * Video autoplay on browser shut down in iOS
+    * PageSpeed tests
+    * iOS scroll but on resize whe using not window-scroll (top toolbar)
+
+<br>
+
+
+
 
 
 ## Structure overview: 
