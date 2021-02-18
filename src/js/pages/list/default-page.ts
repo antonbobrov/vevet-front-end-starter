@@ -36,7 +36,9 @@ class DefaultPage extends PageModule {
         updateLayoutElements();
 
         // update menu links
-        updateMenuLinks();
+        if (this._throughAjax) {
+            updateMenuLinks();
+        }
 
         return this;
 
