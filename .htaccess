@@ -5,8 +5,10 @@ RewriteBase /
 # redirect resources to webpack's dev server
 Redirect 301 /assets http://localhost:8081/assets
 
-# redirect to images
+# redirect to content
 Redirect 301 /image /src/static/image
+Redirect 301 /manifest.webmanifest /src/static/manifest.webmanifest
+Redirect 301 /favicon.ico /src/static/favicon.ico
 
 # index file
 DirectoryIndex src/php/index.php
