@@ -9,6 +9,7 @@ Redirect 301 /assets http://localhost:8081/assets
 Redirect 301 /image /src/static/image
 Redirect 301 /manifest.webmanifest /src/static/manifest.webmanifest
 Redirect 301 /favicon.ico /src/static/favicon.ico
+Redirect 301 /offline.html /src/static/offline.html
 
 # index file
 DirectoryIndex src/php/index.php
