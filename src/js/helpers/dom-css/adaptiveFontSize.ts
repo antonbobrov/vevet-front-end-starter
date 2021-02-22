@@ -29,7 +29,15 @@ export const fontSize = (function fontSize (): {
 
         // dekstop
         if (viewport.desktop) {
-            k = width / 1440;
+            if (viewport.size[0] < 1900 && viewport.size[0] > 1440) {
+                k = 1;
+            }
+            else if (viewport.size[0] >= 1900) {
+                k = width / 1900;
+            }
+            else {
+                k = width / 1440;
+            }
             if (k > 1.25) {
                 k = 1.25;
             }
@@ -47,7 +55,7 @@ export const fontSize = (function fontSize (): {
                     k = 1;
                 }
                 else if (width > 750) {
-                    k = width / 500;
+                    k = width / 600;
                 }
                 else if (window.innerHeight > window.innerWidth) {
                     k = boundProgress(width / 375, [0.9375, Infinity]);
