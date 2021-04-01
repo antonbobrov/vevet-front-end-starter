@@ -34,6 +34,7 @@ npm build
     * Video autoplay on browser shut down in iOS
     * PageSpeed tests
     * iOS scroll but on resize whe using not window-scroll (top toolbar)
+    * Button types
 
 <br>
 
