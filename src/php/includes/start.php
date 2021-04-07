@@ -37,7 +37,8 @@
             >
 
                 <div 
-                    class="custom-scroll <? echo PAGE; ?>" 
+                    class="custom-scroll <? echo PAGE; ?> v-scroll" 
                     id="custom-scroll"
                 >
-                    <div class="custom-scroll__outer">
+                    <div class="v-scroll__container">
+                        <div class="custom-scroll__outer">

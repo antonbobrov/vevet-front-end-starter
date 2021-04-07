@@ -29,6 +29,7 @@ app.viewport.on('', () => {
     }
 }, {
     timeout: 650,
+    name: 'iOS scroll resize bug',
 });
 
 // disable scroll restoration

@@ -32,15 +32,14 @@ export function getScrollSelector (): (HTMLElement | CustomScrollType) {
     if (useWindowScroll) {
         return app.html;
     }
-    const selector = selectOne('#custom-scroll') as HTMLElement;
     if (canBeCustom()) {
         const scroll = customScroll.get();
         if (isCustomScroll(scroll)) {
             return scroll as CustomScrollType;
         }
     }
+    const selector = selectOne('#custom-scroll') as HTMLElement;
     return selector;
-
 }
 
 

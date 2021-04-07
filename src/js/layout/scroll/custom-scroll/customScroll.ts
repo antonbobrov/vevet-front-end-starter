@@ -1,11 +1,12 @@
-import { selectAll } from 'vevet-dom';
-import { ScrollModule } from 'vevet';
+import { selectAll, selectOne } from 'vevet-dom';
+import { ScrollDragPlugin } from 'vevet';
 import { resizeTimeout } from '../../../settings';
 import app from '../../../app/app';
 import { getElementsSelector, getEase, canBeCustom } from './settings';
 import { ScrollKeyboardPlugin } from '../keyboard/ScrollKeyboardPlugin';
 import { CustomScrollType } from './isCustomScroll';
 import { useCustomScroll } from '../settings';
+import { CustomScrollOptimizedOnResize } from './CustomScrollOptimizedOnResize';
 
 
 
@@ -43,6 +44,10 @@ function createScroll () {
 
     if (!useCustomScroll) {
         currentScrollModule = false;
+        const outer = selectOne('#custom-scroll');
+        if (outer) {
+            outer.classList.add('unactive');
+        }
         return false;
     }
 
@@ -59,7 +64,7 @@ function createScroll () {
     }
 
     // initialize scroll
-    const scroll = new ScrollModule({
+    const scroll = new CustomScrollOptimizedOnResize({
         selectors: {
             outer: '#custom-scroll',
             elements: getElementsSelector(),
@@ -71,6 +76,21 @@ function createScroll () {
         run: false,
         resizeOnUpdate: true,
     });
+
+    // add swipe
+    scroll.addPlugin(new ScrollDragPlugin({
+        on: false,
+        multiplier: 0.9,
+        ease: 0.35, // .35
+        friction: 0.93, // .97
+        momentum: true,
+        responsive: [{
+            breakpoint: 'md',
+            settings: {
+                on: true,
+            },
+        }],
+    }));
 
     // destroy the scroll on page destroy
     if (app.vevetPage) {
