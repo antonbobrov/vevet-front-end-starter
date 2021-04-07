@@ -38,3 +38,11 @@
         @content;
     }
 }
+
+@mixin non-mobile-hover {
+    @include non-mobile-device {
+        @include hover {
+            @content;
+        }
+    }
+}
