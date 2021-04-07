@@ -1,0 +1,24 @@
+.dg.ac {
+    z-index: 999 !important; /* stylelint-disable-line declaration-no-important */
+
+    @include tablet-max {
+        display: none !important; /* stylelint-disable-line declaration-no-important */
+    }
+
+    input {
+        &[type='checkbox'] {
+            -webkit-appearance: checkbox;
+        }
+    }
+
+    select {
+        -webkit-appearance: auto;
+    }
+
+}
+
+html:not(.show-dat-gui) {
+    .dg.ac {
+        display: none;
+    }
+}
