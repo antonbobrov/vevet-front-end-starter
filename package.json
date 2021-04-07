@@ -52,11 +52,11 @@
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
-    "get-image-pos": "0.0.7",
+    "get-image-pos": "0.0.9",
     "lerp": "^1.0.3",
     "lit-element": "^2.4.0",
     "normalize-scss": "^7.0.1",
-    "vevet": "^1.4.21",
+    "vevet": "^1.4.24",
     "vevet-dom": "0.0.15"
   }
 }
