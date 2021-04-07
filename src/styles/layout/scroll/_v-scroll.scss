@@ -1,21 +1,26 @@
 .v-scroll {
 
-    &:not(.unactive) {
-        overflow: hidden;
-    }
+    &.custom-scroll {
 
-    &.unactive {
-        overflow: auto;
-        -webkit-overflow-scrolling: touch;
+        &:not(.unactive) {
+            overflow: hidden;
+        }
 
-        .v-scroll {
-            
-            &__container {
-                position: static;
-            }
+        &.unactive {
+            position: static;
+            overflow: initial;
+            -webkit-overflow-scrolling: touch;
 
-            &__scrollbar {
-                display: none;
+            & > .v-scroll {
+                
+                &__container {
+                    position: static;
+                }
+
+                &__scrollbar {
+                    display: none;
+                }
+
             }
 
         }
