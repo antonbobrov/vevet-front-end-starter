@@ -1,0 +1,39 @@
+.text-content {
+    display: block;
+    width: 100%;
+
+    &__iframe {
+        position: relative;
+        width: 100%;
+        padding-top: 56.25%;
+        overflow: hidden;
+    
+        iframe {
+            @include reset-button;
+            @include absolute(top-left, 12, 12);
+        }
+    
+    }
+
+    &__video {
+        position: relative;
+        width: 100%;
+        padding-top: 56.25%;
+        overflow: hidden;
+    
+        video {
+            @include reset-button;
+            @include absolute(top-left, 12, 12);
+        }
+    
+    }
+
+    &__image {
+        img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+    }
+
+}
