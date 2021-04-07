@@ -8,7 +8,7 @@ require_once './includes/start.php';
 
         <h1 class="v-view_b">Front-end Starter</h1>
 
-        <div class="text" data-view-parent="v-view_b">
+        <text-content class="text" data-view-parent="v-view_b">
 
             <p>
                 <a href="test.php" class="v-al">go to the test page (through AJAX) --</a>
@@ -49,12 +49,29 @@ require_once './includes/start.php';
 
             <img src="https://picsum.photos/seed/picsum/1440/400" alt="">
 
-            <h4>Lazy Image</h4>
+            <h4>Lazy BG</h4>
             <div>
                 <div class="lazy-bg" data-src="https://picsum.photos/seed/picsum1/1440/500" style="padding-top: 40%;"></div>
             </div>
 
+            <h4>Text Full-size Image</h4>
+            <img src="https://picsum.photos/seed/picsum1/1440/500" alt="">
+
+        </text-content>
+
+        <h4>Lazy IMG</h4>
+        <div style="position: relative; padding-top: 50%">
+            <lazy-img>
+                <img 
+                    src="https://picsum.photos/seed/picsum2/1440/600" 
+                    alt="" 
+                    srcset="/image/placeholder.svg" 
+                    data-srcset="https://picsum.photos/seed/picsum2/1440/600" 
+                >
+            </lazy-img>
         </div>
+
+        <br><br><br>
 
     </div>
 </div>
