@@ -53,7 +53,7 @@ export class ScrollToAnchor extends LitElement {
             if (targetEl) {
                 const scroll = getScrollSelector();
                 const scrollToVal = scroll.scrollTop + targetEl.getBoundingClientRect().top + toTopVal;
-                scrollTo(scrollToVal);
+                scrollTo(scrollToVal, 750);
             }
 
         });
