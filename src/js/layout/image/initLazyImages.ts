@@ -2,12 +2,13 @@ import { selectAll } from 'vevet-dom';
 import app from '../../app/app';
 import { resizeTimeout } from '../../settings';
 import { layoutElements } from '../../helpers/dom-css/layoutElements';
-import { loadImage } from './imageLoader';
+import { loadImage } from '../../helpers/loaders/loadImage';
 import { getScrollSelector } from '../scroll/custom-scroll/settings';
 import { CustomScrollType, isCustomScroll } from '../scroll/custom-scroll/isCustomScroll';
 import {
     intersectionObserverSupported,
 } from '../scroll/intersection-observer/intersectionObserverSupported';
+import './LazyImg';
 
 const { viewport } = app;
 
@@ -20,6 +21,8 @@ export interface LazyImages {
 export function initLazyImages (
     outerSelector: false | HTMLElement = false,
 ): LazyImages | false {
+
+    let destroyed = false;
 
 
 
@@ -58,6 +61,10 @@ export function initLazyImages (
 
     // Set events
     function set () {
+
+        if (destroyed) {
+            return;
+        }
 
         // update viewport
         addViewportEvent();
@@ -191,6 +198,8 @@ export function initLazyImages (
     // Destroy events
     function destroy () {
 
+        destroyed = true;
+
         removeViewportEvent();
         reset(false);
 
@@ -255,11 +264,7 @@ export function initLazyImages (
             if (entry.isIntersecting) {
                 const el = entry.target;
                 if (el instanceof HTMLElement) {
-                    if (!el.classList.contains(classNameLoad)) {
-                        el.classList.add(classNameLoad);
-                        el.style.willChange = 'opacity';
-                        lazyImageLoad(el);
-                    }
+                    prepareImage(el);
                 }
             }
         });
@@ -279,13 +284,22 @@ export function initLazyImages (
             if (
                 boundingImage.top <= outerHeight
             ) {
-                if (!image.classList.contains(classNameLoad)) {
-                    image.classList.add(classNameLoad);
-                    image.style.willChange = 'opacity';
-                    lazyImageLoad(image);
-                }
+                prepareImage(image);
             }
 
+        }
+
+    }
+
+    // prepare the image for loading
+    function prepareImage (
+        el: HTMLElement,
+    ) {
+
+        if (!el.classList.contains(classNameLoad)) {
+            el.classList.add(classNameLoad);
+            el.style.willChange = 'opacity';
+            lazyImageLoad(el);
         }
 
     }
@@ -295,27 +309,49 @@ export function initLazyImages (
     // load an image
     function lazyImageLoad (img: HTMLElement) {
 
-        // get attribute
-        const src = img.getAttribute('data-src');
+        // get data-src attribute
+        const srcAttr = img.getAttribute('data-src');
+        if (srcAttr) {
+            // load image
+            loadImage(srcAttr, () => {
 
-        // load image
-        loadImage(src, () => {
+                if (img instanceof HTMLImageElement) {
+                    img.src = srcAttr;
+                }
+                else {
+                    img.style.backgroundImage = `url('${srcAttr}')`;
+                }
 
-            if (img instanceof HTMLImageElement) {
-                img.src = src;
+                handleImageLoaded(img);
+
+            });
+        }
+        // if it does not exist, we check for data-srcset
+        // but only if HTMLImageElement
+        else if (img instanceof HTMLImageElement) {
+            const srcsetAttr = img.getAttribute('data-srcset');
+            if (srcsetAttr) {
+                img.addEventListener('load', () => {
+                    handleImageLoaded(img);
+                });
+                img.setAttribute('srcset', srcsetAttr);
             }
-            else {
-                img.style.backgroundImage = `url('${src}')`;
-            }
+        }
 
+
+    }
+
+    // on image loaded handler
+    function handleImageLoaded (
+        el: HTMLElement,
+    ) {
+
+        setTimeout(() => {
+            el.classList.add(classNameLoaded);
             setTimeout(() => {
-                img.classList.add(classNameLoaded);
-                setTimeout(() => {
-                    img.style.willChange = '';
-                }, 250);
-            }, 50);
-
-        });
+                el.style.willChange = '';
+            }, 250);
+        }, 50);
 
     }
 

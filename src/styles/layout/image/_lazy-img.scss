@@ -1,0 +1,16 @@
+.lazy-img,
+lazy-img {
+    display: block;
+    @include absolute(top-left, 12, 12);
+    overflow: hidden;
+
+    * {
+        position: relative;
+    }
+
+    img {
+        @include absolute(top-left, 12, 12);
+        object-fit: cover;
+    }
+
+}

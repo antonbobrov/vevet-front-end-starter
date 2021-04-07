@@ -8,6 +8,20 @@ interface Image {
 
 
 
+export function loadedImage (
+    src: string,
+) {
+    for (let i = 0; i < images.length; i++) {
+        const img = images[i];
+        if (img.src === src) {
+            return img.img;
+        }
+    }
+    return false;
+}
+
+
+
 export function loadImage (
     src: string,
     success: (img: HTMLImageElement) => void,
@@ -15,12 +29,10 @@ export function loadImage (
 ) {
 
     // if the image was loaded before
-    for (let i = 0; i < images.length; i++) {
-        const img = images[i];
-        if (img.src === src) {
-            success(img.img);
-            return;
-        }
+    const isLoaded = loadedImage(src);
+    if (isLoaded) {
+        success(isLoaded);
+        return;
     }
 
     // if the image was never loaded before
