@@ -7,6 +7,10 @@ import { scrollView } from '../../layout/scroll/scroll-view/scrollView';
 import { hidePage, showPage } from '../pageStates';
 import { updateMenuLinks } from '../../layout/menu/updateMenuLinks';
 
+import '../../layout/text/TextContent';
+
+
+
 // Default Page Class
 class DefaultPage extends PageModule {
 
