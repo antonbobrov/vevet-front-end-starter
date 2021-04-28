@@ -7,7 +7,8 @@ import { scrollView } from '../../layout/scroll/scroll-view/scrollView';
 import { hidePage, showPage } from '../pageStates';
 import { updateMenuLinks } from '../../layout/menu/updateMenuLinks';
 
-import '../../layout/text/TextContent';
+import '../../layout/text/text-content/TextContent';
+import { headers } from '../../layout/header/headers';
 
 
 
@@ -43,6 +44,14 @@ class DefaultPage extends PageModule {
         // update page elements
         updateLayoutElements();
 
+        // append a static header to the page
+        headers.appendStatic();
+        // header on scroll
+        headers.hideOnScroll();
+
+        // load modules
+        this._loadModules();
+
         // change state
         this._pageCreated = true;
 
@@ -70,6 +79,11 @@ class DefaultPage extends PageModule {
             }
         });
 
+        // update menu links
+        if (this._throughAjax) {
+            updateMenuLinks();
+        }
+
         // show the page
         if (this._throughAjax) {
             showPage();
@@ -92,6 +106,15 @@ class DefaultPage extends PageModule {
         hidePage();
 
         return true;
+
+    }
+
+
+
+    /**
+     * Load dynamic modules
+     */
+    protected _loadModules () {
 
     }
 
