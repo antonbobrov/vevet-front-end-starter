@@ -1,0 +1,40 @@
+.v-menu {
+    position: fixed;
+    overflow: hidden;
+    background: transparent;
+    z-index: 999;
+
+    @include transition(opacity 0s);
+
+    &_hide {
+        opacity: 1;
+    }
+
+    &__bg {
+        @include absolute(top-left, 12, 12);
+        background-color: var(--color-white);
+        transform: scale(1, 0);
+        transform-origin: top left;
+    }
+
+    &__content {
+        @include absolute(top-left, 12, 12);
+        z-index: 1;
+    }
+
+    &__scroll {
+        @include absolute(top-left, 12, 12);
+        max-height: 100%;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    &__translate {
+        will-change: transform, opacity;
+    }
+
+    &__alpha {
+        will-change: opacity;
+    }
+
+}

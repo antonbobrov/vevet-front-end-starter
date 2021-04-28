@@ -31,7 +31,6 @@
     <div class="header__burger">
         <button class="burger-button js-menu-button">
             <span>Menu</span>
-            <i></i>
         </button>
     </div>
 

@@ -1,0 +1,91 @@
+@import '../buttons/burger-button';
+
+.popup-menu {
+
+    --color-layout-text: var(--color-black);
+
+
+    
+    &__header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        height: var(--header-height);
+        padding: 0 var(--wrap);
+    }
+
+    &__languages {
+        @include reset-ul;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+
+        li {
+            & + li {
+                margin-left: 4px;
+            }
+        }
+
+        a {
+            display: inline-block;
+            padding: 4px;
+
+            opacity: 0.3;
+            @include transition(opacity 0.35s);
+
+            @include hover {
+                opacity: 0.6;
+            }
+
+            &.active {
+                opacity: 1;
+            }
+
+        }
+
+    }
+
+
+
+
+    &__container {
+        min-height: calc(100 * var(--vh));
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+        padding: calc(var(--header-height) + #{px-to-rem(40)}) var(--wrap) px-to-rem(30);
+
+        & > * {
+            width: 100%;
+            overflow: hidden;
+        }
+
+    }
+
+
+
+    &__links {
+
+        ul {
+            @include reset-ul;
+        }
+    
+        font-size: px-to-rem(30);
+        line-height: px-to-rem(48);
+
+    }
+
+
+
+}
+
+html.prevent-scroll-under-popup-menu {
+    overflow: hidden;
+}

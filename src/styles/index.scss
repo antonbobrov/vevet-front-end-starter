@@ -11,6 +11,7 @@
 @import '~vevet/dist/scss/classes/index';
 @import '~vevet/dist/scss/modules/preloader/index';
 @import '~vevet/dist/scss/modules/scroll/index';
+@import '~vevet/dist/scss/modules/menu/index';
 
 
 
@@ -32,6 +33,9 @@
 
 @import './layout/header/header';
 @import './layout/footer/footer';
+
+@import './layout/menu/v-menu';
+@import './layout/menu/popup-menu';
 
 @import './layout/content/page-content';
 

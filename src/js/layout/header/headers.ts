@@ -6,7 +6,7 @@ import { getScrollSelector } from '../scroll/custom-scroll/settings';
 import { onScroll } from '../scroll/onScroll';
 import app from '../../app/app';
 import { pageAjax } from '../../pages/pageAjax';
-// import { setPopupMenuButtonEvents } from '../menu/popup-menu/setPopupMenuButtonEvents';
+import { setPopupMenuButtonEvents } from '../menu/popup-menu/setPopupMenuButtonEvents';
 
 
 
@@ -37,8 +37,8 @@ export const headers = (function () {
 
 
     // set headers' buttons events
-    // setPopupMenuButtonEvents(fixedHeader);
-    // setPopupMenuButtonEvents(staticHeader);
+    setPopupMenuButtonEvents(fixedHeader);
+    setPopupMenuButtonEvents(staticHeader);
 
 
 
