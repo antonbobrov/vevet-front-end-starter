@@ -96,6 +96,7 @@ function createScroll () {
     if (app.vevetPage) {
         app.vevetPage.on('destroy', () => {
             scroll.destroy();
+            currentScrollModule = false;
         });
     }
 

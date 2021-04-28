@@ -40,6 +40,7 @@ export function getScrollSelector (): (HTMLElement | CustomScrollType) {
     }
     const selector = selectOne('#custom-scroll') as HTMLElement;
     return selector;
+
 }
 
 
