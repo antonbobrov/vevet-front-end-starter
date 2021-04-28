@@ -54,6 +54,7 @@
   },
   "dependencies": {
     "dat.gui": "^0.7.7",
+    "easing-progress": "0.0.4",
     "get-image-pos": "0.0.9",
     "lerp": "^1.0.3",
     "lit-element": "^2.4.0",
