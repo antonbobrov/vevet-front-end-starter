@@ -10,6 +10,7 @@ module.exports = {
                     discardComments: {
                         removeAll: true,
                     },
+                    colormin: false,
                 },
             ],
         }),
