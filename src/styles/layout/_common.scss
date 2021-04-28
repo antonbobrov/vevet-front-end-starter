@@ -8,7 +8,9 @@
 
 }
 
-div {
+div,
+body,
+html {
     &::-webkit-scrollbar {
         display: none;
     }
