@@ -24,6 +24,26 @@ require_once './includes/start.php';
         </div>
         <br><br><br>
 
+        <h2 class="v-view_b">Test Video Popup</h2>
+        <br>
+        <div class="v-view_b">
+            <play-video-button
+                source="yt"
+                src="lM02vNMRRB0"
+            >Open video in popup (Youtube)</play-video-button>
+            <br>
+            <play-video-button
+                source="vm"
+                src="542425649"
+            >Open video in popup (Vimeo)</play-video-button>
+            <br>
+            <play-video-button
+                source="srv"
+                src="/image/test-content/video.mp4"
+            >Open video in popup (Server)</play-video-button>
+        </div>
+        <br><br><br>
+
         <h2 class="v-view_b">Test lazy-img component</h2>
         <br>
         <div style="position: relative; padding-top: 50%" class="v-view_b">

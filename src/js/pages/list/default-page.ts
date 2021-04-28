@@ -10,6 +10,7 @@ import { updateMenuLinks } from '../../layout/menu/updateMenuLinks';
 import '../../layout/text/text-content/TextContent';
 import { headers } from '../../layout/header/headers';
 import { setPopupButtons } from '../../includes/popup/setPopupButtons';
+import { loadPlayVideoButton } from '../../includes/media/play-video-button/loadPlayVideoButton';
 
 
 
@@ -118,6 +119,7 @@ class DefaultPage extends PageModule {
     protected _loadModules () {
 
         setPopupButtons();
+        loadPlayVideoButton();
 
     }
 

@@ -1,0 +1,475 @@
+@import '../../mixins/index';
+@import '~vevet/dist/scss/mixins/index';
+
+
+// video.js
+$primary-background-color: #000;
+$primary-background-transparency: 0;
+@import '~video.js/src/css/vjs';
+
+
+
+.vjs-adcd-theme {
+    width: 100%;
+    height: 100%;
+
+    * {
+        outline: none;
+    }
+
+    @include non-mobile-device {
+        &:not(.vjs-fullscreen) {
+            video {
+                object-fit: cover;
+            }
+        }
+    }
+
+    .vjs {
+
+
+
+        &-control-bar {
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000 100%);
+
+            @include tablet-min {
+                height: 70px;
+                padding: 10px 20px 0;
+            }
+            @include mobile {
+                height: 64px;
+                padding: 10px 10px 0;
+            }
+
+        }
+
+        &-picture-in-picture-control,
+        &-remaining-time {
+            display: none;
+        }
+
+        &-current-time,
+        &-duration {
+            position: absolute;
+            bottom: calc(100% + 9px);
+            height: auto;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            font-size: 16px;
+            line-height: 160%;
+            @include mobile {
+                bottom: calc(100% + 9px);
+            }
+        }
+
+        &-current-time {
+            left: 20px;
+            @include mobile {
+                left: 10px;
+            }
+        }
+
+        &-duration {
+            right: 20px;
+            @include mobile {
+                right: 10px;
+            }
+        }
+
+        &-progress-control {
+            position: absolute;
+            height: 10px;
+            top: 0;
+            bottom: auto;
+
+            &:after {
+                content: '';
+                display: block;
+                @include absolute(top-left, 12, 12);
+                box-sizing: border-box;
+                border: 1px solid #fff;
+            }
+
+            @include tablet-min {
+                left: 20px;
+                width: calc(100% - 40px);
+            }
+            @include mobile {
+                left: 10px;
+                width: calc(100% - 20px);
+            }
+
+            .vjs {
+
+                &-progress-holder {
+                    margin: 0;
+                    position: absolute;
+                    top: 50%;
+                    left: 2px;
+                    width: calc(100% - 4px);
+                    height: 4px;
+                    transform: translate(0, -50%);
+                    background: transparent;
+                }
+
+                &-load-progress {
+                    background-color: transparent;
+
+                    div {
+                        background: rgba(255, 255, 255, 0.2);
+                    }
+
+                }
+
+                &-play-progress {
+                    top: 0;
+                    height: 100%;
+                    background-color: #fff;
+                    z-index: 2;
+                    
+                    &:before {
+                        display: none;
+                    }
+
+                    &:after {
+                        content: '';
+                        position: absolute;
+                        top: calc(50% - 11px);
+                        right: -3px;
+                        width: 6px;
+                        height: 22px;
+                        background-position: center;
+                        background-repeat: no-repeat;
+                        background-size: 100%;
+                        background-image: url('/assets/img/video-js/play-progress.svg');
+                    }
+
+                }
+
+            }
+
+        }
+
+
+
+        &-big-play-button {
+            border-radius: 0;
+            border: 0;
+            background: transparent !important; /* stylelint-disable-line declaration-no-important */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            pointer-events: all;
+
+            @include desktop {
+                width: 120px;
+                height: 120px;
+                margin-top: -60px;
+                margin-left: -60px;
+            }
+
+            @include tablet {
+                width: 100px;
+                height: 100px;
+                margin-top: -50px;
+                margin-left: -50px;
+            }
+
+            @include mobile {
+                width: 70px;
+                height: 70px;
+                margin-top: -35px;
+                margin-left: -35px;
+            }
+
+            * {
+                display: none;
+            }
+
+            &:before {
+                content: '';
+                display: block;
+                @include absolute(top-left, 12, 12);
+                background: #fff;
+                border-radius: 50%;
+                @include transition(transform 0.5s);
+            }
+
+            &:after {
+                content: '';
+                display: block;
+                @include absolute(top-left, 12, 12);
+                background: url('/assets/img/video-js/play-big.svg') no-repeat center;
+
+                @include desktop {
+                    margin: 1px 0 0 3px;
+                    background-size: 18px auto;
+                }
+
+                @include tablet {
+                    margin: 0 0 0 3px;
+                    background-size: 16px auto;
+                }
+
+                @include mobile {
+                    margin: 0 0 0 2px;
+                    background-size: 14px auto;
+                }
+
+            }
+
+            @include non-mobile-hover {
+                &:before {
+                    transform: scale(1.1);
+                }
+            }
+
+        }
+
+
+
+        &-play-control {
+            width: 28px;
+            height: 28px;
+            margin-left: -7px;
+            
+            & > * {
+                display: none;
+            }
+
+            &:before,
+            &:after {
+                content: '';
+                display: block;
+                @include absolute(top-left, 12, 12);
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: auto 16px;
+                @include transition(opacity 0.35s);
+            }
+
+            &:before {
+                background-image: url('/assets/img/video-js/play.svg');
+            }
+
+            &:after {
+                background-image: url('/assets/img/video-js/pause.svg');
+            }
+
+            &.vjs-paused {
+                &:before {
+                    opacity: 1;
+                }
+                &:after {
+                    opacity: 0;
+                }
+            }
+
+            &.vjs-playing {
+                &:before {
+                    opacity: 0;
+                }
+                &:after {
+                    opacity: 1;
+                }
+            }
+
+        }
+
+
+
+        &-volume-panel {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+            height: 28px;
+            width: auto;
+            margin-left: 10px;
+            transition: 0s;
+
+            @include mobile-device {
+                display: none;
+            }
+
+            &.vjs-volume-panel-horizontal {
+                &.vjs-hover,
+                &.vjs-slider-active {
+                    width: auto;
+                    transition: 0s;
+                }
+                .vjs-volume-level {
+                    height: 100%;
+                    &:before {
+                        display: none;
+                    }
+                }
+            }
+
+            .vjs {
+
+                &-mute-control {
+                    width: auto;
+        
+                    .vjs-icon-placeholder {
+                        display: block;
+                        position: relative;
+                        width: 18px;
+                        height: 28px;
+                        background-position: center;
+                        background-repeat: no-repeat;
+                        background-size: 18px;
+        
+                        &:before {
+                            display: none;
+                        }
+        
+                    }
+        
+                    &.vjs-vol-0 {
+                        .vjs-icon-placeholder {
+                            background-image: url('/assets/img/video-js/volume-empty.svg');
+                        }
+                    }
+        
+                    &.vjs-vol-1 {
+                        .vjs-icon-placeholder {
+                            background-image: url('/assets/img/video-js/volume-full.svg');
+                        }
+                    }
+        
+                    &.vjs-vol-2 {
+                        .vjs-icon-placeholder {
+                            background-image: url('/assets/img/video-js/volume-full.svg');
+                        }
+                    }
+        
+                    &.vjs-vol-3 {
+                        .vjs-icon-placeholder {
+                            background-image: url('/assets/img/video-js/volume-full.svg');
+                        }
+                    }
+        
+                }
+        
+                &-volume-control {
+                    &.vjs-volume-horizontal {
+                        width: 100px !important; /* stylelint-disable-line declaration-no-important */
+                        height: 6px !important; /* stylelint-disable-line declaration-no-important */
+                        margin-left: 10px;
+                        margin-right: 0;
+                        opacity: 1;
+                        visibility: visible;
+                        transition: 0s;
+
+                        &:before {
+                            content: '';
+                            display: block;
+                            @include absolute(top-left, 12, 12);
+                            box-sizing: border-box;
+                            border: 1px solid #fff;
+                        }
+
+                        .vjs-volume-level {
+                            background-color: transparent;
+
+                            &:before {
+                                content: '';
+                                display: block;
+                                position: absolute;
+                                top: 2px;
+                                left: 0;
+                                width: 100%;
+                                height: 2px;
+                                background-color: #fff;
+                            }
+
+                            &:after {
+                                content: '';
+                                display: block;
+                                position: absolute;
+                                top: -2px;
+                                right: 0;
+                                width: 4px;
+                                height: 10px;
+                                background-color: #fff;
+                                @include mobile {
+                                    display: none;
+                                }
+                            }
+
+                        }
+
+                    }
+                }
+
+                &-volume-bar {
+                    &.vjs-slider-horizontal {
+                        width: calc(100% - 2px);
+                        height: 100%;
+                        margin: 0;
+                        background: transparent;
+                        left: 2px;
+                    }
+                }
+
+            }
+
+            &.vjs-hover {
+                .vjs {
+        
+                    &-volume-control {
+                        &.vjs-volume-horizontal {
+                            width: 100px !important; /* stylelint-disable-line declaration-no-important */
+                            height: 6px !important; /* stylelint-disable-line declaration-no-important */
+                        }
+                    }
+
+                }
+            }
+
+        }
+
+
+
+        &-fullscreen-control {
+            position: absolute;
+            top: calc(50% - 14px);
+            width: 28px;
+            height: 28px;
+
+            @include tablet-min {
+                right: 20px;
+            }
+            @include mobile {
+                right: 10px;
+            }
+            
+            & > * {
+                display: none;
+            }
+
+            &:before {
+                content: '';
+                display: block;
+                @include absolute(top-left, 12, 12);
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: auto 16px;
+                background-image: url('/assets/img/video-js/fullscreen.svg');
+                @include transition(opacity 0.35s);
+            }
+
+        }
+
+
+
+    }
+
+}

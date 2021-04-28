@@ -1,0 +1,41 @@
+html {
+    --popup-media-width: 100%;
+    --popup-media-height: 100%;
+}
+
+.v-popup_media {
+
+    video,
+    iframe {
+        @include reset-button;
+    }
+
+    iframe {
+        @include transition(opacity 0.35s);
+        opacity: 0;
+
+        &.loaded {
+            opacity: 1;
+        }
+
+    }
+
+    .v-popup {
+
+        &__container {
+            overflow: visible;
+        }
+
+        &__levels {
+            overflow: hidden;
+            z-index: 0;
+
+            @include tablet-min {
+                border-radius: 4px;
+            }
+
+        }
+
+    }
+
+}
