@@ -1,3 +1,4 @@
+import { DefaultPage } from '../pages/list/default-page';
 import app from './app';
 
 export class OnPageCreated {
@@ -15,8 +16,8 @@ export class OnPageCreated {
         if (this._proceeded) {
             return;
         }
-        const page = app.vevetPage;
-        if (page) {
+        const page = app.vevetPage as DefaultPage;
+        if (!!page && page.pageCreated) {
             this._proceeded = true;
             this._callback();
         }

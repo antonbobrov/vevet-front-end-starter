@@ -14,8 +14,12 @@ import '../../layout/text/TextContent';
 // Default Page Class
 class DefaultPage extends PageModule {
 
-    protected _lazyImages: false | LazyImages;
+    protected _pageCreated = false;
+    get pageCreated () {
+        return this._pageCreated;
+    }
 
+    protected _lazyImages: false | LazyImages;
     get lazyImages () {
         return this._lazyImages;
     }
@@ -39,10 +43,8 @@ class DefaultPage extends PageModule {
         // update page elements
         updateLayoutElements();
 
-        // update menu links
-        if (this._throughAjax) {
-            updateMenuLinks();
-        }
+        // change state
+        this._pageCreated = true;
 
         return this;
 
