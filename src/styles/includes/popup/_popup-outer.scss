@@ -1,0 +1,13 @@
+.popup-outer {
+    padding: px-to-rem(40);
+       
+    &__header {
+        @include text-header-3;
+    }
+       
+    &__desc {
+        margin-top: px-to-rem(30);
+        @include text-styles;
+    }
+
+}

@@ -9,6 +9,7 @@ import { updateMenuLinks } from '../../layout/menu/updateMenuLinks';
 
 import '../../layout/text/text-content/TextContent';
 import { headers } from '../../layout/header/headers';
+import { setPopupButtons } from '../../includes/popup/setPopupButtons';
 
 
 
@@ -115,6 +116,8 @@ class DefaultPage extends PageModule {
      * Load dynamic modules
      */
     protected _loadModules () {
+
+        setPopupButtons();
 
     }
 

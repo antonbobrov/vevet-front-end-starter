@@ -1,0 +1,10 @@
+.use-custom-scroll {
+    .v-popup {
+        height: calc(100 * var(--vh));
+    }
+}
+
+
+html.prevent-scroll-under-popup {
+    overflow: hidden;
+}
