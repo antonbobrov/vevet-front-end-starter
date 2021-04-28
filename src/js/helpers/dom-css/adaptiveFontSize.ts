@@ -4,27 +4,28 @@ import app from '../../app/app';
 import { useAdaptiveFontSize } from '../../settings';
 import { boundProgress } from '../math/boundProgress';
 
-export const fontSize = (function fontSize (): {
+
+
+interface Return {
     set: Function;
-    udateAndGetValue: Function;
-    getValue: Function;
-    } {
+    getValue: () => number;
+}
 
+export const adaptiveFontSize = (function fontSize (): Return {
 
-    let value = 0;
+    let prevValue = 16;
 
 
 
     // get font size
-    function udateAndGetValue (): number {
+    function getValue () {
 
         if (!useAdaptiveFontSize) {
-            value = 16;
             return 16;
         }
 
         const { viewport } = app;
-        const width = viewport.size[0];
+        const [width, height] = viewport.size;
         let k = 1;
 
         // dekstop
@@ -39,29 +40,32 @@ export const fontSize = (function fontSize (): {
                 k = width / 1920;
             }
         }
-        else {
-
-            // tablet
-            if (viewport.tablet) {
-                k = width / 1024;
+        // tablet
+        else if (viewport.tablet) {
+            k = width / 1024;
+        }
+        // mobile
+        else if (viewport.mobile) {
+            if (app.viewport.landscape) {
+                k = 1;
             }
-
-            // mobile
-            if (viewport.mobile) {
-                if (app.viewport.landscape) {
+            else if (width > 750) {
+                k = width / 500;
+            }
+            else if (width > height) {
+                if (width >= 360 && width <= 400) {
                     k = 1;
                 }
-                else if (width > 750) {
-                    k = width / 500;
+                else if (width < 360) {
+                    k = boundProgress(width / 360, [0.9375, Infinity]);
                 }
-                else if (window.innerHeight > window.innerWidth) {
-                    k = boundProgress(width / 375, [0.9375, Infinity]);
-                }
-                else {
-                    k = 1;
+                else if (width > 400) {
+                    k = width / width;
                 }
             }
-
+            else {
+                k = 1;
+            }
         }
 
         // calculate
@@ -77,7 +81,6 @@ export const fontSize = (function fontSize (): {
             font = 22;
         }
 
-        value = font;
         return font;
 
     }
@@ -86,8 +89,11 @@ export const fontSize = (function fontSize (): {
 
     // set font size
     function set () {
-        const font = udateAndGetValue();
-        app.html.style.fontSize = `${font}px`;
+        const value = getValue();
+        if (value !== prevValue) {
+            app.html.style.fontSize = `${value}px`;
+        }
+        prevValue = value;
     }
     set();
 
@@ -108,8 +114,7 @@ export const fontSize = (function fontSize (): {
 
     return {
         set: set.bind(this),
-        udateAndGetValue: udateAndGetValue.bind(this),
-        getValue: () => value,
+        getValue: getValue.bind(this),
     };
 
 
