@@ -11,8 +11,8 @@
             overflow: initial;
             -webkit-overflow-scrolling: touch;
 
-            & > .v-scroll {
-                
+            .v-scroll {
+            
                 &__container {
                     position: static;
                 }
@@ -27,4 +27,14 @@
 
     }
 
+}
+
+html.v-mobile-device {
+    .v-scroll {
+        &.v-scroll_dragging {
+            & > .v-scroll__container {
+                pointer-events: initial !important; /* stylelint-disable-line declaration-no-important */
+            }
+        } 
+    }
 }
