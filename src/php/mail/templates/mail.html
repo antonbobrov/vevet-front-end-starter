@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/strict.dtd">
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>{{subject}}</title>
+	</head>
+	
+	<body style="font-family: Arial, sans-serif; font-size: 16px; line-height: 24px; color: #545454;background: #dcdcdc;">
+	<div style="width: 800px;font-family: Arial, sans-serif; font-size: 16px; line-height: 24px; color: #dcdcdc;background: #dcdcdc;overflow:hidden;">
+	
+		<div style="width: 668px;margin: 50px auto;background: #fff;">
+		
+			<div style="width: 100%;padding: 27px 0 24px 41px;border-bottom: 2px solid #dcdcdc; font-size: 24px;line-height: normal;color: #000;font-weight: 500;font-family: Arial, sans-serif;">
+				{{subject}}
+			</div>
+			
+			<div style="padding: 30px 41px 30px 41px;">
+			
+			
+			
+				<!-- Text -->
+			
+				<p style="margin: 0; font-size: 20px;line-height: normal;color: #000;font-weight: 500;font-family: Arial, sans-serif;">{{text}}</p>
+			
+			
+			
+				<!-- Inputs -->
+				
+				<table style="border-collapse: collapse;width: 100%;border-top: 2px solid #dcdcdc;border-left: 2px solid #dcdcdc;margin: 24px 0 0 0;">
+					<tbody>
+						<tr>
+							<td style="width: 50%;vertical-align: top; font-size: 13px;line-height: 24px;border-right: 2px solid #dcdcdc;border-bottom: 2px solid #dcdcdc;text-align: left;padding: 10px 20px;color: #000;">
+								Форма
+							</td>
+							<td style="width: 50%;vertical-align: top; font-size: 13px;line-height: 24px;border-right: 2px solid #dcdcdc;border-bottom: 2px solid #dcdcdc;text-align: left;padding: 10px 20px;color: #000;">
+								{{formSubject}}
+							</td>
+						</tr>
+					</tbody>
+                </table>
+                
+                {% for key, input in inputs %}
+                    <table style="border-collapse: collapse;width: 100%;border-top: 2px solid #dcdcdc;border-left: 2px solid #dcdcdc;margin: 10px 0 0 0;">
+                        <tbody>
+                            <tr>
+                                <td style="width: 50%;vertical-align: top; font-size: 13px;line-height: 24px;border-right: 2px solid #dcdcdc;border-bottom: 2px solid #dcdcdc;text-align: left;padding: 10px 20px;color: #000;">
+                                    {{input.title}}
+                                </td>
+                                <td style="width: 50%;vertical-align: top; font-size: 13px;line-height: 24px;border-right: 2px solid #dcdcdc;border-bottom: 2px solid #dcdcdc;text-align: left;padding: 10px 20px;color: #000;">
+                                    {{input.value}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                {% endfor %}
+			
+			
+			
+			</div>
+			
+		</div>
+	
+	</div>
+	</body>
+</html>

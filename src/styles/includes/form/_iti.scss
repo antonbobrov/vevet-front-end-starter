@@ -1,0 +1,61 @@
+@import '~intl-tel-input/build/css/intlTelInput.min.css';
+
+.iti {
+    width: 100%;
+
+    @include layout-text;
+    
+    &__country-list {
+        background-color: var(--form-select-background-color);
+        border-radius: 3px;
+        border: 1px solid var(--form-select-border-color);
+        margin: 10px 0 3px -1px;
+
+        color: var(--form-select-text-color);
+
+        @at-root .iti-mobile & {
+            min-width: 260px;
+            max-width: calc(100vw - 60px);
+            margin: 0;
+        }
+
+    }
+
+    &__arrow {
+        border-top-color: var(--form-input-color);
+
+        &--up {
+            border-bottom-color: var(--form-input-color);
+        }
+
+    }
+
+    &__selected-flag {
+        padding: 0 5px 0 20px;
+        background: transparent !important; /* stylelint-disable-line declaration-no-important */
+    }
+
+    &__dial-code {
+        color: var(--form-select-text-color);
+        opacity: 0.75;
+    }
+
+    &__divider {
+        border-bottom: 1px solid var(--form-select-text-color);
+    }
+
+    &__country {
+        &.iti__highlight {
+            background-color: var(--form-selected-option-background-color);
+        }
+        @at-root .iti-mobile & {
+            transform: translateZ(0);
+        }
+    }
+
+    &--container {
+        z-index: 99999999999;
+        transform: translateZ(0);
+    }
+
+}

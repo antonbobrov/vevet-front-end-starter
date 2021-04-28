@@ -1,0 +1,14 @@
+@import './form-input';
+
+.form-double-input {
+    display: grid;
+    grid-gap: px-to-rem(20);
+
+    @include tablet-min {
+        grid-template-columns: 1fr 1fr;
+    }
+    @include mobile-lg {
+        grid-template-columns: 1fr 1fr;
+    }
+
+}

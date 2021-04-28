@@ -1,0 +1,88 @@
+$input-transition-duration: 0.25s;
+
+.form-input {
+    position: relative;
+
+    --input-height: 60px;
+
+
+
+    &__label {
+        display: inline-block;
+        margin-bottom: 10px;
+        user-select: none;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 16px;
+    }
+
+
+
+    &__input        {
+        position: relative;
+    }
+    
+    @include placeholder(var(--form-input-placeholder-color));
+    
+    input,
+    textarea {
+        @include reset-input;
+        display: block;
+        width: 100%;
+        outline: none;
+
+        background-color: var(--form-input-background-color);
+        border: 1px solid var(--form-input-border-color);
+        border-radius: 3px;
+        box-shadow: none;
+
+        padding-left: 20px;
+        padding-right: 20px;
+        
+        @include layout-text;
+        color: var(--form-input-color);
+
+        @include transition((
+            border-color $input-transition-duration, 
+            background-color $input-transition-duration, 
+            color $input-transition-duration
+        ));
+
+        &:focus {
+            border-color: var(--form-input-border-focus-color);
+        }
+
+        &.error {
+            padding-right: 60px;
+            border-color: var(--form-input-border-error-color);
+            background-color: var(--form-input-background-error-color);
+        }
+        
+    }
+
+    input {
+        height: var(--input-height);
+    }
+
+    textarea {
+        resize: none;
+
+        @include desktop {
+            padding-top: 25px;
+            padding-bottom: 25px;
+            height: 240px;
+        }
+        @include tablet {
+            padding-top: 22px;
+            padding-bottom: 22px;
+            height: 210px;
+        }
+        @include mobile {
+            padding-top: 18px;
+            padding-bottom: 18px;
+            height: 180px;
+        }
+
+    }
+
+}

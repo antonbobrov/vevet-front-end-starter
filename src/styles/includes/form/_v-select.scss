@@ -1,0 +1,127 @@
+.v-select {
+    background: transparent;
+    color: var(--form-input-color);
+
+    --input-height: 60px;
+
+    &__placeholder {
+        border-radius: 3px;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        
+        padding-left: 20px;
+        padding-right: 60px;
+        height: var(--input-height);
+        
+        @include layout-text;
+
+        border: 1px solid var(--form-input-border-color);
+        background-color: var(--form-input-background-color);
+        @include transition((
+            border-color $input-transition-duration, 
+            background-color $input-transition-duration
+        ));
+
+        @at-root .v-select.error & {
+            border-color: var(--form-input-border-error-color);
+            background-color: var(--form-input-background-error-color);
+        }
+    
+    }
+
+    &__arrow {
+        width: 12px;
+        right: 20px;
+
+        &:before,
+        &:after {
+            content: '';
+            position: absolute;
+            display: block;
+            top: 50%;
+            right: 0;
+            width: 13px;
+            height: 11px;
+            margin: -5px 0 0 0;
+            border: 0;
+            z-index: 1;
+            @include transition((opacity 0.35s, transform 0.35s));
+        }
+
+        &:before {
+            background-color: var(--form-input-border-color);
+        }
+
+        &:after {
+            background-color: var(--form-input-color);
+            opacity: 0;
+        }
+
+        @at-root .v-select_animate & {
+            &:before,
+            &:after {
+                transform: rotate(180deg);
+            }
+            &:before {
+                opacity: 0;
+            }
+            &:after {
+                opacity: 1;
+            }
+        }
+
+    }
+
+    &__container {
+        top: 0;
+        border-radius: 3px;
+        border: 1px solid var(--form-select-border-color);
+        background: var(--form-select-background-color);
+    }
+
+    &__content {
+        padding: 0;
+        max-height: initial;
+    }
+
+    &__values {
+        margin: 0;
+    }
+
+    &__value {
+        padding: 12px 20px;
+
+        @include layout-text;
+        color: var(--form-select-text-color);
+
+        @include transition(background-color 0.35s);
+
+        &_active {
+            @at-root .v-select__values_hide-active & {
+                display: block;
+                background-color: var(--form-selected-option-background-color);
+            }
+        }
+
+        &:first-child {
+            pointer-events: none;
+            padding-top: 0;
+            padding-bottom: 0;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            height: var(--input-height);
+            background-color: transparent;
+        }
+
+        @include non-mobile-hover {
+            background-color: var(--form-selected-option-background-color);
+        }
+
+    }
+
+}

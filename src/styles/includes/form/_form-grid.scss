@@ -1,0 +1,15 @@
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+
+    @include desktop {
+        grid-gap: px-to-rem(40);
+    }
+    @include tablet {
+        grid-gap: px-to-rem(30);
+    }
+    @include mobile {
+        grid-gap: px-to-rem(20);
+    }
+
+}

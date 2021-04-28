@@ -9,8 +9,10 @@ import { updateMenuLinks } from '../../layout/menu/updateMenuLinks';
 
 import '../../layout/text/text-content/TextContent';
 import { headers } from '../../layout/header/headers';
+
 import { setPopupButtons } from '../../includes/popup/setPopupButtons';
 import { loadPlayVideoButton } from '../../includes/media/play-video-button/loadPlayVideoButton';
+import loadAjaxForm from '../../includes/form/loadAjaxForm';
 
 
 
@@ -120,6 +122,7 @@ class DefaultPage extends PageModule {
 
         setPopupButtons();
         loadPlayVideoButton();
+        loadAjaxForm();
 
     }
 
