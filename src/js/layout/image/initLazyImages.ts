@@ -2,7 +2,7 @@ import { selectAll } from 'vevet-dom';
 import app from '../../app/app';
 import { resizeTimeout } from '../../settings';
 import { layoutElements } from '../../helpers/dom-css/layoutElements';
-import { loadImage } from '../../helpers/loaders/loadImage';
+import { loadImage } from './imageLoader';
 import { getScrollSelector } from '../scroll/custom-scroll/settings';
 import { CustomScrollType, isCustomScroll } from '../scroll/custom-scroll/isCustomScroll';
 import {

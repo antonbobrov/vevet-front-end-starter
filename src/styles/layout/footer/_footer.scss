@@ -1,0 +1,9 @@
+.footer {
+    margin-top: px-to-rem(60);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: px-to-rem(60) var(--wrap);
+    background-color: #eee;   
+}

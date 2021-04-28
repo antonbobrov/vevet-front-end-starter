@@ -90,6 +90,19 @@
         }
     }
 
+    .justifyleft {
+        text-align: left;
+    }
+    .justifycenter {
+        text-align: center;
+    }
+    .justifyright {
+        text-align: right;
+    }
+    .justifyfull {
+        text-align: justify;
+    }
+
 }
 
 @mixin text-spacings-styles {
@@ -138,6 +151,13 @@
 
 }
 
+
+
+@mixin layout-text {
+    font-size: px-to-rem(16);
+    line-height: px-to-rem(18);
+    color: var(--color-layout-text);
+}
 
 
 

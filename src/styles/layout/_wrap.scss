@@ -1,15 +1,31 @@
 html {
 
-    --wrap: 4vw;
-    --wrap-1: 8vw;
+    @include desktop {
+        @media (max-width: 1439px) {
+            --wrap: 4vw;
+            --wrap-1: 16.6vw;
+        }
+        @media (min-width: 1440px) and (max-width: 1920px) {
+            --wrap: 60px;   
+            --wrap-1: calc((100vw - 960px) / 2);
+        }
+        @media (min-width: 1921px) {
+            --wrap: 4vw;   
+            --wrap-1: 18.75vw;   
+        }
+    }
     
     @include tablet {
         --wrap: 2.5rem;
-        --wrap-1: 5rem;
+        --wrap-1: 10rem;
     }
     @include mobile {
         --wrap: 1.25rem;
         --wrap-1: 1.25rem;
     }
 
+}
+
+.wrap_1 {
+    margin: 0 auto;
 }

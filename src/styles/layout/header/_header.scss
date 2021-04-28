@@ -1,0 +1,168 @@
+@import '../text/text';
+
+$header-hide-duration: 0.5s;
+
+
+
+html {
+
+    // Header
+    @include tablet-min {
+        --header-height: #{px-to-rem(100)};
+    }
+    @include mobile {
+        --header-height: #{px-to-rem(80)};
+    }
+
+}
+
+
+
+.header {
+
+    // STYLES
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--header-height);
+    z-index: 9;
+
+    padding: 0 var(--wrap);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    background-color: #eee;
+    @include line-bottom(var(--color-black));
+
+    @include layout-text;
+
+
+
+    &_fixed {
+        position: fixed;
+        height: calc(var(--header-height) * 0.75);
+
+        @at-root html:not(.v-browser_safari) & {
+            @include transition(transform $header-hide-duration);
+            transform: translate(0, -250%);
+
+            &.show-fixed {
+                transform: none;
+            }
+    
+            @include desktop {
+                &:not(.show-fixed) {
+                    pointer-events: none;
+                }
+            }
+
+        }
+
+        @at-root html.v-browser_safari & {
+            @include transition((opacity $header-hide-duration, visibility $header-hide-duration));
+            opacity: 0;
+            visibility: hidden;
+
+            &.show-fixed {
+                opacity: 1;
+                visibility: visible;
+            }
+    
+            @include desktop {
+                &:not(.show-fixed) {
+                    pointer-events: none;
+                }
+            }
+        }
+
+    }
+
+    &_static {
+        transform: translateZ(0);
+    }
+
+
+
+    &__logo {
+        @include non-mobile-device {
+            @include decoration-bottom-line;
+        }
+    }
+
+
+
+    &__menu {
+
+        @include tablet-max {
+            display: none;
+        }
+
+        ul {
+            @include reset-ul;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+
+            li {
+                & + li {
+                    margin-left: px-to-rem(36);
+                }
+            }
+
+        }
+
+        a {
+            @include decoration-bottom-line;
+        }
+
+    }
+
+    &__languages {
+        @include reset-ul;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+
+        @include tablet-max {
+            display: none;
+        }
+
+        li {
+            & + li {
+                margin-left: 4px;
+            }
+        }
+
+        a {
+            display: inline-block;
+            padding: 4px;
+
+            opacity: 0.3;
+            @include transition(opacity 0.35s);
+
+            @include hover {
+                opacity: 0.6;
+            }
+
+            &.active {
+                opacity: 1;
+            }
+
+        }
+
+    }
+
+    &__burger {
+        @include desktop {
+            display: none;
+        }
+    }
+
+
+
+}

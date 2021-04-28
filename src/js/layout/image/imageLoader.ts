@@ -8,6 +8,9 @@ interface Image {
 
 
 
+/**
+ * Check if image is loaded
+ */
 export function loadedImage (
     src: string,
 ) {
@@ -22,6 +25,9 @@ export function loadedImage (
 
 
 
+/**
+ * Load an image
+ */
 export function loadImage (
     src: string,
     success: (img: HTMLImageElement) => void,

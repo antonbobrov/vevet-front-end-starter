@@ -4,6 +4,8 @@ lazy-img {
     @include absolute(top-left, 12, 12);
     overflow: hidden;
 
+    background-color: var(--color-lazy-image-bg);
+
     * {
         position: relative;
     }

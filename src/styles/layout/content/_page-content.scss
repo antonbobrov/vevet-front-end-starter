@@ -1,0 +1,21 @@
+html {
+
+    @include desktop {
+        --content-padding-top: calc(var(--header-height) + #{px-to-rem(60)});
+    }
+
+    @include tablet {
+        --content-padding-top: calc(var(--header-height) + #{px-to-rem(50)});
+    }
+
+    @include mobile {
+        --content-padding-top: calc(var(--header-height) + #{px-to-rem(40)});
+    }
+
+}
+
+
+.page-content {
+    transform: translateZ(0);
+    padding-top: var(--content-padding-top);
+}
