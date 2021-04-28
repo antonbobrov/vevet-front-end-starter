@@ -34,8 +34,12 @@ export function setKeyboardTabHightlight () {
 
     }
 
-    function onClick () {
-        removeHighlight();
+    function onClick (
+        e: MouseEvent,
+    ) {
+        if (e.target !== activeElement) {
+            removeHighlight();
+        }
     }
 
 

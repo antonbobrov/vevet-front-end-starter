@@ -55,49 +55,49 @@ export class ScrollKeyboardPlugin extends Plugin {
         // animate
         switch (e.keyCode) {
 
-        // down
-        case 40:
-            scroll.targetTop += iterator;
-            break;
+            // down
+            case 40:
+                scroll.targetTop += iterator;
+                break;
             // page down
-        case 34:
-            scroll.targetTop += iterator * 10;
-            break;
+            case 34:
+                scroll.targetTop += iterator * 10;
+                break;
             // end down
-        case 35:
-            scroll.targetTop = scroll.scrollHeight;
-            break;
+            case 35:
+                scroll.targetTop = scroll.scrollHeight;
+                break;
 
             // up
-        case 38:
-            scroll.targetTop -= iterator;
-            break;
+            case 38:
+                scroll.targetTop -= iterator;
+                break;
             // page up
-        case 33:
-            scroll.targetTop -= iterator * 10;
-            break;
+            case 33:
+                scroll.targetTop -= iterator * 10;
+                break;
             // home
-        case 36:
-            scroll.targetTop = 0;
-            break;
+            case 36:
+                scroll.targetTop = 0;
+                break;
 
             // space
-        case 32:
-            scroll.targetTop += iterator * 5;
-            break;
+            case 32:
+                scroll.targetTop += iterator * 5;
+                break;
 
             // right
-        case 39:
-            scroll.targetLeft += iterator;
-            break;
+            case 39:
+                scroll.targetLeft += iterator;
+                break;
 
             // left
-        case 37:
-            scroll.targetLeft -= iterator;
-            break;
+            case 37:
+                scroll.targetLeft -= iterator;
+                break;
 
-        default:
-            return;
+            default:
+                return;
 
         }
 

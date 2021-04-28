@@ -1,8 +1,12 @@
+import { parentByTagName } from 'vevet-dom';
+
 export function disableTabIndex (parent: Element) {
 
     const children = parent.querySelectorAll('*');
     for (let i = 0, l = children.length; i < l; i++) {
-        children[i].setAttribute('tabindex', '-1');
+        if (!parentByTagName(children[i], 'button', 5)) {
+            children[i].setAttribute('tabindex', '-1');
+        }
     }
 
 }
