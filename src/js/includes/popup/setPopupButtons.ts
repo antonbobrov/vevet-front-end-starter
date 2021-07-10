@@ -1,26 +1,34 @@
 import { selectAll } from 'vevet-dom';
 import { setLoadingIndicator } from '../../layout/loading/indicator';
 
+interface PopupButton extends HTMLElement {
+    popupProceededClick: boolean;
+}
+
 export function setPopupButtons (
     outer: false | Element = false,
 ) {
 
     // set click on popup buttons
-    const buttons = selectAll('.js-open-popup', !outer ? undefined : outer);
+    const buttons = selectAll('.js-popup-button', !outer ? undefined : outer) as NodeListOf<PopupButton>;
     buttons.forEach((button) => {
-        const popupID = button.getAttribute('data-popup');
-        if (popupID) {
-            // @ts-ignore
-            if (typeof button['popup-proceeded'] === 'undefined') {
+
+        const popupSelector = button.getAttribute('data-popup-selector');
+        const popupType = button.getAttribute('data-popup-type') || 'auto';
+
+        if (popupSelector) {
+            if (typeof button.popupProceededClick === 'undefined') {
+
                 button.addEventListener('click', (e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    loadPopup(popupID);
+                    loadPopup(popupSelector, popupType);
                 });
-                // @ts-ignore
-                button['popup-proceeded'] = true;
+                button.popupProceededClick = true;
+
             }
         }
+
     });
 
 }
@@ -28,13 +36,25 @@ export function setPopupButtons (
 
 
 function loadPopup (
-    popupID: string,
+    popupSelector: string,
+    popupType: string,
 ) {
 
     setLoadingIndicator(true);
-    import('./auto/openAutoPopup').then((module) => {
-        module.default(`${popupID}`);
-    });
+    if (popupType === 'auto' || popupType.includes('auto ')) {
+        import('./auto/popupAuto').then((module) => {
+            module.openAutoPopup(`${popupSelector}`, popupType.split(' '));
+        });
+    }
+    else {
+        import('./common/popup').then((module) => {
+            module.popup.show({
+                selector: popupSelector,
+                types: popupType.split(' '),
+                append: true,
+            });
+        });
+    }
     setLoadingIndicator(false);
 
 }

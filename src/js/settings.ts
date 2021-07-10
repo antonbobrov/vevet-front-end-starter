@@ -2,13 +2,19 @@ export const OpenServerDomain = 'vevet-front-end-starter';
 
 export const isTesting = process.env.NODE_ENV === 'development';
 
+export const lang = document.documentElement.getAttribute('lang');
+export const langDir = document.documentElement.getAttribute('dir') as 'ltr' | 'rtl';
+
+export function isRtl () {
+    return langDir === 'rtl';
+}
+
 export const resizeTimeout = 100;
 export const useAdaptiveFontSize = true;
 
-export const showHidePageDuration = !isTesting ? 250 : 10;
 export const pageSettings = {
     default: 'default-page',
-    load: showHidePageDuration,
+    load: !isTesting ? 250 : 10,
     update: 10,
-    done: showHidePageDuration,
+    done: !isTesting ? 250 : 10,
 };

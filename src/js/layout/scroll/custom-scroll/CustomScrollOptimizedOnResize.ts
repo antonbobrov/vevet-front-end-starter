@@ -7,7 +7,7 @@ export class CustomScrollOptimizedOnResize extends ScrollModule {
     _autoResize () {
 
         this._autoResizeFrames++;
-        if (this._autoResizeFrames > 60) {
+        if (this._autoResizeFrames > 10) {
             this._autoResizeFrames = 0;
             super._autoResize();
         }

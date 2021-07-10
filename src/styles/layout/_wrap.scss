@@ -5,11 +5,11 @@ html {
             --wrap: 4vw;
             --wrap-1: 16.6vw;
         }
-        @media (min-width: 1440px) and (max-width: 1920px) {
+        @media (min-width: 1440px) and (max-width: 1580px) {
             --wrap: 60px;   
             --wrap-1: calc((100vw - 960px) / 2);
         }
-        @media (min-width: 1921px) {
+        @media (min-width: 1581px) {
             --wrap: 4vw;   
             --wrap-1: 18.75vw;   
         }

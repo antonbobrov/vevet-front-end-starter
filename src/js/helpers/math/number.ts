@@ -1,5 +1,5 @@
 export function strToNum (
-    val: string,
+    val: string | number,
 ) {
     if (typeof val !== 'string') {
         val = `${val}`;

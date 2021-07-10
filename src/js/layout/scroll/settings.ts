@@ -1,6 +1,6 @@
 import app from '../../app/app';
 
-export const useCustomScroll = customScrollAvailable();
+export const useCustomScroll = false; // customScrollAvailable();
 export const useWindowScroll = !useCustomScroll;
 
 if (!useCustomScroll && useWindowScroll) {

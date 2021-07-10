@@ -14,7 +14,7 @@ export default function ThreeRenderer (canvas: HTMLCanvasElement, outer: Element
     });
     renderer.physicallyCorrectLights = true;
 
-    const DPR = viewport.dprMobile;
+    const DPR = viewport.dpr;
     renderer.setPixelRatio(DPR);
     renderer.setSize(outer.clientWidth, outer.clientHeight);
 
@@ -37,9 +37,18 @@ export default function ThreeRenderer (canvas: HTMLCanvasElement, outer: Element
 
 
 
+    function destroy () {
+
+        renderer.dispose();
+
+    }
+
+
+
     return {
         renderer,
         resize: resize.bind(this),
+        destroy: destroy.bind(this),
     };
 
 }

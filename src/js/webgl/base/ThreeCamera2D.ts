@@ -5,6 +5,7 @@ export namespace IThreeCamera2D {
     export interface Returns {
         camera: OrthographicCamera;
         resize: Function;
+        destroy: Function;
     }
 
 }
@@ -54,9 +55,16 @@ export function ThreeCamera2D (outer: false | Element = false) {
 
 
 
+    function destroy () {
+
+    }
+
+
+
     return {
         camera,
         resize: resize.bind(this),
+        destroy: destroy.bind(this),
     };
 
 }

@@ -1,9 +1,13 @@
+const viewedClassName = 'v-viewed';
+
 export const scrollViewClasses = [
     'v-view',
-    'v-viewed',
+    viewedClassName,
     'v-view_b',
     'v-view_a',
 ];
+
+
 
 export function includesScrollViewClass (el: Element) {
 
@@ -34,4 +38,29 @@ export function removeScrollViewClasses (
         });
     });
 
+}
+
+
+
+export function isScrollViewed (
+    el: Element,
+) {
+    return el.classList.contains(viewedClassName);
+}
+
+
+
+export function onScrollViewEl (
+    el: Element,
+    callback: () => void,
+) {
+    if (el.classList.contains(viewedClassName)) {
+        callback();
+    }
+    else {
+        // @ts-ignore
+        el['v-view-callback'] = () => {
+            callback();
+        };
+    }
 }

@@ -5,6 +5,7 @@ export namespace IThreeCamera3D {
     export interface Returns {
         camera: PerspectiveCamera;
         resize: Function;
+        destroy: Function;
     }
 
 }
@@ -69,9 +70,16 @@ export function ThreeCamera3D (
 
 
 
+    function destroy () {
+
+    }
+
+
+
     return {
         camera,
         resize: resize.bind(this),
+        destroy: destroy.bind(this),
     };
 
 }

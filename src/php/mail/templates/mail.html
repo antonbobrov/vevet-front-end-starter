@@ -1,66 +1,78 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<title>{{subject}}</title>
-	</head>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>{{subject}}</title>
+</head>
+
+<body style="margin: 0;padding: 0;background: #f6f6f6;">
 	
-	<body style="font-family: Arial, sans-serif; font-size: 16px; line-height: 24px; color: #545454;background: #dcdcdc;">
-	<div style="width: 800px;font-family: Arial, sans-serif; font-size: 16px; line-height: 24px; color: #dcdcdc;background: #dcdcdc;overflow:hidden;">
-	
-		<div style="width: 668px;margin: 50px auto;background: #fff;">
-		
-			<div style="width: 100%;padding: 27px 0 24px 41px;border-bottom: 2px solid #dcdcdc; font-size: 24px;line-height: normal;color: #000;font-weight: 500;font-family: Arial, sans-serif;">
-				{{subject}}
-			</div>
-			
-			<div style="padding: 30px 41px 30px 41px;">
-			
-			
-			
-				<!-- Text -->
-			
-				<p style="margin: 0; font-size: 20px;line-height: normal;color: #000;font-weight: 500;font-family: Arial, sans-serif;">{{text}}</p>
-			
-			
-			
-				<!-- Inputs -->
+	<table style="padding: 40px;width: 100%;background: #f6f6f6;">
+		<tr><td>
+
+			<table style="border: 1px solid #f0f0f0;background: #fff;width: 800px;margin: auto; border-collapse: collapse;">
+				<tr>
+					<td style="padding: 30px 20px; border-bottom: 2px solid #6f6f6f;font-family: 'Arial';color: #111;font-weight: 600;font-size: 20px;line-height: 1.2em;">
+						{{subject}}
+					</td>
+				</tr>
+				{% if text is not empty %}
+					<tr>
+						<td style="padding: 20px; border-bottom: 2px solid #6f6f6f;font-family: 'Arial';color: #111;font-weight: 300;font-size: 16px;line-height: 1.2em;">
+							{{text}}
+						</td>
+					</tr>
+				{% endif %}
+				<tr>
+					<td style="padding: 20px; font-family: 'Arial';color: #111;font-weight: 300;font-size: 16px;line-height: 1.2em;">
+
+						<!-- Inputs -->
+						<table style="border-collapse: collapse; width: 100%;">
+							{% for key, input in inputs %}
+								<tr>
+									<td 
+										style="padding: 10px; border: 1px solid #ccc; font-weight: 600;"
+										{% if input.value is iterable %}
+											colspan="2"
+										{% endif %}
+									>
+										{{input.title}}
+									</td>
+									{% if input.value is not iterable %}
+										<td style="padding: 10px; border: 1px solid #ccc;">
+											{{input.value}}
+										</td>
+									{% endif %}
+								</tr>
+								{% if input.value is iterable %}
+									<tr>
+										<td style="padding: 20px; border: 1px solid #ccc;" colspan="2">
+											<table style="border-collapse: collapse; width: 100%;">
+												{% for val in input.value %}
+													<tr>
+														<td style="padding: 10px; border: 1px solid #ccc; font-weight: 600;">
+															{{ val.key }}
+														</td>
+														<td style="padding: 10px; border: 1px solid #ccc;">
+															{{ val.value }}
+														</td>
+													</tr>
+												{% endfor %}
+											</table>
+										</td>
+									</tr>
+								{% endif %}
+							{% endfor %}
+						</table>
+
+					</td>
+				</tr>
+			</table>
 				
-				<table style="border-collapse: collapse;width: 100%;border-top: 2px solid #dcdcdc;border-left: 2px solid #dcdcdc;margin: 24px 0 0 0;">
-					<tbody>
-						<tr>
-							<td style="width: 50%;vertical-align: top; font-size: 13px;line-height: 24px;border-right: 2px solid #dcdcdc;border-bottom: 2px solid #dcdcdc;text-align: left;padding: 10px 20px;color: #000;">
-								Форма
-							</td>
-							<td style="width: 50%;vertical-align: top; font-size: 13px;line-height: 24px;border-right: 2px solid #dcdcdc;border-bottom: 2px solid #dcdcdc;text-align: left;padding: 10px 20px;color: #000;">
-								{{formSubject}}
-							</td>
-						</tr>
-					</tbody>
-                </table>
-                
-                {% for key, input in inputs %}
-                    <table style="border-collapse: collapse;width: 100%;border-top: 2px solid #dcdcdc;border-left: 2px solid #dcdcdc;margin: 10px 0 0 0;">
-                        <tbody>
-                            <tr>
-                                <td style="width: 50%;vertical-align: top; font-size: 13px;line-height: 24px;border-right: 2px solid #dcdcdc;border-bottom: 2px solid #dcdcdc;text-align: left;padding: 10px 20px;color: #000;">
-                                    {{input.title}}
-                                </td>
-                                <td style="width: 50%;vertical-align: top; font-size: 13px;line-height: 24px;border-right: 2px solid #dcdcdc;border-bottom: 2px solid #dcdcdc;text-align: left;padding: 10px 20px;color: #000;">
-                                    {{input.value}}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                {% endfor %}
-			
-			
-			
-			</div>
-			
-		</div>
-	
-	</div>
-	</body>
+		</td></tr>
+	</table>
+
+</body>
+
 </html>

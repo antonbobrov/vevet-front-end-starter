@@ -1,7 +1,7 @@
 import { MenuTimelineModule, TimelineBaseModule, mathSpreadScopeProgress } from 'vevet';
 import { selectOne, isElement, selectAll } from 'vevet-dom';
-import app from '../../../app/app';
-import { pageAjax } from '../../../pages/pageAjax';
+import app from '../../../../app/app';
+import { pageAjax } from '../../../../pages/pageAjax';
 import { createLanguages } from '../../languages/createLanguages';
 
 

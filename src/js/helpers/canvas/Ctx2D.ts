@@ -7,8 +7,6 @@ const { viewport } = app;
 
 export class Ctx2D {
 
-    protected _parent: Element | false;
-
     protected _canvas: HTMLCanvasElement;
     get canvas () {
         return this._canvas;
@@ -36,9 +34,14 @@ export class Ctx2D {
 
 
 
-    constructor (parent: Element | false) {
+    constructor (
+        protected _parent: Element | false,
+        /**
+         * true - real DPR, false - dprMobile, or just a number
+         */
+        protected _useDpr: boolean | number = false,
+    ) {
 
-        this._parent = parent;
         this._create();
 
     }
@@ -55,8 +58,19 @@ export class Ctx2D {
         height?: number,
     ) {
 
-        this._dpr = viewport.dprMobile;
-        const dpr = this._dpr;
+        let dpr = 1;
+        if (typeof this._useDpr === 'boolean') {
+            if (this._useDpr) {
+                dpr = viewport.dpr;
+            }
+            else {
+                dpr = viewport.dprMobile;
+            }
+        }
+        else {
+            dpr = this._useDpr;
+        }
+        this._dpr = dpr;
 
         let newWidth = 0;
         let newHeight = 0;

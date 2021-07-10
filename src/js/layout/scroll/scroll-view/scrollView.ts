@@ -3,8 +3,10 @@ import { initScrollViewParents } from './scrollViewParents';
 import { getScrollSelector } from '../custom-scroll/settings';
 import { resizeTimeout } from '../../../settings';
 import app from '../../../app/app';
+import { updateThingsCallbacks } from '../../../app/updateThings';
 
 let currentViewModule: (ScrollViewModule | false) = false;
+let updateThingsCallback: string | false;
 
 
 
@@ -42,7 +44,7 @@ export function createView (
     const pageSettings: ScrollViewModule.Properties = {
         selectors: {
             outer: (scrollOuter instanceof HTMLHtmlElement) ? window : scrollOuter,
-            elements: '*[class*="v-view"]',
+            elements: '*[class*="v-view"]:not([data-view-ignore])',
             inside: false,
         },
         on: false,
@@ -61,10 +63,20 @@ export function createView (
     // initialize scroll view
     const view = new ScrollViewModule(settings);
 
+    // update things
+    updateThingsCallback = updateThingsCallbacks.on('', () => {
+        view.updateEl();
+        view.seek();
+    });
+
     // destroy the class on page destroy
     if (app.vevetPage) {
         app.vevetPage.on('destroy', () => {
             view.destroy();
+            if (updateThingsCallback) {
+                updateThingsCallbacks.remove(updateThingsCallback);
+                updateThingsCallback = false;
+            }
         });
     }
 

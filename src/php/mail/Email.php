@@ -1,6 +1,6 @@
 <?php
 
-include_once('class/PHPMailerAutoload.php');
+require_once 'lib/PHPMailer/PHPMailerAutoload.php';
 require_once 'lib/Twig/Autoloader.php';
 
 
@@ -11,7 +11,6 @@ class Email {
 	private $form;
 	private $subject;
 	private $formName;
-	private $formSubject;
 	private $formHTML;
 	private $template = 'mail';
 
@@ -84,8 +83,7 @@ class Email {
 			if ($this->formName == $key) {
 
 				$this->form = $value;
-				$this->subject = $this->config['subject'];
-				$this->formSubject = $value['subject'];
+				$this->subject = $value['subject'];
 				if (isset($value['template'])) {
 					$this->template = $value['template'];
 				}
@@ -125,19 +123,24 @@ class Email {
 				}
 				else {
 					// $errors[$key] = 'The field "' . $key . '" must not be empty';
-					$errors[$key] = 'Поле должно быть заполнено';
+					$errors[$key] = 'The field must exist in POST';
 					continue;
 				}
 			}
 
 			// validate
-			if (!$value['check']($this->post[$key], $this->post)) {
+			$validate = $value['check']($this->post[$key], $this->post);
+			if (!$validate) {
 				if ($value['getError']) {
 					$errors[$key] = $value['getError']($this->post[$key], $this->post);
 				}
 				else {
-					// $errors[$key] = 'The field "' . $key . '" is not valid';
-					$errors[$key] = 'Поле должно быть заполнено правильно';
+					$errors[$key] = 'The field is not valid';
+				}
+			}
+			else {
+				if (!is_bool($validate)) {
+					$this->post[$key] = $validate;
 				}
 			}
 
@@ -224,11 +227,8 @@ class Email {
 			$text = false;
 		}
 
-		// return
-
 		return array(
 			'subject' => $this->subject,
-			'formSubject' => $this->formSubject,
 			'config' => $this->config,
 			'post' => $this->post,
 			'inputs' => $inputs,
@@ -271,7 +271,7 @@ class Email {
 			// add attachment
 			if ($_POST['loaded-file']) {
 				$mail->AddAttachment(
-					'./fileupload/uploads/' . $_POST['loaded-file'],
+					__DIR__ . '/fileupload/uploads/' . $_POST['loaded-file'],
 					$_POST['loaded-file']
 				);
 			}
@@ -288,9 +288,9 @@ class Email {
 			}
 	
 		}
-		catch(phpmailerException $e) {
+		catch (phpmailerException $e) {
 			$this->error(array(
-				'smtp' => 'SMTP error'
+				'smtp' => 'SMTP error ' . $e
 			));
 		}
 

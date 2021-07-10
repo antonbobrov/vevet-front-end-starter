@@ -9,6 +9,9 @@ import { scrollToTop } from '../../layout/scroll/scrollTo';
 import { createSelectElements } from './inputs/createSelectElements';
 import valdateFormInputs from './inputs/validateFormInputs';
 import { IAjaxFormElements } from './types';
+import './FormRecaptcha';
+import { FormRecaptcha, tagName as formRecaptchaTagName } from './FormRecaptcha';
+import { updateThings } from '../../app/updateThings';
 
 const $ = require('jquery');
 
@@ -130,6 +133,8 @@ export class AjaxForm extends LitElement {
 
         // set events on success
         this._setOnSuccess();
+        // set events on failure
+        this._setOnFail();
 
         // set reverse z-index for elements
         const children = this.querySelectorAll('form > *');
@@ -173,6 +178,21 @@ export class AjaxForm extends LitElement {
     }
 
     /**
+     * Set form events on failure
+     */
+    protected _setOnFail () {
+
+        if (!this.form) {
+            return;
+        }
+
+        this.form.on('failure', () => {
+            this._resetRecaptcha();
+        });
+
+    }
+
+    /**
      * Set form events on success
      */
     protected _setOnSuccess () {
@@ -182,6 +202,8 @@ export class AjaxForm extends LitElement {
         }
 
         this.form.on('success', () => {
+
+            this._resetRecaptcha();
 
             // scroll to top on success
             if (this.scrollToTopOnSuccess) {
@@ -210,21 +232,17 @@ export class AjaxForm extends LitElement {
         // open popup if exists
         if (this.popupOnSuccess) {
             import('../popup/auto/popupAuto').then((module) => {
-                const popup = module.default;
+                const popup = module.popupAuto;
                 if (popup.shown) {
                     popup.on('hidden', () => {
-                        import('../popup/auto/openAutoPopup').then((mod) => {
-                            mod.default(this.popupOnSuccess);
-                        });
+                        module.openAutoPopup(this.popupOnSuccess);
                     }, {
                         once: true,
                     });
                     popup.hide();
                 }
                 else {
-                    import('../popup/auto/openAutoPopup').then((mod) => {
-                        mod.default(this.popupOnSuccess);
-                    });
+                    module.openAutoPopup(this.popupOnSuccess);
                 }
             });
         }
@@ -254,6 +272,7 @@ export class AjaxForm extends LitElement {
                     if ('updateThingsCallback' in window) {
                         window.updateThingsCallback();
                     }
+                    updateThings();
                 }, {
                     once: true,
                 });
@@ -264,6 +283,7 @@ export class AjaxForm extends LitElement {
         // update things
         if ('updateThingsCallback' in window) {
             window.updateThingsCallback();
+            updateThings();
         }
 
     }
@@ -286,6 +306,20 @@ export class AjaxForm extends LitElement {
             }
         }
         return false;
+    }
+
+
+
+    /**
+     * Reset recaptcha
+     */
+    protected _resetRecaptcha () {
+
+        const recaptchaEl = selectAll(formRecaptchaTagName, this) as NodeListOf<FormRecaptcha>;
+        recaptchaEl.forEach((el) => {
+            el.reset();
+        });
+
     }
 
 

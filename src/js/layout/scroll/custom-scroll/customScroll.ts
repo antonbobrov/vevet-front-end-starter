@@ -1,5 +1,5 @@
 import { selectAll, selectOne } from 'vevet-dom';
-import { ScrollDragPlugin } from 'vevet';
+import { ScrollBarPlugin, ScrollDragPlugin } from 'vevet';
 import { resizeTimeout } from '../../../settings';
 import app from '../../../app/app';
 import { getElementsSelector, getEase, canBeCustom } from './settings';
@@ -104,7 +104,7 @@ function createScroll () {
     setScrollClasses(scroll, false);
 
     // add scrollbars
-    // scroll.addPlugin(new ScrollBarPlugin());
+    scroll.addPlugin(new ScrollBarPlugin());
 
     // add keyboard plugin
     scroll.addPlugin(new ScrollKeyboardPlugin());

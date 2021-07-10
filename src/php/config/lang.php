@@ -31,7 +31,7 @@ if (isset($_GET['contexts'])) {
                         '".$key."_".$keySettings."', 
                         '".$settingsSettings."', 
                         'textfield', 'core', 
-                        'language', 
+                        'language_" . $key . "', 
                         NULL
                     );
                 ";

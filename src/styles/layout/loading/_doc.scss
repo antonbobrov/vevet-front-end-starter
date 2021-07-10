@@ -1,0 +1,67 @@
+@mixin loading-indicator {
+    cursor: progress !important; /* stylelint-disable-line declaration-no-important */
+    * {
+        cursor: progress !important; /* stylelint-disable-line declaration-no-important */
+    }
+    &:before {
+        opacity: 1;
+        animation-name: loading-indicator;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+        animation-fill-mode: both;
+    }
+}
+
+
+
+html {
+
+    &:before {
+        content: '';
+        display: block;
+        position: fixed;
+        z-index: 999999;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: var(--color-highlight);
+
+        @include desktop {
+            height: px-to-rem(5);
+        }
+        @include tablet {
+            height: 5px;
+        }
+        @include mobile {
+            height: 3px;
+        }
+
+        transition: opacity 0.25s;
+        opacity: 0;
+
+    }
+
+    @keyframes loading-indicator {
+        from {
+            transform: scale(0, 1);
+            transform-origin: top left;
+        }
+        50% {
+            transform-origin: top left;
+            transform: scale(1, 1);
+        }
+        50.01% {
+            transform-origin: top right;
+            transform: scale(1, 1);
+        }
+        to {
+            transform: scale(0, 1);
+            transform-origin: top right;
+        }
+    }
+
+    &.loading {
+        @include loading-indicator;
+    }
+    
+}

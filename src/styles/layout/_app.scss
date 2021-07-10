@@ -1,9 +1,8 @@
 .app {
-    position: relative;
-    z-index: 1;
-    overflow: hidden;
 
     @at-root html:not(.use-native-scroll) & {
+        position: relative;
+        z-index: 1;
         height: calc(100 * var(--vh));
     }
     

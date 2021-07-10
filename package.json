@@ -9,6 +9,9 @@
     "lint:js": "eslint . --ext .ts,.js",
     "lint:scss": "npx stylelint \"**/*.scss\""
   },
+  "browserslist": [
+    "since 2015"
+  ],
   "devDependencies": {
     "@babel/core": "^7.11.4",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
@@ -16,6 +19,7 @@
     "@types/dat.gui": "^0.7.6",
     "@types/inputmask": "^5.0.0",
     "@types/intl-tel-input": "^17.0.1",
+    "@types/react-dom": "^17.0.7",
     "@types/three": "^0.127.1",
     "@types/video.js": "^7.3.15",
     "@typescript-eslint/eslint-plugin": "^3.10.1",
@@ -57,6 +61,7 @@
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
+    "@lit-labs/react": "^1.0.0-rc.2",
     "dat.gui": "^0.7.7",
     "easing-progress": "0.0.4",
     "email-validator": "^2.0.4",
@@ -68,6 +73,9 @@
     "lerp": "^1.0.3",
     "lit-element": "^2.4.0",
     "normalize-scss": "^7.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "redux": "^4.1.0",
     "three": "^0.127.0",
     "vevet": "^1.4.24",
     "vevet-dom": "0.0.15",

@@ -1,6 +1,6 @@
 import { PopupModule } from 'vevet';
 import app from '../../../app/app';
-import { pageAjax } from '../../../pages/pageAjax';
+import { processPopupEvents } from '../../popup/common/processPopupEvents';
 import { setMediaPopupSize } from './setMediaPopupSize';
 
 const adaptivePopupSize = true;
@@ -9,29 +9,15 @@ const adaptivePopupSize = true;
 
 // create the popup
 export const mediaPopup = new PopupModule();
-
-
-
-// hide the popup on page change
-pageAjax.on('prepare', () => {
-    mediaPopup.hide();
+processPopupEvents({
+    instance: mediaPopup,
+    appendCloseToLevels: true,
 });
 
-// set escape key event
-window.addEventListener('keyup', (e: KeyboardEvent) => {
-    if (e.keyCode === 27) {
-        mediaPopup.hide();
+mediaPopup.on('created', () => {
+    if (mediaPopup.outer) {
+        mediaPopup.outer.classList.add('js-no-custom-cursor');
     }
-});
-
-
-
-// prevent beneath-scrolling
-mediaPopup.on('show', () => {
-    app.html.classList.add('prevent-scroll-under-popup');
-});
-mediaPopup.on('hide', () => {
-    app.html.classList.remove('prevent-scroll-under-popup');
 });
 
 

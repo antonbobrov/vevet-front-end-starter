@@ -1,0 +1,21 @@
+.v-scroll-line {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 3px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+
+    &__progress {
+        @include absolute(top-left, 12, 12);
+        background: #fff;
+        transform-origin: top left;
+        transform: scale(0);
+    }
+
+    @at-root html:not(.use-custom-scroll) .v-scroll > & {
+        display: none;
+    }
+
+}

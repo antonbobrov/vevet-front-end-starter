@@ -1,11 +1,11 @@
 import { ScrollModule } from 'vevet';
 import { selectOne } from 'vevet-dom';
 import { createLanguages } from '../languages/createLanguages';
-import { disableTabIndex } from '../scroll/keyboard/tabindex';
-import { getScrollSelector } from '../scroll/custom-scroll/settings';
-import { onScroll } from '../scroll/onScroll';
-import app from '../../app/app';
-import { pageAjax } from '../../pages/pageAjax';
+import { disableTabIndex } from '../../scroll/keyboard/tabindex';
+import { getScrollSelector } from '../../scroll/custom-scroll/settings';
+import { onScroll } from '../../scroll/onScroll';
+import app from '../../../app/app';
+import { pageAjax } from '../../../pages/pageAjax';
 import { setPopupMenuButtonEvents } from '../menu/popup-menu/setPopupMenuButtonEvents';
 
 

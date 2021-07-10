@@ -3,6 +3,8 @@ import { timeoutCallback } from 'vevet';
 import { hidePage, showPage } from '../../../pages/pageStates';
 import app from '../../../app/app';
 import { scrollToTop } from '../scrollTo';
+import { enableTabIndex } from '../keyboard/tabindex';
+import { setEnterClickListener } from '../../../helpers/listeners/setEnterClickListener';
 
 const prefix = 'scroll-to-top';
 
@@ -27,6 +29,20 @@ export class ScrollToTop extends LitElement {
 
     firstUpdated () {
 
+        this.addEventListener('click', () => {
+            this._handleClick();
+        });
+
+        // enable tab events
+        enableTabIndex(this);
+        setEnterClickListener(this, () => {
+            this._handleClick();
+        });
+
+    }
+
+    protected _handleClick () {
+
         let shouldHidePage = false;
         const page = app.vevetPage;
         if (page) {
@@ -35,18 +51,16 @@ export class ScrollToTop extends LitElement {
             }
         }
 
-        this.addEventListener('click', () => {
-            let timeout = 0;
-            if (shouldHidePage) {
-                hidePage();
-                timeout = 250;
-            }
-            timeoutCallback(() => {
-                scrollToTop(500).then(() => {
-                    showPage();
-                });
-            }, timeout);
-        });
+        let timeout = 0;
+        if (shouldHidePage) {
+            hidePage();
+            timeout = 250;
+        }
+        timeoutCallback(() => {
+            scrollToTop(500).then(() => {
+                showPage();
+            });
+        }, timeout);
 
     }
 

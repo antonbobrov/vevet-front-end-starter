@@ -1,7 +1,7 @@
 import { TimelineModule } from 'vevet';
 import { layoutElements } from '../helpers/dom-css/layoutElements';
 import { scrollToTop } from '../layout/scroll/scrollTo';
-import { showHidePageDuration } from '../settings';
+import { pageAjax } from './pageAjax';
 
 function getElements () {
     return [
@@ -12,7 +12,7 @@ function getElements () {
 
 
 export function hidePage (
-    duration = showHidePageDuration,
+    duration = pageAjax.prop.timeouts.load,
     scrollTop = true,
 ) {
 
@@ -44,7 +44,7 @@ export function hidePage (
 
 
 export function showPage (
-    duration = showHidePageDuration,
+    duration = pageAjax.prop.timeouts.load,
 ) {
 
     const outers = getElements();

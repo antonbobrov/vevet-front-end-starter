@@ -20,7 +20,7 @@ const typeAll = '2d,3d';
 export namespace IThreeBase {
 
     export interface Properties extends Module.Properties {
-        outerSelector?: string;
+        outerSelector?: string | HTMLElement | Element;
         autoplay?: boolean;
         cameras?: '2d' | '3d' | '2d,3d';
         cameraFar?: number;
@@ -35,6 +35,7 @@ class ThreeBase extends Module {
 
     // @ts-ignore
     get defaultProp (): IThreeBase.Properties {
+        // @ts-ignore
         return merge(super.defaultProp, {
             outerSelector: '#three-js',
             autoplay: false,
@@ -59,6 +60,9 @@ class ThreeBase extends Module {
     }
 
     protected _canvas: HTMLCanvasElement;
+    get canvas () {
+        return this._canvas;
+    }
 
     protected _outer: Element;
     get outer () {
@@ -68,6 +72,7 @@ class ThreeBase extends Module {
     protected _renderer: {
         renderer: WebGLRenderer;
         resize: Function;
+        destroy: Function;
     };
     get renderer () {
         return this._renderer.renderer;
@@ -286,6 +291,22 @@ class ThreeBase extends Module {
         }
 
         this.lbt('afterrender');
+
+    }
+
+
+
+    public destroy () {
+
+        this._renderer.destroy();
+        if (this._camera2d) {
+            this._camera2d.destroy();
+        }
+        if (this._camera3d) {
+            this._camera3d.destroy();
+        }
+
+        this._viewportEvent.remove();
 
     }
 

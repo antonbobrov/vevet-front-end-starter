@@ -1,6 +1,6 @@
 export function boundProgress (
-	progress: number,
-	scope = [0, 1]
+    progress: number,
+    scope = [0, 1],
 ) {
 
     if (progress < scope[0]) {

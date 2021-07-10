@@ -26,62 +26,51 @@ export const adaptiveFontSize = (function fontSize (): Return {
 
         const { viewport } = app;
         const [width, height] = viewport.size;
-        let k = 1;
+        let multiplier = 1;
 
         // dekstop
         if (viewport.desktop) {
             if (width < 1440) {
-                k = width / 1440;
+                multiplier = width / 1440;
             }
-            else if (width >= 1440 && width <= 1920) {
-                k = 1;
+            else if (width >= 1440 && width <= 1580) {
+                multiplier = 1;
             }
             else {
-                k = width / 1920;
+                multiplier = width / 1580;
             }
         }
         // tablet
         else if (viewport.tablet) {
-            k = width / 1024;
+            multiplier = width / 1024;
         }
         // mobile
         else if (viewport.mobile) {
             if (app.viewport.landscape) {
-                k = 1;
+                multiplier = 1;
             }
             else if (width > 750) {
-                k = width / 500;
+                multiplier = width / 500;
             }
             else if (width > height) {
                 if (width >= 360 && width <= 400) {
-                    k = 1;
+                    multiplier = 1;
                 }
                 else if (width < 360) {
-                    k = boundProgress(width / 360, [0.9375, Infinity]);
+                    multiplier = boundProgress(width / 360, [0.9375, Infinity]);
                 }
                 else if (width > 400) {
-                    k = width / width;
+                    multiplier = width / width;
                 }
             }
             else {
-                k = 1;
+                multiplier = 1;
             }
         }
 
         // calculate
-
-        let font = Math.floor(k * 16);
-        if (app.browser === 'ie') {
-            font = 16;
-        }
-        if (font <= 13) {
-            font = 14;
-        }
-        if (font > 22) {
-            font = 22;
-        }
-
-        return font;
+        const font = Math.round(multiplier * 16);
+        return boundProgress(font, [13, 27]);
 
     }
 
@@ -120,3 +109,13 @@ export const adaptiveFontSize = (function fontSize (): Return {
 
 
 }());
+
+
+
+export function adaptivePx (
+    val: number,
+    round = false,
+) {
+    const px = val * adaptiveFontSize.getValue() / 16;
+    return round ? Math.round(px) : px;
+}

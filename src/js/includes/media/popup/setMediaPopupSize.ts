@@ -27,7 +27,7 @@ function getYPadding (
     const close = selectOne('.v-popup__close', outer);
     const closeBounding = close.getBoundingClientRect();
 
-    return ((closeBounding.top * 2) + closeBounding.height);
+    return closeBounding.height;
 
 }
 

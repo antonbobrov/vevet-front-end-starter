@@ -15,3 +15,10 @@ $view-duration: 1.25s;
 
 $wrap-padding: 0 var(--wrap);
 $wrap-1-padding: 0 var(--wrap-1);
+
+
+
+html {
+    --vh: 1vh;
+    --vw: 1vw;
+}

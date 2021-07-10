@@ -75,9 +75,9 @@ try {
 
     // check mime types
     $mimeTypes = "application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/pdf";
-    if ($_POST['accept']) {
-        $mimeTypes = $_POST['accept'];
-    }
+    // if ($_POST['accept']) {
+    //     $mimeTypes = $_POST['accept'];
+    // }
     $mimeTypes = explode(',', $mimeTypes);
     $hasMimeType = false;
     foreach ($mimeTypes as $mimeType) {

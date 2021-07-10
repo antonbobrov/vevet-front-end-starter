@@ -34,11 +34,14 @@
 
 // Layout Elements
 
-@import './layout/header/header';
-@import './layout/footer/footer';
+@import './layout/loading/v-preloader';
+@import './layout/loading/doc';
 
-@import './layout/menu/v-menu';
-@import './layout/menu/popup-menu';
+@import './layout/nav/header';
+@import './layout/nav/footer';
+
+@import './layout/nav/menu/v-menu';
+@import './layout/nav/menu/popup-menu';
 
 @import './layout/content/page-content';
 

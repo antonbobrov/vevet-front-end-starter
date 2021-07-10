@@ -1,4 +1,4 @@
-import { pageAjax } from '../../pages/pageAjax';
+import { pageAjax } from '../../../pages/pageAjax';
 import { MENU_LINKS_SELECTOR } from './vars';
 
 export function updateMenuLinks () {

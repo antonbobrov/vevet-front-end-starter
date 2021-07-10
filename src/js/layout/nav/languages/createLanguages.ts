@@ -1,5 +1,5 @@
 import { isElement, selectAll, selectOne } from 'vevet-dom';
-import { pageAjax } from '../../pages/pageAjax';
+import { pageAjax } from '../../../pages/pageAjax';
 
 export function createLanguages (
     parent: Element,

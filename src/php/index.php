@@ -16,7 +16,7 @@ require_once './includes/start.php';
         <h2 class="v-view_b">Test Popup</h2>
         <br>
         <div class="v-view_b">
-            <button class="js-open-popup" data-popup="#test-popup">Open popup</button>
+            <button class="js-popup-button" data-popup-selector="#test-popup">Open popup</button>
         </div>
         <div id="test-popup" class="display-none">
             <div class="popup-outer">

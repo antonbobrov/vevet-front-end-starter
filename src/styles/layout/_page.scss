@@ -5,5 +5,9 @@
     @at-root html:not(.use-native-scroll) & {
         height: calc(100 * var(--vh));
     }
+
+    @at-root html.use-native-scroll & {
+        position: static;
+    }
     
 }

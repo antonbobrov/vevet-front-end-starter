@@ -5,10 +5,10 @@ import { updateLayoutElements } from '../../helpers/dom-css/layoutElements';
 import { customScroll } from '../../layout/scroll/custom-scroll/customScroll';
 import { scrollView } from '../../layout/scroll/scroll-view/scrollView';
 import { hidePage, showPage } from '../pageStates';
-import { updateMenuLinks } from '../../layout/menu/updateMenuLinks';
+import { updateMenuLinks } from '../../layout/nav/menu/updateMenuLinks';
 
 import '../../layout/text/text-content/TextContent';
-import { headers } from '../../layout/header/headers';
+import { headers } from '../../layout/nav/header/headers';
 
 import { setPopupButtons } from '../../includes/popup/setPopupButtons';
 import { loadPlayVideoButton } from '../../includes/media/play-video-button/loadPlayVideoButton';

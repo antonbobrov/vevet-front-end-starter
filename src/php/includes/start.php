@@ -1,6 +1,6 @@
 <? require_once "config/lang.php"; ?>
 <!DOCTYPE html>
-<html lang="<? echo LANG; ?>" class="v-reset v-no-transition has-gui">
+<html lang="<? echo LANG; ?>" class="v-reset v-no-transition has-gui ltr" dir="ltr">
 
     <head>
        
@@ -25,6 +25,10 @@
        <link rel="manifest" href="/manifest.webmanifest">
 
 		<? include('css.php'); ?>
+
+        <script>
+            // window.ReCaptchaKey = '';
+        </script>
 
     </head>
 

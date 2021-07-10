@@ -26,7 +26,7 @@ module.exports = {
     },
 
     resolve: {
-        extensions: ['.ts', '.js', '.json'],
+        extensions: ['.ts', '.js', '.tsx', '.jsx', '.json'],
     },
 
     module: {
@@ -38,7 +38,7 @@ module.exports = {
                 loader: 'babel-loader',
             },
             {
-                test: /\.ts?$/,
+                test: /\.(ts|tsx)$/,
                 exclude: /node_modules/,
                 loaders: ['babel-loader', 'ts-loader'],
             },
@@ -137,10 +137,6 @@ module.exports = {
             {
                 from: `${PATHS.src}/php`,
                 to: '',
-            },
-            {
-                from: `${PATHS.src}/fonts`,
-                to: `${PATHS.assets}fonts`,
             },
         ]),
     ],

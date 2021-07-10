@@ -8,3 +8,7 @@ export interface Coords3D {
     y: number;
     z: number;
 }
+
+export interface IDestroyable {
+    destroy: () => void;
+}

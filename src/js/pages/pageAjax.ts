@@ -1,5 +1,5 @@
 import { PageAjaxModule } from 'vevet';
-import { MENU_LINKS_SELECTOR } from '../layout/menu/vars';
+import { MENU_LINKS_SELECTOR } from '../layout/nav/menu/vars';
 import { pageSettings } from '../settings';
 import { setLoadingIndicator } from '../layout/loading/indicator';
 
