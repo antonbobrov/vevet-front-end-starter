@@ -5,14 +5,3 @@
 @function rem-to-px($rem) {
     @return #{$rem * 16}px;
 }
-
-@mixin min-font-size ($px) {
-    font-size: px-to-rem($px);
-
-    @include desktop {
-        @media (max-width: 1440px) {
-            font-size: #{$px}px;
-        }
-    }
-
-}
