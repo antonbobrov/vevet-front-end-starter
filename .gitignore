@@ -2,7 +2,5 @@
 node_modules/
 public/
 
-package-lock.json
-
 !/src/img
 !/src/styles/includes
