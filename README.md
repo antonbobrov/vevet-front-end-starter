@@ -44,7 +44,7 @@ npm build
 
 ## Structure overview: 
     * /src/ - Source Files
-    * /public/ - Build files
+    * /public/ - Build files for production
     * /webpack/ - Webpack configuration
     * /.htaccess - It is used to bundle Webpack with OpenServer and also to output the PHP files to the root of the OpenServer domain.
 
@@ -63,19 +63,3 @@ All pages are linked using AJAX. To define a link working with AJAX, add the cla
 ></div>
 ```
 where "PAGE_NAME" is the name of the page bound with JavaScript. If there's not any page instance with this very name, the Default page instance will be used.
-
-
-
-
-
-## HTML Classes
-
-### full-height
-Defines a full-height element. The height of the block is set with JavaScript.
-
-### v-view
-JavaScript observable elements. When they appear in the viewport, the class "v-viewed" is added.
-### v-view_b
-The element appears with a "fade-in-from-bottom" effect.
-### v-view_a
-The element appears with a "fade-in" effect.
