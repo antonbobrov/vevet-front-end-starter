@@ -4,17 +4,24 @@ import app from '../../app/app';
 
 interface Data {
     el: Element;
-    delay: number;
+    delay?: number;
+    useOnMobile?: boolean;
     mouseenter: () => void;
     mouseleave: () => void;
 }
 
+export interface IDelayHover {
+    isHovered: () => boolean;
+    destroy: () => void;
+}
+
 export function setDelayHover ({
     el,
-    delay,
+    delay = 100,
+    useOnMobile = true,
     mouseenter,
     mouseleave,
-}: Data) {
+}: Data): IDelayHover {
 
     // states
     let isHovered = false;
@@ -35,13 +42,46 @@ export function setDelayHover ({
 
     // set mouseleave
     listeners.push(addEventListener(el, 'mouseleave', () => {
+        if (app.viewport.mobiledevice) {
+            return;
+        }
         isHovered = false;
         mouseleave();
     }));
 
+    // set events for mobile
+    if (useOnMobile) {
+
+        if (el instanceof HTMLElement) {
+            el.style.userSelect = 'none';
+        }
+
+        listeners.push(addEventListener(el, 'touchstart', () => {
+            if (!app.viewport.mobiledevice) {
+                return;
+            }
+            isHovered = true;
+            timeoutCallback(() => {
+                if (isHovered) {
+                    mouseenter();
+                }
+            }, delay);
+        }));
+
+        listeners.push(addEventListener(el, 'touchend', () => {
+            if (!app.viewport.mobiledevice) {
+                return;
+            }
+            isHovered = false;
+            mouseleave();
+        }));
+
+    }
+
 
 
     return {
+        isHovered: () => isHovered,
         destroy: () => {
             listeners.forEach((listener) => {
                 listener.remove();
