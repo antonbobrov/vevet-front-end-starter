@@ -1,14 +1,15 @@
 import {
     LitElement,
 } from 'lit-element';
-import { OnPageCreated } from './OnPageCreated';
+import { IDestroyable } from '../commonTypes';
+import onPageCreated from './onPageCreated';
 import { updateThingsCallbacks } from './updateThings';
 
 
 
 export abstract class VevetLitElement extends LitElement {
 
-    protected _onPageCreated: false | OnPageCreated = false;
+    protected _onPageCreated: false | IDestroyable = false;
     protected _disconnected = false;
     protected _updateThingsCallback: string | false;
 
@@ -21,7 +22,7 @@ export abstract class VevetLitElement extends LitElement {
     connectedCallback () {
         super.connectedCallback();
         this._disconnected = false;
-        this._onPageCreated = new OnPageCreated(() => {
+        this._onPageCreated = onPageCreated(() => {
             this._connectedCallback();
         });
         this._updateThingsCallback = updateThingsCallbacks.on('', () => {
