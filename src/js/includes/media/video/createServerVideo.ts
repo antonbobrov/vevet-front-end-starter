@@ -18,7 +18,8 @@ export function createServerVideo (
     video.playsInline = true;
 
     const source = document.createElement('source');
-    source.setAttribute('src', src);
+    source.setAttribute('src', `${src}#t=0.1`);
+    source.setAttribute('type', 'video/mp4');
     video.appendChild(source);
 
     return video;
