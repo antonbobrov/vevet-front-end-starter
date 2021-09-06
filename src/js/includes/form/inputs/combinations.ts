@@ -1,6 +1,6 @@
 import { selectAll } from 'vevet-dom';
-import { IAjaxFormElements } from '../types';
-import { getFormInputValue, onFormInputChange } from './inputs';
+import { IAjaxFormElements } from './types';
+import { getFormInputValue, onFormInputChange } from './helpers';
 
 export interface FormCombinationItem {
     name: string;
@@ -15,7 +15,7 @@ type InputsType = NodeListOf<InputType>;
 /**
  * Create form combinations
  */
-export function createFormCombinations (
+export default function createFormCombinations (
     outer: Element,
     combinations: FormCombinationItem[][] = [],
     onChangeCallback: (valid: number | false) => void,

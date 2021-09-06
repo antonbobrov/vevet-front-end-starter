@@ -1,12 +1,14 @@
 import { addEventListener, IAddEventListener } from 'vevet-dom';
-import { IAjaxFormElements } from '../types';
-import toggleFormInputError from './toggleFormInputError';
-import toggleFormLiveError from './toggleFormLiveError';
+import { toggleFormInputError } from './errors';
+import { IAjaxFormElements } from './types';
 
-export default function validateFormLength (
+interface Data {
     input: HTMLInputElement | HTMLTextAreaElement,
-    formOuter: HTMLElement,
-): IAjaxFormElements {
+}
+
+export default function createInputLengthValidator ({
+    input,
+}: Data): IAjaxFormElements {
 
     const listeners: IAddEventListener[] = [];
     const { minLength, maxLength } = input;
@@ -19,30 +21,27 @@ export default function validateFormLength (
     }));
 
     function change () {
-        if (!checkLength()) {
-            toggleFormInputError(input, true);
-            toggleFormLiveError(input.name, true, formOuter);
-        }
-        else {
-            toggleFormInputError(input, false);
-            toggleFormLiveError(input.name, false, formOuter);
-        }
+        const isValid = checkLength();
+        toggleFormInputError({
+            input,
+            isError: !isValid,
+        });
     }
 
     function checkLength () {
         const { value } = input;
-        let success = true;
+        let isValid = true;
         if (minLength !== -1) {
             if (value.length < minLength) {
-                success = false;
+                isValid = false;
             }
         }
         if (maxLength !== -1) {
             if (value.length > maxLength) {
-                success = false;
+                isValid = false;
             }
         }
-        return success;
+        return isValid;
     }
 
     return {

@@ -1,22 +1,22 @@
 import { SelectModule } from 'vevet';
 import { selectAll } from 'vevet-dom';
-import { IAjaxFormElements } from '../types';
+import { IAjaxFormElements } from './types';
 
-export function createSelectElements (
-    outer: HTMLElement,
+export default function createCustomSelects (
+    parent: Element,
 ): IAjaxFormElements {
 
     const selects: SelectModule[] = [];
     const observers: MutationObserver[] = [];
 
-    const selectEl = selectAll('select', outer) as NodeListOf<HTMLSelectElement>;
-    selectEl.forEach((el) => {
+    const selectEl = selectAll('select', parent) as NodeListOf<HTMLSelectElement>;
+    selectEl.forEach((input) => {
 
-        const select = createSelect(el);
+        const select = createSelect(input);
         selects.push(select);
 
         const mutation = new MutationObserver(() => {
-            if (el.classList.contains('error')) {
+            if (input.classList.contains('error')) {
                 // @ts-ignore
                 select._outer.classList.add('error');
             }
@@ -26,7 +26,7 @@ export function createSelectElements (
             }
         });
         observers.push(mutation);
-        mutation.observe(el, {
+        mutation.observe(input, {
             attributes: true,
         });
 
@@ -53,7 +53,7 @@ function createSelect (
 
     const select = new SelectModule({
         selector: el,
-        showSelected: false,
+        showSelected: true,
     });
 
     select.on('change', () => {

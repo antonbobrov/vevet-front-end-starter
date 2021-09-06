@@ -1,5 +1,5 @@
 import { addEventListener, IAddEventListener, selectAll } from 'vevet-dom';
-import { IAjaxFormElements } from '../types';
+import { IAjaxFormElements } from './types';
 
 /**
  * @param name - Get input by its name

@@ -6,14 +6,13 @@ import {
 import { isCustomScroll } from '../../layout/scroll/custom-scroll/isCustomScroll';
 import { getScrollSelector } from '../../layout/scroll/custom-scroll/settings';
 import { scrollToTop } from '../../layout/scroll/scrollTo';
-import { createSelectElements } from './inputs/createSelectElements';
-import valdateFormInputs from './inputs/validateFormInputs';
-import { IAjaxFormElements } from './types';
+import createCustomSelects from './inputs/customSelect';
+import createLiveFormValidation from './inputs/createLiveFormValidation';
+import { IAjaxFormElements } from './inputs/types';
 import './FormRecaptcha';
 import { FormRecaptcha, tagName as formRecaptchaTagName } from './FormRecaptcha';
 import { updateThings } from '../../app/updateThings';
-
-const $ = require('jquery');
+import { toggleFormInputError } from './inputs/errors';
 
 
 
@@ -43,7 +42,8 @@ export class AjaxForm extends LitElement {
 
     @property({
         attribute: 'scroll-to-top-on-success',
-    }) scrollToTopOnSuccess = '';
+        type: Boolean,
+    }) scrollToTopOnSuccess: boolean;
 
 
 
@@ -63,7 +63,7 @@ export class AjaxForm extends LitElement {
     /**
      * Form inputs validation
      */
-     protected _formInputsValidation: IAjaxFormElements;
+     protected _validation: IAjaxFormElements;
      /**
       * Custom select inputs
       */
@@ -124,17 +124,14 @@ export class AjaxForm extends LitElement {
         });
 
         // validate inputs
-        this._formInputsValidation = valdateFormInputs(this._formElement);
+        this._validation = createLiveFormValidation(this._formElement as HTMLFormElement);
         // crete custom select elements
-        this._selectinputs = createSelectElements(this);
+        this._selectinputs = createCustomSelects(this);
 
-        // observe errors changes
-        this._observeErrors();
-
-        // set events on success
-        this._setOnSuccess();
         // set events on failure
-        this._setOnFail();
+        this._setFailEvents();
+        // set events on success
+        this._setSuccessEvents();
 
         // set reverse z-index for elements
         const children = this.querySelectorAll('form > *');
@@ -146,48 +143,34 @@ export class AjaxForm extends LitElement {
     }
 
     /**
-     * Observe form errors
-     */
-    protected _observeErrors () {
-
-        // get errors
-        const errors = selectAll('.v-form__error, .v-form__errors, .v-form__message', this._formElement);
-        errors.forEach((error) => {
-
-            // config object
-            const config = {
-                childList: true,
-            };
-
-            // instantiating observer
-            const observer = new MutationObserver((mutations) => {
-                mutations.forEach(() => {
-                    if (error.classList.contains('show')) {
-                        $(error).stop().delay(100).slideDown(350);
-                    }
-                    else {
-                        $(error).stop().delay(100).slideUp(350);
-                    }
-                });
-            });
-            observer.observe(error, config);
-            this._mutationObservers.push(observer);
-
-        });
-
-    }
-
-    /**
      * Set form events on failure
      */
-    protected _setOnFail () {
+    protected _setFailEvents () {
 
         if (!this.form) {
             return;
         }
 
-        this.form.on('failure', () => {
+        this.form.on('failure', (data) => {
+
             this._resetRecaptcha();
+
+            // reset form errors
+            const inputs = selectAll(
+                'input, select, textarea', this,
+            ) as NodeListOf<HTMLInputElement|HTMLSelectElement|HTMLTextAreaElement>;
+            inputs.forEach((input) => {
+                let isError = false;
+                data.errors.forEach((error) => {
+                    if (error.key === input.name) {
+                        isError = true;
+                    }
+                });
+                toggleFormInputError({
+                    input,
+                    isError,
+                });
+            });
         });
 
     }
@@ -195,7 +178,7 @@ export class AjaxForm extends LitElement {
     /**
      * Set form events on success
      */
-    protected _setOnSuccess () {
+    protected _setSuccessEvents () {
 
         if (!this.form) {
             return;
@@ -209,16 +192,22 @@ export class AjaxForm extends LitElement {
             if (this.scrollToTopOnSuccess) {
                 scrollToTop().then(() => {
                     this._handleSuccess();
-                    const scrollSelector = getScrollSelector();
-                    if (isCustomScroll(scrollSelector)) {
-                        const scroll = scrollSelector as ScrollModule;
-                        scroll.setSize(true);
-                    }
                 });
             }
             else {
                 this._handleSuccess();
             }
+
+            // reset form errors
+            const inputs = selectAll(
+                'input, select, textarea', this,
+            ) as NodeListOf<HTMLInputElement|HTMLSelectElement|HTMLTextAreaElement>;
+            inputs.forEach((input) => {
+                toggleFormInputError({
+                    input,
+                    isError: false,
+                });
+            });
 
         });
 
@@ -280,11 +269,18 @@ export class AjaxForm extends LitElement {
 
         }
 
+        // update scroll sizes
+        const scrollSelector = getScrollSelector();
+        if (isCustomScroll(scrollSelector)) {
+            const scroll = scrollSelector as ScrollModule;
+            scroll.setSize(true);
+        }
+
         // update things
         if ('updateThingsCallback' in window) {
             window.updateThingsCallback();
-            updateThings();
         }
+        updateThings();
 
     }
 
@@ -334,8 +330,8 @@ export class AjaxForm extends LitElement {
             this._form = false;
         }
 
-        if (this._formInputsValidation) {
-            this._formInputsValidation.destroy();
+        if (this._validation) {
+            this._validation.destroy();
         }
 
         if (this._selectinputs) {

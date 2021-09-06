@@ -3,15 +3,18 @@ import intlTelInput, { Plugin } from 'intl-tel-input';
 import {
     addEventListener, IAddEventListener, parentByClassName, selectOne,
 } from 'vevet-dom';
-import { IAjaxFormElements } from '../types';
+import { IAjaxFormElements } from './types';
 import { loadScript } from '../../../helpers/loaders/loadScript';
+import { formErrorClassName, toggleFormInputError } from './errors';
 
-const errorClassName = 'error';
-
-
-export default function validateFormTelephone (
+interface Data {
     input: HTMLInputElement,
-): IAjaxFormElements {
+}
+
+
+export default function createInputTelephoneValidator ({
+    input,
+}: Data): IAjaxFormElements {
 
     let phoneInput: Plugin | false = false;
     let listeners: IAddEventListener[] = [];
@@ -26,7 +29,7 @@ export default function validateFormTelephone (
             initialCountry: countryCode,
             autoPlaceholder: 'polite',
             separateDialCode: true,
-            preferredCountries: ['de', 'us', 'ru'],
+            preferredCountries: ['us'],
         });
 
         // update telephone code
@@ -99,11 +102,11 @@ export default function validateFormTelephone (
             const parent = parentByClassName(input, 'iti--separate-dial-code');
             if (parent) {
                 mutations.forEach(() => {
-                    if (input.classList.contains(errorClassName)) {
-                        parent.classList.add(errorClassName);
+                    if (input.classList.contains(formErrorClassName)) {
+                        parent.classList.add(formErrorClassName);
                     }
                     else {
-                        parent.classList.remove(errorClassName);
+                        parent.classList.remove(formErrorClassName);
                     }
                 });
             }
@@ -119,13 +122,12 @@ export default function validateFormTelephone (
     ) {
 
         const test = new RegExp(`${mask.replace(/9/g, '\\d')}`, 'g');
+        const isValid = test.test(input.value);
 
-        if (!test.test(input.value)) {
-            input.classList.add(errorClassName);
-        }
-        else {
-            input.classList.remove(errorClassName);
-        }
+        toggleFormInputError({
+            input,
+            isError: !isValid,
+        });
 
     }
 
