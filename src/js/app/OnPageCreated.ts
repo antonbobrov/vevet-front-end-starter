@@ -1,37 +1,30 @@
 import { DefaultPage } from '../pages/list/default-page';
 import app from './app';
+import { IDestroyable } from '../commonTypes';
 
-export class OnPageCreated {
+export default function onPageCreated (
+    callback: () => void,
+): IDestroyable {
+    let destroyed = false;
+    trace();
 
-    protected _proceeded = false;
-    protected _timeout: false | NodeJS.Timeout = false;
-
-    constructor (
-        protected _callback: () => void,
-    ) {
-        this._trace();
-    }
-
-    protected _trace () {
-        if (this._proceeded) {
+    function trace () {
+        if (destroyed) {
             return;
         }
         const page = app.vevetPage as DefaultPage;
-        if (!!page && page.pageCreated) {
-            this._proceeded = true;
-            this._callback();
+        if (!!page && page.created) {
+            callback();
+            return;
         }
-        else {
-            this._timeout = setTimeout(() => {
-                this._trace();
-            }, 50);
-        }
+        setTimeout(() => {
+            trace();
+        }, 30);
     }
 
-    public destroy () {
-        if (this._timeout) {
-            clearTimeout(this._timeout);
-        }
-    }
-
+    return {
+        destroy: () => {
+            destroyed = true;
+        },
+    };
 }
