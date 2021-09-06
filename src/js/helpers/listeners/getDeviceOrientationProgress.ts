@@ -2,9 +2,10 @@ import { mathScopeProgress } from 'vevet';
 
 
 
-export function getDeviceOrientationGammaProgress (e: DeviceOrientationEvent) {
-
-    const edge = 40;
+export function getDeviceOrientationGammaProgress (
+    e: DeviceOrientationEvent,
+    edge = 40,
+) {
 
     // get motion
     let leftToRight = e.gamma;
@@ -30,9 +31,10 @@ export function getDeviceOrientationGammaProgress (e: DeviceOrientationEvent) {
 
 
 
-export function getDeviceOrientationBetaProgress (e: DeviceOrientationEvent) {
-
-    const edge = 60;
+export function getDeviceOrientationBetaProgress (
+    e: DeviceOrientationEvent,
+    edge = 40,
+) {
 
     // get motion
     let leftToRight = e.beta;
