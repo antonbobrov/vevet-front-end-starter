@@ -19,11 +19,6 @@ import loadAjaxForm from '../../includes/form/loadAjaxForm';
 // Default Page Class
 class DefaultPage extends PageModule {
 
-    protected _pageCreated = false;
-    get pageCreated () {
-        return this._pageCreated;
-    }
-
     protected _lazyImages: false | LazyImages;
     get lazyImages () {
         return this._lazyImages;
@@ -55,9 +50,6 @@ class DefaultPage extends PageModule {
 
         // load modules
         this._loadModules();
-
-        // change state
-        this._pageCreated = true;
 
         return this;
 
