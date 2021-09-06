@@ -24,6 +24,7 @@ import {
 import { Coords2D } from '../../commonTypes';
 import { approximateLerp } from '../../helpers/math/approximateLerp';
 import { setDeviceOrientationListener } from '../../helpers/listeners/setDeviceOrientationListener';
+import onPageShown from '../../app/onPageShown';
 
 
 
@@ -405,15 +406,12 @@ export class GlModelScene<
                 this._createElements();
                 this._onLoadedCallback();
 
-                const page = app.vevetPage;
-                if (page) {
-                    page.onPageShown(() => {
-                        this._updateSizes();
-                        if (renderSettings.autoShow) {
-                            this._plane.show(500);
-                        }
-                    });
-                }
+                onPageShown(() => {
+                    this._updateSizes();
+                    if (renderSettings.autoShow) {
+                        this._plane.show(500);
+                    }
+                });
 
             },
             onBeforeResizeCallback: () => {
