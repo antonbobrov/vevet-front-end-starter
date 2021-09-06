@@ -35,6 +35,9 @@ export function scrollTo (
                 const mod = outer as CustomScrollType;
                 mod.play();
             }
+            if (scrollOuter instanceof HTMLElement && scrollOuter.tagName.toLocaleLowerCase() === 'html') {
+                document.body.scrollTop = scrollTop + diff * p.se;
+            }
             scrollOuter.scrollTop = scrollTop + diff * p.se;
         });
 
