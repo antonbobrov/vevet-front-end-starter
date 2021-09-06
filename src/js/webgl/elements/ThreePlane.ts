@@ -774,24 +774,34 @@ export class ThreePlane extends Module {
 
     public hide (duration: number) {
 
-        const timeline = new TimelineModule();
-        timeline.on('progress', (data) => {
-            this.setAlpha(1 - data.se);
-        });
-        timeline.play({
-            duration,
+        return new Promise((resolve: (...args: any) => void) => {
+            const timeline = new TimelineModule();
+            timeline.on('progress', (data) => {
+                this.setAlpha(1 - data.se);
+            });
+            timeline.on('end', () => {
+                resolve();
+            });
+            timeline.play({
+                duration,
+            });
         });
 
     }
 
     public show (duration: number) {
 
-        const timeline = new TimelineModule();
-        timeline.on('progress', (data) => {
-            this.setAlpha(data.se);
-        });
-        timeline.play({
-            duration,
+        return new Promise((resolve: (...args: any) => void) => {
+            const timeline = new TimelineModule();
+            timeline.on('progress', (data) => {
+                this.setAlpha(data.se);
+            });
+            timeline.on('end', () => {
+                resolve();
+            });
+            timeline.play({
+                duration,
+            });
         });
 
     }
