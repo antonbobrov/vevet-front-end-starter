@@ -1,64 +1,39 @@
-import { PreloaderModule } from 'vevet';
+import { PreloaderModule, timeoutCallback } from 'vevet';
 import app from '../../app/app';
 import { isTesting } from '../../settings';
 import { showAfterloadElements } from '../../helpers/dom-css/showAfterloadElements';
-
-
-
-// settings for the preloader
-const settings = {
-    animation: !isTesting ? 500 : 0,
-    progress: {
-        on: false,
-        forceEnd: true,
-        k: !isTesting ? 0.035 : 1,
-        forceEndDuration: !isTesting ? 1500 : 10,
-    },
-};
-
-
+import { setPreloaderReady } from './onPreloaderReady';
 
 // init preloader
 export const preloader = (function () {
 
-
-
     // vars
-    let mod: PreloaderModule;
+    const mod = new PreloaderModule({
+        selector: '#preloader',
+        hide: true,
+        animation: !isTesting ? 500 : 0,
+        progress: {
+            on: false,
+            forceEnd: true,
+            k: !isTesting ? 0.035 : 1,
+            forceEndDuration: !isTesting ? 1500 : 10,
+        },
+    });
+
+    // add event on hide
+    mod.add({
+        target: 'hide',
+        do: hide.bind(this),
+    });
+
+    // make preloader ready
+    timeoutCallback(() => {
+        setPreloaderReady();
+    }, isTesting ? 0 : 0);
 
 
 
-    // initialize preloader
-    function init () {
-
-        // create preloader
-        mod = new PreloaderModule({
-            selector: '#preloader',
-            hide: true,
-            animation: settings.animation,
-            progress: settings.progress,
-        });
-
-        // set events
-        setEvents();
-
-        // return preloader
-        return mod;
-
-    }
-
-
-
-    // events
-    function setEvents () {
-
-        // add event on hide
-        mod.add({
-            target: 'hide',
-            do: hide.bind(this),
-        });
-
-    }
+    return mod;
 
 
 
@@ -72,11 +47,5 @@ export const preloader = (function () {
         }
 
     }
-
-
-
-    return init();
-
-
 
 }());
