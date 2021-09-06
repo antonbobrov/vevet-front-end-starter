@@ -1,7 +1,7 @@
 import { customElement, property } from 'lit-element';
-import { VevetLitElement } from '../../app/VevetLitElement';
+import VevetLitElement from '../../app/VevetLitElement';
 
-export const tagName = 'form-recaptcha';
+const tagName = 'form-recaptcha';
 
 declare global {
     interface Window {
@@ -13,8 +13,7 @@ declare global {
 
 
 @customElement(tagName)
-export class FormRecaptcha extends VevetLitElement {
-
+export default class FormRecaptcha extends VevetLitElement {
     @property({
         attribute: 'captcha-theme',
     }) theme: 'dark' | 'light' = 'light'
@@ -22,7 +21,6 @@ export class FormRecaptcha extends VevetLitElement {
     protected _id: any;
 
     protected _connectedCallback () {
-
         super._connectedCallback();
         this.classList.add(tagName);
         this.classList.add('js-no-custom-cursor');
@@ -38,20 +36,16 @@ export class FormRecaptcha extends VevetLitElement {
                     },
                 );
             }
-        }
-        else {
+        } else {
             this.reset();
         }
-
     }
 
 
     public reset () {
-
         if (typeof window.grecaptcha !== 'undefined') {
             window.grecaptcha.reset(this._id);
         }
-
     }
 
 
@@ -60,6 +54,4 @@ export class FormRecaptcha extends VevetLitElement {
     // ) {
     //     alert(response);
     // }
-
-
 }

@@ -3,10 +3,10 @@ import { ScrollBarPlugin, ScrollDragPlugin } from 'vevet';
 import { resizeTimeout } from '../../../settings';
 import app from '../../../app/app';
 import { getElementsSelector, getEase, canBeCustom } from './settings';
-import { ScrollKeyboardPlugin } from '../keyboard/ScrollKeyboardPlugin';
+import ScrollKeyboardPlugin from '../keyboard/ScrollKeyboardPlugin';
 import { CustomScrollType } from './isCustomScroll';
 import { useCustomScroll } from '../settings';
-import { CustomScrollOptimizedOnResize } from './CustomScrollOptimizedOnResize';
+import CustomScrollOptimizedOnResize from './CustomScrollOptimizedOnResize';
 
 
 
@@ -23,7 +23,7 @@ interface CustomScroll {
     playAndSetClasses: () => boolean;
 }
 
-export const customScroll: CustomScroll = (function () {
+const customScroll: CustomScroll = (function func () {
     return {
         get: getScroll.bind(this),
         create: createScroll.bind(this),
@@ -33,6 +33,7 @@ export const customScroll: CustomScroll = (function () {
         playAndSetClasses: playAndSetClasses.bind(this),
     };
 }());
+export default customScroll;
 
 
 
@@ -41,7 +42,6 @@ function getScroll () {
 }
 
 function createScroll () {
-
     if (!useCustomScroll) {
         currentScrollModule = false;
         const outer = selectOne('#custom-scroll');
@@ -122,24 +122,20 @@ function createScroll () {
     currentScrollModule = scroll;
 
     return scroll;
-
 }
 
 
 
 function toggleScroll (onResize = false) {
-
     // get scroll
     const scroll = getScroll();
     if (scroll) {
-
         // bool
         const playBool = canBeCustom();
         // either play or pause
         if (playBool) {
             playPause(scroll, true);
-        }
-        else {
+        } else {
             playPause(scroll, false);
         }
 
@@ -147,16 +143,13 @@ function toggleScroll (onResize = false) {
         if (onResize) {
             setScrollClasses(scroll, playBool);
         }
-
     }
-
 }
 
 function playPause (
     scroll: CustomScrollType,
     bool = true,
 ) {
-
     if (bool) {
         scroll.outer.scrollTop = 0;
         scroll.outer.scrollLeft = 0;
@@ -166,7 +159,6 @@ function playPause (
     scroll.changeProp({
         run: bool,
     });
-
 }
 
 function pause () {
@@ -212,7 +204,6 @@ function setScrollClasses (
     scroll: CustomScrollType,
     bool: boolean,
 ) {
-
     // get scroll outer
     const scrollOuter = scroll.outer;
     // and scroll elements
@@ -222,8 +213,7 @@ function setScrollClasses (
         // classes
         scrollOuter.classList.remove('unactive');
         app.html.classList.add('use-custom-scroll');
-    }
-    else {
+    } else {
         // classes
         scrollOuter.classList.add('unactive');
         app.html.classList.remove('use-custom-scroll');
@@ -235,5 +225,4 @@ function setScrollClasses (
             }
         }
     }
-
 }

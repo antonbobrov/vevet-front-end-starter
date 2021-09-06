@@ -1,24 +1,21 @@
 import { PageModule } from 'vevet';
 import { initLazyImages, LazyImages } from '../../layout/image/initLazyImages';
-import { fullHeight } from '../../helpers/dom-css/fullHeight';
-import { updateLayoutElements } from '../../helpers/dom-css/layoutElements';
-import { customScroll } from '../../layout/scroll/custom-scroll/customScroll';
+import customScroll from '../../layout/scroll/custom-scroll/customScroll';
 import { scrollView } from '../../layout/scroll/scroll-view/scrollView';
 import { hidePage, showPage } from '../pageStates';
-import { updateMenuLinks } from '../../layout/nav/menu/updateMenuLinks';
+import updateMenuLinks from '../../layout/nav/menu/updateMenuLinks';
 
 import '../../layout/text/text-content/TextContent';
-import { headers } from '../../layout/nav/header/headers';
+import headers from '../../layout/nav/header/headers';
 
-import { setPopupButtons } from '../../includes/popup/setPopupButtons';
-import { loadPlayVideoButton } from '../../includes/media/play-video-button/loadPlayVideoButton';
+import setPopupButtons from '../../includes/popup/setPopupButtons';
+import loadPlayVideoButton from '../../includes/media/play-video-button/loadPlayVideoButton';
 import loadAjaxForm from '../../includes/form/loadAjaxForm';
 
 
 
 // Default Page Class
 class DefaultPage extends PageModule {
-
     protected _lazyImages: false | LazyImages;
     get lazyImages () {
         return this._lazyImages;
@@ -27,21 +24,14 @@ class DefaultPage extends PageModule {
 
 
     create (ajax = false) {
-
         if (!super.create(ajax)) {
             return false;
         }
-
-        // set full-height elements
-        fullHeight.set();
 
         // create a custom scrolling
         customScroll.create();
         // create a scroll view
         scrollView.create();
-
-        // update page elements
-        updateLayoutElements();
 
         // append a static header to the page
         headers.appendStatic();
@@ -52,11 +42,9 @@ class DefaultPage extends PageModule {
         this._loadModules();
 
         return this;
-
     }
 
     show () {
-
         if (!super.show()) {
             return false;
         }
@@ -86,11 +74,9 @@ class DefaultPage extends PageModule {
         }
 
         return true;
-
     }
 
     hide () {
-
         if (!super.hide()) {
             return false;
         }
@@ -102,7 +88,6 @@ class DefaultPage extends PageModule {
         hidePage();
 
         return true;
-
     }
 
 
@@ -111,15 +96,10 @@ class DefaultPage extends PageModule {
      * Load dynamic modules
      */
     protected _loadModules () {
-
         setPopupButtons();
         loadPlayVideoButton();
         loadAjaxForm();
-
     }
-
-
-
 }
 
 const defaultPage = new DefaultPage({

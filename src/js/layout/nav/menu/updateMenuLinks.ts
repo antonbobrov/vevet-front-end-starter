@@ -1,11 +1,10 @@
-import { pageAjax } from '../../../pages/pageAjax';
-import { MENU_LINKS_SELECTOR } from './vars';
+import pageAjax from '../../../pages/pageAjax';
 
-export function updateMenuLinks () {
+const selector = '.js-menu-link';
 
+export default function updateMenuLinks () {
     pageAjax.updateMenuLinks({
-        selectorOld: MENU_LINKS_SELECTOR,
-        selectorNew: MENU_LINKS_SELECTOR,
+        selectorOld: selector,
+        selectorNew: selector,
     });
-
 }

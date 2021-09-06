@@ -20,7 +20,6 @@ export namespace IThreePlaneBg {
 
 
 export class ThreePlaneBg extends ThreePlane {
-
     protected _prop: IThreePlaneBg.Properties;
 
     // @ts-ignore
@@ -43,12 +42,10 @@ export class ThreePlaneBg extends ThreePlane {
 
     // Extra Constructor
     protected _extra () {
-
         super._extra();
 
         // set color
         this.on('material', this._setColor.bind(this));
-
     }
 
 
@@ -57,16 +54,10 @@ export class ThreePlaneBg extends ThreePlane {
      * @description Set plane color.
      */
     protected _setColor () {
-
         if (this.prop.bg instanceof Color) {
             this._material.color = this.prop.bg;
-        }
-        else {
+        } else {
             this._material.color.setHex(this.prop.bg);
         }
-
     }
-
-
-
 }

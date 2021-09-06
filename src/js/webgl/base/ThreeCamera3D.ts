@@ -18,7 +18,6 @@ export function ThreeCamera3D (
     near = 1,
     far = 10000,
 ) {
-
     const aspectRatio = getAspectRatio();
     const fieldOfView = getFOV();
     const nearPlane = near;
@@ -60,11 +59,9 @@ export function ThreeCamera3D (
 
 
     function resize () {
-
         camera.fov = getFOV();
         camera.aspect = getAspectRatio();
         camera.updateProjectionMatrix();
-
     }
     resize();
 
@@ -81,5 +78,4 @@ export function ThreeCamera3D (
         resize: resize.bind(this),
         destroy: destroy.bind(this),
     };
-
 }

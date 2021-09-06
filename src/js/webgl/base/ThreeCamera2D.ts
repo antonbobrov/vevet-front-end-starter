@@ -13,7 +13,6 @@ export namespace IThreeCamera2D {
 
 
 export function ThreeCamera2D (outer: false | Element = false) {
-
     let width: number;
     let height: number;
     updateSizes();
@@ -29,7 +28,6 @@ export function ThreeCamera2D (outer: false | Element = false) {
 
 
     function resize () {
-
         updateSizes();
 
         camera.left = width / -2;
@@ -38,19 +36,16 @@ export function ThreeCamera2D (outer: false | Element = false) {
         camera.bottom = height / -2;
 
         camera.updateProjectionMatrix();
-
     }
     resize();
 
     function updateSizes () {
-
         width = window.innerWidth;
         height = window.innerHeight;
         if (outer) {
             width = outer.clientWidth;
             height = outer.clientHeight;
         }
-
     }
 
 
@@ -66,5 +61,4 @@ export function ThreeCamera2D (outer: false | Element = false) {
         resize: resize.bind(this),
         destroy: destroy.bind(this),
     };
-
 }

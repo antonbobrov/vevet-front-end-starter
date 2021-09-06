@@ -4,8 +4,7 @@ import { pageSettings } from '../settings';
 
 // create page according to the defined type
 
-export function createPage () {
-
+export default function createPage () {
     const page = app.page[0];
 
 
@@ -31,15 +30,10 @@ export function createPage () {
     if (!existingPage) {
         if (!defaultPage) {
             throw new Error("Default page doesn't exist!");
-        }
-        else {
+        } else {
             defaultPage.create();
         }
-    }
-    else {
+    } else {
         existingPage.create();
     }
-
-
-
 }

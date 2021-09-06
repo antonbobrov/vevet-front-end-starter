@@ -6,16 +6,14 @@ const { viewport } = app;
 
 
 // set popup container sizes
-export function setMediaPopupSize (
+export default function setMediaPopupSize (
     outer: HTMLElement,
 ) {
-
     const yPadding = getYPadding(outer);
     const newSizes = getContainerMustBeSize(yPadding);
 
     app.html.style.setProperty('--popup-media-width', `${newSizes.width}px`);
     app.html.style.setProperty('--popup-media-height', `${newSizes.height}px`);
-
 }
 
 
@@ -23,18 +21,15 @@ export function setMediaPopupSize (
 function getYPadding (
     outer: HTMLElement,
 ) {
-
     const close = selectOne('.v-popup__close', outer);
     const closeBounding = close.getBoundingClientRect();
 
     return closeBounding.height + closeBounding.top * 2;
-
 }
 
 
 
 function getContainerMustBeSize (yPadding: number) {
-
     const { size } = viewport;
     const maxWidth = app.viewport.mobile ? size[0] : size[0] * 0.8;
     const maxHeight = size[1];
@@ -57,5 +52,4 @@ function getContainerMustBeSize (yPadding: number) {
         width,
         height,
     };
-
 }

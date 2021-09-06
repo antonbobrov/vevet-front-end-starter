@@ -15,15 +15,13 @@ const loadedItems: StorageData[] = [];
 
 
 
-export function loadOBJ ({
+export default function loadOBJ ({
     path,
     src,
 }: Data) {
-
     return new Promise((resolve: (
         item: Group,
     ) => void) => {
-
         // check if the object exists
         let loadedItem: StorageData | false = false;
         for (let index = 0; index < loadedItems.length; index++) {
@@ -40,9 +38,8 @@ export function loadOBJ ({
         if (loadedItem) {
             resetObject3DCoords(loadedItem.obj, true);
             resolve(loadedItem.obj);
-        }
-        // otherwise load the object
-        else {
+        } else {
+            // otherwise load the object
             const manager = new LoadingManager();
             const objLoader = new OBJLoader(manager);
             objLoader
@@ -58,7 +55,5 @@ export function loadOBJ ({
                     resolve(obj);
                 });
         }
-
     });
-
 }

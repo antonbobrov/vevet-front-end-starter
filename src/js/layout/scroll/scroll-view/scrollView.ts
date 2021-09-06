@@ -1,12 +1,13 @@
 import { ScrollViewModule, merge, ScrollModule } from 'vevet';
-import { initScrollViewParents } from './scrollViewParents';
+import initScrollViewParents from './scrollViewParents';
 import { getScrollSelector } from '../custom-scroll/settings';
 import { resizeTimeout } from '../../../settings';
 import app from '../../../app/app';
-import { updateThingsCallbacks } from '../../../app/updateThings';
+import updateThings from '../../../app/updateThings';
+import { IDestroyable } from '../../../commonTypes';
 
 let currentViewModule: (ScrollViewModule | false) = false;
-let updateThingsCallback: string | false;
+let updateThingsCallback: IDestroyable | false;
 
 
 
@@ -16,7 +17,7 @@ interface ScrollView {
     create: (prop?: ScrollViewModule.Properties) => ScrollViewModule;
     enable: Function;
 }
-export const scrollView: ScrollView = (function () {
+export const scrollView: ScrollView = (function func () {
     return {
         get: getView.bind(this),
         create: createView.bind(this),
@@ -33,7 +34,6 @@ function getView () {
 export function createView (
     prop: ScrollViewModule.Properties = {},
 ) {
-
     // set view parents
     initScrollViewParents();
 
@@ -64,7 +64,7 @@ export function createView (
     const view = new ScrollViewModule(settings);
 
     // update things
-    updateThingsCallback = updateThingsCallbacks.on('', () => {
+    updateThingsCallback = updateThings.add(() => {
         view.updateEl();
         view.seek();
     });
@@ -74,7 +74,7 @@ export function createView (
         app.vevetPage.on('destroy', () => {
             view.destroy();
             if (updateThingsCallback) {
-                updateThingsCallbacks.remove(updateThingsCallback);
+                updateThingsCallback.destroy();
                 updateThingsCallback = false;
             }
         });
@@ -102,13 +102,11 @@ export function createView (
     currentViewModule = view;
 
     return view;
-
 }
 
 
 
 function enableView () {
-
     const view = getView();
     if (view) {
         view.changeProp({
@@ -116,5 +114,4 @@ function enableView () {
         });
         view.seek();
     }
-
 }

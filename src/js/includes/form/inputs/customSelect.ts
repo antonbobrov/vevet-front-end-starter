@@ -5,23 +5,22 @@ import { IAjaxFormElements } from './types';
 export default function createCustomSelects (
     parent: Element,
 ): IAjaxFormElements {
-
     const selects: SelectModule[] = [];
     const observers: MutationObserver[] = [];
 
     const selectEl = selectAll('select', parent) as NodeListOf<HTMLSelectElement>;
     selectEl.forEach((input) => {
-
         const select = createSelect(input);
         selects.push(select);
 
         const mutation = new MutationObserver(() => {
             if (input.classList.contains('error')) {
                 // @ts-ignore
+                // eslint-disable-next-line no-underscore-dangle
                 select._outer.classList.add('error');
-            }
-            else {
+            } else {
                 // @ts-ignore
+                // eslint-disable-next-line no-underscore-dangle
                 select._outer.classList.remove('error');
             }
         });
@@ -29,7 +28,6 @@ export default function createCustomSelects (
         mutation.observe(input, {
             attributes: true,
         });
-
     });
 
     return {
@@ -42,7 +40,6 @@ export default function createCustomSelects (
             });
         },
     };
-
 }
 
 
@@ -50,7 +47,6 @@ export default function createCustomSelects (
 function createSelect (
     el: HTMLSelectElement,
 ) {
-
     const select = new SelectModule({
         selector: el,
         showSelected: true,
@@ -63,5 +59,4 @@ function createSelect (
     });
 
     return select;
-
 }

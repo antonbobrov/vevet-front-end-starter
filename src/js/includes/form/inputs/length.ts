@@ -9,7 +9,6 @@ interface Data {
 export default function createInputLengthValidator ({
     input,
 }: Data): IAjaxFormElements {
-
     const listeners: IAddEventListener[] = [];
     const { minLength, maxLength } = input;
 
@@ -51,5 +50,4 @@ export default function createInputLengthValidator ({
             });
         },
     };
-
 }

@@ -1,10 +1,9 @@
 /**
- * Create a Video from Server
+ * Create an HTML Video
  */
-export function createServerVideo (
+export default function createVideo (
     src: string,
 ) {
-
     interface VideoElement extends HTMLVideoElement {
         disablePictureInPicture: boolean;
     }
@@ -23,5 +22,4 @@ export function createServerVideo (
     video.appendChild(source);
 
     return video;
-
 }

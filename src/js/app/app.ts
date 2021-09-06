@@ -6,6 +6,7 @@ const app = new Application({
     page: document.querySelector('.app').getAttribute('data-v-page').split(' '),
     easing: [0.85, 0.02, 0.225, 0.925],
 });
+export default app;
 
 // remove no transition class
 app.load.add({
@@ -13,5 +14,3 @@ app.load.add({
         app.html.classList.remove('v-no-transition');
     },
 });
-
-export default app;

@@ -1,7 +1,7 @@
 import { IOnScroll, onScroll } from '../onScroll';
 import app from '../../../app/app';
-import { getIntersectionObserverRoot } from './getIntersectionObserverRoot';
-import { intersectionObserverSupported } from './intersectionObserverSupported';
+import { getIntersectionObserverRoot } from './observer';
+import { intersectionObserverSupported } from './observer';
 
 
 
@@ -17,7 +17,6 @@ export function setInOutViewportCallbacks (
     outCallback: () => void,
     threshold = 0.001,
 ): InOutViewportCallbacks {
-
     let onScrollEvents: IOnScroll | false = false;
     let observer: IntersectionObserver | false = false;
 
@@ -29,8 +28,7 @@ export function setInOutViewportCallbacks (
         };
         observer = new IntersectionObserver(observerCallback.bind(this), options);
         observer.observe(element);
-    }
-    else {
+    } else {
         onScrollEvents = onScroll(seekBounding.bind(this));
     }
 
@@ -39,20 +37,16 @@ export function setInOutViewportCallbacks (
     function observerCallback (
         entries: IntersectionObserverEntry[],
     ) {
-
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
                 inCallback();
-            }
-            else {
+            } else {
                 outCallback();
             }
         });
-
     }
 
     function seekBounding () {
-
         const bounding = element.getBoundingClientRect();
         const vSize = app.viewport.size;
 
@@ -63,18 +57,15 @@ export function setInOutViewportCallbacks (
             || bounding.left >= vSize[0]
         ) {
             outCallback();
-        }
-        else {
+        } else {
             inCallback();
         }
-
     }
 
 
 
     // destroy the listeners
     function destroy () {
-
         if (onScrollEvents) {
             onScrollEvents.destroy();
         }
@@ -82,7 +73,6 @@ export function setInOutViewportCallbacks (
         if (observer) {
             observer.disconnect();
         }
-
     }
 
 
@@ -90,5 +80,4 @@ export function setInOutViewportCallbacks (
     return {
         destroy: destroy.bind(this),
     };
-
 }

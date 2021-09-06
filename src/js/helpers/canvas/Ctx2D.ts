@@ -5,8 +5,7 @@ const { viewport } = app;
 
 
 
-export class Ctx2D {
-
+export default class Ctx2D {
     protected _canvas: HTMLCanvasElement;
     get canvas () {
         return this._canvas;
@@ -41,33 +40,26 @@ export class Ctx2D {
          */
         protected _useDpr: boolean | number = false,
     ) {
-
         this._create();
-
     }
 
     protected _create () {
-
         this._canvas = createElement('canvas');
         this._ctx = this._canvas.getContext('2d');
-
     }
 
     public updateSize (
         width?: number,
         height?: number,
     ) {
-
         let dpr = 1;
         if (typeof this._useDpr === 'boolean') {
             if (this._useDpr) {
                 dpr = viewport.dpr;
-            }
-            else {
+            } else {
                 dpr = viewport.dprMobile;
             }
-        }
-        else {
+        } else {
             dpr = this._useDpr;
         }
         this._dpr = dpr;
@@ -78,12 +70,10 @@ export class Ctx2D {
         if (!!width && !!height) {
             newWidth = width;
             newHeight = height;
-        }
-        else if (this._parent) {
+        } else if (this._parent) {
             newWidth = this._parent.clientWidth * dpr;
             newHeight = this._parent.clientHeight * dpr;
-        }
-        else {
+        } else {
             newWidth = viewport.size[0] * dpr;
             newHeight = viewport.size[1] * dpr;
         }
@@ -93,9 +83,5 @@ export class Ctx2D {
 
         this._canvas.width = newWidth;
         this._canvas.height = newHeight;
-
     }
-
-
-
 }

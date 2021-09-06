@@ -3,14 +3,12 @@ import { customElement, LitElement } from 'lit-element';
 const tagName = 'lazy-img';
 
 @customElement(tagName)
-export class LazyImg extends LitElement {
-
+export default class LazyImg extends LitElement {
     createRenderRoot () {
         return this;
     }
 
     connectedCallback () {
-
         super.connectedCallback();
 
         this.classList.add(tagName);
@@ -22,7 +20,5 @@ export class LazyImg extends LitElement {
                 child.classList.add('lazy-image');
             }
         }
-
     }
-
 }

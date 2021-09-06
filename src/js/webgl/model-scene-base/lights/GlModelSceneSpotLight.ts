@@ -3,15 +3,14 @@ import {
 } from 'three';
 import { minSiteGUIStep } from '../../../siteGUI';
 import { GlSpotLightSettings } from '../types';
-import { GlModelSceneLightBase } from './GlModelSceneLightBase';
+import GlModelSceneLightBase from './GlModelSceneLightBase';
 
 
 
-export class GlModelSceneSpotLight extends GlModelSceneLightBase<
+export default class GlModelSceneSpotLight extends GlModelSceneLightBase<
     SpotLight,
     GlSpotLightSettings
 > {
-
     // vars
     protected _helper: SpotLightHelper;
     protected _helperTarget: Mesh;
@@ -20,7 +19,6 @@ export class GlModelSceneSpotLight extends GlModelSceneLightBase<
      * Create Light
      */
     protected _create () {
-
         super._create();
 
         const { _prop } = this;
@@ -44,7 +42,6 @@ export class GlModelSceneSpotLight extends GlModelSceneLightBase<
         this._helperTarget = new Mesh(helperTargetGeometry, helperTargetMaterial);
         this._helperTarget.visible = false;
         this._scene.add(this._helperTarget);
-
     }
 
 
@@ -53,7 +50,6 @@ export class GlModelSceneSpotLight extends GlModelSceneLightBase<
      * Create GUI
      */
     protected _createGUI () {
-
         const gui = super._createGUI();
         if (!gui) {
             return false;
@@ -87,7 +83,6 @@ export class GlModelSceneSpotLight extends GlModelSceneLightBase<
             settingsFolder,
             targetFolder,
         };
-
     }
 
 
@@ -96,7 +91,6 @@ export class GlModelSceneSpotLight extends GlModelSceneLightBase<
      * Update the object
      */
     public update () {
-
         super.update();
 
         const light = this._light;
@@ -111,7 +105,7 @@ export class GlModelSceneSpotLight extends GlModelSceneLightBase<
         // change light props
         light.distance = _prop.distance * modelDiameter;
         light.decay = _prop.decay;
-        light.angle = _prop.angle * Math.PI / 180;
+        light.angle = (_prop.angle * Math.PI) / 180;
         light.penumbra = _prop.penumbra;
 
         // positionate light target
@@ -130,7 +124,6 @@ export class GlModelSceneSpotLight extends GlModelSceneLightBase<
         // update light matrix
         light.target.updateMatrixWorld();
         this._helper.update();
-
     }
 
 
@@ -139,9 +132,7 @@ export class GlModelSceneSpotLight extends GlModelSceneLightBase<
      * Render the object
      */
     public render () {
-
         super.render();
-
     }
 
 
@@ -150,7 +141,6 @@ export class GlModelSceneSpotLight extends GlModelSceneLightBase<
      * Destroy the object
      */
     public destroy () {
-
         super.destroy();
 
         if (this._light) {
@@ -158,8 +148,5 @@ export class GlModelSceneSpotLight extends GlModelSceneLightBase<
         }
         this._scene.remove(this._helper);
         this._scene.remove(this._helperTarget);
-
     }
-
-
 }

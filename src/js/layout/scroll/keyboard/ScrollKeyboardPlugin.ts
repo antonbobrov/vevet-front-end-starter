@@ -1,33 +1,73 @@
 import {
     Plugin, ScrollModule, timeoutCallback, domChildOf,
 } from 'vevet';
-import { setKeyboardTabHightlight } from './setKeyboardTabHightlight';
 
-setKeyboardTabHightlight();
+
+
+(function func () {
+    const highlightClass = 'tab-highlight';
+    let activeElement: Element | false = false;
+
+    // set events
+    window.addEventListener('keydown', onKeydown.bind(this));
+    window.addEventListener('click', onClick.bind(this));
+
+    // on keydown event
+    function onKeydown (e: KeyboardEvent) {
+        // if not tab
+        if (e.keyCode !== 9) {
+            return;
+        }
+
+        removeHighlight();
+        // get active element
+        timeoutCallback(() => {
+            // change active element
+            activeElement = document.activeElement;
+            if (activeElement instanceof HTMLElement) {
+                activeElement.classList.add(highlightClass);
+            }
+        }, 50);
+    }
+
+    function onClick (
+        e: MouseEvent,
+    ) {
+        if (e.target !== activeElement) {
+            removeHighlight();
+        }
+    }
+
+
+
+    function removeHighlight () {
+        // remove focus class from the previous active element
+        if (activeElement) {
+            activeElement.classList.remove(highlightClass);
+            activeElement = false;
+        }
+    }
+}());
+
+
 
 const iterator = 40;
 
-
-
-export class ScrollKeyboardPlugin extends Plugin {
-
+export default class ScrollKeyboardPlugin extends Plugin {
     protected _m: ScrollModule;
 
     protected _prevFocusItem: HTMLElement | false;
 
 
     _setEvents () {
-
         super._setEvents();
 
         this.listener(window, 'keydown', this._onkeydown.bind(this));
-
     }
 
 
 
     protected _onkeydown (e: KeyboardEvent) {
-
         // tab is active for everethyng, forms too
         if (e.keyCode === 9) {
             this._onTab();
@@ -54,7 +94,6 @@ export class ScrollKeyboardPlugin extends Plugin {
 
         // animate
         switch (e.keyCode) {
-
             // down
             case 40:
                 scroll.targetTop += iterator;
@@ -98,7 +137,6 @@ export class ScrollKeyboardPlugin extends Plugin {
 
             default:
                 return;
-
         }
 
         // home
@@ -107,16 +145,16 @@ export class ScrollKeyboardPlugin extends Plugin {
         }
 
         // @ts-ignore
+        // eslint-disable-next-line no-underscore-dangle
         scroll._boundaries(true);
         // @ts-ignore
+        // eslint-disable-next-line no-underscore-dangle
         scroll._boundaries(false);
-
     }
 
 
 
     protected _onTab () {
-
         // get scroll
         const scroll = this._m;
         if (!scroll.prop.run) {
@@ -125,10 +163,8 @@ export class ScrollKeyboardPlugin extends Plugin {
 
         // get active element and scroll to it
         timeoutCallback(() => {
-
             const { activeElement } = document;
             if (activeElement instanceof HTMLElement) {
-
                 if (!domChildOf(activeElement, scroll.outer)) {
                     return;
                 }
@@ -156,15 +192,13 @@ export class ScrollKeyboardPlugin extends Plugin {
                 scroll.play();
 
                 // @ts-ignore
+                // eslint-disable-next-line no-underscore-dangle
                 scroll._boundaries(true);
                 // @ts-ignore
+                // eslint-disable-next-line no-underscore-dangle
                 scroll._boundaries(false);
-
             }
-
         }, 120);
-
     }
-
-
 }
+

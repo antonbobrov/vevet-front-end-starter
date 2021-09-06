@@ -1,8 +1,8 @@
 import { MenuTimelineModule, TimelineBaseModule, mathSpreadScopeProgress } from 'vevet';
 import { selectOne, isElement, selectAll } from 'vevet-dom';
 import app from '../../../../app/app';
-import { pageAjax } from '../../../../pages/pageAjax';
-import { createLanguages } from '../../languages/createLanguages';
+import pageAjax from '../../../../pages/pageAjax';
+import createLanguages from '../../languages/createLanguages';
 
 
 
@@ -20,8 +20,7 @@ const menuElClass = {
 
 
 
-export const popupMenu = (function () {
-
+const popupMenu = (function func () {
     // get outer
     const outer = selectOne('#menu') as HTMLElement;
     if (!isElement(outer)) {
@@ -61,7 +60,6 @@ export const popupMenu = (function () {
 
     // initialize the menu
     function init () {
-
         // create a timeline for animation
         createAnimationTimelines();
 
@@ -85,13 +83,12 @@ export const popupMenu = (function () {
                 module.hide();
             }
         });
-
     }
+
 
 
     // set button events
     function setEvents () {
-
         closeButtons.forEach((button) => {
             button.addEventListener('click', () => {
                 module.hide();
@@ -105,22 +102,18 @@ export const popupMenu = (function () {
         module.on('hide', () => {
             app.html.classList.remove('prevent-scroll-under-popup-menu');
         });
-
     }
 
 
 
     // create a timeline for animation
     function createAnimationTimelines () {
-
         createOuterAnimation();
         createElementsAnimation();
-
     }
 
     // animate outer
     function createOuterAnimation () {
-
         // the timeline itself
         const timeline = new TimelineBaseModule({
             easing: [0.25, 0.1, 0.25, 1],
@@ -133,12 +126,10 @@ export const popupMenu = (function () {
         module.on('progressOuter', (data) => {
             timeline.imitate(data.p);
         });
-
     }
 
     // animate elements
     function createElementsAnimation () {
-
         const elements = selectAll(`
             .${menuElClass.translate},
             .${menuElClass.alpha}
@@ -154,7 +145,6 @@ export const popupMenu = (function () {
 
         // animate elements
         for (let i = 0; i < spread.length; i++) {
-
             const innerTimeline = new TimelineBaseModule({
                 line: spread[i],
                 easing: [0.25, 0.1, 0.25, 1],
@@ -164,8 +154,7 @@ export const popupMenu = (function () {
                 const el = elements[i] as HTMLElement;
                 if (el.classList.contains(menuElClass.alpha)) {
                     el.style.opacity = data.se.toString();
-                }
-                else if (el.classList.contains(menuElClass.translate)) {
+                } else if (el.classList.contains(menuElClass.translate)) {
                     el.style.transform = `
                         translate3d(0, ${(1 - data.se) * 2}rem, 0)
                     `;
@@ -174,21 +163,18 @@ export const popupMenu = (function () {
             });
 
             timeline.addTimeline(innerTimeline);
-
         }
 
         // imitate progress
         module.on('progressInner', (data) => {
             timeline.imitate(data.p);
         });
-
     }
 
 
 
     // eslint-disable-next-line consistent-return
     return module;
-
-
-
 }());
+
+export default popupMenu;

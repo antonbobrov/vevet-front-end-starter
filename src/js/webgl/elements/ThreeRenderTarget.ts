@@ -10,7 +10,7 @@ import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass';
 import { GammaCorrectionShader } from 'three/examples/jsm/shaders/GammaCorrectionShader';
 import { ThreeCamera3D, IThreeCamera3D } from '../base/ThreeCamera3D';
 import ThreeScene from '../base/ThreeScene';
-import { threeJS } from '../threeJS';
+import threeJS from '../threeJS';
 import ThreeBase from '../base/ThreeBase';
 import app from '../../app/app';
 
@@ -68,7 +68,6 @@ export namespace IThreeRenderTarget {
 
 
 export class ThreeRenderTarget extends Module {
-
     protected _prop: IThreeRenderTarget.Properties;
 
     // @ts-ignore
@@ -122,7 +121,6 @@ export class ThreeRenderTarget extends Module {
 
     // Extra Constructor
     protected _extra () {
-
         super._extra();
 
         // vars
@@ -140,7 +138,6 @@ export class ThreeRenderTarget extends Module {
         if (this._useComposer) {
             this._createEffectComposer();
         }
-
     }
 
 
@@ -149,7 +146,6 @@ export class ThreeRenderTarget extends Module {
      * Create a render target.
      */
     _createRenderTarget () {
-
         const sizes = this._getRenderSizes();
 
         const renderer = new WebGLRenderTarget(
@@ -162,11 +158,9 @@ export class ThreeRenderTarget extends Module {
         );
 
         return renderer;
-
     }
 
     protected _getRenderSizes () {
-
         const dpr = this._prop.dpr ? this._prop.dpr : viewport.dprMobile;
         const width = this._prop.el ? this._prop.el.clientWidth : viewport.size[0];
         const height = this._prop.el ? this._prop.el.clientHeight : viewport.size[1];
@@ -175,16 +169,13 @@ export class ThreeRenderTarget extends Module {
             width: width * dpr,
             height: height * dpr,
         };
-
     }
 
     /**
      * Enable/disable auto rendering.
      */
     public toggleAutoRender (bool: boolean) {
-
         this._prop.autoRender = bool;
-
     }
 
 
@@ -193,7 +184,6 @@ export class ThreeRenderTarget extends Module {
      * Create an effect composer.
      */
     _createEffectComposer () {
-
         this._composer = new EffectComposer(this.prop.three.renderer, this._renderer);
 
         const renderPass = new RenderPass(this._scene, this.camera);
@@ -206,19 +196,16 @@ export class ThreeRenderTarget extends Module {
 
         // anti-aliasing
         this._createComposerAntialiasing();
-
     }
 
     /**
      * Apply anti-aliasing.
      */
     _createComposerAntialiasing () {
-
         const sizes = this._getRenderSizes();
 
         const pass = new SMAAPass(sizes.width, sizes.height);
         this._composer.addPass(pass);
-
     }
 
 
@@ -227,7 +214,6 @@ export class ThreeRenderTarget extends Module {
      * Set events.
      */
     protected _setEvents () {
-
         // on resize
         const resizeID = this.prop.three.on('resize', () => {
             this._updateSizes();
@@ -240,46 +226,38 @@ export class ThreeRenderTarget extends Module {
                 return;
             }
             this.render();
-
         });
         this._threeEvents.push(renderID);
-
     }
 
     /**
      * Update render target sizes
      */
     protected _updateSizes () {
-
         const sizes = this._getRenderSizes();
         this._renderer.setSize(sizes.width, sizes.height);
         this._camera.resize();
-
     }
 
 
 
     public render () {
-
         const threeRenderer = this._prop.three.renderer;
 
         if (this._useComposer) {
             this._composer.renderToScreen = false;
             this._composer.render();
-        }
-        else {
+        } else {
             threeRenderer.autoClear = true;
             threeRenderer.setRenderTarget(this._renderer);
             threeRenderer.render(this._scene, this._camera.camera);
             threeRenderer.setRenderTarget(null);
         }
-
     }
 
 
 
     _destroy () {
-
         super._destroy();
 
         this._scene = null;
@@ -292,9 +270,5 @@ export class ThreeRenderTarget extends Module {
         for (let i = 0; i < this._threeEvents.length; i++) {
             this._prop.three.remove(this._threeEvents[i]);
         }
-
     }
-
-
-
 }

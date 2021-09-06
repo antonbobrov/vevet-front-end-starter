@@ -11,7 +11,6 @@ interface Data {
 export default function createInputEmailValidator ({
     input,
 }: Data): IAjaxFormElements {
-
     const listeners: IAddEventListener[] = [];
 
     listeners.push(addEventListener(input, 'keyup', () => {
@@ -38,5 +37,4 @@ export default function createInputEmailValidator ({
             });
         },
     };
-
 }

@@ -2,7 +2,6 @@ import { WebGLRenderer } from 'three';
 import app from '../../app/app';
 
 export default function ThreeRenderer (canvas: HTMLCanvasElement, outer: Element) {
-
     const { viewport } = app;
 
     const renderer = new WebGLRenderer({
@@ -21,7 +20,6 @@ export default function ThreeRenderer (canvas: HTMLCanvasElement, outer: Element
 
 
     function resize () {
-
         const width = outer.clientWidth;
         const height = outer.clientHeight;
 
@@ -31,16 +29,13 @@ export default function ThreeRenderer (canvas: HTMLCanvasElement, outer: Element
 
         // update renderer's sizes
         renderer.setSize(width, height);
-
     }
     resize();
 
 
 
     function destroy () {
-
         renderer.dispose();
-
     }
 
 
@@ -50,5 +45,4 @@ export default function ThreeRenderer (canvas: HTMLCanvasElement, outer: Element
         resize: resize.bind(this),
         destroy: destroy.bind(this),
     };
-
 }

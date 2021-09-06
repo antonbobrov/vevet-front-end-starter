@@ -87,8 +87,6 @@ export namespace ISectionScroll {
 
 
 export class SectionScroll extends Module {
-
-
     // eslint-disable-next-line no-useless-constructor
     constructor (data: ISectionScroll.Prop) {
         super(data);
@@ -237,7 +235,6 @@ export class SectionScroll extends Module {
 
     // Extra Constructor
     protected _extra () {
-
         super._extra();
 
         // const prefix = this._prefix;
@@ -292,7 +289,6 @@ export class SectionScroll extends Module {
         this._getElements();
         // create additional scrolling elements
         this._createAdditionalElements();
-
     }
 
     // Initialize & Run animation frame
@@ -304,7 +300,6 @@ export class SectionScroll extends Module {
     // When properties are changed
     // @ts-ignore
     protected _changeProp (prop: ISectionScroll.Prop) {
-
         // @ts-ignore
         super._changeProp(prop);
 
@@ -312,7 +307,6 @@ export class SectionScroll extends Module {
         this._getElements();
         this.setSize();
         this._run();
-
     }
 
 
@@ -321,7 +315,6 @@ export class SectionScroll extends Module {
      * Get elements. Scroll elements are searched not only inside the outer.
      */
     protected _getElements () {
-
         // copy values
         const prop = this._prop;
         const { selectors } = prop;
@@ -341,16 +334,13 @@ export class SectionScroll extends Module {
         for (let i = 0; i < el.length; i++) {
             el[i].style.willChange = willChangeValue;
         }
-
     }
 
     /**
      * Set element properties.
      */
     protected _setElementsProp () {
-
         for (let i = 0; i < this._length; i++) {
-
             const el = this._el[i];
 
             // get & set dedault settings
@@ -407,9 +397,7 @@ export class SectionScroll extends Module {
             if (!settings.callbacks) {
                 settings.callbacks = {};
             }
-
         }
-
     }
 
     /**
@@ -418,7 +406,6 @@ export class SectionScroll extends Module {
     public static setDefaultElProp (
         el: ISectionScroll.El,
     ) {
-
         // if the elements need to be rendered
         const noRenderAttribute = el.getAttribute('data-no-render');
 
@@ -433,14 +420,12 @@ export class SectionScroll extends Module {
         }
 
         return el.sectionScroll;
-
     }
 
     /**
      * Create additional elements. They are needed for scrolling.
      */
     protected _createAdditionalElements () {
-
         this._container = document.createElement('div');
         this._container.classList.add(`${this._prefix}__container`);
 
@@ -451,14 +436,12 @@ export class SectionScroll extends Module {
 
         // append additional elements
         this._outer.appendChild(this._container);
-
     }
 
 
 
     // Set Events
     protected _setEvents () {
-
         // sizes
         this.setSize();
         this.addEvent('viewport', {
@@ -486,7 +469,6 @@ export class SectionScroll extends Module {
             do: this._onScroll.bind(this),
             passive: true,
         });
-
     }
 
 
@@ -496,7 +478,6 @@ export class SectionScroll extends Module {
      * @param {boolean} native - Defines if the method was called on window resize.
      */
     public setSize (native = false) {
-
         if (!this._prop.run) {
             return;
         }
@@ -539,7 +520,6 @@ export class SectionScroll extends Module {
 
         // launch callbacks
         this.lbt('size');
-
     }
 
 
@@ -548,11 +528,9 @@ export class SectionScroll extends Module {
      * Event on wheel.
      */
     protected _wheel (evt: WheelEvent) {
-
         const prop = this._prop;
 
         if (prop.run && prop.scroll) {
-
             // stop propagation if enabled
             if (!prop.propagation) {
                 // evt.preventDefault();
@@ -581,23 +559,19 @@ export class SectionScroll extends Module {
 
             // launch events
             this.lbt('wheel', evt);
-
         }
-
     }
 
     /**
      * Event on scroll. Reset native scroll values.
      */
     protected _onScroll () {
-
         const prop = this._prop;
 
         if (prop.run) {
             this._outer.scrollTop = 0;
             this._outer.scrollLeft = 0;
         }
-
     }
 
 
@@ -606,7 +580,6 @@ export class SectionScroll extends Module {
      * Prevent cases when targets are less or more than the maximum values of scrolling
      */
     protected _boundaries (vertical = true) {
-
         const targetTop = this._targetTop;
         const targetLeft = this._targetLeft;
 
@@ -619,8 +592,7 @@ export class SectionScroll extends Module {
             if (targetTop > max) {
                 this.targetTop = max;
             }
-        }
-        else {
+        } else {
             const max = this._width - this._widthOuter;
             if (targetLeft < 0) {
                 this.targetLeft = 0;
@@ -629,7 +601,6 @@ export class SectionScroll extends Module {
                 this.targetLeft = max;
             }
         }
-
     }
 
     /**
@@ -646,32 +617,26 @@ export class SectionScroll extends Module {
      * Run animationFrame.
      */
     protected _run () {
-
         if (this._prop.run) {
             this.play();
-        }
-        else {
+        } else {
             this.stop();
         }
-
     }
 
     /**
      * Run animation frame if scroll is enabled.
      */
     public play () {
-
         const frame = this._frame;
 
         if (!frame && this._prop.run) {
             if (this._prop.frame) {
                 this._frame = this._prop.frame.on('frame', this.render.bind(this));
-            }
-            else {
+            } else {
                 this._frame = window.requestAnimationFrame(this.render.bind(this));
             }
         }
-
     }
 
     /**
@@ -679,19 +644,16 @@ export class SectionScroll extends Module {
      * To stop scroll forever use {@linkcode Vevet.ScrollModule.changeProp}.
      */
     stop () {
-
         const frame = this._frame;
 
         if (frame) {
             if (this._prop.frame) {
                 this._prop.frame.remove(this._frame);
-            }
-            else {
+            } else {
                 window.cancelAnimationFrame(frame);
             }
             this._frame = false;
         }
-
     }
 
 
@@ -700,7 +662,6 @@ export class SectionScroll extends Module {
      * Animation. Here scroll values are calculated.
      */
     public render () {
-
         // auto-resizing
         this._autoResize();
 
@@ -740,14 +701,12 @@ export class SectionScroll extends Module {
             }
             this.lbt('approximate');
         }
-
     }
 
     /**
      * Auto-resizing while rendering.
      */
     _autoResize () {
-
         // get prop
         const prop = this._prop;
         const container = this._container;
@@ -760,7 +719,6 @@ export class SectionScroll extends Module {
                 this.setSize();
             }
         }
-
     }
 
     /**
@@ -768,9 +726,7 @@ export class SectionScroll extends Module {
      * @param {boolean} instant - If animation is to be implemented instantly.
      */
     _calcElCoords (instant: boolean) {
-
         for (let i = 0; i < this._length; i++) {
-
             // get element & props
             const el = this._el[i];
             const { sectionScroll } = el;
@@ -784,8 +740,7 @@ export class SectionScroll extends Module {
             if (ease === this._prop.ease) {
                 targetCoords.x = this._scrollLeft;
                 targetCoords.y = this._scrollTop;
-            }
-            else {
+            } else {
                 targetCoords.x = this._r(lerp(targetCoords.x, this._targetLeft, ease));
                 targetCoords.y = this._r(lerp(targetCoords.y, this._targetTop, ease));
                 // round the values
@@ -794,9 +749,7 @@ export class SectionScroll extends Module {
                     targetCoords.y = Math.round(targetCoords.y);
                 }
             }
-
         }
-
     }
 
     /**
@@ -804,7 +757,6 @@ export class SectionScroll extends Module {
      * @param {boolean} instant - If animation is to be implemented instantly.
      */
     protected _calcScrollCoords (instant: boolean) {
-
         // get ease
         const ease = this.getEase(null, instant);
 
@@ -817,11 +769,9 @@ export class SectionScroll extends Module {
             this._scrollLeft = Math.round(this._scrollLeft);
             this._scrollTop = Math.round(this._scrollTop);
         }
-
     }
 
     protected _r (t: number, e?: any) {
-
         /* eslint-disable */
         return e = void 0 !== e ? Math.pow(10, e) : 1e3,
             Math.round(t * e) / e;

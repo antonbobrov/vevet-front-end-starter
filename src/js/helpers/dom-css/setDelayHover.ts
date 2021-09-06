@@ -22,7 +22,6 @@ export function setDelayHover ({
     mouseenter,
     mouseleave,
 }: Data): IDelayHover {
-
     // states
     let isHovered = false;
     const listeners: IAddEventListener[] = [];
@@ -51,7 +50,6 @@ export function setDelayHover ({
 
     // set events for mobile
     if (useOnMobile) {
-
         if (el instanceof HTMLElement) {
             el.style.userSelect = 'none';
         }
@@ -75,7 +73,6 @@ export function setDelayHover ({
             isHovered = false;
             mouseleave();
         }));
-
     }
 
 
@@ -88,5 +85,4 @@ export function setDelayHover ({
             });
         },
     };
-
 }

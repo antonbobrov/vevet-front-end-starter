@@ -1,26 +1,17 @@
 import { ScrollModule } from 'vevet';
 import { selectOne } from 'vevet-dom';
-import { createLanguages } from '../languages/createLanguages';
+import createLanguages from '../languages/createLanguages';
 import { disableTabIndex } from '../../scroll/keyboard/tabindex';
 import { getScrollSelector } from '../../scroll/custom-scroll/settings';
 import { onScroll } from '../../scroll/onScroll';
 import app from '../../../app/app';
-import { pageAjax } from '../../../pages/pageAjax';
-import { setPopupMenuButtonEvents } from '../menu/popup-menu/setPopupMenuButtonEvents';
+import pageAjax from '../../../pages/pageAjax';
+import setPopupMenuButtonEvents from '../menu/popup-menu/setPopupMenuButtonEvents';
 
-
-
-let fixedHeader: Element;
-let staticHeader: Element;
-
-
-
-export const headers = (function () {
-
+const headers = (function func () {
     // get header and copy it
-    fixedHeader = selectOne('.header');
-    // @ts-ignore
-    staticHeader = fixedHeader.cloneNode(true);
+    const fixedHeader = selectOne('.header');
+    const staticHeader = fixedHeader.cloneNode(true) as Element;
     app.load.on('', () => {
         disableTabIndex(fixedHeader);
     });
@@ -45,14 +36,12 @@ export const headers = (function () {
     // append the static header to the page
     // this event must be called on "create" of a Vevet Page
     function appendStatic () {
-
         // get scroll outer
         const scrollOuter = getScrollSelector();
         let parent: Element;
         if (scrollOuter instanceof ScrollModule) {
             parent = selectOne('.custom-scroll__outer', scrollOuter.outer);
-        }
-        else {
+        } else {
             parent = selectOne('.custom-scroll__outer');
         }
 
@@ -61,12 +50,10 @@ export const headers = (function () {
 
         // update ajax links
         pageAjax.setLinks();
-
     }
 
     // hide the header on scroll
     function hideOnScroll () {
-
         // native event
         onScroll((scrollTop) => {
             seek(scrollTop);
@@ -78,22 +65,18 @@ export const headers = (function () {
 
         // seek on scroll
         function seek (scrollTop: number) {
-
             const edge = app.viewport.size[1] * 0.75;
 
             if (scrollTop < edge) {
                 hideFixed();
-            }
-            else if (scrollTop > scrollPrevValue) {
+            } else if (scrollTop > scrollPrevValue) {
                 hideFixed();
-            }
-            else if (scrollTop < scrollPrevValue) {
+            } else if (scrollTop < scrollPrevValue) {
                 showFixed();
             }
 
             // change value
             scrollPrevValue = scrollTop;
-
         }
 
         // show fixed
@@ -106,7 +89,6 @@ export const headers = (function () {
             app.html.classList.remove('show-fixed-header');
             fixedHeader.classList.remove('show-fixed');
         }
-
     }
 
 
@@ -131,8 +113,6 @@ export const headers = (function () {
         fixedHeader,
         staticHeader,
     };
-
-
 }());
 
-export { fixedHeader, staticHeader };
+export default headers;

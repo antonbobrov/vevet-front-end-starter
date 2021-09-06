@@ -2,7 +2,6 @@ import app from '../../app/app';
 
 // calculate viewport values for css
 
-
 const { viewport } = app;
 
 // set
@@ -18,7 +17,6 @@ viewport.add({
 
 // set vars
 function set () {
-
     const { size } = viewport;
 
     // viewport width
@@ -26,5 +24,4 @@ function set () {
 
     // viewport height
     app.html.style.setProperty('--vh', `${size[1] / 100}px`);
-
 }

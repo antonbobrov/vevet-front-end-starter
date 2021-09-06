@@ -7,7 +7,6 @@ import { IAjaxFormElements } from './types';
 export default function createLiveFormValidation (
     parent: Element,
 ): IAjaxFormElements {
-
     const validators: IAjaxFormElements[] = [];
 
     // length
@@ -47,5 +46,4 @@ export default function createLiveFormValidation (
             });
         },
     };
-
 }

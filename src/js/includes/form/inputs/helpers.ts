@@ -8,7 +8,6 @@ export function getFormInputsByName (
     name: string,
     outer: false | Element,
 ) {
-
     const inputs: (
         HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     )[] = [];
@@ -26,7 +25,6 @@ export function getFormInputsByName (
     });
 
     return inputs;
-
 }
 
 
@@ -53,13 +51,11 @@ export function onFormInputChange (
      */
     outer: false | Element = false,
 ): IAjaxFormElements {
-
     const listeners: IAddEventListener[] = [];
 
     // get all elements by name
     const elements = getFormInputsByName(name, outer);
     elements.forEach((input) => {
-
         if (input instanceof HTMLInputElement && input.type === 'radio') {
             listeners.push(addEventListener(input, 'change', () => {
                 if (input.checked) {
@@ -69,8 +65,7 @@ export function onFormInputChange (
                     });
                 }
             }));
-        }
-        else {
+        } else {
             listeners.push(addEventListener(input, 'change', () => {
                 callback({
                     name: input.name,
@@ -78,7 +73,6 @@ export function onFormInputChange (
                 });
             }));
         }
-
     });
 
     return {
@@ -88,7 +82,6 @@ export function onFormInputChange (
             });
         },
     };
-
 }
 
 
@@ -106,7 +99,6 @@ export function getFormInputValue (
      */
     outer: false | Element = false,
 ) {
-
     // get all elements by name
     const elements = getFormInputsByName(name, outer);
     for (let i = 0; i < elements.length; i++) {
@@ -115,19 +107,16 @@ export function getFormInputValue (
             if (input.checked) {
                 return input.value;
             }
-        }
-        else if (input instanceof HTMLInputElement && input.type === 'checkbox') {
+        } else if (input instanceof HTMLInputElement && input.type === 'checkbox') {
             if (input.checked) {
                 return input.value;
             }
-        }
-        else {
+        } else {
             return input.value;
         }
     }
 
     return '';
-
 }
 
 
@@ -149,11 +138,9 @@ export function setFormInputValue (
      */
     outer: false | Element = false,
 ) {
-
     // get all elements by name
     const elements = getFormInputsByName(name, outer);
     for (let i = 0; i < elements.length; i++) {
-
         const input = elements[i];
         if (input instanceof HTMLSelectElement) {
             const { options } = input;
@@ -162,20 +149,16 @@ export function setFormInputValue (
                     input.selectedIndex = index;
                 }
             }
-        }
-        else if (input instanceof HTMLInputElement && (input.type === 'checkbox' || input.type === 'radio')) {
+        } else if (input instanceof HTMLInputElement && (input.type === 'checkbox' || input.type === 'radio')) {
             if (input.value === value) {
                 input.checked = true;
             }
-        }
-        else {
+        } else {
             input.value = value;
         }
 
         input.dispatchEvent(new Event('change'));
-
     }
 
     return '';
-
 }

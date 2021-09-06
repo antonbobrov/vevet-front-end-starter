@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { Plugin, merge, ScrollModule } from 'vevet';
 
 
@@ -22,7 +23,6 @@ export namespace IScrollClampPlugin {
  * based on which the elements either approach each other or move away from each other.
  */
 export class ScrollClampPlugin extends Plugin {
-
     protected _prop: IScrollClampPlugin.Properties;
     protected _m: ScrollModule;
 
@@ -61,19 +61,16 @@ export class ScrollClampPlugin extends Plugin {
 
     // When properties are changed
     protected _changeProp () {
-
         super._changeProp();
 
         // set intensity event
         this._intensitySet();
-
     }
 
 
 
     // Extra Constructor
     protected _extra () {
-
         super._extra();
 
         // get module
@@ -81,6 +78,7 @@ export class ScrollClampPlugin extends Plugin {
 
         // override module element properties
         // @ts-ignore
+        // eslint-disable-next-line no-underscore-dangle
         const _elProp = module._elProp.bind(module);
         // @ts-ignore
         module._elProp = () => {
@@ -102,7 +100,6 @@ export class ScrollClampPlugin extends Plugin {
 
         // override elements' values calculations
         this._calcElValues();
-
     }
 
 
@@ -111,7 +108,6 @@ export class ScrollClampPlugin extends Plugin {
      * Set intensity on render.
      */
     protected _intensitySet () {
-
         // get module
         const module = this._m;
 
@@ -128,13 +124,11 @@ export class ScrollClampPlugin extends Plugin {
         // set new event
         if (this._prop.on) {
             this._intensityId = module.on('update', () => {
-
                 // get difference between current and previous targets
                 let difference;
                 if (module.prop.horizontal) {
                     difference = module.scrollLeft - this._prevValues[0];
-                }
-                else {
+                } else {
                     difference = module.scrollTop - this._prevValues[1];
                 }
 
@@ -146,22 +140,18 @@ export class ScrollClampPlugin extends Plugin {
 
                 // update targets
                 this._updateTargets();
-
             });
         }
-
     }
 
     /**
      * Update previous scroll values.
      */
     protected _updateTargets () {
-
         // get module
         const module = this._m;
 
         this._prevValues = [module.scrollLeft, module.scrollTop];
-
     }
 
 
@@ -170,7 +160,6 @@ export class ScrollClampPlugin extends Plugin {
      * Set element properties.
      */
     protected _elProp () {
-
         // get module
         const module = this._m;
         // @ts-ignore
@@ -179,7 +168,6 @@ export class ScrollClampPlugin extends Plugin {
         // go thru elements and set properties
         // @ts-ignore
         for (let i = 0; i < module._length; i++) {
-
             // get element
             const el = module.elements[i] as HTMLElement;
             // @ts-ignore
@@ -193,9 +181,7 @@ export class ScrollClampPlugin extends Plugin {
             const y = bounding.top + elCurrentProp[1] + bounding.height / 2;
             // @ts-ignore
             el[this._centerProp] = [x, y];
-
         }
-
     }
 
 
@@ -204,14 +190,12 @@ export class ScrollClampPlugin extends Plugin {
      * Force values.
      */
     protected _forceValues () {
-
         // get module
         const module = this._m;
 
         // change values
         // @ts-ignore
         for (let i = 0; i < module._length; i++) {
-
             // get element
             const el = module.elements[i];
 
@@ -222,20 +206,17 @@ export class ScrollClampPlugin extends Plugin {
             // change values
             current[0] = module.targetLeft;
             current[1] = module.targetTop;
-
         }
 
         // render elements
         // @ts-ignore
         module._render();
-
     }
 
     /**
      * Override elements ease.
      */
     protected _overrideGetEase () {
-
         // get module
         const module = this._m;
 
@@ -244,7 +225,6 @@ export class ScrollClampPlugin extends Plugin {
         const _getEase = module._getEase.bind(module);
         // @ts-ignore
         module._getEase = (el, intstant) => {
-
             let ease = _getEase(el, intstant);
 
             // if disabled
@@ -269,8 +249,7 @@ export class ScrollClampPlugin extends Plugin {
                 // @ts-ignore
                 centerPos = centerProp[0] - el[currentProp][0];
                 p = centerPos / module.width;
-            }
-            else {
+            } else {
                 // @ts-ignore
                 centerPos = centerProp[1] - el[currentProp][1];
                 p = centerPos / module.height;
@@ -295,28 +274,23 @@ export class ScrollClampPlugin extends Plugin {
             ease -= p * this._prop.reduce * this._intensity;
 
             return ease;
-
         };
-
     }
 
     /**
      * Override elements' values calculation.
      */
     protected _calcElValues () {
-
         // get module
         const module = this._m;
 
         // override
         const _calcElValues = module._calcElValues.bind(module);
         module._calcElValues = (intstant) => {
-
             _calcElValues(intstant);
 
             // @ts-ignore
             for (let i = 0; i < module._length; i++) {
-
                 // get element
                 const el = module.elements[i];
 
@@ -326,18 +300,14 @@ export class ScrollClampPlugin extends Plugin {
 
                 // bound values
                 this._boundClamping(current);
-
             }
-
         };
-
     }
 
     /**
      * Bound Clamping.
      */
     protected _boundClamping (current: number[]) {
-
         // get module
         const module = this._m;
 
@@ -351,9 +321,5 @@ export class ScrollClampPlugin extends Plugin {
         if (current[1] < module.scrollTop - max) {
             current[1] = module.scrollTop - max;
         }
-
     }
-
-
-
 }

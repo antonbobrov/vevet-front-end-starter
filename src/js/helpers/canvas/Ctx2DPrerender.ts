@@ -1,25 +1,21 @@
 import { getPos } from 'get-image-pos';
-import { Ctx2D } from './Ctx2D';
+import Ctx2D from './Ctx2D';
 
 
 
-export class Ctx2DPrerender extends Ctx2D {
-
+export default class Ctx2DPrerender extends Ctx2D {
     constructor (
         public source: HTMLImageElement,
         parent: Element | false,
     ) {
-
         super(parent);
         this.updateSize();
-
     }
 
     public updateSize (
         width?: number,
         height?: number,
     ) {
-
         super.updateSize(width, height);
 
         const size = getPos({
@@ -39,9 +35,5 @@ export class Ctx2DPrerender extends Ctx2D {
             size.sourceWidth, size.sourceHeight,
             size.x, size.y, size.width, size.height,
         );
-
     }
-
-
-
 }

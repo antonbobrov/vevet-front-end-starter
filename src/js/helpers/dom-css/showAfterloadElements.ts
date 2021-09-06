@@ -5,8 +5,7 @@ const afterloadDuration = 1000;
 // show elements when the page is loaded
 // see also /src/styles/helpers/_afterload.scss
 
-export function showAfterloadElements () {
-
+export default function showAfterloadElements () {
     const el = selectAll('.afterload');
     for (let i = 0, l = el.length; i < l; i++) {
         const e = el[i];
@@ -20,5 +19,4 @@ export function showAfterloadElements () {
             e.classList.remove('afterload_show');
         }
     }, (afterloadDuration + 50));
-
 }

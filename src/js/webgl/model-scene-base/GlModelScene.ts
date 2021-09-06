@@ -3,27 +3,27 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { mathScopeProgress, merge } from 'vevet';
 import { addEventListener, IAddEventListener } from 'vevet-dom';
 import app from '../../app/app';
-import { layoutElements } from '../../helpers/dom-css/layoutElements';
+import layoutElements from '../../helpers/dom-css/layoutElements';
 import {
     InOutViewportCallbacks, setInOutViewportCallbacks,
 } from '../../layout/scroll/intersection-observer/setInOutViewportCallbacks';
 import { GUIType, minSiteGUIStep, siteGUI } from '../../siteGUI';
 import { ThreePlane } from '../elements/ThreePlane';
 import { ThreeRenderTarget } from '../elements/ThreeRenderTarget';
-import { getRenderTargetDPR } from '../helpers/getRenderTargetDPR';
-import { threeJS } from '../threeJS';
-import { getModelBaseEnvronmentMap } from './getModelBaseEnvronmentMap';
-import { GlModelSceneSpotLight } from './lights/GlModelSceneSpotLight';
-import { GlModelSceneObj } from './GlModelSceneObj';
-import { GlModelSceneAreaLight } from './lights/GlModelSceneAreaLight';
-import { GlModelSceneAmbientLight } from './lights/GlModelSceneAmbientLight';
+import getRenderTargetDPR from '../helpers/getRenderTargetDPR';
+import threeJS from '../threeJS';
+import getModelBaseEnvronmentMap from './getModelBaseEnvronmentMap';
+import GlModelSceneSpotLight from './lights/GlModelSceneSpotLight';
+import GlModelSceneObj from './GlModelSceneObj';
+import GlModelSceneAreaLight from './lights/GlModelSceneAreaLight';
+import GlModelSceneAmbientLight from './lights/GlModelSceneAmbientLight';
 import { GlModelSceneProp } from './types';
 import {
     getDeviceOrientationBetaProgress, getDeviceOrientationGammaProgress,
 } from '../../helpers/listeners/getDeviceOrientationProgress';
 import { Coords2D } from '../../commonTypes';
-import { approximateLerp } from '../../helpers/math/approximateLerp';
-import { setDeviceOrientationListener } from '../../helpers/listeners/setDeviceOrientationListener';
+import { approximateLerp } from '../../helpers/math/progress';
+import setDeviceOrientationListener from '../../helpers/listeners/setDeviceOrientationListener';
 import onPageShown from '../../app/onPageShown';
 
 
@@ -39,10 +39,9 @@ interface Data<Prop> {
     onBeforeResizeCallback?: () => void;
 }
 
-export class GlModelScene<
+export default class GlModelScene<
     Prop extends GlModelSceneProp = GlModelSceneProp
 > {
-
     // states
     protected _destroyed = false;
     protected _inOutEvents: InOutViewportCallbacks | false = false;
@@ -68,7 +67,9 @@ export class GlModelScene<
         return this._model;
     }
     protected _lightsCount = 0;
-    protected _lights: (GlModelSceneSpotLight | GlModelSceneAreaLight | GlModelSceneAmbientLight)[] = [];
+    protected _lights: (
+        GlModelSceneSpotLight | GlModelSceneAreaLight | GlModelSceneAmbientLight
+    )[] = [];
 
     // gui
     protected _guiFolder: GUIType | false = false;
@@ -108,7 +109,6 @@ export class GlModelScene<
         onRenderCallback = () => {},
         onBeforeResizeCallback = () => {},
     }: Data<Prop>) {
-
         // update prop vars
         this._prop = prop;
         this._onLoadedCallback = onLoadedCallback;
@@ -177,7 +177,6 @@ export class GlModelScene<
         this._prop = merge(defaultProp, this._prop);
 
         this._create();
-
     }
 
 
@@ -186,18 +185,15 @@ export class GlModelScene<
      * Create the scene
      */
     protected _create () {
-
         this._createBase();
         this._createModel();
         this._setEvents();
-
     }
 
     /**
      * Create base elements
      */
     protected _createBase () {
-
         this._createGUI();
 
         // create render target
@@ -220,14 +216,12 @@ export class GlModelScene<
                 }
             });
         }
-
     }
 
     /**
      * Create GUI
      */
     protected _createGUI () {
-
         const { _prop } = this;
         const { settings } = _prop;
 
@@ -235,15 +229,13 @@ export class GlModelScene<
         if (siteGUI) {
             try {
                 this._guiFolder = siteGUI.addFolder(_prop.name);
-            }
-            catch (e) {
+            } catch (e) {
                 // code
             }
         }
 
         const gui = this._guiFolder;
         if (gui) {
-
             // scene gui
             const sceneFolder = gui.addFolder('scene');
 
@@ -255,16 +247,13 @@ export class GlModelScene<
             mouseCameraPositionFolder.add(mouseCameraPosition, 'ease', minSiteGUIStep, 0.25, minSiteGUIStep);
             mouseCameraPositionFolder.add(mouseCameraPosition, 'x', -0.25, 0.25, minSiteGUIStep);
             mouseCameraPositionFolder.add(mouseCameraPosition, 'y', -0.25, 0.25, minSiteGUIStep);
-
         }
-
     }
 
     /**
      * Create a render target
      */
     protected _createRenderTarget () {
-
         // vars
         const { _prop } = this;
         const { renderSettings } = _prop;
@@ -293,7 +282,6 @@ export class GlModelScene<
             zIndex: 1,
             renderPosition: renderSettings.renderPosition,
         });
-
     }
 
 
@@ -302,7 +290,6 @@ export class GlModelScene<
      * Set scene events
      */
     protected _setEvents () {
-
         // rendering events
         this._threeEvents.push(threeJS.on('resize', this._updateSizes.bind(this), {
             timeout: 100,
@@ -320,14 +307,12 @@ export class GlModelScene<
         }).then((listener) => {
             this._listeners.push(listener);
         });
-
     }
 
     /**
      * Set in out events
      */
     protected _setInOutEvents () {
-
         // vars
         const { _prop } = this;
         const { renderSettings } = _prop;
@@ -348,7 +333,6 @@ export class GlModelScene<
                 this._renderTarget.prop.autoRender = false;
             },
         );
-
     }
 
     /**
@@ -357,14 +341,16 @@ export class GlModelScene<
     protected _handleMouseMove (
         e: MouseEvent,
     ) {
-
         if (app.viewport.mobiledevice) {
             return;
         }
 
-        this._targetMouse.x = mathScopeProgress(e.clientX, [app.viewport.size[0] / 2, app.viewport.size[0]]);
-        this._targetMouse.y = mathScopeProgress(e.clientY, [app.viewport.size[1] / 2, app.viewport.size[1]]);
-
+        this._targetMouse.x = mathScopeProgress(
+            e.clientX, [app.viewport.size[0] / 2, app.viewport.size[0]],
+        );
+        this._targetMouse.y = mathScopeProgress(
+            e.clientY, [app.viewport.size[1] / 2, app.viewport.size[1]],
+        );
     }
 
     /**
@@ -373,7 +359,6 @@ export class GlModelScene<
     protected _handleDeviceOrientation (
         e: DeviceOrientationEvent,
     ) {
-
         if (!app.viewport.mobiledevice) {
             return;
         }
@@ -383,7 +368,6 @@ export class GlModelScene<
 
         const progressY = getDeviceOrientationBetaProgress(e);
         this._targetMouse.y = progressY * 1.25;
-
     }
 
 
@@ -392,7 +376,6 @@ export class GlModelScene<
      * Create Model
      */
     protected _createModel () {
-
         const { _prop } = this;
         const { renderSettings } = _prop;
 
@@ -402,7 +385,6 @@ export class GlModelScene<
             guiParent: this._guiFolder,
             prop: _prop,
             onLoaded: () => {
-
                 this._createElements();
                 this._onLoadedCallback();
 
@@ -412,34 +394,28 @@ export class GlModelScene<
                         this._plane.show(500);
                     }
                 });
-
             },
             onBeforeResizeCallback: () => {
                 this._onBeforeResizeCallback();
             },
         });
-
     }
 
     /**
      * Create other elements
      */
     protected _createElements () {
-
         this._createLights();
-
     }
 
     /**
      * Create lights
      */
     protected _createLights () {
-
         const { lights } = this._prop.settings;
 
         lights.forEach((lightSettings, index) => {
             if (this._model) {
-
                 if (lightSettings.type === 'spot') {
                     const light = new GlModelSceneSpotLight({
                         name: `${index}`,
@@ -450,8 +426,7 @@ export class GlModelScene<
                     });
                     this._lights.push(light);
                     this._lightsCount++;
-                }
-                else if (lightSettings.type === 'area') {
+                } else if (lightSettings.type === 'area') {
                     const light = new GlModelSceneAreaLight({
                         name: `${index}`,
                         prop: lightSettings,
@@ -461,8 +436,7 @@ export class GlModelScene<
                     });
                     this._lights.push(light);
                     this._lightsCount++;
-                }
-                else if (lightSettings.type === 'ambient') {
+                } else if (lightSettings.type === 'ambient') {
                     const light = new GlModelSceneAmbientLight({
                         name: `${index}`,
                         prop: lightSettings,
@@ -477,10 +451,8 @@ export class GlModelScene<
                 // else {
 
                 // }
-
             }
         });
-
     }
 
 
@@ -489,7 +461,6 @@ export class GlModelScene<
      * Update scene sizes
      */
     protected _updateSizes () {
-
         this._onBeforeResizeCallback();
 
         if (this._model) {
@@ -500,7 +471,6 @@ export class GlModelScene<
             const light = this._lights[i];
             light.update();
         }
-
     }
 
 
@@ -511,7 +481,6 @@ export class GlModelScene<
     public render (
         force = false,
     ) {
-
         if (!this._renderTarget.prop.autoRender && !force) {
             return;
         }
@@ -533,14 +502,12 @@ export class GlModelScene<
 
         // process callbacks
         this._onRenderCallback();
-
     }
 
     /**
      * Calculate movement
      */
     protected _renderMouseCameraPosition () {
-
         // vars
         const { _targetMouse, _currentMouseCameraPosition } = this;
         const { mouseCameraPosition } = this._prop.settings.scene;
@@ -571,7 +538,6 @@ export class GlModelScene<
         // and apply rotation
         camera.position.x = x;
         camera.position.y = y;
-
     }
 
 
@@ -580,7 +546,6 @@ export class GlModelScene<
      * Destroy the scene
      */
     public destroy () {
-
         this._destroyed = true;
 
         this._threeEvents.forEach((event) => {
@@ -612,8 +577,5 @@ export class GlModelScene<
         if (!!siteGUI && this._guiFolder) {
             siteGUI.removeFolder(this._guiFolder);
         }
-
     }
-
-
 }

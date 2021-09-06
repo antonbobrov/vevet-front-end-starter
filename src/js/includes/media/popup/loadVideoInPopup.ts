@@ -1,8 +1,8 @@
 import { generateId } from 'vevet';
-import { setLoadingIndicator } from '../../../layout/loading/indicator';
-import { createServerVideo } from '../video/createServerVideo';
-import { createVideoPlayer } from '../video/createVideoPlayer';
-import { mediaPopup } from './mediaPopup';
+import setLoadingIndicator from '../../../layout/loading/indicator';
+import createVideo from '../video/createVideo';
+import createVideoPlayer from '../video/createVideoPlayer';
+import mediaPopup from './mediaPopup';
 
 
 
@@ -16,11 +16,10 @@ export enum VideoInPopupSourceEnum {
 
 
 
-export function loadVideoInPopup (
+export default function loadVideoInPopup (
     source: VideoInPopupSourceEnum | false = false,
     src: string | false = false,
 ) {
-
     // check state
     if (isShown) {
         return;
@@ -38,12 +37,10 @@ export function loadVideoInPopup (
     // get media source
     if (source === VideoInPopupSourceEnum.YouTube) {
         videoElement = createYoutubeVideo(src);
-    }
-    else if (source === VideoInPopupSourceEnum.Vimeo) {
+    } else if (source === VideoInPopupSourceEnum.Vimeo) {
         videoElement = createVimeoVideo(src);
-    }
-    else if (source === VideoInPopupSourceEnum.Server) {
-        videoElement = createServerVideo(src);
+    } else if (source === VideoInPopupSourceEnum.Server) {
+        videoElement = createVideo(src);
     }
 
     // check if the video is created
@@ -65,14 +62,12 @@ export function loadVideoInPopup (
                 setLoadingIndicator(false);
             });
         });
-    }
-    // no player for other videos
-    else {
+    } else {
+        // no player for other videos
         showInPopup(outer, () => {
             setLoadingIndicator(false);
         });
     }
-
 }
 
 
@@ -83,7 +78,6 @@ export function loadVideoInPopup (
 function createYoutubeVideo (
     src: string,
 ) {
-
     const iframe = document.createElement('iframe');
     iframe.setAttribute('src', `https://www.youtube.com/embed/${src}`);
     iframe.setAttribute('allow', 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture');
@@ -94,7 +88,6 @@ function createYoutubeVideo (
     });
 
     return iframe;
-
 }
 
 /**
@@ -103,7 +96,6 @@ function createYoutubeVideo (
 function createVimeoVideo (
     src: string,
 ) {
-
     const iframe = document.createElement('iframe');
     iframe.setAttribute('src', `https://player.vimeo.com/video/${src}`);
     iframe.setAttribute('allow', 'autoplay; fullscreen');
@@ -114,7 +106,6 @@ function createVimeoVideo (
     });
 
     return iframe;
-
 }
 
 
@@ -123,14 +114,12 @@ function createVimeoVideo (
  * Create video outer
  */
 function createOuter () {
-
     const outer = document.createElement('div');
     outer.style.display = 'none';
     outer.setAttribute('id', generateId('video-popup-source'));
     document.body.appendChild(outer);
 
     return outer;
-
 }
 
 
@@ -141,7 +130,6 @@ function showInPopup (
     outer: HTMLElement,
     callback = () => {},
 ) {
-
     mediaPopup.show({
         selector: `#${outer.id}`,
         append: true,
@@ -155,5 +143,4 @@ function showInPopup (
     });
 
     callback();
-
 }

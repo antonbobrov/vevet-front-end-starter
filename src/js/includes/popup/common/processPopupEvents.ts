@@ -1,10 +1,10 @@
 import { PopupModule } from 'vevet';
 import { selectAll } from 'vevet-dom';
 import app from '../../../app/app';
-import { updateThings } from '../../../app/updateThings';
-import { pageAjax } from '../../../pages/pageAjax';
+import updateThings from '../../../app/updateThings';
+import pageAjax from '../../../pages/pageAjax';
 import loadAjaxForm from '../../form/loadAjaxForm';
-import { setPopupButtons } from '../setPopupButtons';
+import setPopupButtons from '../setPopupButtons';
 
 interface Data {
     instance: PopupModule;
@@ -17,13 +17,10 @@ declare global {
     }
 }
 
-export function processPopupEvents ({
+export default function processPopupEvents ({
     instance,
     appendCloseToLevels = false,
 }: Data) {
-
-
-
     // animation states
     instance.on('show', () => {
         if (instance.outer) {
@@ -44,8 +41,7 @@ export function processPopupEvents ({
     if (appendCloseToLevels) {
         if (instance.created) {
             appendCloseToLevelsFunc();
-        }
-        else {
+        } else {
             instance.on('created', () => {
                 appendCloseToLevelsFunc();
             });
@@ -66,11 +62,7 @@ export function processPopupEvents ({
         setPopupButtons(instance.outer);
         setPopupCloseButtons();
         loadAjaxForm();
-        // update things
-        if ('updateThingsCallback' in window) {
-            window.updateThingsCallback();
-        }
-        updateThings();
+        updateThings.launchCallbacks();
     });
 
 
@@ -100,7 +92,6 @@ export function processPopupEvents ({
 
 
     function setPopupCloseButtons () {
-
         const back = selectAll('.js-popup-back', instance.outer || undefined);
         back.forEach((el) => {
             // @ts-ignore
@@ -124,10 +115,5 @@ export function processPopupEvents ({
                 el['popup-proceeded'] = true;
             }
         });
-
-
     }
-
-
-
 }

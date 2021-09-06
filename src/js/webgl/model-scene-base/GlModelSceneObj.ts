@@ -6,14 +6,14 @@ import {
 } from 'three';
 import app from '../../app/app';
 import { Coords2D } from '../../commonTypes';
-import { approximateLerp } from '../../helpers/math/approximateLerp';
+import { approximateLerp } from '../../helpers/math/progress';
 import { GUIType, minSiteGUIStep } from '../../siteGUI';
-import { getModelSphereRadius } from '../helpers/getModelSphereRadius';
-import { loadOBJ } from '../helpers/loadOBJ';
+import getModelSphereRadius from '../helpers/getModelSphereRadius';
+import loadOBJ from '../helpers/loadOBJ';
 import {
     resetObject3DCoords, setObject3DScale,
 } from '../helpers/object3DPos';
-import { threeJS } from '../threeJS';
+import threeJS from '../threeJS';
 import { GlModelSceneProp } from './types';
 
 
@@ -31,10 +31,9 @@ interface Data<T> {
 
 
 
-export class GlModelSceneObj<
+export default class GlModelSceneObj<
     Prop extends GlModelSceneProp = GlModelSceneProp
 > {
-
     // states
     protected _loaded = false;
     protected _destroyed = false;
@@ -104,7 +103,6 @@ export class GlModelSceneObj<
         onLoaded,
         onBeforeResizeCallback,
     }: Data<Prop>) {
-
         this._parent = parent;
         this._prop = prop;
         this._settings = prop.settings.obj;
@@ -114,7 +112,6 @@ export class GlModelSceneObj<
         this._onBeforeResizeCallback = onBeforeResizeCallback;
 
         this._create();
-
     }
 
 
@@ -123,7 +120,6 @@ export class GlModelSceneObj<
      * Create the object
      */
     protected _create () {
-
         const { _prop } = this;
         const { paths } = _prop;
 
@@ -140,7 +136,6 @@ export class GlModelSceneObj<
                 this._createModel(obj);
             }
         });
-
     }
 
 
@@ -149,7 +144,6 @@ export class GlModelSceneObj<
      * Create GUI
      */
     protected _createGUI () {
-
         if (!this._guiParent) {
             return;
         }
@@ -195,7 +189,6 @@ export class GlModelSceneObj<
         mouseRotationFolder.add(_settings.mouseRotation, 'ease', 0.001, 0.3, minSiteGUIStep);
         mouseRotationFolder.add(_settings.mouseRotation, 'x', 0, Math.PI / 2, minSiteGUIStep);
         mouseRotationFolder.add(_settings.mouseRotation, 'y', 0, Math.PI / 2, minSiteGUIStep);
-
     }
 
 
@@ -205,7 +198,6 @@ export class GlModelSceneObj<
     protected _createModel (
         object: Group,
     ) {
-
         this._loadedObject = object;
 
         // create groups
@@ -231,7 +223,6 @@ export class GlModelSceneObj<
         if (this._onLoaded) {
             this._onLoaded();
         }
-
     }
 
 
@@ -242,7 +233,6 @@ export class GlModelSceneObj<
     protected _createObject (
         child: Object3D,
     ) {
-
         // create a group for the object
         this._group = new Group();
         this._group.add(child);
@@ -250,21 +240,18 @@ export class GlModelSceneObj<
 
         // reset group coordinates
         this._resetObjects();
-
     }
 
     /**
      * Reset group coordinates
      */
     protected _resetObjects () {
-
         if (!this._group || !this._loadedObject) {
             return;
         }
 
         resetObject3DCoords(this._group);
         resetObject3DCoords(this._loadedObject);
-
     }
 
 
@@ -273,7 +260,6 @@ export class GlModelSceneObj<
      * Create the model material
      */
     protected _createMaterial () {
-
         // get material properties
         const { _settings } = this;
         const { materialProp, materialType } = _settings;
@@ -283,8 +269,7 @@ export class GlModelSceneObj<
             this._material = new MeshPhysicalMaterial({
                 ...materialProp,
             });
-        }
-        else {
+        } else {
             this._material = new MeshStandardMaterial({
                 ...materialProp,
             });
@@ -293,7 +278,6 @@ export class GlModelSceneObj<
 
         // create GUI
         if (this._guiFolder) {
-
             const folder = this._guiFolder.addFolder('material prop');
 
             folder.addColor(materialProp, 'color').onChange((val) => {
@@ -320,9 +304,7 @@ export class GlModelSceneObj<
                     });
                 }
             }
-
         }
-
     }
 
 
@@ -340,7 +322,6 @@ export class GlModelSceneObj<
      * Update object sizes
      */
     public updateSizes () {
-
         if (!this._loaded) {
             return;
         }
@@ -378,9 +359,9 @@ export class GlModelSceneObj<
         // rotate the object
         const { defaultRotation } = _settings;
         if (object) {
-            object.rotation.x = (defaultRotation.x * Math.PI / 180);
-            object.rotation.y = (defaultRotation.y * Math.PI / 180);
-            object.rotation.z = (defaultRotation.z * Math.PI / 180);
+            object.rotation.x = ((defaultRotation.x * Math.PI) / 180);
+            object.rotation.y = ((defaultRotation.y * Math.PI) / 180);
+            object.rotation.z = ((defaultRotation.z * Math.PI) / 180);
             // and update initial radius
             this._initialRadius = getModelSphereRadius(object);
         }
@@ -412,7 +393,6 @@ export class GlModelSceneObj<
 
         // states
         this._allowRender = true;
-
     }
 
     protected _getViewScale () {
@@ -432,7 +412,6 @@ export class GlModelSceneObj<
      * Render the object
      */
     public render () {
-
         if (!this._allowRender) {
             return;
         }
@@ -444,7 +423,6 @@ export class GlModelSceneObj<
 
         this._processPosition();
         this._processMouseRotation();
-
     }
 
 
@@ -453,7 +431,6 @@ export class GlModelSceneObj<
      * Positionate the model
      */
     protected _processPosition () {
-
         const object = this._loadedObject;
         if (!object) {
             return;
@@ -463,32 +440,28 @@ export class GlModelSceneObj<
         object.position.x = this._position.x + (defaultPosition.x * this._diameter);
         object.position.y = this._position.y + (defaultPosition.y * this._diameter);
         object.position.z = this._position.z + (defaultPosition.z * this._diameter);
-
     }
 
     /**
      * Set default rotation the model
      */
     protected _processDefaultRotation () {
-
         const object = this._group;
         if (!object) {
             return;
         }
         const { defaultRotation } = this._settings;
-        const defaultRotationX = (defaultRotation.x * Math.PI / 180);
-        const defaultRotationY = (defaultRotation.y * Math.PI / 180);
+        const defaultRotationX = ((defaultRotation.x * Math.PI) / 180);
+        const defaultRotationY = ((defaultRotation.y * Math.PI) / 180);
 
         object.rotation.x = defaultRotationX;
         object.rotation.y = defaultRotationY;
-
     }
 
     /**
      * Rotate the model
      */
     protected _processMouseRotation () {
-
         if (!this._loadedObject) {
             return;
         }
@@ -510,7 +483,6 @@ export class GlModelSceneObj<
         // and apply rotation
         group.rotation.x = currentMouseRotation.y * mouseRotation.y;
         group.rotation.y = currentMouseRotation.x * mouseRotation.x;
-
     }
 
 
@@ -519,7 +491,6 @@ export class GlModelSceneObj<
      * Destroy the object
      */
     public destroy () {
-
         this._destroyed = true;
 
         if (this._group) {
@@ -529,8 +500,5 @@ export class GlModelSceneObj<
         if (!!this._guiParent && this._guiFolder) {
             this._guiParent.removeFolder(this._guiFolder);
         }
-
     }
-
-
 }

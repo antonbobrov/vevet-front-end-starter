@@ -10,8 +10,8 @@ import createCustomSelects from './inputs/customSelect';
 import createLiveFormValidation from './inputs/createLiveFormValidation';
 import { IAjaxFormElements } from './inputs/types';
 import './FormRecaptcha';
-import { FormRecaptcha, tagName as formRecaptchaTagName } from './FormRecaptcha';
-import { updateThings } from '../../app/updateThings';
+import FormRecaptcha from './FormRecaptcha';
+import updateThings from '../../app/updateThings';
 import { toggleFormInputError } from './inputs/errors';
 
 
@@ -27,8 +27,7 @@ declare global {
 
 
 @customElement(tagName)
-export class AjaxForm extends LitElement {
-
+export default class AjaxForm extends LitElement {
     @property({
         attribute: 'popup-on-success',
     }) popupOnSuccess = '';
@@ -80,20 +79,16 @@ export class AjaxForm extends LitElement {
     }
 
     connectedCallback () {
-
         super.connectedCallback();
         this.classList.add(tagName);
 
         this._create();
-
     }
 
     disconnectedCallback () {
-
         super.disconnectedCallback();
 
         this._destroy();
-
     }
 
 
@@ -102,7 +97,6 @@ export class AjaxForm extends LitElement {
      * Create the form
      */
     protected _create () {
-
         if (this._form) {
             return;
         }
@@ -110,8 +104,7 @@ export class AjaxForm extends LitElement {
         const formEl = selectOne('form', this) as HTMLFormElement;
         if (isElement(formEl)) {
             this._formElement = formEl;
-        }
-        else {
+        } else {
             this._formElement = this;
         }
 
@@ -139,20 +132,17 @@ export class AjaxForm extends LitElement {
             const el = children[i] as HTMLElement;
             el.style.zIndex = z.toString();
         }
-
     }
 
     /**
      * Set form events on failure
      */
     protected _setFailEvents () {
-
         if (!this.form) {
             return;
         }
 
         this.form.on('failure', (data) => {
-
             this._resetRecaptcha();
 
             // reset form errors
@@ -172,20 +162,17 @@ export class AjaxForm extends LitElement {
                 });
             });
         });
-
     }
 
     /**
      * Set form events on success
      */
     protected _setSuccessEvents () {
-
         if (!this.form) {
             return;
         }
 
         this.form.on('success', () => {
-
             this._resetRecaptcha();
 
             // scroll to top on success
@@ -193,8 +180,7 @@ export class AjaxForm extends LitElement {
                 scrollToTop().then(() => {
                     this._handleSuccess();
                 });
-            }
-            else {
+            } else {
                 this._handleSuccess();
             }
 
@@ -208,20 +194,17 @@ export class AjaxForm extends LitElement {
                     isError: false,
                 });
             });
-
         });
-
     }
 
     /**
      * Actions on form success
      */
     protected _handleSuccess () {
-
         // open popup if exists
         if (this.popupOnSuccess) {
             import('../popup/auto/popupAuto').then((module) => {
-                const popup = module.popupAuto;
+                const popup = module.default;
                 if (popup.shown) {
                     popup.on('hidden', () => {
                         module.openAutoPopup(this.popupOnSuccess);
@@ -229,8 +212,7 @@ export class AjaxForm extends LitElement {
                         once: true,
                     });
                     popup.hide();
-                }
-                else {
+                } else {
                     module.openAutoPopup(this.popupOnSuccess);
                 }
             });
@@ -245,7 +227,6 @@ export class AjaxForm extends LitElement {
         // show elements on success
         const showEl = this.showElementOnSuccess;
         if (showEl) {
-
             showEl.style.display = 'block';
 
             // process back buttons
@@ -258,15 +239,11 @@ export class AjaxForm extends LitElement {
                     if (hideEl) {
                         hideEl.style.display = '';
                     }
-                    if ('updateThingsCallback' in window) {
-                        window.updateThingsCallback();
-                    }
-                    updateThings();
+                    updateThings.launchCallbacks();
                 }, {
                     once: true,
                 });
             });
-
         }
 
         // update scroll sizes
@@ -277,11 +254,7 @@ export class AjaxForm extends LitElement {
         }
 
         // update things
-        if ('updateThingsCallback' in window) {
-            window.updateThingsCallback();
-        }
-        updateThings();
-
+        updateThings.launchCallbacks();
     }
 
     get hideElementOnSuccess () {
@@ -310,12 +283,12 @@ export class AjaxForm extends LitElement {
      * Reset recaptcha
      */
     protected _resetRecaptcha () {
-
-        const recaptchaEl = selectAll(formRecaptchaTagName, this) as NodeListOf<FormRecaptcha>;
+        const recaptchaEl = selectAll(
+            'form-recaptcha', this,
+        ) as unknown as NodeListOf<FormRecaptcha>;
         recaptchaEl.forEach((el) => {
             el.reset();
         });
-
     }
 
 
@@ -324,7 +297,6 @@ export class AjaxForm extends LitElement {
      * Destroy the form
      */
     protected _destroy () {
-
         if (this._form) {
             this._form.destroy();
             this._form = false;
@@ -342,8 +314,5 @@ export class AjaxForm extends LitElement {
             observer.disconnect();
         });
         this._mutationObservers = [];
-
     }
-
-
 }

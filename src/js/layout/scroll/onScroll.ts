@@ -2,7 +2,7 @@ import {
     selectOne, isElement, IAddEventListener, addEventListener,
 } from 'vevet-dom';
 import app from '../../app/app';
-import { customScroll } from './custom-scroll/customScroll';
+import customScroll from './custom-scroll/customScroll';
 import { CustomScrollType, isCustomScroll } from './custom-scroll/isCustomScroll';
 import { canBeCustom } from './custom-scroll/settings';
 import { useWindowScroll } from './settings';
@@ -22,7 +22,6 @@ export function onScroll (
      */
     external = false,
 ): IOnScroll {
-
     // get current page
     const page = app.vevetPage;
 
@@ -82,7 +81,6 @@ export function onScroll (
 
     // destroy the listeners
     function destroy () {
-
         listeners.forEach((event) => {
             event.remove();
         });
@@ -90,7 +88,6 @@ export function onScroll (
         if (!!customScrollEvent && !!scrollModule) {
             scrollModule.remove(customScrollEvent);
         }
-
     }
 
 
@@ -98,5 +95,4 @@ export function onScroll (
     return {
         destroy: destroy.bind(this),
     };
-
 }

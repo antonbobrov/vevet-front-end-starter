@@ -1,6 +1,7 @@
-export function strToNum (
-    val: string | number,
+export default function strToNum (
+    arg: string | number,
 ) {
+    let val = arg;
     if (typeof val !== 'string') {
         val = `${val}`;
     }

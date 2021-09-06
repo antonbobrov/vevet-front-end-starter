@@ -1,4 +1,4 @@
-export function loadScript (url: string) {
+export default function loadScript (url: string) {
     return new Promise((resolve) => {
         const head = document.getElementsByTagName('head')[0];
         const script = document.createElement('script');

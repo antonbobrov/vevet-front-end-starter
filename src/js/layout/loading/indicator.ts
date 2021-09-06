@@ -1,12 +1,9 @@
 import app from '../../app/app';
 
-export function setLoadingIndicator (bool = true) {
-
+export default function setLoadingIndicator (bool = true) {
     if (bool) {
         app.html.classList.add('loading');
-    }
-    else {
+    } else {
         app.html.classList.remove('loading');
     }
-
 }

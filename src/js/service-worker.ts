@@ -1,9 +1,8 @@
 /* eslint-disable no-console */
 
-import { isLocalHost } from './helpers/site/isLocalHost';
+import isLocalHost from './helpers/site/isLocalHost';
 
-export const registerServiceWorker = function () {
-
+const registerServiceWorker = function () {
     if (isLocalHost()) {
         return;
     }
@@ -11,11 +10,9 @@ export const registerServiceWorker = function () {
     // This is the "Offline page" service worker
     // Check compatibility for the browser we're running this in
     if ('serviceWorker' in navigator) {
-
         if (navigator.serviceWorker.controller) {
             console.log('[PWA Builder] active service worker found, no need to register');
-        }
-        else {
+        } else {
             // Register the service worker
             navigator.serviceWorker
                 .register('/sw.js', {
@@ -26,6 +23,6 @@ export const registerServiceWorker = function () {
                 });
         }
     }
-
-
 };
+
+export default registerServiceWorker;

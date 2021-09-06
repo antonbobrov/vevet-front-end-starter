@@ -33,7 +33,6 @@ export function loadImage (
     success: (img: HTMLImageElement) => void,
     error?: () => void,
 ) {
-
     // if the image was loaded before
     const isLoaded = loadedImage(src);
     if (isLoaded) {
@@ -57,5 +56,4 @@ export function loadImage (
         }
     };
     img.src = src;
-
 }

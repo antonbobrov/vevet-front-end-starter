@@ -1,13 +1,13 @@
 import { selectAll } from 'vevet-dom';
 import app from '../../app/app';
 import { resizeTimeout } from '../../settings';
-import { layoutElements } from '../../helpers/dom-css/layoutElements';
+import layoutElements from '../../helpers/dom-css/layoutElements';
 import { loadImage } from './imageLoader';
 import { getScrollSelector } from '../scroll/custom-scroll/settings';
 import { CustomScrollType, isCustomScroll } from '../scroll/custom-scroll/isCustomScroll';
 import {
     intersectionObserverSupported,
-} from '../scroll/intersection-observer/intersectionObserverSupported';
+} from '../scroll/intersection-observer/observer';
 import './LazyImg';
 
 const { viewport } = app;
@@ -21,7 +21,6 @@ export interface LazyImages {
 export function initLazyImages (
     outerSelector: false | HTMLElement = false,
 ): LazyImages | false {
-
     let destroyed = false;
 
 
@@ -61,7 +60,6 @@ export function initLazyImages (
 
     // Set events
     function set () {
-
         if (destroyed) {
             return;
         }
@@ -73,8 +71,7 @@ export function initLazyImages (
         outer = getOuteSelector();
         if (!isCustomScroll(outer)) {
             parentElement = outer as HTMLElement;
-        }
-        else {
+        } else {
             const mod = outer as CustomScrollType;
             parentElement = mod.outer as HTMLElement;
         }
@@ -99,16 +96,13 @@ export function initLazyImages (
                 options,
             );
             addImagesToObserver();
-        }
-        // if observer not supported
-        else {
-
+        } else {
+            // if observer not supported
             // if custom scroll
             if (isCustomScroll(outer)) {
                 // @ts-ignore
                 eventCustom = outer.on('update', lazyImageBounding.bind(this));
-            }
-            else if (page) {
+            } else if (page) {
                 eventNative = page.listener(
                     outer as HTMLElement,
                     'scroll',
@@ -117,9 +111,7 @@ export function initLazyImages (
                 );
             }
             lazyImageBounding();
-
         }
-
     }
 
 
@@ -130,36 +122,30 @@ export function initLazyImages (
         }
 
         return outerSelector;
-
     }
 
 
 
     function addViewportEvent () {
-
         viewportEvent = viewport.add({
             target: 'w_',
             do: reset.bind(this, true),
             timeout: resizeTimeout,
             name: 'LAZY IMAGE',
         });
-
     }
 
     function removeViewportEvent () {
-
         if (typeof viewportEvent !== 'boolean') {
             viewport.remove(viewportEvent);
             viewportEvent = false;
         }
-
     }
 
 
 
     // Reset events
     function reset (initAgain = true) {
-
         if (eventNative) {
             if (page) {
                 page.removeEventListener({
@@ -192,24 +178,20 @@ export function initLazyImages (
         if (initAgain) {
             set();
         }
-
     }
 
     // Destroy events
     function destroy () {
-
         destroyed = true;
 
         removeViewportEvent();
         reset(false);
-
     }
 
 
 
     // get lazy images
     function getImages () {
-
         images = [];
 
         const items = selectAll('.lazy-image, .lazy-bg', parentElement);
@@ -222,23 +204,19 @@ export function initLazyImages (
                 }
             }
         }
-
     }
 
     // add images to the intersection observer
     function addImagesToObserver () {
-
         if (observer instanceof IntersectionObserver) {
             for (let i = 0; i < images.length; i++) {
                 observer.observe(images[i]);
             }
         }
-
     }
 
     // when the page is shown, show the images that must be loaded at once
     function showInstantImages () {
-
         const items = selectAll(
             '.lazy-image-instant, .lazy-bg-instant',
             parentElement,
@@ -252,14 +230,12 @@ export function initLazyImages (
                 }
             }
         }
-
     }
 
 
 
     // callback on observer
     function lazyImageObserve (entries: IntersectionObserverEntry[]) {
-
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
                 const el = entry.target;
@@ -268,16 +244,13 @@ export function initLazyImages (
                 }
             }
         });
-
     }
 
     // callback on scroll update
     function lazyImageBounding () {
-
         const outerHeight = layoutElements.app.clientHeight;
 
         for (let i = 0; i < images.length; i++) {
-
             const image = images[i];
 
             const boundingImage = image.getBoundingClientRect();
@@ -286,49 +259,40 @@ export function initLazyImages (
             ) {
                 prepareImage(image);
             }
-
         }
-
     }
 
     // prepare the image for loading
     function prepareImage (
         el: HTMLElement,
     ) {
-
         if (!el.classList.contains(classNameLoad)) {
             el.classList.add(classNameLoad);
             el.style.willChange = 'opacity';
             lazyImageLoad(el);
         }
-
     }
 
 
 
     // load an image
     function lazyImageLoad (img: HTMLElement) {
-
         // get data-src attribute
         const srcAttr = img.getAttribute('data-src');
         if (srcAttr) {
             // load image
             loadImage(srcAttr, () => {
-
                 if (img instanceof HTMLImageElement) {
                     img.src = srcAttr;
-                }
-                else {
+                } else {
                     img.style.backgroundImage = `url('${srcAttr}')`;
                 }
 
                 handleImageLoaded(img);
-
             });
-        }
-        // if it does not exist, we check for data-srcset
-        // but only if HTMLImageElement
-        else if (img instanceof HTMLImageElement) {
+        } else if (img instanceof HTMLImageElement) {
+            // if it does not exist, we check for data-srcset
+            // but only if HTMLImageElement
             const srcsetAttr = img.getAttribute('data-srcset');
             if (srcsetAttr) {
                 img.addEventListener('load', () => {
@@ -337,22 +301,18 @@ export function initLazyImages (
                 img.setAttribute('srcset', srcsetAttr);
             }
         }
-
-
     }
 
     // on image loaded handler
     function handleImageLoaded (
         el: HTMLElement,
     ) {
-
         setTimeout(() => {
             el.classList.add(classNameLoaded);
             setTimeout(() => {
                 el.style.willChange = '';
             }, 250);
         }, 50);
-
     }
 
 
@@ -362,7 +322,4 @@ export function initLazyImages (
         destroy: destroy.bind(this),
         reset: reset.bind(this),
     };
-
-
-
 }

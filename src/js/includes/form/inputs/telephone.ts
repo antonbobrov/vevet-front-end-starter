@@ -4,7 +4,7 @@ import {
     addEventListener, IAddEventListener, parentByClassName, selectOne,
 } from 'vevet-dom';
 import { IAjaxFormElements } from './types';
-import { loadScript } from '../../../helpers/loaders/loadScript';
+import loadScript from '../../../helpers/loaders/loadScript';
 import { formErrorClassName, toggleFormInputError } from './errors';
 
 interface Data {
@@ -15,7 +15,6 @@ interface Data {
 export default function createInputTelephoneValidator ({
     input,
 }: Data): IAjaxFormElements {
-
     let phoneInput: Plugin | false = false;
     let listeners: IAddEventListener[] = [];
     let classNamesObserver: MutationObserver | false = false;
@@ -23,7 +22,6 @@ export default function createInputTelephoneValidator ({
     // create the international telephone input
     const countryCode = '';
     loadScript('https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.8/js/utils.js').then(() => {
-
         phoneInput = intlTelInput(input, {
             utilsScript: 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.8/js/utils.js',
             initialCountry: countryCode,
@@ -57,7 +55,6 @@ export default function createInputTelephoneValidator ({
         input.parentElement.addEventListener('wheel', (e) => {
             e.stopPropagation();
         });
-
     });
 
 
@@ -66,7 +63,6 @@ export default function createInputTelephoneValidator ({
      * Create the telephone mask
      */
     function createMask () {
-
         const placeholder = input.getAttribute('placeholder');
         let mask = '';
         if (placeholder) {
@@ -104,8 +100,7 @@ export default function createInputTelephoneValidator ({
                 mutations.forEach(() => {
                     if (input.classList.contains(formErrorClassName)) {
                         parent.classList.add(formErrorClassName);
-                    }
-                    else {
+                    } else {
                         parent.classList.remove(formErrorClassName);
                     }
                 });
@@ -114,13 +109,11 @@ export default function createInputTelephoneValidator ({
         classNamesObserver.observe(input, {
             attributes: true,
         });
-
     }
 
     function testMask (
         mask: string,
     ) {
-
         const test = new RegExp(`${mask.replace(/9/g, '\\d')}`, 'g');
         const isValid = test.test(input.value);
 
@@ -128,13 +121,11 @@ export default function createInputTelephoneValidator ({
             input,
             isError: !isValid,
         });
-
     }
 
 
 
     function destroyListeners () {
-
         listeners.forEach((listener) => {
             listener.remove();
         });
@@ -144,7 +135,6 @@ export default function createInputTelephoneValidator ({
             classNamesObserver.disconnect();
             classNamesObserver = false;
         }
-
     }
 
 
@@ -157,5 +147,4 @@ export default function createInputTelephoneValidator ({
             destroyListeners();
         },
     };
-
 }

@@ -7,8 +7,7 @@ const prefix = 'scroll-to-anchor';
 
 
 @customElement(prefix)
-export class ScrollToAnchor extends LitElement {
-
+export default class ScrollToAnchor extends LitElement {
     @property({
         attribute: 'target-selector',
     }) targetSelector: string;
@@ -23,25 +22,20 @@ export class ScrollToAnchor extends LitElement {
     }
 
     connectedCallback () {
-
         super.connectedCallback();
 
         // add component class
         this.classList.add(prefix);
-
     }
 
     firstUpdated () {
-
         this.addEventListener('click', () => {
-
             // get target element
             let targetEl: Element;
             if (this.targetSelector) {
                 try {
                     targetEl = selectOne(this.targetSelector);
-                }
-                catch (e) {
+                } catch (e) {
                     //
                 }
             }
@@ -52,13 +46,10 @@ export class ScrollToAnchor extends LitElement {
             // scroll to the element
             if (targetEl) {
                 const scroll = getScrollSelector();
-                const scrollToVal = scroll.scrollTop + targetEl.getBoundingClientRect().top + toTopVal;
+                const scrollToVal = scroll.scrollTop
+                    + targetEl.getBoundingClientRect().top + toTopVal;
                 scrollTo(scrollToVal, 750);
             }
-
         });
-
     }
-
-
 }

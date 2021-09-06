@@ -1,3 +1,3 @@
-export interface IAjaxFormElements {
-    destroy: () => void;
-}
+import { IDestroyable } from '../../../commonTypes';
+
+export interface IAjaxFormElements extends IDestroyable { }

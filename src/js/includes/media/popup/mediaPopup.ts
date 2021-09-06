@@ -1,14 +1,16 @@
 import { PopupModule } from 'vevet';
 import app from '../../../app/app';
-import { processPopupEvents } from '../../popup/common/processPopupEvents';
-import { setMediaPopupSize } from './setMediaPopupSize';
+import processPopupEvents from '../../popup/common/processPopupEvents';
+import setMediaPopupSize from './setMediaPopupSize';
 
 const adaptivePopupSize = true;
 
 
 
 // create the popup
-export const mediaPopup = new PopupModule();
+const mediaPopup = new PopupModule();
+export default mediaPopup;
+
 processPopupEvents({
     instance: mediaPopup,
     appendCloseToLevels: true,
@@ -24,7 +26,6 @@ mediaPopup.on('created', () => {
 
 // set sizes of the popup's container
 if (adaptivePopupSize) {
-
     mediaPopup.on('show', () => {
         setSize();
         setTimeout(() => {
@@ -35,7 +36,6 @@ if (adaptivePopupSize) {
     app.viewport.on('', setSize.bind(this), {
         name: 'Align Media Popup',
     });
-
 }
 
 function setSize () {

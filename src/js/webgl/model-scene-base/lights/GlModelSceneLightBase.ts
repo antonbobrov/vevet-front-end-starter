@@ -2,7 +2,7 @@ import {
     Color, Group, Scene, Light,
 } from 'three';
 import { GUIType, minSiteGUIStep } from '../../../siteGUI';
-import { GlModelSceneObj } from '../GlModelSceneObj';
+import GlModelSceneObj from '../GlModelSceneObj';
 import { GlLightBaseSettings } from '../types';
 
 
@@ -19,11 +19,10 @@ interface Data <
 
 
 
-export abstract class GlModelSceneLightBase<
+export default abstract class GlModelSceneLightBase<
     LightType extends Light,
     LightProp extends GlLightBaseSettings,
 > {
-
     // vars
     protected _guiFolder: GUIType | false = false;
     protected _light: LightType | false = false;
@@ -42,7 +41,6 @@ export abstract class GlModelSceneLightBase<
         model,
         guiParent,
     }: Data<LightProp>) {
-
         // set vars
         this._name = name;
         this._prop = prop;
@@ -56,7 +54,6 @@ export abstract class GlModelSceneLightBase<
 
         // create gui
         this._createGUI();
-
     }
 
 
@@ -74,7 +71,6 @@ export abstract class GlModelSceneLightBase<
      * Create GUI
      */
     protected _createGUI () {
-
         if (!this._guiParent) {
             return false;
         }
@@ -101,7 +97,6 @@ export abstract class GlModelSceneLightBase<
             folder,
             settingsFolder,
         };
-
     }
 
 
@@ -110,7 +105,6 @@ export abstract class GlModelSceneLightBase<
      * Update the object
      */
     public update () {
-
         const light = this._light;
         if (!light) {
             return;
@@ -132,7 +126,6 @@ export abstract class GlModelSceneLightBase<
         // change light props
         light.color = new Color(_prop.color);
         light.intensity = _prop.intensity;
-
     }
 
 
@@ -150,7 +143,6 @@ export abstract class GlModelSceneLightBase<
      * Destroy the object
      */
     public destroy () {
-
         if (!!this._guiParent && this._guiFolder) {
             this._guiParent.removeFolder(this._guiFolder);
         }
@@ -158,8 +150,5 @@ export abstract class GlModelSceneLightBase<
         if (this._light) {
             this._scene.remove(this._light);
         }
-
     }
-
-
 }

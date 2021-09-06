@@ -1,7 +1,25 @@
 import { Event } from 'vevet';
 
-export const updateThingsCallbacks = new Event();
+const updateThings = (function func () {
+    const events = new Event();
 
-export const updateThings = () => {
-    updateThingsCallbacks.launchAll();
-};
+    return {
+        launchCallbacks: () => {
+            events.launchAll();
+        },
+        add: (
+            callback: (...arg: any) => void,
+        ) => {
+            const id = events.on('', () => {
+                callback();
+            });
+            return {
+                destroy: () => {
+                    events.remove(id);
+                },
+            };
+        },
+    };
+}());
+
+export default updateThings;

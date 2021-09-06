@@ -20,7 +20,6 @@ export default function createFormCombinations (
     combinations: FormCombinationItem[][] = [],
     onChangeCallback: (valid: number | false) => void,
 ): IAjaxFormElements {
-
     const destroyableElements: IAjaxFormElements[] = [];
 
     // get names of inputs
@@ -44,8 +43,7 @@ export default function createFormCombinations (
     let inputs: InputsType;
     if (watchNames.length > 0) {
         inputs = selectAll(selectors.join(','), outer) as InputsType;
-    }
-    else {
+    } else {
         // @ts-ignore
         inputs = [];
     }
@@ -69,7 +67,6 @@ export default function createFormCombinations (
             });
         },
     };
-
 }
 
 
@@ -83,7 +80,6 @@ function validateInputs (
     combinations: FormCombinationItem[][] = [],
     watchNames: string[],
 ): number | false {
-
     // enable all inputs
     inputs.forEach((input) => {
         input.disabled = false;
@@ -95,7 +91,6 @@ function validateInputs (
     // get overlapping combinations
     let hasOverlaps: false | number = false;
     combinations.forEach((currentCombination, combinationIndex) => {
-
         let currentOverlaps = 0;
 
         currentCombination.forEach((combinationInput) => {
@@ -114,7 +109,6 @@ function validateInputs (
         ) {
             hasOverlaps = combinationIndex;
         }
-
     });
 
     // process inputs
@@ -123,7 +117,6 @@ function validateInputs (
     });
 
     return hasOverlaps;
-
 }
 
 
@@ -135,7 +128,6 @@ function getCurrentInputsCombination (
     outer: Element,
     inputs: InputsType,
 ) {
-
     const inputsCombination: FormCombinationItem[] = [];
 
     inputs.forEach((input) => {
@@ -157,7 +149,6 @@ function getCurrentInputsCombination (
     });
 
     return inputsCombination;
-
 }
 
 
@@ -168,7 +159,6 @@ function processInputs (
     staticCombinations: FormCombinationItem[][],
     targetName: string,
 ) {
-
     const targetInputsCombination: FormCombinationItem[] = [];
 
     // get current input combination except for the current name
@@ -190,7 +180,6 @@ function processInputs (
     // get available values of the target input
     const availableTargetInputs: FormCombinationItem[] = [];
     staticCombinations.forEach((currentStaticCombination) => {
-
         let overlapsWithTargetCombination = 0;
         currentStaticCombination.forEach((staticInputData) => {
             targetInputsCombination.forEach((targetInputData) => {
@@ -213,12 +202,10 @@ function processInputs (
                 }
             });
         }
-
     });
 
     // process inputs
     checkInputs.forEach((currentCheckInput) => {
-
         let valueExists = false;
         availableTargetInputs.forEach((currentAvailableTargetInput) => {
             if (currentAvailableTargetInput.name === currentCheckInput.name) {
@@ -229,7 +216,5 @@ function processInputs (
         });
 
         currentCheckInput.disabled = !valueExists;
-
     });
-
 }

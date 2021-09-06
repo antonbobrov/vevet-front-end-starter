@@ -6,30 +6,21 @@ const prefix = 'scroll-down';
 
 
 @customElement(prefix)
-export class ScrollDown extends LitElement {
-
-
-
+export default class ScrollDown extends LitElement {
     createRenderRoot () {
         return this;
     }
 
     connectedCallback () {
-
         super.connectedCallback();
 
         // add component class
         this.classList.add(prefix);
-
     }
 
     firstUpdated () {
-
         this.addEventListener('click', () => {
             scrollTo(app.viewport.size[1] + 1);
         });
-
     }
-
-
 }

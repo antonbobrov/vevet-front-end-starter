@@ -12,7 +12,7 @@ import {
     Group,
 } from 'three';
 import ThreeBase from '../base/ThreeBase';
-import { threeJS } from '../threeJS';
+import threeJS from '../threeJS';
 
 
 
@@ -111,7 +111,6 @@ export namespace IThreePlane {
 
 
 export class ThreePlane extends Module {
-
     protected _prop: IThreePlane.Properties;
 
     // @ts-ignore
@@ -212,7 +211,6 @@ export class ThreePlane extends Module {
 
     // Extra Constructor
     protected _extra () {
-
         super._extra();
 
         this.setDefaultProperties();
@@ -222,7 +220,6 @@ export class ThreePlane extends Module {
 
         // set data
         this._data = this.prop.uniformsData;
-
     }
 
 
@@ -240,10 +237,8 @@ export class ThreePlane extends Module {
 
     // Here you can set additional events
     protected _setEvents () {
-
         // create three.js base
         this._createTHREE();
-
     }
 
 
@@ -251,7 +246,6 @@ export class ThreePlane extends Module {
      * Create Three.js base.
      */
     protected _createTHREE () {
-
         this._setStartSize();
 
         // create a texture
@@ -282,7 +276,6 @@ export class ThreePlane extends Module {
 
         // when all processes are done
         this.lbt('done');
-
     }
 
 
@@ -291,7 +284,6 @@ export class ThreePlane extends Module {
      * Calculate sizes at the beginning.
      */
     protected _setStartSize () {
-
         const el = this._el;
         let width = 0;
         let height = 0;
@@ -307,21 +299,18 @@ export class ThreePlane extends Module {
             if (height === 0) {
                 height = three.height;
             }
-        }
-        else {
+        } else {
             width = three.width;
             height = three.height;
         }
 
         this._startSize = [width, height];
-
     }
 
     /**
      * Scale mesh on resize.
      */
     public resize () {
-
         let startWidth = this._startSize[0];
         let startHeight = this._startSize[1];
 
@@ -333,8 +322,7 @@ export class ThreePlane extends Module {
         if (el) {
             width = el.clientWidth;
             height = el.clientHeight;
-        }
-        else {
+        } else {
             width = this.prop.three.width;
             height = this.prop.three.height;
         }
@@ -358,18 +346,15 @@ export class ThreePlane extends Module {
         const mesh = this._mesh;
         mesh.scale.x = scaleX;
         mesh.scale.y = scaleY;
-
     }
 
     /**
      * Set resize events.
      */
     protected _setResize () {
-
         this._threeEvents.push(
             this.prop.three.on('resize', this.resize.bind(this)),
         );
-
     }
 
 
@@ -378,19 +363,16 @@ export class ThreePlane extends Module {
      * Create a texture.
      */
     protected _createTexture () {
-
         const { texture } = this.prop;
         if (texture) {
             this._texture = texture;
         }
-
     }
 
     /**
      * Create a geometry.
      */
     protected _createGeometry () {
-
         // get dimensions
         const width = this._startSize[0];
         const height = this._startSize[1];
@@ -400,7 +382,6 @@ export class ThreePlane extends Module {
 
         // callbacks on geometry created
         this.lbt('geometry');
-
     }
 
 
@@ -409,23 +390,18 @@ export class ThreePlane extends Module {
      * Create a material.
      */
     protected _createMaterial () {
-
         const prop = this._prop;
 
         // extend native fragment shader
         const Material = this._prop.material;
         if (!(Material instanceof ShaderMaterial)) {
-
             const materialProp: any = { ...prop.materialProp };
             if (this._texture) {
                 materialProp.map = this._texture;
             }
 
             this._material = new Material(materialProp);
-
-        }
-        else {
-
+        } else {
             let uniforms = this._getMaterialUniforms();
 
             // apply a texture
@@ -448,7 +424,6 @@ export class ThreePlane extends Module {
 
             // set uniforms
             this._uniforms = Material.uniforms;
-
         }
 
         // apply a texture to the material
@@ -465,14 +440,12 @@ export class ThreePlane extends Module {
 
         // callbacks on material created
         this.lbt('material');
-
     }
 
     /**
      * Get material uniforms.
      */
     protected _getMaterialUniforms () {
-
         const uniforms: any = {};
 
         this._data.forEach((obj) => {
@@ -483,26 +456,22 @@ export class ThreePlane extends Module {
         });
 
         return uniforms;
-
     }
 
     /**
      * Set material data on Materials extending the native fragment shader.
      */
     protected _setMaterialDataOnExtendedMaterial () {
-
         // material uniforms to user data
         this._setMaterialUserData();
         // set a "before compile event"
         this._setMaterialOnBeforeCompile();
-
     }
 
     /**
      * Material uniforms to user data.
      */
     protected _setMaterialUserData () {
-
         const material = this._material;
         this._data.forEach((obj) => {
             material.userData[obj.key] = {
@@ -510,7 +479,6 @@ export class ThreePlane extends Module {
                 value: obj.value,
             };
         });
-
     }
 
     /**
@@ -520,11 +488,9 @@ export class ThreePlane extends Module {
      * That's why it has sense to change the callback in each new material.
      */
     protected _setMaterialOnBeforeCompile () {
-
         this._material.onBeforeCompile = (shader: any) => {
             this._onMaterialBeforeCompile(shader);
         };
-
     }
 
     /**
@@ -532,10 +498,8 @@ export class ThreePlane extends Module {
      * @param { Shader } shader
      */
     protected _onMaterialBeforeCompile (shader: Shader) {
-
         const { extendFragmentShader } = this.prop;
         if (extendFragmentShader) {
-
             // set uniforms in shaders
             this._setShaderUniforms(shader);
 
@@ -544,9 +508,7 @@ export class ThreePlane extends Module {
                 '#include <map_fragment>',
                 extendFragmentShader,
             );
-
         }
-
     }
 
     /**
@@ -554,7 +516,6 @@ export class ThreePlane extends Module {
      * @param { Shader } shader
      */
     protected _setShaderUniforms (shader: Shader) {
-
         const material = this._material;
 
         this._data.forEach((obj) => {
@@ -564,7 +525,6 @@ export class ThreePlane extends Module {
         });
 
         this._uniforms = material.userData;
-
     }
 
 
@@ -573,7 +533,6 @@ export class ThreePlane extends Module {
      * Create a mesh.
      */
     protected _createMesh () {
-
         const mesh = new Mesh(this._geometry, this._material);
         this._mesh = mesh;
         mesh.position.set(0, 0, this.prop.zIndex);
@@ -583,7 +542,6 @@ export class ThreePlane extends Module {
 
         // callbacks on mesh created
         this.lbt('mesh');
-
     }
 
 
@@ -592,15 +550,12 @@ export class ThreePlane extends Module {
      * Remove Three.js vevet module events.
      */
     removeThreeEvents () {
-
         this._threeEvents.forEach((id) => {
             this.prop.three.remove(id);
         });
-
     }
 
     destroy () {
-
         super.destroy();
 
         this.removeThreeEvents();
@@ -618,7 +573,6 @@ export class ThreePlane extends Module {
         if (this.prop.scene) {
             this.prop.scene.remove(this._mesh);
         }
-
     }
 
 
@@ -627,14 +581,12 @@ export class ThreePlane extends Module {
      * Set rendering.
      */
     _setRendering () {
-
         // add rendering event
         if (this.prop.autoRender) {
             this._threeEvents.push(
                 this.prop.three.on('prerender', this.render.bind(this)),
             );
         }
-
     }
 
 
@@ -643,14 +595,12 @@ export class ThreePlane extends Module {
      * Render the object.
      */
     render () {
-
         if (this.prop.renderPosition) {
             this.renderPosition();
         }
         this._renderTexture();
 
         this._renderedFrames += 1;
-
     }
 
     /**
@@ -659,7 +609,6 @@ export class ThreePlane extends Module {
     public renderPosition (
         force = false,
     ) {
-
         const prop = this._prop;
         const { three } = prop;
         const mesh = this._mesh;
@@ -671,8 +620,7 @@ export class ThreePlane extends Module {
                     return;
                 }
                 this._lastTimeRenderedPosition = true;
-            }
-            else {
+            } else {
                 this._lastTimeRenderedPosition = false;
             }
         }
@@ -698,8 +646,7 @@ export class ThreePlane extends Module {
                     this._onScene = false;
                     mesh.matrixAutoUpdate = false;
                 }
-            }
-            else if (!this._onScene) {
+            } else if (!this._onScene) {
                 if (scene) {
                     scene.add(mesh);
                 }
@@ -711,20 +658,17 @@ export class ThreePlane extends Module {
         // apply
         mesh.position.x = position.x;
         mesh.position.y = position.y;
-
     }
 
     /**
      * Get the object's bounding.
      */
     _getBounding () {
-
         // get outer element
         let el: Element;
         if (this._el) {
             el = this._el;
-        }
-        else {
+        } else {
             el = this._prop.three.outer;
         }
 
@@ -732,14 +676,12 @@ export class ThreePlane extends Module {
         const bounding = el.getBoundingClientRect();
 
         return bounding;
-
     }
 
     /**
      * Get the object's position.
      */
     _getPosition (bounding: ClientRect) {
-
         const prop = this._prop;
         const { three } = prop;
 
@@ -755,25 +697,21 @@ export class ThreePlane extends Module {
             x,
             y,
         };
-
     }
 
     /**
      * Render the texture
      */
     protected _renderTexture () {
-
         if (!this._prop.alwaysNeedsUpdate) return;
         if (this._texture) {
             this._texture.needsUpdate = true;
         }
-
     }
 
 
 
     public hide (duration: number) {
-
         return new Promise((resolve: (...args: any) => void) => {
             const timeline = new TimelineModule();
             timeline.on('progress', (data) => {
@@ -786,11 +724,9 @@ export class ThreePlane extends Module {
                 duration,
             });
         });
-
     }
 
     public show (duration: number) {
-
         return new Promise((resolve: (...args: any) => void) => {
             const timeline = new TimelineModule();
             timeline.on('progress', (data) => {
@@ -803,16 +739,10 @@ export class ThreePlane extends Module {
                 duration,
             });
         });
-
     }
 
     public setAlpha (alpha: number) {
-
         // @ts-ignore
         this.mesh.material.opacity = alpha;
-
     }
-
-
-
 }

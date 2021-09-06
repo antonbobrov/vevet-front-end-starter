@@ -3,10 +3,9 @@ import '../../../../styles/includes/media/_video-js.scss';
 /**
  * Create video player
  */
-export function createVideoPlayer (
+export default function createVideoPlayer (
     video: HTMLVideoElement,
 ) {
-
     return new Promise((
         resolve: (arg?: unknown) => void,
     ) => {
@@ -17,5 +16,4 @@ export function createVideoPlayer (
             resolve();
         });
     });
-
 }

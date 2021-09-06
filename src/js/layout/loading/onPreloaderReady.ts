@@ -15,8 +15,7 @@ export function onPreloaderReady (
     let callbackId: false | string = false;
     if (preloaderReadyBool) {
         callback();
-    }
-    else {
+    } else {
         callbackId = eventCallbacks.on('', () => {
             callback();
         });
@@ -28,5 +27,4 @@ export function onPreloaderReady (
             }
         },
     };
-
 }

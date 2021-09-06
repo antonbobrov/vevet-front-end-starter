@@ -1,1 +1,4 @@
-export const playVideoButtonTagName = 'play-video-button';
+const settings = {
+    tagName: 'play-video-button',
+};
+export default settings;

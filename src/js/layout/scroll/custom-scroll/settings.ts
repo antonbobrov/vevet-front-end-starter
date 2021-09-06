@@ -1,7 +1,7 @@
 import { selectOne } from 'vevet-dom';
 import app from '../../../app/app';
 import { useCustomScroll, useWindowScroll } from '../settings';
-import { customScroll } from './customScroll';
+import customScroll from './customScroll';
 import { CustomScrollType, isCustomScroll } from './isCustomScroll';
 
 const { viewport } = app;
@@ -9,7 +9,6 @@ const { viewport } = app;
 
 
 export function getEase () {
-
     // get easing
     let ease = 0.1;
     if (app.os === 'macos') {
@@ -22,7 +21,6 @@ export function getEase () {
     }
 
     return ease;
-
 }
 
 
@@ -40,7 +38,6 @@ export function getScrollSelector (): (HTMLElement | CustomScrollType) {
     }
     const selector = selectOne('#custom-scroll') as HTMLElement;
     return selector;
-
 }
 
 

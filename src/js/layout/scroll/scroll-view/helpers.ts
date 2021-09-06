@@ -10,7 +10,6 @@ export const scrollViewClasses = [
 
 
 export function includesScrollViewClass (el: Element) {
-
     for (let i = 0, l = scrollViewClasses.length; i < l; i++) {
         if (el.classList.contains(scrollViewClasses[i])) {
             return true;
@@ -18,7 +17,6 @@ export function includesScrollViewClass (el: Element) {
     }
 
     return false;
-
 }
 
 
@@ -26,7 +24,6 @@ export function includesScrollViewClass (el: Element) {
 export function removeScrollViewClasses (
     outer: Element,
 ) {
-
     scrollViewClasses.forEach((className) => {
         outer.classList.remove(className);
     });
@@ -37,7 +34,6 @@ export function removeScrollViewClasses (
             child.classList.remove(className);
         });
     });
-
 }
 
 
@@ -56,8 +52,7 @@ export function onScrollViewEl (
 ) {
     if (el.classList.contains(viewedClassName)) {
         callback();
-    }
-    else {
+    } else {
         // @ts-ignore
         el['v-view-callback'] = () => {
             callback();

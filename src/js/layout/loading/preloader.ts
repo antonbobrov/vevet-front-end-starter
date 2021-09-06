@@ -1,12 +1,11 @@
 import { PreloaderModule, timeoutCallback } from 'vevet';
 import app from '../../app/app';
 import { isTesting } from '../../settings';
-import { showAfterloadElements } from '../../helpers/dom-css/showAfterloadElements';
+import showAfterloadElements from '../../helpers/dom-css/showAfterloadElements';
 import { setPreloaderReady } from './onPreloaderReady';
 
 // init preloader
-export const preloader = (function () {
-
+const preloader = (function func () {
     // vars
     const mod = new PreloaderModule({
         selector: '#preloader',
@@ -39,13 +38,11 @@ export const preloader = (function () {
 
     // hide preloader
     function hide () {
-
         showAfterloadElements();
 
         if (app.vevetPage) {
             app.vevetPage.show();
         }
-
     }
-
 }());
+export default preloader;

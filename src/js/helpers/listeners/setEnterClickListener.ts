@@ -1,10 +1,9 @@
 import { addEventListener } from 'vevet-dom';
 
-export function setEnterClickListener (
+export default function setEnterClickListener (
     el: Element,
     callback: () => void,
 ) {
-
     el.setAttribute('role', 'button');
     el.setAttribute('aria-pressed', 'false');
 
@@ -19,5 +18,4 @@ export function setEnterClickListener (
             listener.remove();
         },
     };
-
 }

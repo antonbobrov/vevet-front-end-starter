@@ -1,6 +1,6 @@
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader';
 import { UnsignedByteType, PMREMGenerator, Texture } from 'three';
-import { threeJS } from '../threeJS';
+import threeJS from '../threeJS';
 
 
 
@@ -11,21 +11,17 @@ const textures: Record<string, Texture> = {};
 
 
 
-export function getModelBaseEnvronmentMap (
+export default function getModelBaseEnvronmentMap (
     src: string,
 ) {
-
     // has envmap
     return new Promise((
         resolve: (texture: Texture) => void,
         reject,
     ) => {
-
         if (textures[src]) {
             resolve(textures[src]);
-        }
-        else {
-
+        } else {
             new RGBELoader()
                 .setDataType(UnsignedByteType)
                 .load(
@@ -39,9 +35,6 @@ export function getModelBaseEnvronmentMap (
                     undefined,
                     reject,
                 );
-
         }
-
     });
-
 }

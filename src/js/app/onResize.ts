@@ -1,17 +1,11 @@
+import { IDestroyable } from '../commonTypes';
 import app from './app';
 
-export interface IOnResize {
-    remove: () => void;
-}
-
-
-
-export function onResize (
+export default function onResize (
     callback: () => void,
     name = '',
     timeout = 0,
-): IOnResize {
-
+): IDestroyable {
     const events: string[] = [];
 
     events.push(app.viewport.on('', () => {
@@ -34,18 +28,13 @@ export function onResize (
         timeout,
     }));
 
-
-
-    function remove () {
+    function destroy () {
         events.forEach((eventId) => {
             app.viewport.remove(eventId);
         });
     }
 
-
-
     return {
-        remove: remove.bind(this),
+        destroy: destroy.bind(this),
     };
-
 }

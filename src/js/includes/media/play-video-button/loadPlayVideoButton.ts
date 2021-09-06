@@ -1,11 +1,9 @@
 import { selectAll } from 'vevet-dom';
-import { playVideoButtonTagName } from './settings';
+import settings from './settings';
 
-export function loadPlayVideoButton () {
-
-    const elements = selectAll(playVideoButtonTagName);
+export default function loadPlayVideoButton () {
+    const elements = selectAll(settings.tagName);
     if (elements.length > 0) {
         import('./PlayVideoButton');
     }
-
 }

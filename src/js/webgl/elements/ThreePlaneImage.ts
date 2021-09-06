@@ -7,7 +7,7 @@ import {
 import { getPos, PosRule } from 'get-image-pos';
 import { ThreePlane, IThreePlane } from './ThreePlane';
 import { loadImage } from '../../layout/image/imageLoader';
-import { Ctx2D } from '../../helpers/canvas/Ctx2D';
+import Ctx2D from '../../helpers/canvas/Ctx2D';
 
 
 
@@ -33,7 +33,6 @@ export namespace IThreePlaneImage {
 
 
 export class ThreePlaneImage extends ThreePlane {
-
     protected _prop: IThreePlaneImage.Properties;
 
     // @ts-ignore
@@ -66,7 +65,6 @@ export class ThreePlaneImage extends ThreePlane {
 
     // Extra Constructor
     protected _extra () {
-
         super._extra();
 
         this._resource = false;
@@ -85,7 +83,6 @@ export class ThreePlaneImage extends ThreePlane {
         });
 
         this._isVideo = false;
-
     }
 
     get loaded () {
@@ -106,23 +103,19 @@ export class ThreePlaneImage extends ThreePlane {
 
     // Create THREE.JS base
     protected _createTHREE () {
-
         this._loadRes(super._createTHREE.bind(this));
-
     }
 
     /**
      * Load a resource.
      */
     protected _loadRes (callback: Function) {
-
         const res = this._prop.resource;
 
         if (res) {
             this._resource = res;
             this._resLoaded(callback);
-        }
-        else {
+        } else {
             loadImage(this._prop.src, (img) => {
                 this._resource = img;
                 this._resLoaded(callback);
@@ -132,7 +125,6 @@ export class ThreePlaneImage extends ThreePlane {
                 this._resLoaded(callback);
             });
         }
-
     }
 
     /**
@@ -140,7 +132,6 @@ export class ThreePlaneImage extends ThreePlane {
      * @param {Function} callback
      */
     protected _resLoaded (callback: Function) {
-
         // events
         if (!this._loaded) {
             this.lbt('loaded');
@@ -149,14 +140,12 @@ export class ThreePlaneImage extends ThreePlane {
 
         // callback
         callback();
-
     }
 
 
 
     // Create a texture
     protected _createTexture () {
-
         const resource = this._resource;
         let texture: Texture;
 
@@ -167,20 +156,16 @@ export class ThreePlaneImage extends ThreePlane {
             resource.addEventListener('loadedmetadata', () => {
                 this.resize();
             });
-        }
-        else if (resource instanceof HTMLCanvasElement) {
+        } else if (resource instanceof HTMLCanvasElement) {
             texture = new CanvasTexture(resource);
             texture.mapping = CubeUVRefractionMapping;
-        }
-        else if (resource instanceof HTMLImageElement) {
+        } else if (resource instanceof HTMLImageElement) {
             if (!this._prop.posRule) {
                 texture = new Texture(resource);
-            }
-            else {
+            } else {
                 texture = this._createCanvasTexture(resource);
             }
-        }
-        else {
+        } else {
             this._texture = undefined;
         }
 
@@ -190,14 +175,12 @@ export class ThreePlaneImage extends ThreePlane {
             texture.minFilter = LinearFilter;
             this._texture = texture;
         }
-
     }
 
 
 
     // Create a canvas texture
     protected _createCanvasTexture (resource: HTMLImageElement) {
-
         // create canvas
         this._ctx2D = new Ctx2D(this._prop.el);
         this._ctx2D.updateSize();
@@ -215,13 +198,11 @@ export class ThreePlaneImage extends ThreePlane {
 
         // return the texture
         return texture;
-
     }
 
 
     // Create a canvas texture
     protected _drawCanvasTexture (resource: HTMLImageElement) {
-
         // get context
         const ctx2D = this._ctx2D;
         const { width } = ctx2D;
@@ -247,21 +228,17 @@ export class ThreePlaneImage extends ThreePlane {
             size.sourceWidth, size.sourceHeight,
             size.x, size.y, size.width, size.height,
         );
-
     }
 
 
 
     public resize () {
-
         super.resize();
 
         this._resizeVideoTexture();
-
     }
 
     protected _resizeVideoTexture () {
-
         const video = this._prop.resource;
         if (!(video instanceof HTMLVideoElement)) {
             return;
@@ -286,8 +263,7 @@ export class ThreePlaneImage extends ThreePlane {
             repeatY = blockHeight * videoWidth / (blockWidth * videoHeight);
             texture.repeat.set(repeatX, repeatY);
             texture.offset.y = (repeatY - 1) / 2 * -1;
-        }
-        else {
+        } else {
             // fill the height and adjust the width accordingly
             repeatX = blockWidth * videoHeight / (blockHeight * videoWidth);
             repeatY = 1;
@@ -302,7 +278,6 @@ export class ThreePlaneImage extends ThreePlane {
         if (userData.u_video_repeatX) {
             userData.u_video_repeatY.value = repeatY;
         }
-
     }
 
 
@@ -311,7 +286,6 @@ export class ThreePlaneImage extends ThreePlane {
      * Render the texture
      */
     protected _renderTexture () {
-
         super._renderTexture();
 
         if (this._isVideo) {
@@ -321,7 +295,6 @@ export class ThreePlaneImage extends ThreePlane {
                 }
             }
         }
-
     }
 
 
@@ -330,20 +303,14 @@ export class ThreePlaneImage extends ThreePlane {
      * Destroy the plane
      */
     destroy () {
-
         if (this.prop.resource instanceof HTMLVideoElement) {
             try {
                 this.prop.resource.pause();
-            }
-            catch (e) {
+            } catch (e) {
                 //
             }
         }
 
         super.destroy();
-
     }
-
-
-
 }

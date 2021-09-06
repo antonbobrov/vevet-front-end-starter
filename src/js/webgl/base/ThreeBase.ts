@@ -8,7 +8,8 @@ import ThreeScene from './ThreeScene';
 import ThreeRenderer from './ThreeRenderer';
 import { ThreeCamera3D, IThreeCamera3D } from './ThreeCamera3D';
 import { ThreeCamera2D, IThreeCamera2D } from './ThreeCamera2D';
-import { IOnResize, onResize } from '../../app/onResize';
+import onResize from '../../app/onResize';
+import { IDestroyable } from '../../commonTypes';
 
 const resizeTimeout = 150;
 const type2d = '2d';
@@ -30,7 +31,6 @@ export namespace IThreeBase {
 
 
 class ThreeBase extends Module {
-
     protected _prop: IThreeBase.Properties;
 
     // @ts-ignore
@@ -50,7 +50,7 @@ class ThreeBase extends Module {
     }
 
 
-    protected _viewportEvent: IOnResize;
+    protected _viewportEvent: IDestroyable;
 
     protected _frame: FrameModule;
 
@@ -115,7 +115,6 @@ class ThreeBase extends Module {
 
     // Extra Constructor
     protected _extra () {
-
         super._extra();
 
         // default vars
@@ -159,7 +158,6 @@ class ThreeBase extends Module {
 
         // render for the first time
         this.render();
-
     }
 
 
@@ -176,7 +174,6 @@ class ThreeBase extends Module {
 
     // Get or create a canvas
     protected _getCanvas () {
-
         let canvas = selectOne('canvas', this.outer);
         if (canvas == null) {
             canvas = document.createElement('canvas');
@@ -191,14 +188,12 @@ class ThreeBase extends Module {
         canvas.addEventListener('webglcontextlost', () => {
             throw new Error('Three.JS Webgl Context Lost');
         }, false);
-
     }
 
 
 
     // Set Events
     protected _setEvents () {
-
         this._viewportEvent = onResize(
             this.resize.bind(this),
             'Three.JS',
@@ -208,12 +203,10 @@ class ThreeBase extends Module {
         this.resize();
 
         this.on('changeProp', this.resize.bind(this));
-
     }
 
     // When the window is resized
     public resize () {
-
         // update sizes
         this._width = this._outer.clientWidth;
         this._height = this._outer.clientHeight;
@@ -237,7 +230,6 @@ class ThreeBase extends Module {
         if (this._prop.autoplay) {
             this.play();
         }
-
     }
 
 
@@ -261,14 +253,12 @@ class ThreeBase extends Module {
     // RENDERING
 
     render () {
-
         // launch rendering events
         this.lbt('frame');
         this.lbt('prerender');
 
         // render webgl
         if (!this._noRender) {
-
             // clear
             this.renderer.autoClear = false;
             this.renderer.clear();
@@ -278,26 +268,21 @@ class ThreeBase extends Module {
             const cameraType = this._prop.cameras;
             if (cameraType === type2d) {
                 this.renderer.render(this.scene2d, this.camera2d);
-            }
-            else if (cameraType === type3d) {
+            } else if (cameraType === type3d) {
                 this.renderer.render(this.scene3d, this.camera3d);
-            }
-            else if (cameraType === typeAll) {
+            } else if (cameraType === typeAll) {
                 this.renderer.render(this.scene3d, this.camera3d);
                 this.renderer.autoClear = false;
                 this.renderer.render(this.scene2d, this.camera2d);
             }
-
         }
 
         this.lbt('afterrender');
-
     }
 
 
 
     public destroy () {
-
         this._renderer.destroy();
         if (this._camera2d) {
             this._camera2d.destroy();
@@ -306,12 +291,8 @@ class ThreeBase extends Module {
             this._camera3d.destroy();
         }
 
-        this._viewportEvent.remove();
-
+        this._viewportEvent.destroy();
     }
-
-
-
 }
 
 

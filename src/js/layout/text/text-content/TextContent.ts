@@ -4,8 +4,7 @@ import { createElement, insertAfter, selectAll } from 'vevet-dom';
 const tagName = 'text-content';
 
 @customElement(tagName)
-export class TextContent extends LitElement {
-
+export default class TextContent extends LitElement {
     createRenderRoot () {
         return this;
     }
@@ -13,14 +12,12 @@ export class TextContent extends LitElement {
 
 
     connectedCallback () {
-
         super.connectedCallback();
         this.classList.add(tagName);
 
         this._processIframes();
         this._processVideos();
         this._processImages();
-
     }
 
 
@@ -29,12 +26,10 @@ export class TextContent extends LitElement {
      * Wrap iframes
      */
     protected _processIframes () {
-
         const parentClassName = `${tagName}__iframe`;
 
         const elements = selectAll('iframe', this);
         elements.forEach((el) => {
-
             const parent = el.parentElement;
             if (!parent.classList.contains(parentClassName)) {
                 const outer = createElement('div', {
@@ -43,21 +38,17 @@ export class TextContent extends LitElement {
                 insertAfter(outer, el);
                 outer.appendChild(el);
             }
-
         });
-
     }
 
     /**
      * Wrap videos
      */
     protected _processVideos () {
-
         const parentClassName = `${tagName}__video`;
 
         const elements = selectAll('video', this);
         elements.forEach((el) => {
-
             const parent = el.parentElement;
             if (!parent.classList.contains(parentClassName)) {
                 const outer = createElement('div', {
@@ -66,16 +57,13 @@ export class TextContent extends LitElement {
                 insertAfter(outer, el);
                 outer.appendChild(el);
             }
-
         });
-
     }
 
     /**
      * Wrap images
      */
     protected _processImages () {
-
         const parentClassName = `${tagName}__image`;
 
         const elements = selectAll('img', this);
@@ -96,7 +84,5 @@ export class TextContent extends LitElement {
                 }
             }
         });
-
     }
-
 }

@@ -4,7 +4,7 @@
   "description": "Vevet Front-end Starter",
   "scripts": {
     "build": "NODE_ENV=production webpack --config ./webpack/webpack.build.conf.js",
-    "start": "webpack-dev-server --config ./webpack/webpack.dev.conf.js",
+    "dev": "webpack-dev-server --config ./webpack/webpack.dev.conf.js",
     "lint": "npm run lint:js && npm run lint:scss",
     "lint:js": "eslint . --ext .ts,.js",
     "lint:scss": "npx stylelint \"**/*.scss\""

@@ -5,16 +5,15 @@ import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHel
 import { RectAreaLightUniformsLib } from 'three/examples/jsm/lights/RectAreaLightUniformsLib';
 import { minSiteGUIStep } from '../../../siteGUI';
 import { GlAreaLightSettings } from '../types';
-import { GlModelSceneLightBase } from './GlModelSceneLightBase';
+import GlModelSceneLightBase from './GlModelSceneLightBase';
 
 RectAreaLightUniformsLib.init();
 
 
-export class GlModelSceneAreaLight extends GlModelSceneLightBase<
+export default class GlModelSceneAreaLight extends GlModelSceneLightBase<
     RectAreaLight,
     GlAreaLightSettings
 > {
-
     // vars
     protected _helper: RectAreaLightHelper;
     protected _helperTarget: Mesh;
@@ -23,7 +22,6 @@ export class GlModelSceneAreaLight extends GlModelSceneLightBase<
      * Create Light
      */
     protected _create () {
-
         super._create();
 
         const { _prop } = this;
@@ -43,7 +41,6 @@ export class GlModelSceneAreaLight extends GlModelSceneLightBase<
         this._helperTarget = new Mesh(helperTargetGeometry, helperTargetMaterial);
         this._helperTarget.visible = false;
         this._scene.add(this._helperTarget);
-
     }
 
 
@@ -52,7 +49,6 @@ export class GlModelSceneAreaLight extends GlModelSceneLightBase<
      * Create GUI
      */
     protected _createGUI () {
-
         const gui = super._createGUI();
         if (!gui) {
             return false;
@@ -84,7 +80,6 @@ export class GlModelSceneAreaLight extends GlModelSceneLightBase<
             settingsFolder,
             targetFolder,
         };
-
     }
 
 
@@ -93,7 +88,6 @@ export class GlModelSceneAreaLight extends GlModelSceneLightBase<
      * Update the object
      */
     public update () {
-
         super.update();
 
         const light = this._light;
@@ -122,11 +116,9 @@ export class GlModelSceneAreaLight extends GlModelSceneLightBase<
         // show helper
         if (this._helper.visible) {
             this._scene.add(this._helper);
-        }
-        else {
+        } else {
             this._scene.remove(this._helper);
         }
-
     }
 
 
@@ -135,9 +127,7 @@ export class GlModelSceneAreaLight extends GlModelSceneLightBase<
      * Render the object
      */
     public render () {
-
         super.render();
-
     }
 
 
@@ -146,12 +136,9 @@ export class GlModelSceneAreaLight extends GlModelSceneLightBase<
      * Destroy the object
      */
     public destroy () {
-
         super.destroy();
 
         this._scene.remove(this._helper);
         this._scene.remove(this._helperTarget);
-
     }
-
 }

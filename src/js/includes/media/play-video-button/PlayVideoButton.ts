@@ -1,14 +1,13 @@
 import { customElement, LitElement, property } from 'lit-element';
-import { setEnterClickListener } from '../../../helpers/listeners/setEnterClickListener';
+import setEnterClickListener from '../../../helpers/listeners/setEnterClickListener';
 import { enableTabIndex } from '../../../layout/scroll/keyboard/tabindex';
-import { playVideoButtonTagName } from './settings';
-import { loadVideoInPopup, VideoInPopupSourceEnum } from '../popup/loadVideoInPopup';
+import settings from './settings';
+import loadVideoInPopup, { VideoInPopupSourceEnum } from '../popup/loadVideoInPopup';
 
-const tagName = playVideoButtonTagName;
+const { tagName } = settings;
 
 @customElement(tagName)
-export class PlayVideoButton extends LitElement {
-
+export default class PlayVideoButton extends LitElement {
     @property({
         attribute: 'source',
     }) source: VideoInPopupSourceEnum;
@@ -21,7 +20,6 @@ export class PlayVideoButton extends LitElement {
     }
 
     firstUpdated () {
-
         this.classList.add(tagName);
         enableTabIndex(this);
 
@@ -31,7 +29,5 @@ export class PlayVideoButton extends LitElement {
         setEnterClickListener(this, () => {
             loadVideoInPopup(this.source, this.src);
         });
-
     }
-
 }

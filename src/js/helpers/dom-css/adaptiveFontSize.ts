@@ -2,7 +2,7 @@
 
 import app from '../../app/app';
 import { useAdaptiveFontSize } from '../../settings';
-import { boundProgress } from '../math/boundProgress';
+import { boundProgress } from '../math/progress';
 
 
 
@@ -64,11 +64,9 @@ const adaptiveFontSize = (function func () {
                 if (width > 400) {
                     return width / width;
                 }
-            }
-            else if (width < 350) {
+            } else if (width < 350) {
                 return width / 350;
-            }
-            else {
+            } else {
                 return 1;
             }
         }

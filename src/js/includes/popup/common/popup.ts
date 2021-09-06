@@ -1,10 +1,12 @@
 import { PopupModule } from 'vevet';
-import { processPopupEvents } from './processPopupEvents';
+import processPopupEvents from './processPopupEvents';
 
-export const popup = new PopupModule({
+const popup = new PopupModule({
     duration: 350,
     levels: 1,
 });
+export default popup;
+
 processPopupEvents({
     instance: popup,
 });

@@ -14,7 +14,6 @@ export function toggleFormInputError ({
     input,
     isError,
 }: Data) {
-
     toggleFormLabelError({
         input,
         isError,
@@ -26,7 +25,6 @@ export function toggleFormInputError ({
     if (vFormInput) {
         vFormInput.classList.toggle(vevetErrorInputOuterClassName, isError);
     }
-
 }
 
 
@@ -35,7 +33,6 @@ export function toggleFormLabelError ({
     input,
     isError,
 }: Data) {
-
     const id = input.getAttribute('id');
     let label: false | Element = false;
     if (id) {
@@ -45,5 +42,4 @@ export function toggleFormLabelError ({
     if (label) {
         label.classList.toggle('error', isError);
     }
-
 }

@@ -3,15 +3,14 @@ import {
 } from 'lit-element';
 import { IDestroyable } from '../commonTypes';
 import onPageCreated from './onPageCreated';
-import { updateThingsCallbacks } from './updateThings';
+import updateThings from './updateThings';
 
 
 
-export abstract class VevetLitElement extends LitElement {
-
+export default abstract class VevetLitElement extends LitElement {
     protected _onPageCreated: false | IDestroyable = false;
     protected _disconnected = false;
-    protected _updateThingsCallback: string | false;
+    protected _updateThingsCallback: IDestroyable | false;
 
 
 
@@ -25,7 +24,7 @@ export abstract class VevetLitElement extends LitElement {
         this._onPageCreated = onPageCreated(() => {
             this._connectedCallback();
         });
-        this._updateThingsCallback = updateThingsCallbacks.on('', () => {
+        this._updateThingsCallback = updateThings.add(() => {
             this._updateThings();
         });
     }
@@ -38,7 +37,7 @@ export abstract class VevetLitElement extends LitElement {
             this._onPageCreated = false;
         }
         if (this._updateThingsCallback) {
-            updateThingsCallbacks.remove(this._updateThingsCallback);
+            this._updateThingsCallback.destroy();
             this._updateThingsCallback = false;
         }
         this._disconnectedCallback();
@@ -68,7 +67,4 @@ export abstract class VevetLitElement extends LitElement {
     protected _updateThings () {
 
     }
-
-
-
 }

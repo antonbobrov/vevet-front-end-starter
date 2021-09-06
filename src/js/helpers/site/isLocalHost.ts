@@ -1,7 +1,7 @@
 import { OpenServerDomain } from '../../settings';
 
-export function isLocalHost (): boolean {
-
+export default function isLocalHost (): boolean {
+    const { location } = window;
     const is = Boolean(
         location.hostname === OpenServerDomain
         || location.hostname === 'localhost'
@@ -15,5 +15,4 @@ export function isLocalHost (): boolean {
     );
 
     return is;
-
 }

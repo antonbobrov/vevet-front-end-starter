@@ -1,14 +1,9 @@
 import dat, { GUI } from 'dat.gui';
 import app from './app/app';
 
-
-
 export const minSiteGUIStep = 0.0001;
 
-
-
-export const siteGUI: false | dat.GUI = (function () {
-
+export const siteGUI: false | dat.GUI = (function func () {
     if (app.viewport.mobiledevice) {
         return false;
     }
@@ -20,7 +15,6 @@ export const siteGUI: false | dat.GUI = (function () {
     gui.close();
 
     return gui;
-
 }());
 
 export interface GUIType extends GUI {}
