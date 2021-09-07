@@ -94,7 +94,7 @@ const adaptiveFontSize = (function func () {
     // set events
     update();
     if (app) {
-        app.viewport.on('w', () => {
+        app.viewport.on('w_', () => {
             update();
         }, {
             name: 'Adaptive Font Size',

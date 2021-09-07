@@ -5,7 +5,7 @@
 $prefix: 'v-';
 
 // Site Vars
-$font-family: 'Arial';
+$font-family: 'Inter';
 $font-size: 16px;
 
 $afterload-transition: 1s;
@@ -18,7 +18,8 @@ $wrap-1-padding: 0 var(--wrap-1);
 
 
 
-html {
+:root {
     --vh: 1vh;
     --vw: 1vw;
+    --font-size: 16px;
 }
